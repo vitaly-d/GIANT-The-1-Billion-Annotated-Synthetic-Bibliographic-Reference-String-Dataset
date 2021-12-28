@@ -68,13 +68,13 @@
   <citation collapse="citation-number">
     
     <layout vertical-align="sup" delimiter="," suffix=")">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography et-al-min="7" et-al-use-first="6" second-field-align="flush" line-spacing="2">
     
     <layout>
-      
+      <text variable="citation-number" suffix="&lt;/citation-number>." prefix="&lt;citation-number>"/>
       <text macro="author" suffix=". " prefix=""/>
       <choose>
         <if type="book">

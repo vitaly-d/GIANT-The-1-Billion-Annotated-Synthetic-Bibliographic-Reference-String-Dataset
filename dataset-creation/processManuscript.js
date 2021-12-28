@@ -63,6 +63,7 @@ function makebib(sys, stylePath, citations) {
     }
 
     console.log(citations);
+    rendered_citations = [];
     if (citations === undefined) {
       engine.updateItems(keys);
     } else {
@@ -73,21 +74,25 @@ function makebib(sys, stylePath, citations) {
         }
 
         var citation = {
-	    properties: {
-            noteIndex: 1,
+          properties: {
+            noteIndex: i + 1,
           },
           citationItems: citationItems,
         };
         console.log(JSON.stringify(citation));
         _c = engine.appendCitationCluster(citation);
-        console.log(JSON.stringify(_c));
+        //console.log(JSON.stringify(_c));
+        rendered_citations.push(_c[0][1]);
       }
     }
 
     var bib = engine.makeBibliography();
-    console.log(JSON.stringify(bib[0], null, 2));
+    //console.log(JSON.stringify(bib[0], null, 2));
 
-    return bib[1];
+    return {
+      citations: rendered_citations,
+      references: bib[1],
+    };
   } catch (error) {
     failedBibs.add(stylePath);
     console.log("Cannot process:", stylePath, error);
@@ -97,7 +102,7 @@ function makebib(sys, stylePath, citations) {
 sys = load_references("inputFiles/sampleCrossref.json");
 csls = readCSLs(cslFolder);
 
-var stylePath = cslFolder + csls[2] + ".csl";
+var stylePath = cslFolder + csls[22] + ".csl";
 console.log("Using...", stylePath);
 
 //references = makebib(sys, stylePath);
@@ -108,6 +113,4 @@ references = makebib(sys, stylePath, [
   ["8"],
   ["9"],
 ]);
-for (var ref of references) {
-  console.log(JSON.stringify(ref));
-}
+console.log(JSON.stringify(references, null, 2));

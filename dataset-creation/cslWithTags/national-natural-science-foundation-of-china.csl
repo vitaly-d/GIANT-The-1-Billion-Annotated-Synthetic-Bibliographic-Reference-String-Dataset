@@ -151,12 +151,12 @@
   <citation collapse="citation-number">
     
     <layout vertical-align="sup" prefix="[" suffix="]" delimiter=",">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography et-al-min="4" et-al-use-first="3" second-field-align="flush" entry-spacing="0">
     <layout suffix=".">
-      
+      <text variable="citation-number" prefix="[&lt;citation-number>" suffix="&lt;/citation-number>]"/>
       <text macro="author" suffix=". " prefix=""/>
       <group delimiter=", ">
         <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>

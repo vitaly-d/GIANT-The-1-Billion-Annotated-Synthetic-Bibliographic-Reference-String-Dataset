@@ -301,7 +301,7 @@
     
     <layout prefix="(" suffix=")" delimiter=", ">
       <group delimiter=", ">
-        
+        <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
         <group>
           <label variable="locator" suffix=". " form="short" strip-periods="true"/>
           <text variable="locator" prefix="&lt;locator>" suffix="&lt;/locator>"/>
@@ -312,7 +312,7 @@
   <bibliography>
     
     <layout>
-      
+      <text variable="citation-number" display="left-margin" suffix="&lt;/citation-number>. " prefix="&lt;citation-number>"/>
       <choose>
         <if type="book map" match="any">
           <group display="right-inline">

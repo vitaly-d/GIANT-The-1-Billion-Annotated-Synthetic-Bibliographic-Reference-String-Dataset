@@ -215,7 +215,7 @@
     
     <layout delimiter=", " prefix="(" suffix=")">
       <group>
-        
+        <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
       </group>
     </layout>
   </citation>
@@ -227,7 +227,7 @@ Citation-number. Author. Title. Journal Year;Volume:Pages.
 1. Middleton MS, McNamara MP. Breast implant classification with MR imaging correlation. RadioGraphics [serial online]. 2000; vol 20, no. 3. Available at: http://radiographics.rsnajnls.org/cgi /content/full/20/3/e1. Accessed October 5, 2000. (online only)
 -->
     <layout>
-      
+      <text variable="citation-number" suffix="&lt;/citation-number>. " prefix="&lt;citation-number>"/>
       <group delimiter=". " suffix=". ">
         <text macro="author" prefix="" suffix=""/>
         <text macro="title" prefix="" suffix=""/>

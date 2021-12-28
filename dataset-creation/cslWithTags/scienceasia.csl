@@ -85,12 +85,12 @@
   <citation collapse="citation-number">
     
     <layout vertical-align="sup" delimiter=",">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography second-field-align="flush" et-al-min="6" et-al-use-first="1" delimiter-precedes-et-al="always">
     <layout suffix=".">
-      
+      <text variable="citation-number" suffix="&lt;/citation-number>. " prefix="&lt;citation-number>"/>
       <text macro="author" strip-periods="true" prefix="" suffix=""/>
       <date variable="issued" prefix=" (&lt;issued>" suffix="&lt;/issued>)">
         <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>

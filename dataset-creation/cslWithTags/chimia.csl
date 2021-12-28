@@ -168,13 +168,13 @@
   <citation collapse="citation-number">
     
     <layout vertical-align="sup" delimiter="," prefix="[" suffix="]">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <!-- BIBLIOGRAPHY -->
   <bibliography entry-spacing="0" second-field-align="flush">
     <layout suffix=".">
-      
+      <text variable="citation-number" prefix="[&lt;citation-number>" suffix="&lt;/citation-number>] "/>
       <choose>
         <!-- journal/review article -->
         <if type="article-journal review" match="any">

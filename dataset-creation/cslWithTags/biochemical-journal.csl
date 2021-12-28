@@ -106,12 +106,12 @@
   <citation collapse="citation-number">
     
     <layout delimiter="," prefix="[" suffix="]">
-      
+      <text variable="citation-number" form="long" font-style="normal" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography et-al-min="11" et-al-use-first="10" second-field-align="flush" entry-spacing="0">
     <layout suffix=".">
-      
+      <text variable="citation-number" form="long" suffix="&lt;/citation-number> " prefix="&lt;citation-number>"/>
       <text macro="author" suffix="." prefix=""/>
       <text macro="issued" prefix="" suffix=""/>
       <text variable="title" prefix=" &lt;title>" suffix="&lt;/title>"/>

@@ -72,12 +72,12 @@
   <citation collapse="citation-number">
     
     <layout vertical-align="sup" delimiter=",">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography entry-spacing="0">
     <layout suffix=".">
-      
+      <text variable="citation-number" suffix="&lt;/citation-number>." prefix="&lt;citation-number>"/>
       <text macro="author" prefix=" " suffix=", " text-case="uppercase"/>
       <text variable="title" suffix="&lt;/title>, " prefix="&lt;title>"/>
       <text macro="container-title" prefix="" suffix=""/>

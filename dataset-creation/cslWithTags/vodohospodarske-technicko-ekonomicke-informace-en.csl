@@ -426,7 +426,7 @@
     
     <layout prefix="[" suffix="]" delimiter=", ">
       <group delimiter=" ">
-        
+        <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
         <group delimiter=" ">
           <label variable="locator" form="short"/>
           <text variable="locator" prefix="&lt;locator>" suffix="&lt;/locator>"/>
@@ -437,7 +437,7 @@
   <bibliography et-al-min="4" et-al-use-first="3" and="text">
     
     <layout>
-      
+      <text variable="citation-number" prefix="[&lt;citation-number>" suffix="&lt;/citation-number>] "/>
       <group>
         <choose>
           <if type="book">

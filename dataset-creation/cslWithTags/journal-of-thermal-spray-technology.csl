@@ -127,12 +127,12 @@
   <citation collapse="citation-number">
     
     <layout delimiter="," prefix="(Ref " suffix=")">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography entry-spacing="0" second-field-align="flush" et-al-min="31" et-al-use-first="30">
     <layout suffix=".">
-      
+      <text variable="citation-number" suffix="&lt;/citation-number>. " prefix="&lt;citation-number>"/>
       <group delimiter=", ">
         <text macro="author" prefix="" suffix=""/>
         <text macro="title" prefix="" suffix=""/>

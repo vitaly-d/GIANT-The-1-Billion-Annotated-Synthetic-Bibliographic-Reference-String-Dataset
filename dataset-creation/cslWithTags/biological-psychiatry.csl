@@ -171,13 +171,13 @@
   <citation collapse="citation-number">
     
     <layout prefix="(" suffix=")" delimiter=", ">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography hanging-indent="true" et-al-min="8" et-al-use-first="6" entry-spacing="0" line-spacing="2">
     
     <layout suffix=".">
-      
+      <text variable="citation-number" suffix="&lt;/citation-number>. " prefix="&lt;citation-number>"/>
       <text macro="author" prefix="" suffix=""/>
       <text macro="issued" prefix=" (" suffix="): "/>
       <group delimiter=". " suffix=". ">

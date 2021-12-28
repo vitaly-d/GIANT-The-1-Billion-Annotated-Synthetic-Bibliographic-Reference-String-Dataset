@@ -200,7 +200,7 @@
     
     <layout delimiter=", ">
       <group prefix="[" suffix="]" delimiter=", ">
-        
+        <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
         <text macro="citation-locator" prefix="" suffix=""/>
       </group>
     </layout>
@@ -209,7 +209,7 @@
   <bibliography entry-spacing="0" second-field-align="flush">
     <layout suffix=".">
       <!-- Citation Number -->
-      
+      <text variable="citation-number" prefix="[&lt;citation-number>" suffix="&lt;/citation-number>]"/>
       <!-- Author(s) -->
       <text macro="author" suffix=", " prefix=""/>
       <!-- Rest of Citation -->

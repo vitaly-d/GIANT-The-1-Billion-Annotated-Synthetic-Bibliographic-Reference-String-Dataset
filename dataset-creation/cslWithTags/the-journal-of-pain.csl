@@ -232,13 +232,13 @@
   <citation collapse="citation-number">
     
     <layout delimiter="," vertical-align="sup">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography et-al-min="100" et-al-use-first="99" second-field-align="flush">
     
     <layout>
-      
+      <text variable="citation-number" suffix="&lt;/citation-number>. " prefix="&lt;citation-number>"/>
       <group delimiter=". " suffix=". ">
         <text macro="author" prefix="" suffix=""/>
         <text macro="title" prefix="" suffix=""/>

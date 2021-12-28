@@ -360,7 +360,7 @@
   <citation collapse="citation-number">
     
     <layout delimiter="," vertical-align="sup">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
       <group prefix="(" suffix=")">
         <label variable="locator" form="short" strip-periods="true"/>
         <text variable="locator" prefix="&lt;locator>" suffix="&lt;/locator>"/>

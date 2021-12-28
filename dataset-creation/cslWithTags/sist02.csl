@@ -137,13 +137,13 @@
   <citation collapse="citation-number">
     
     <layout delimiter=", " prefix="(" suffix=")">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography entry-spacing="0" second-field-align="flush">
     
     <layout suffix=".">
-      
+      <text variable="citation-number" prefix="(&lt;citation-number>" suffix="&lt;/citation-number>)"/>
       <text macro="author" prefix="" suffix=""/>
       <choose>
         <if type="article-journal">

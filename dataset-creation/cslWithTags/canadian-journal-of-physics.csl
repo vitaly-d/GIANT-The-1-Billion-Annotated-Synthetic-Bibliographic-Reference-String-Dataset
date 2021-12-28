@@ -72,12 +72,12 @@
   <citation collapse="citation-number">
     
     <layout prefix="[" suffix="]" delimiter=",">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography second-field-align="flush" et-al-min="10" et-al-use-first="1">
     <layout suffix=".">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
       <group delimiter=" " prefix=" ">
         <text macro="author" prefix="" suffix=""/>
       </group>

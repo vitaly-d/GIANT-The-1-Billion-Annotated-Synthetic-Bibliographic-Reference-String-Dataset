@@ -67,13 +67,13 @@
   <citation collapse="citation-number">
     
     <layout font-variant="normal" vertical-align="baseline" delimiter="," prefix="(" suffix=")">
-      
+      <text variable="citation-number" quotes="false" font-variant="normal" vertical-align="baseline" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography second-field-align="flush">
     
     <layout suffix=".">
-      
+      <text variable="citation-number" suffix="&lt;/citation-number>. " prefix="&lt;citation-number>"/>
       <text macro="author" prefix="" suffix=""/>
       <text macro="title" suffix=". " prefix=""/>
       <choose>

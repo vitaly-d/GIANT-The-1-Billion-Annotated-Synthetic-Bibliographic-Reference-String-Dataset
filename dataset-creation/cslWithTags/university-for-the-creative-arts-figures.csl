@@ -46,7 +46,7 @@
     <layout prefix="(" suffix=")">
       <group delimiter=" ">
         <text term="figure" form="symbol" text-case="capitalize-first" prefix="" suffix=""/>
-        
+        <text variable="citation-number" suffix="&lt;/citation-number>." prefix="&lt;citation-number>"/>
         <text variable="title" font-style="italic" prefix="&lt;title>" suffix="&lt;/title>"/>
         <group>
           <choose>
@@ -66,7 +66,7 @@
     <layout>
       <group delimiter=" ">
         <text term="figure" prefix="" suffix=""/>
-        
+        <text variable="citation-number" suffix="&lt;/citation-number>." prefix="&lt;citation-number>"/>
         <group delimiter=" ">
           <names variable="author" suffix="&lt;/author>." prefix="&lt;author>">
             <name and="text" delimiter-precedes-last="never" initialize-with="." name-as-sort-order="all"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>

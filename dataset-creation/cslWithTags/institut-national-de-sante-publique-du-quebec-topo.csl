@@ -140,12 +140,12 @@
   <citation collapse="citation-number">
     
     <layout prefix="(" suffix=")" delimiter="," vertical-align="sup">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography entry-spacing="1" line-spacing="1" second-field-align="flush">
     <layout suffix=".">
-      
+      <text variable="citation-number" prefix="(&lt;citation-number>" suffix="&lt;/citation-number>)"/>
       <text macro="author" prefix="" suffix=""/>
       <group suffix="). " prefix="(">
         <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">

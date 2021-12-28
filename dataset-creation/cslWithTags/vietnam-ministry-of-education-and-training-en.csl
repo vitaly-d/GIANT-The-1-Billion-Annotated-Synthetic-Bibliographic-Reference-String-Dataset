@@ -76,14 +76,14 @@
     
     <layout font-variant="normal" delimiter="], [" prefix=" [" suffix="]">
       <group delimiter=", ">
-        
+        <text variable="citation-number" form="short" strip-periods="false" quotes="false" font-variant="normal" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
         <text variable="locator" prefix="&lt;locator>" suffix="&lt;/locator>"/>
       </group>
     </layout>
   </citation>
   <bibliography and="text" delimiter-precedes-et-al="always" initialize-with="." sort-separator="." second-field-align="flush" entry-spacing="0">
     <layout suffix=".">
-      
+      <text variable="citation-number" suffix="&lt;/citation-number>." prefix="&lt;citation-number>"/>
       <text macro="author" strip-periods="false" suffix=" " prefix=""/>
       <text macro="title" prefix="" suffix=""/>
       <choose>

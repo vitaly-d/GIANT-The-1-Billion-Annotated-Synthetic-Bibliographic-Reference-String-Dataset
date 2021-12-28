@@ -72,13 +72,13 @@
   <citation collapse="citation-number">
     
     <layout prefix="(" suffix=")" delimiter=", ">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography et-al-min="51" et-al-use-first="50" second-field-align="flush" line-spacing="2">
     <layout>
       <group delimiter=". " suffix=".">
-        
+        <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
         <text macro="author" prefix="" suffix=""/>
         <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
           <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>

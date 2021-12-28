@@ -21,12 +21,12 @@
   <citation>
     
     <layout delimiter=",">
-      
+      <text variable="citation-number" prefix="[&lt;citation-number>" suffix="&lt;/citation-number>]"/>
     </layout>
   </citation>
   <bibliography>
     <layout>
-      
+      <text variable="citation-number" prefix="[&lt;citation-number>" suffix="&lt;/citation-number>] "/>
       <choose>
         <if type="article-journal">
           <names variable="author" delimiter="; " suffix="&lt;/author> " prefix="&lt;author>">

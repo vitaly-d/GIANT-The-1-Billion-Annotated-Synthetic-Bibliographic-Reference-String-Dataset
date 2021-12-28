@@ -116,12 +116,12 @@
   <citation collapse="citation-number">
     
     <layout delimiter="," prefix="[" suffix="]">
-      
+      <text variable="citation-number" vertical-align="baseline" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography entry-spacing="0" second-field-align="flush" et-al-min="7" et-al-use-first="3">
     <layout suffix=".">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
       <text macro="author" suffix=". " prefix=""/>
       <choose>
         <if type="bill book graphic legal_case legislation motion_picture report song" match="any">

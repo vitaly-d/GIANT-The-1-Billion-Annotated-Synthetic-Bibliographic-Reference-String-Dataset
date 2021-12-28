@@ -256,14 +256,14 @@
     
     <layout delimiter=", ">
       <group prefix="[" suffix="]" delimiter=", ">
-        
+        <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
         <text macro="citation-locator" prefix="" suffix=""/>
       </group>
     </layout>
   </citation>
   <bibliography entry-spacing="0" second-field-align="flush">
     <layout suffix=".">
-      
+      <text variable="citation-number" prefix="[&lt;citation-number>" suffix="&lt;/citation-number>]"/>
       <text macro="author" suffix=", " prefix=""/>
       <choose>
         <if type="article-journal">

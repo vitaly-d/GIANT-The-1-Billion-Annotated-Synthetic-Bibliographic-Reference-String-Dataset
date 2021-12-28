@@ -108,7 +108,7 @@
   <citation collapse="citation-number">
     
     <layout vertical-align="baseline" delimiter="," prefix="(" suffix=")">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
       <group prefix="(" suffix=")">
         <label variable="locator" form="short" strip-periods="true"/>
         <text variable="locator" prefix="&lt;locator>" suffix="&lt;/locator>"/>
@@ -117,7 +117,7 @@
   </citation>
   <bibliography hanging-indent="false" et-al-min="7" et-al-use-first="3" second-field-align="flush">
     <layout>
-      
+      <text variable="citation-number" suffix="&lt;/citation-number>. " prefix="&lt;citation-number>"/>
       <text macro="author" prefix="" suffix=""/>
       <text macro="title" prefix=" " suffix="."/>
       <choose>

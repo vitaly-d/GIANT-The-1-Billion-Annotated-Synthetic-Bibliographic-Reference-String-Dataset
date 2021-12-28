@@ -73,7 +73,7 @@
   <citation collapse="citation-number">
     
     <layout delimiter=", " prefix="(" suffix=")">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
       <group>
         <label variable="locator" form="short" strip-periods="true"/>
         <text variable="locator" prefix="&lt;locator>" suffix="&lt;/locator>"/>
@@ -82,7 +82,7 @@
   </citation>
   <bibliography et-al-min="7" et-al-use-first="3" second-field-align="margin">
     <layout>
-      
+      <text variable="citation-number" suffix="&lt;/citation-number>. " prefix="&lt;citation-number>"/>
       <text macro="author" prefix="" suffix=""/>
       <choose>
         <if type="bill book graphic legal_case legislation motion_picture report song" match="any">

@@ -82,12 +82,12 @@
   <citation collapse="citation-number">
     
     <layout vertical-align="sup" delimiter="," prefix="[" suffix="]">
-      
+      <text variable="citation-number" vertical-align="baseline" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography delimiter-precedes-last="always" entry-spacing="0">
     <layout suffix=".">
-      
+      <text variable="citation-number" prefix="[&lt;citation-number>" suffix="&lt;/citation-number>] "/>
       <text macro="author" suffix=", " prefix=""/>
       <choose>
         <if type="bill book graphic legal_case legislation motion_picture report song" match="any">

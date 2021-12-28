@@ -131,12 +131,12 @@
   <citation near-note-distance="0">
     
     <layout delimiter=", " prefix="(" suffix=")">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography et-al-min="31" et-al-use-first="30" second-field-align="flush">
     <layout>
-      
+      <text variable="citation-number" suffix="&lt;/citation-number>. " prefix="&lt;citation-number>"/>
       <group delimiter=". " suffix=". ">
         <text macro="author" prefix="" suffix=""/>
         <text macro="title" prefix="" suffix=""/>

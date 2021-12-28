@@ -175,12 +175,12 @@
   <citation collapse="citation-number">
     
     <layout vertical-align="sup" delimiter="," prefix="[" suffix="]">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography entry-spacing="0" second-field-align="flush" et-al-min="7" et-al-use-first="6">
     <layout>
-      
+      <text variable="citation-number" suffix="&lt;/citation-number>. " prefix="&lt;citation-number>"/>
       <group delimiter=", " suffix=".">
         <group delimiter=" ">
           <text macro="author" prefix="" suffix=""/>

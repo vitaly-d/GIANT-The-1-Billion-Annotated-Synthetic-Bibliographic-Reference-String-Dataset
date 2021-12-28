@@ -79,12 +79,12 @@
   <citation collapse="citation-number">
     
     <layout prefix="(" suffix=")" delimiter=",">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography et-al-min="4" et-al-use-first="3" second-field-align="flush">
     <layout>
-      
+      <text variable="citation-number" font-weight="bold" suffix="&lt;/citation-number> " prefix="&lt;citation-number>"/>
       <text macro="author" prefix="" suffix=""/>
       <text macro="title" suffix=". " prefix=""/>
       <choose>

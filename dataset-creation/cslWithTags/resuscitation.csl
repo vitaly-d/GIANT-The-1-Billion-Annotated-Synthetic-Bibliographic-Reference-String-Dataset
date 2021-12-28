@@ -219,13 +219,13 @@
   <citation collapse="citation-number">
     
     <layout prefix="[" suffix="]" delimiter=", ">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
       <text macro="page" prefix=", " suffix=""/>
     </layout>
   </citation>
   <bibliography et-al-min="7" et-al-use-first="6">
     <layout>
-      
+      <text variable="citation-number" prefix="[&lt;citation-number>" suffix="&lt;/citation-number>] "/>
       <group delimiter=" " suffix=".">
         <group delimiter=". ">
           <text macro="author" prefix="" suffix=""/>

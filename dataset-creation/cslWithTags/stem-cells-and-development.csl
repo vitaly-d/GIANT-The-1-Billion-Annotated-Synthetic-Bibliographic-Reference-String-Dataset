@@ -44,12 +44,12 @@
   <citation collapse="citation-number">
     
     <layout delimiter="," prefix="[" suffix="]">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography et-al-min="51" et-al-use-first="50" line-spacing="2">
     <layout suffix=".">
-      
+      <text variable="citation-number" suffix="&lt;/citation-number>. " prefix="&lt;citation-number>"/>
       <group delimiter=" ">
         <text macro="author" prefix="" suffix=""/>
         <text macro="issued" prefix="(" suffix=")."/>

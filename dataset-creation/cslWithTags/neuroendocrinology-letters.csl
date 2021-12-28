@@ -96,7 +96,7 @@
   <bibliography et-al-min="7" et-al-use-first="3" entry-spacing="0" hanging-indent="true">
     
     <layout suffix=".">
-      
+      <text variable="citation-number" suffix="&lt;/citation-number> " prefix="&lt;citation-number>"/>
       <text macro="author" prefix="" suffix=""/>
       <date variable="issued" prefix=" (&lt;issued>" suffix="&lt;/issued>).">
         <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>

@@ -104,7 +104,7 @@
     
     <layout prefix="[" suffix="]" delimiter=",">
       <group delimiter=":">
-        
+        <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
         <text variable="locator" prefix="&lt;locator>" suffix="&lt;/locator>"/>
       </group>
     </layout>
@@ -112,7 +112,7 @@
   <bibliography second-field-align="flush" entry-spacing="0">
     
     <layout>
-      
+      <text variable="citation-number" prefix="[&lt;citation-number>" suffix="&lt;/citation-number>]"/>
       <group delimiter=". " suffix=". ">
         <text macro="author" prefix="" suffix=""/>
         <text macro="year" prefix="" suffix=""/>

@@ -78,7 +78,7 @@
     <text value="Z999" prefix="" suffix=""/>
   </macro>
   <macro name="citation-number">
-    
+    <text variable="citation-number" suffix="&lt;/citation-number>. " prefix="&lt;citation-number>"/>
   </macro>
   <macro name="author-first">
     <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
@@ -89,7 +89,7 @@
   <citation collapse="citation-number">
     
     <layout prefix="[" suffix="]" delimiter=", ">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
       <group prefix=",">
         <label plural="never" prefix=" " variable="locator" form="short"/>
         <text variable="locator" form="short" prefix=" &lt;locator>" suffix="&lt;/locator>"/>

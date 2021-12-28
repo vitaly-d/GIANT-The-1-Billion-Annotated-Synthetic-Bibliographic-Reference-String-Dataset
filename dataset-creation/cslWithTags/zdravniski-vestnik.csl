@@ -224,12 +224,12 @@
     
     <!-- unlike Vancouver, cites are superscript; this is a recent change in the journal format; they used to have cites in parenthesis just like Vancouver -->
     <layout vertical-align="sup" delimiter=",">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography et-al-min="7" et-al-use-first="6" second-field-align="flush">
     <layout>
-      
+      <text variable="citation-number" suffix="&lt;/citation-number>. " prefix="&lt;citation-number>"/>
       <group delimiter=". " suffix=". ">
         <text macro="author" prefix="" suffix=""/>
         <text macro="title" prefix="" suffix=""/>

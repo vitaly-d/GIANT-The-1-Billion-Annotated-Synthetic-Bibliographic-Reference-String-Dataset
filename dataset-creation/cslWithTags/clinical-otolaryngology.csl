@@ -67,12 +67,12 @@
   <citation collapse="citation-number">
     
     <layout vertical-align="sup" delimiter=",">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography et-al-min="4" et-al-use-first="3" entry-spacing="0" second-field-align="flush">
     <layout>
-      
+      <text variable="citation-number" suffix="&lt;/citation-number> " prefix="&lt;citation-number>"/>
       <text macro="author" suffix=" " prefix=""/>
       <date variable="issued" prefix="(&lt;issued>" suffix="&lt;/issued>)">
         <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>

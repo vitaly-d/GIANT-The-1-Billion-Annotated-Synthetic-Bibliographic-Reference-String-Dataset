@@ -50,14 +50,14 @@
   <citation collapse="citation-number">
     
     <layout delimiter="," prefix="(" suffix=")">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography entry-spacing="0">
     
     <layout suffix=".">
       <group delimiter=". " prefix="    ">
-        
+        <text variable="citation-number" form="long" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
         <text macro="author" prefix="" suffix=""/>
         <choose>
           <if type="bill book graphic legal_case legislation motion_picture report song" match="any">

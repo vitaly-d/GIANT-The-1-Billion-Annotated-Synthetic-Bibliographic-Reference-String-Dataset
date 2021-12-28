@@ -59,12 +59,12 @@
   <citation collapse="citation-number">
     
     <layout prefix="[" suffix="]" delimiter=",">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography entry-spacing="0">
     <layout suffix=".">
-      
+      <text variable="citation-number" font-weight="bold" suffix="&lt;/citation-number> " prefix="&lt;citation-number>"/>
       <group font-weight="bold" delimiter=". ">
         <text macro="author" font-weight="bold" prefix="" suffix=""/>
         <choose>

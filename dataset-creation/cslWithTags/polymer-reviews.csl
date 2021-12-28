@@ -120,12 +120,12 @@
   <citation collapse="citation-number">
     
     <layout delimiter="," vertical-align="sup">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography second-field-align="flush" entry-spacing="0">
     <layout suffix=".">
-      
+      <text variable="citation-number" prefix="(&lt;citation-number>" suffix="&lt;/citation-number>) "/>
       <text macro="author" suffix=" " prefix=""/>
       <choose>
         <if type="article-journal review" match="any">

@@ -229,12 +229,12 @@
     
     <!-- JID complies with the Uniform Requirements for Manuscripts Submitted to Biomedical Journals (for the complete text, see http://www.icmje.org), except that reference citations should appear in the text in square brackets (not parentheses). -->
     <layout prefix="[" suffix="]" delimiter=",">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography et-al-min="7" et-al-use-first="3" second-field-align="flush">
     <layout>
-      
+      <text variable="citation-number" suffix="&lt;/citation-number>. " prefix="&lt;citation-number>"/>
       <group delimiter=". " suffix=". ">
         <text macro="author" prefix="" suffix=""/>
         <text macro="title" prefix="" suffix=""/>

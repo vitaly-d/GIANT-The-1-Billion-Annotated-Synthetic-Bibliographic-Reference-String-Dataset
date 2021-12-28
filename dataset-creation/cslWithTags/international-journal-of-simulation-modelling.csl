@@ -322,12 +322,12 @@
   <citation collapse="citation-number">
     
     <layout prefix="[" suffix="]" delimiter=", ">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography second-field-align="flush">
     <layout>
-      
+      <text variable="citation-number" prefix="[&lt;citation-number>" suffix="&lt;/citation-number>]"/>
       <group>
         <group delimiter=". ">
           <text macro="author" prefix="" suffix=""/>

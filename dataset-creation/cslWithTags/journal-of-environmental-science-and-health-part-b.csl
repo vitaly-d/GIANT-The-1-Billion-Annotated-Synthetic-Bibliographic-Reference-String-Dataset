@@ -36,12 +36,12 @@
   <citation collapse="citation-number">
     
     <layout vertical-align="sup" delimiter="," prefix="[" suffix="]">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography>
     <layout suffix=".">
-      
+      <text variable="citation-number" prefix="[&lt;citation-number>" suffix="&lt;/citation-number>] "/>
       <text macro="author" suffix=". " prefix=""/>
       <choose>
         <if type="article-journal">

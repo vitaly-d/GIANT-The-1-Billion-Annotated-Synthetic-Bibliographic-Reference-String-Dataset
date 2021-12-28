@@ -68,7 +68,7 @@
   <citation collapse="citation-number" after-collapse-delimiter="; ">
     
     <layout prefix="[" suffix="]" delimiter=", ">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
       <group delimiter=" ">
         <label variable="locator" form="short" prefix=" "/>
         <text variable="locator" prefix="&lt;locator>" suffix="&lt;/locator>"/>
@@ -78,7 +78,7 @@
   <bibliography and="text" second-field-align="flush">
     
     <layout suffix=".">
-      
+      <text variable="citation-number" prefix="[&lt;citation-number>" suffix="&lt;/citation-number>]"/>
       <group delimiter=" - " suffix=": ">
         <text macro="author" prefix="" suffix=""/>
       </group>

@@ -126,13 +126,13 @@
   <citation collapse="citation-number">
     
     <layout suffix=")" delimiter=", " vertical-align="sup">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography et-al-min="4" et-al-use-first="3" delimiter-precedes-et-al="always" second-field-align="flush" entry-spacing="0">
     <layout>
       <group vertical-align="sup">
-        
+        <text variable="citation-number" suffix="&lt;/citation-number>) " prefix="&lt;citation-number>"/>
       </group>
       <choose>
         <if type="webpage">

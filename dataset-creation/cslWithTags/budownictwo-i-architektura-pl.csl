@@ -292,7 +292,7 @@
     
     <layout delimiter=", ">
       <group prefix="[" suffix="]" delimiter=", ">
-        
+        <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
         <text macro="citation-locator" prefix="" suffix=""/>
       </group>
     </layout>
@@ -301,7 +301,7 @@
   <bibliography hanging-indent="false" et-al-min="11" et-al-use-first="7" subsequent-author-substitute="———" entry-spacing="0">
     <layout suffix=".">
       <!-- Citation Number -->
-      
+      <text variable="citation-number" prefix="[&lt;citation-number>" suffix="&lt;/citation-number>] "/>
       <!-- Author(s) -->
       <text macro="author" suffix=", " prefix=""/>
       <!-- Rest of Citation -->

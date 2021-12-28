@@ -218,7 +218,7 @@
   <citation collapse="citation-number">
     
     <layout prefix="[" suffix="]" delimiter="], [">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <!-- End of in-text citation -->
@@ -226,7 +226,7 @@
     
     <layout>
       <!-- Citation Number -->
-      
+      <text variable="citation-number" prefix="[&lt;citation-number>" suffix="&lt;/citation-number>]"/>
       <!-- continuing with original bibliography -->
       <group delimiter=" ; " suffix=":">
         <text macro="author" prefix="" suffix=""/>

@@ -130,12 +130,12 @@
   <citation collapse="citation-number">
     
     <layout prefix="(" suffix=")" delimiter="," font-style="italic">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography hanging-indent="false" et-al-min="4" et-al-use-first="1">
     <layout>
-      
+      <text variable="citation-number" suffix="&lt;/citation-number>. " prefix="&lt;citation-number>"/>
       <group suffix=".">
         <text macro="author" suffix=" " prefix=""/>
         <choose>

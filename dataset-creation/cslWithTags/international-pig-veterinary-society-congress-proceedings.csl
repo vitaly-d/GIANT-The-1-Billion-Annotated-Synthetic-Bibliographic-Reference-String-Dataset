@@ -43,12 +43,12 @@
   <citation collapse="citation-number">
     
     <layout vertical-align="baseline" delimiter="," prefix="(" suffix=")">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography et-al-min="2" et-al-use-first="1" second-field-align="flush" entry-spacing="0">
     <layout>
-      
+      <text variable="citation-number" suffix="&lt;/citation-number>." prefix="&lt;citation-number>"/>
       <text macro="author" prefix="" suffix=""/>
       <text macro="issuance" prefix="" suffix=""/>
       <text variable="container-title" font-style="normal" prefix=" &lt;container-title>" suffix="&lt;/container-title>, " form="short"/>

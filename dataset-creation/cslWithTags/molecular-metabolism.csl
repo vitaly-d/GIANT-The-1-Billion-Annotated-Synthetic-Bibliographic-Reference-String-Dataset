@@ -113,12 +113,12 @@
   <citation collapse="citation-number">
     
     <layout delimiter="," prefix="[" suffix="]">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography entry-spacing="0" second-field-align="flush" et-al-min="7" et-al-use-first="6">
     <layout suffix=".">
-      
+      <text variable="citation-number" prefix="[&lt;citation-number>" suffix="&lt;/citation-number>]"/>
       <text macro="author" suffix=", " prefix=""/>
       <text macro="year-date" suffix=". " prefix=""/>
       <choose>

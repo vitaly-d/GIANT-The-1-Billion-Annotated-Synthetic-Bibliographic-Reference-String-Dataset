@@ -111,12 +111,12 @@
   <citation collapse="citation-number">
     
     <layout prefix="(" suffix=")" delimiter=", ">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography hanging-indent="false" et-al-min="5" et-al-use-first="3">
     <layout>
-      
+      <text variable="citation-number" suffix="&lt;/citation-number>. " prefix="&lt;citation-number>"/>
       <text macro="author" prefix="" suffix=""/>
       <choose>
         <if type="article-journal article-magazine article-newspaper" match="any">

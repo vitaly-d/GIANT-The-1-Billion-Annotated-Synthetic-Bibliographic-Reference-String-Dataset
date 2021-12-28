@@ -180,12 +180,12 @@
   <citation collapse="citation-number">
     
     <layout vertical-align="sup" delimiter=",">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography et-al-min="3" et-al-use-first="1">
     <layout>
-      
+      <text variable="citation-number" suffix="&lt;/citation-number> " font-weight="bold" prefix="&lt;citation-number>"/>
       <group delimiter=". " suffix=". ">
         <text macro="author" prefix="" suffix=""/>
         <text macro="date" prefix="" suffix=""/>

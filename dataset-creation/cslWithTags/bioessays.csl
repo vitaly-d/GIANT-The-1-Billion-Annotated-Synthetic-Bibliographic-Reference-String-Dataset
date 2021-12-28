@@ -32,14 +32,14 @@
   <citation collapse="citation-number">
     
     <layout prefix="[" suffix="]" delimiter=", ">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography second-field-align="flush" et-al-min="5" et-al-use-first="4">
     <layout>
       <choose>
         <if type="book">
-          
+          <text variable="citation-number" suffix="&lt;/citation-number>. " prefix="&lt;citation-number>"/>
           <text macro="author" prefix="" suffix=""/>
           <date variable="issued" suffix="&lt;/issued> " prefix="&lt;issued>">
             <date-part name="year" form="long" prefix=". &lt;year>" suffix="&lt;/year>. "/>
@@ -49,7 +49,7 @@
           <text variable="publisher" suffix="&lt;/publisher>. " prefix="&lt;publisher>"/>
         </if>
         <else-if type="chapter">
-          
+          <text variable="citation-number" suffix="&lt;/citation-number>. " prefix="&lt;citation-number>"/>
           <text macro="author" prefix="" suffix=""/>
           <date variable="issued" suffix="&lt;/issued> " prefix="&lt;issued>">
             <date-part name="year" form="long" prefix=". &lt;year>" suffix="&lt;/year>. "/>
@@ -63,7 +63,7 @@
           <text variable="page" prefix="p &lt;page>" suffix="&lt;/page>. "/>
         </else-if>
         <else>
-          
+          <text variable="citation-number" suffix="&lt;/citation-number>. " prefix="&lt;citation-number>"/>
           <text macro="author" prefix="" suffix=""/>
           <date variable="issued" suffix="&lt;/issued> " prefix="&lt;issued>">
             <date-part name="year" form="long" prefix=". &lt;year>" suffix="&lt;/year>. "/>

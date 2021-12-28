@@ -94,12 +94,12 @@
   <citation collapse="citation-number">
     
     <layout delimiter=", " prefix=" (" suffix=")">
-      
+      <text variable="citation-number" vertical-align="baseline" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography second-field-align="flush" entry-spacing="0">
     <layout>
-      
+      <text variable="citation-number" suffix="&lt;/citation-number>. " prefix="&lt;citation-number>"/>
       <text macro="author" suffix=". " prefix=""/>
       <date variable="issued" date-parts="year" form="text" prefix="(&lt;issued>" suffix="&lt;/issued>) "/>
       <text macro="title" suffix=". " prefix=""/>

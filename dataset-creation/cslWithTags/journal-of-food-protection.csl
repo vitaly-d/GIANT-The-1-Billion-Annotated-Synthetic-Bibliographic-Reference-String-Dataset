@@ -117,13 +117,13 @@
   <citation>
     
     <layout prefix="(" suffix=")" delimiter=", ">
-      
+      <text variable="citation-number" font-style="italic" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography entry-spacing="0" second-field-align="flush">
     
     <layout suffix=".">
-      
+      <text variable="citation-number" suffix="&lt;/citation-number>. " prefix="&lt;citation-number>"/>
       <text macro="author" prefix="" suffix=""/>
       <text macro="issued" prefix="" suffix=""/>
       <text variable="title" prefix=" &lt;title>" suffix="&lt;/title>"/>
