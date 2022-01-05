@@ -8,21 +8,21 @@ var failedBibs = new Set();
 //This folder should have all the CSL files
 const cslFolder = "./cslWithTags/";
 
-var crossref = require("./crossref2citeprocjson.js");
+var crossref_converter = require("./crossref2citeprocjson.js");
 // reads crossref csl json from fileName & returns sys with items in csl-json
 //   see: https://citeproc-js.readthedocs.io/en/latest/csl-json/markup.html#ordinary-fields
 //   see: https://citeproc-js.readthedocs.io/en/latest/running.html#required-sys-functions
-function load_references(fileName, jsonl = true) {
+function load_references(fileName, crossref = true) {
   var data = fs.readFileSync(fileName, "utf8");
-  return load_references_from_string(data, jsonl);
+  return load_references_from_string(data, crossref);
 }
 
-function load_references_from_string(data, jsonl = true) {
+function load_references_from_string(data, crossref = true) {
   console.time("readrawfile");
-  if (jsonl) {
+  if (crossref) {
     data = data.replace(/</g, "&lt;").replace(/>/g, "&rt;");
     lines = data.split("\n");
-    bibliography = crossref.crossref2citeproc(lines);
+    bibliography = crossref_converter.crossref2citeproc(lines);
   } else {
     bibliography = JSON.parse(data);
     // TBD crossref2citeproc cleanups CSL Json: removes empty authors, etc. Do we need it here?
@@ -123,9 +123,10 @@ csls = readCSLs(cslFolder);
 //
 var test_html = `<form action="/" enctype="multipart/form-data" method="post">
   <div class="form-group">
-    <input type="file" class="form-control-file" name="references">
-    <input type="file" class="form-control-file" name="citations">
-    <input type="submit" value="Process!" class="btn btn-default">            
+    <input type="file" name="references">
+    <input type="file" name="citations">
+    <input type="checkbox" name="crossref" checked>
+    <input type="submit">            
   </div>
 </form>`;
 
@@ -141,18 +142,24 @@ const cpUpload = upload.fields([
   { name: "citations", maxCount: 1 },
 ]);
 app.post("/", cpUpload, function (req, res) {
-  // req.file is the name of your file in the form above, here 'uploaded_file'
-  // req.body will hold the text fields, if there were any
+  // list of references in csl-json or in CrossRef jsonl
   references_list_str = req.files["references"][0].buffer.toString();
-  citations_ragged_array = JSON.parse(
-    req.files["citations"][0].buffer.toString()
-  );
+  // optional citation clusters (of not provided, all references will be included into bibliography)
+  citations_ragged_array = req.files["citations"]
+    ? JSON.parse(req.files["citations"][0].buffer.toString())
+    : undefined;
 
-  sys = load_references_from_string(references_list_str);
-  var stylePath = cslFolder + csls[22] + ".csl";
-  console.log("Using...", stylePath);
+  var stylePath = cslFolder + csls[22] + ".csl"; //TODO - add style index or name parameter  
+  crossref = "on" == req.body["crossref"];
+  console.log(
+    "Processing references ",
+    crossref ? "downloaded from Crossref" : "in csl-json",
+    "using",
+    stylePath
+  );
+  sys = load_references_from_string(references_list_str, crossref);
   references = makebib(sys, stylePath, citations_ragged_array);
-  res.json({ message: references });
+  res.json(references);
 });
 
 app.get("/", function (req, res) {

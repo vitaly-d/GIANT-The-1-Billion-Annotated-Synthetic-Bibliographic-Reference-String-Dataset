@@ -33,15 +33,27 @@ Changes:
  
   `node generateAnnotatedStyles.js`
 
-## Generate references for a 'manuscript' in given style  
-  
-1. `node_modules/citation-js/bin/cmd.js -i inputFiles/prompts.bib -s csl -f string -l en > inputFiles/prompts.bib.json`
 
 
-2. Launch processManuscript server
+## processManuscript server
 
  `node processManuscript.js ` 
 
  processManuscript server exposes processManuscript.js as an HTTP peer:
 
-`curl -v -F references=@inputFiles/sampleCrossref.json -F citations=@inputFiles/sampleCrossref.citations.json localhost:3000`
+- Process JSONL downloaded from CrossRef:
+`curl -v -F references=@inputFiles/sampleCrossref.json -F citations=@inputFiles/sampleCrossref.citations.json -F crossref=on 192.168.2.22:3000`
+
+OR
+
+- Process csl-json:
+`curl -v -F references=@cslCiteprocOutput/cslciteproc.json -F citations=@inputFiles/sampleCrossref.citations.json  192.168.2.22:3000`
+
+OR
+
+- Process bibtex using citations-js:
+
+```
+node_modules/citation-js/bin/cmd.js -i inputFiles/prompts.bib -s csl -f string -l en > cslCiteprocOutput/prompts.bib.json`
+curl -v -F references=@cslCiteprocOutput/prompts.bib.json 192.168.2.22:3000
+```
