@@ -41,5 +41,7 @@ Changes:
 2. Launch processManuscript server
 
  `node processManuscript.js ` 
-processManuscript server exposes processManuscript.js as an HTTP peer 
-curl -v -F references=@inputFiles/sampleCrossref.json -F citations=@inputFiles/sampleCrossref.citations.json localhost:3000
+
+ processManuscript server exposes processManuscript.js as an HTTP peer:
+
+`curl -v -F references=@inputFiles/sampleCrossref.json -F citations=@inputFiles/sampleCrossref.citations.json localhost:3000`
