@@ -36,5 +36,5 @@ sh ./createCitations.sh \n\
 node processManuscript.js \n\
 ' >> ~/.bash_history 
 
-
-CMD bash
+EXPOSE 3000
+CMD node processManuscript.js

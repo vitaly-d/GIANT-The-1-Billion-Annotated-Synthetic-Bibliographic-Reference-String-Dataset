@@ -27,11 +27,14 @@ Changes:
 
 ### in Docker
 
- TODO
+`docker build . -t $USER/bib`
+
+`docker run --rm -p3000:3000 $USER/bib`
 
 ## Generate CLSs with tags
  
   `node generateAnnotatedStyles.js`
+>Note: this is an optional step because generated files are in the repo 
 
 
 
@@ -41,19 +44,30 @@ Changes:
 
  processManuscript server exposes processManuscript.js as an HTTP peer:
 
-- Process JSONL downloaded from CrossRef:
-`curl -v -F references=@inputFiles/sampleCrossref.json -F citations=@inputFiles/sampleCrossref.citations.json -F crossref=on 192.168.2.22:3000`
+The references input field is the name of a file with bibliographic references. It could be either in csl-json or in CrossRef citeproc format. `-F crossref=on` needs to be specified for CrossRef citeproc-json
 
-OR
+The citations input field is a file name that contain the ragged array of citation clusters, for example, see inputFiles/sampleCrossref.citations.json
 
-- Process csl-json:
-`curl -v -F references=@cslCiteprocOutput/cslciteproc.json -F citations=@inputFiles/sampleCrossref.citations.json  192.168.2.22:3000`
+The `styles` input field allows to select styles to be applied to the references and citations. It is the list that consists indexes of CSL templates. You can see CSL templates and their indexes at `http://localhost:3000/styles`
 
-OR
+### Examples:
 
-- Process bibtex using citations-js:
+
+#### Process JSONL downloaded from CrossRef:
+
+`curl -v -F references=@inputFiles/sampleCrossref.json -F citations=@inputFiles/sampleCrossref.citations.json -F 'styles=[22,33]' -F crossref=on localhost:3000`
+
+
+#### Process csl-json:
+
+`curl -v -F references=@cslCiteprocOutput/cslciteproc.json -F citations=@inputFiles/sampleCrossref.citations.json -F 'styles=[22,33]' localhost:3000`
+
+
+#### Process bibtex using citations-js:
 
 ```
 node_modules/citation-js/bin/cmd.js -i inputFiles/prompts.bib -s csl -f string -l en > cslCiteprocOutput/prompts.bib.json`
-curl -v -F references=@cslCiteprocOutput/prompts.bib.json 192.168.2.22:3000
+curl -v -F references=@cslCiteprocOutput/prompts.bib.json -F 'styles=[22,33]' localhost:3000
 ```
+
+

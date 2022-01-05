@@ -47,7 +47,7 @@ function load_references_from_string(data, crossref = true) {
   return sys;
 }
 
-// returns list of CSL templates from cslFolder
+// returns list of CSL styles from cslFolder
 function readCSLs(cslFolder) {
   var files = fs.readdirSync(cslFolder);
   var csls = [];
@@ -68,12 +68,6 @@ function makebib(sys, stylePath, citations) {
     var styleString = fs.readFileSync(stylePath, "utf8");
     var engine = sys.newEngine(styleString, "en-US");
     engine.setOutputFormat("text");
-    // // var citationsPre = [ ["citation-quaTheb4", 1], ["citation-mileiK4k", 2] ];
-    // // var citationsPost = [ ["citation-adaNgoh1", 4] ];
-    // citationsPre = []
-    // citationsPost = []
-    // console.log("about to call processCitationCluster")
-    // var _c = engine.processCitationCluster(citation, citationsPre, citationsPost);
 
     rendered_citations = [];
     if (citations === undefined) {
@@ -121,15 +115,6 @@ function makebib(sys, stylePath, citations) {
 csls = readCSLs(cslFolder);
 
 //
-var test_html = `<form action="/" enctype="multipart/form-data" method="post">
-  <div class="form-group">
-    <input type="file" name="references">
-    <input type="file" name="citations">
-    <input type="checkbox" name="crossref" checked>
-    <input type="submit">            
-  </div>
-</form>`;
-
 var express = require("express");
 
 var app = express();
@@ -149,20 +134,37 @@ app.post("/", cpUpload, function (req, res) {
     ? JSON.parse(req.files["citations"][0].buffer.toString())
     : undefined;
 
-  var stylePath = cslFolder + csls[22] + ".csl"; //TODO - add style index or name parameter  
+  // input format: csl-json by default, CrossRef citeproc-json if crossref field is on, see crossref/crossrefDownload.py
   crossref = "on" == req.body["crossref"];
-  console.log(
-    "Processing references ",
-    crossref ? "downloaded from Crossref" : "in csl-json",
-    "using",
-    stylePath
-  );
+  // array of indexes of styles applied to the manuscript, see the '/styles' peer
+  var styles = req.body["styles"];
+  if (styles === undefined) {
+    styles = [22];
+  } else {
+    styles = JSON.parse(styles);
+  }
+
+  console.log("Processing", crossref ? "CrossRef citeproc-json" : "csl-json");
   sys = load_references_from_string(references_list_str, crossref);
-  references = makebib(sys, stylePath, citations_ragged_array);
-  res.json(references);
+  var rendered_bibliographies = [];
+  for (style of styles) {
+    var stylePath = cslFolder + csls[style] + ".csl";
+    console.log("rendering bibliograpgy using", stylePath);
+    try {
+      references = makebib(sys, stylePath, citations_ragged_array);
+      references["style"] = csls[style];
+      rendered_bibliographies.push(references);
+    } catch (exception) {
+      console.error(
+        "Can't process style csls[" + style + "] == " + csls[style]
+      );
+    }
+  }
+  res.json(rendered_bibliographies);
 });
 
-app.get("/", function (req, res) {
-  res.send(test_html);
+app.get("/styles", function (req, res) {
+  res.json(csls);
 });
+app.set("json spaces", 2);
 app.listen(3000, "0.0.0.0");
