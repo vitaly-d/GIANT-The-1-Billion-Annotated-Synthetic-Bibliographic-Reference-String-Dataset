@@ -9,22 +9,40 @@ var failedBibs = new Set();
 const cslFolder = "./cslWithTags/";
 
 var crossref = require("./crossref2citeprocjson.js");
-const { stringify } = require("querystring");
 // reads crossref csl json from fileName & returns sys with items in csl-json
 //   see: https://citeproc-js.readthedocs.io/en/latest/csl-json/markup.html#ordinary-fields
 //   see: https://citeproc-js.readthedocs.io/en/latest/running.html#required-sys-functions
-function load_references(fileName) {
-  console.time("readrawfile");
+function load_references(fileName, jsonl = true) {
   var data = fs.readFileSync(fileName, "utf8");
-  data = data.replace(/</g, "&lt;").replace(/>/g, "&rt;");
-  console.timeEnd("readrawfile");
-  lines = data.split("\n");
-  bibliography = crossref.crossref2citeproc(lines);
+  return load_references_from_string(data, jsonl);
+}
 
+function load_references_from_string(data, jsonl = true) {
+  console.time("readrawfile");
+  if (jsonl) {
+    data = data.replace(/</g, "&lt;").replace(/>/g, "&rt;");
+    lines = data.split("\n");
+    bibliography = crossref.crossref2citeproc(lines);
+  } else {
+    bibliography = JSON.parse(data);
+    // TBD crossref2citeproc cleanups CSL Json: removes empty authors, etc. Do we need it here?
+    //     Or a client has to send correct CSL JSON?
+    // lines = [];
+    // for (item of bibliography){
+    // lines.push(JSON.stringify(item));
+    // }
+    // bibliography = crossref.crossref2citeproc(lines)
+  }
+
+  // console.log(JSON.stringify(bibliography, undefined, 2));
+  console.timeEnd("readrawfile");
   var sys = new citeproc.simpleSys();
   var enUS = fs.readFileSync("./locales/locales-en-US.xml", "utf8");
   sys.addLocale("en-US", enUS);
-  sys.items = bibliography;
+  sys.items = Object.assign(
+    {},
+    ...bibliography.map((item) => ({ [item.id]: item }))
+  );
 
   return sys;
 }
@@ -57,15 +75,11 @@ function makebib(sys, stylePath, citations) {
     // console.log("about to call processCitationCluster")
     // var _c = engine.processCitationCluster(citation, citationsPre, citationsPost);
 
-    keys = [];
-    for (var ref in sys.items) {
-      keys.push(ref["id"]);
-    }
-
-    console.log(citations);
     rendered_citations = [];
     if (citations === undefined) {
-      engine.updateItems(keys);
+      console.log("***");
+      var citationKeys = Object.keys(sys.items);
+      engine.updateItems(citationKeys);
     } else {
       for (var i = 0; i < citations.length; i++) {
         citationItems = [];
@@ -99,18 +113,49 @@ function makebib(sys, stylePath, citations) {
   }
 }
 
-sys = load_references("inputFiles/sampleCrossref.json");
+//
+// HTTP Peer
+//
+
+// read CLS templates
 csls = readCSLs(cslFolder);
 
-var stylePath = cslFolder + csls[22] + ".csl";
-console.log("Using...", stylePath);
+//
+var test_html = `<form action="/" enctype="multipart/form-data" method="post">
+  <div class="form-group">
+    <input type="file" class="form-control-file" name="references">
+    <input type="file" class="form-control-file" name="citations">
+    <input type="submit" value="Process!" class="btn btn-default">            
+  </div>
+</form>`;
 
-//references = makebib(sys, stylePath);
-references = makebib(sys, stylePath, [
-  ["0", "1", "2"],
-  ["3", "4"],
-  ["5", "6", "7"],
-  ["8"],
-  ["9"],
+var express = require("express");
+
+var app = express();
+
+const multer = require("multer");
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+const cpUpload = upload.fields([
+  { name: "references", maxCount: 1 },
+  { name: "citations", maxCount: 1 },
 ]);
-console.log(JSON.stringify(references, null, 2));
+app.post("/", cpUpload, function (req, res) {
+  // req.file is the name of your file in the form above, here 'uploaded_file'
+  // req.body will hold the text fields, if there were any
+  references_list_str = req.files["references"][0].buffer.toString();
+  citations_ragged_array = JSON.parse(
+    req.files["citations"][0].buffer.toString()
+  );
+
+  sys = load_references_from_string(references_list_str);
+  var stylePath = cslFolder + csls[22] + ".csl";
+  console.log("Using...", stylePath);
+  references = makebib(sys, stylePath, citations_ragged_array);
+  res.json({ message: references });
+});
+
+app.get("/", function (req, res) {
+  res.send(test_html);
+});
+app.listen(3000, "0.0.0.0");

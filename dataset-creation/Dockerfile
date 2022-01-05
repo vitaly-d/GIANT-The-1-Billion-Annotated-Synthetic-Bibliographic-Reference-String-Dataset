@@ -25,11 +25,10 @@ WORKDIR /usr/src/app
 
 COPY . .
 
-WORKDIR /usr/src/app/dataset-creation
 # install node deps
 RUN mkdir -p node_modules \
 && cd node_modules \
-&& npm install npmlog xmldom citeproc-js-node
+&& npm install --save npmlog xmldom citeproc-js-node citation-js express multer
 # alternatively you can 'RUN tar xjf node_modules.tar.bz2' 
 
 RUN echo 'node generateCSVcitationdataset.js tags sampleCrossref.json \n\

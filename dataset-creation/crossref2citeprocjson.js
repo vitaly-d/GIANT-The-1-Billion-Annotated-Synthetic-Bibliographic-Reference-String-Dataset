@@ -32,7 +32,7 @@ for (var i = 0; i < lines.length; i++) {
     for(var a = 0; a < line["author"].length; a++){
 
       //delete affiliation if it's empty
-      if(line["author"][a]["affiliation"].length == 0){
+      if(line["author"][a].hasOwnProperty("affiliation") && line["author"][a]["affiliation"].length == 0){
         delete line["author"][a]["affiliation"];
       }
       //delete author if it's empty
