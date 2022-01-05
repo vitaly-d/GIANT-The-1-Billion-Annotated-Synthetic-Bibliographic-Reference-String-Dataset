@@ -1,4 +1,4 @@
-# Bibliographic References in a manuscript context
+# Bibliography and Citations for a manuscript
 
 Based on https://github.com/BeelGroup/GIANT-The-1-Billion-Annotated-Synthetic-Bibliographic-Reference-String-Dataset
 
@@ -7,7 +7,7 @@ Similarities:
 - Reuses CSL files from GIANT repo
 
 Changes:
- - the goal is to generate not 'standalone' references strings, but 'references in a manuscript context':
+ - the goal is to generate not 'standalone' references strings, but 'references in a manuscript context'. It would enable to train model that can be used to parse 1) whole bibliographe section and identify individual bibliographic items & 2) a model that identifies citations in a manuscript body (citation cluster can be created from parsed manuscripts, e.g. from JATS);
     -- citation-number is enabled
     -- input:
 	--- the same list of CSL json bibliographic entries, but they are considered not as list of independed references, but as the manuscript bibliographic data, something similar to what can be defined in a bibtex file for a Latex manuscript   
