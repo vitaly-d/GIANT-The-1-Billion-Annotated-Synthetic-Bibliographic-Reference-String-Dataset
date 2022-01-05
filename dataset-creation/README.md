@@ -7,13 +7,13 @@ Similarities:
 - Reuses CSL files from GIANT repo
 
 Changes:
- - the goal is to generate not 'standalone' references strings, but 'references in a manuscript context'. It would enable to train model that can be used to parse 1) whole bibliographe section and identify individual bibliographic items & 2) a model that identifies citations in a manuscript body (citation cluster can be created from parsed manuscripts, e.g. from JATS);
-    -- citation-number is enabled
-    -- input:
-	--- the same list of CSL json bibliographic entries, but they are considered not as list of independed references, but as the manuscript bibliographic data, something similar to what can be defined in a bibtex file for a Latex manuscript   
-    -- output: each generated 'manuscript' consists of
-	--- list of references (aka the bibliography section)
-	--- list of citations (if citation id clusters are provided)
+  - the goal is to generate not 'standalone' references strings, but 'references in a manuscript context'. It would enable to train model that can be used to parse 1) whole bibliographe section and identify individual bibliographic items & 2) a model that identifies citations in a manuscript body (citation cluster can be created from parsed manuscripts, e.g. from JATS);
+    - citation-number is enabled
+    - input:
+      - the same list of CSL json bibliographic entries, but they are considered not as list of independed references, but as the manuscript bibliographic data, something similar to what can be defined in a bibtex file for a Latex manuscript   
+    - output: each generated 'manuscript' consists of
+      - list of references (aka the bibliography section)
+      - list of citations (if citation id clusters are provided)
 
 
 # How to use:
