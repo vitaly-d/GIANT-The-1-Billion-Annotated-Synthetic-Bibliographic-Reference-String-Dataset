@@ -96,13 +96,19 @@ function makebib(sys, stylePath, citations) {
     var bib = engine.makeBibliography();
     //console.log(JSON.stringify(bib[0], null, 2));
 
+    if (bib[1] === undefined){
+      console.log("WARNING: bibliography is undefined, style: " + stylePath)
+    }
+
     return {
       citations: rendered_citations,
       references: bib[1],
     };
   } catch (error) {
     // failedBibs.add(stylePath);
-    console.log("Cannot process:", stylePath, error, JSON.stringify(citations, undefined, 2));
+    // console.log("Cannot process:", stylePath, error, JSON.stringify(citations, undefined, 2));
+    console.log("Cannot process:", stylePath, error);
+
   }
 }
 
@@ -128,6 +134,7 @@ const cpUpload = upload.fields([
 app.post("/", cpUpload, function (req, res) {
   // list of references in csl-json or in CrossRef jsonl
   references_list_str = req.files["references"][0].buffer.toString();
+  references_list_name = req.files["references"][0].originalname
   // optional citation clusters (of not provided, all references will be included into bibliography)
   citations_ragged_array = req.files["citations"]
     ? JSON.parse(req.files["citations"][0].buffer.toString())
@@ -155,7 +162,7 @@ app.post("/", cpUpload, function (req, res) {
       rendered_bibliographies.push(references);
     } catch (exception) {
       console.error(
-        "Can't process style csls[" + style + "] == " + csls[style] + "\n" + references_list_str
+        "ERROR: Cannot process " + references_list_name + " using style csls[" + style + "] == " + csls[style] 
       );
     }
   }
