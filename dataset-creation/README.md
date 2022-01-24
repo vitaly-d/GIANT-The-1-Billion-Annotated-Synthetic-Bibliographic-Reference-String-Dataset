@@ -23,7 +23,7 @@ Changes:
 
 ### on a dev machile (tested on Ubuntu 20.04)
  - install node
- - install deps: `tar xjf node-modules.tar.bz2`
+ - install deps: `tar xjf node_modules.tar.bz2`
 
 ### in Docker
 

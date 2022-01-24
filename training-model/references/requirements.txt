@@ -1,0 +1,6 @@
+spacy[apple]
+typer
+
+
+black
+

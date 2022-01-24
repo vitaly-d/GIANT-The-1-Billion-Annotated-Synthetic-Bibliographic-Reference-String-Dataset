@@ -7,9 +7,9 @@ RUN apt-get -y install xz-utils zip unzip curl
 
 
 # install python dependencies
-RUN pip3 install -U pip
-COPY ./requirements.txt .
-RUN pip3 install -r requirements.txt && pip3 cache purge && rm -rf /root/.cache
+# RUN pip3 install -U pip
+# COPY ./requirements.txt .
+# RUN pip3 install -r requirements.txt && pip3 cache purge && rm -rf /root/.cache
 
 
 # install Node

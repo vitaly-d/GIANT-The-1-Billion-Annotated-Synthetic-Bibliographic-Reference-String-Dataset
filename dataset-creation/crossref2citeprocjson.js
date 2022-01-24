@@ -12,7 +12,15 @@ var citationcounter = 0;
 
 for (var i = 0; i < lines.length; i++) {
   if (lines[i] === '') continue;
-  line = JSON.parse(lines[i]);
+  var line
+  try{
+    line = JSON.parse(lines[i]);
+  }
+  catch(err){
+    console.log("Cannot parse " + lines[i] + ":\n" + err)
+    continue
+  }
+
   if(line.type){
     line.type = line.type.replace("journal-article", 'article-journal').replace("book-chapter", 'chapter');
   }else{
@@ -30,7 +38,7 @@ for (var i = 0; i < lines.length; i++) {
   //delete empty authors
   if(line.author != undefined){
     for(var a = 0; a < line["author"].length; a++){
-
+      var noname_authors = []
       //delete affiliation if it's empty
       if(line["author"][a].hasOwnProperty("affiliation") && line["author"][a]["affiliation"].length == 0){
         delete line["author"][a]["affiliation"];
@@ -38,18 +46,28 @@ for (var i = 0; i < lines.length; i++) {
       //delete author if it's empty
       //console.log("index:"+emptyvalues.indexOf(line["author"][a]["family"]));
       if(emptyvalues.indexOf(line["author"][a]["family"]) !== -1 && emptyvalues.indexOf(line["author"][a]["given"]) !== -1){
-        line["author"].remove(a);
+        noname_authors.push(a)
       }
+    }
+    for (a of noname_authors){
+	line.author.splice(a, 1)
     }
     if(line["author"].length === 0){
       delete line["author"];
     }
   }
+  // if (line.issued != undefined){
+  //   // "issued":{"date-parts":[[null]]}
+  //   if(line.issued["date-parts"][0][0] == null){
+	// console.log("empty issued has been removed")
+	// delete line['issued']
+  //   }
+  // }
 
   //go through each property
   for (var prop in line) {
     var newprop = prop.replace("short-title", 'shortTitle').replace("short-container-title", 'container-title-short');
-    //console.log(newprop);
+    // console.log(newprop);
     if (field.types.hasOwnProperty(newprop)) {
       var type = field.types[newprop];
       if (typeof type == "object") {

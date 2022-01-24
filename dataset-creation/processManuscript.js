@@ -71,7 +71,6 @@ function makebib(sys, stylePath, citations) {
 
     rendered_citations = [];
     if (citations === undefined) {
-      console.log("***");
       var citationKeys = Object.keys(sys.items);
       engine.updateItems(citationKeys);
     } else {
@@ -102,8 +101,8 @@ function makebib(sys, stylePath, citations) {
       references: bib[1],
     };
   } catch (error) {
-    failedBibs.add(stylePath);
-    console.log("Cannot process:", stylePath, error);
+    // failedBibs.add(stylePath);
+    console.log("Cannot process:", stylePath, error, JSON.stringify(citations, undefined, 2));
   }
 }
 
@@ -156,7 +155,7 @@ app.post("/", cpUpload, function (req, res) {
       rendered_bibliographies.push(references);
     } catch (exception) {
       console.error(
-        "Can't process style csls[" + style + "] == " + csls[style]
+        "Can't process style csls[" + style + "] == " + csls[style] + "\n" + references_list_str
       );
     }
   }
