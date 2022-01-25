@@ -1,5 +1,6 @@
+import logging
 from pathlib import Path
-from typing import List, Optional, Sequence
+from typing import List, Optional
 
 from lxml import etree
 from numpy.random import randint
@@ -9,10 +10,11 @@ import typer
 
 from csl_client import make_bibliography, styles_list
 from lxml_iter_tree import annotations
-from schema import tags_span
+from schema import tag_sentence_start, tags_span
 
 NUM_STYLES_FOR_DOC = 10
 
+log = logging.getLogger(__name__)
 blank_nlp = spacy.blank("en")
 
 
@@ -31,9 +33,25 @@ def references_to_spacy(references, style: str) -> Optional[Doc]:
         doc.char_span(start, end, label=tag, alignment_mode="contract")
         for tag, start, end in annotations(root, tags_to_be_included=tags_span)
     ]
+    # doc.char_span can return None if character indices can't be snaped to token boundaries
+    spans = [span for span in spans if span]
+
+    doc.spans["bib"] = spans
+
+    for span in spans:
+        if span.label_ == tag_sentence_start:
+            span[0].is_sent_start = True
+
     from pprint import pprint
 
     pprint([(span.label_, span.text) for span in spans if span])
+
+    return doc
+
+
+def split_up_large_doc(doc: Doc, max_tokens=512) -> List[Doc]:
+    # TODO
+    return [doc]
 
 
 def main(crossref_dir: Path):
@@ -52,6 +70,11 @@ def main(crossref_dir: Path):
             references = bibliography["references"]
             style = bibliography["style"]
             doc = references_to_spacy(references, style)
+            if doc:
+                docs = split_up_large_doc(doc)
+                # TODO save as DocBin
+            else:
+                log.warning("Can't process %s", f)
 
 
 if __name__ == "__main__":
