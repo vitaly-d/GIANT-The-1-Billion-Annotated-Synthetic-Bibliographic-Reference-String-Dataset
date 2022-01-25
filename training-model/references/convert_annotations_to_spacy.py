@@ -12,7 +12,7 @@ import numpy
 
 from csl_client import make_bibliography, styles_list
 from lxml_iter_tree import annotations
-from schema import tag_sentence_start, tags_span
+from schema import tag_sentence_start, tags_span, tags_ent
 
 NUM_STYLES_FOR_DOC = 10
 
@@ -38,21 +38,25 @@ def references_to_spacy(references, style: str) -> Optional[Doc]:
     # doc.char_span can return None if character indices can't be snaped to token boundaries
     spans = [span for span in spans if span]
 
-    doc.spans["bib"] = spans
+    # add not-overlapped spans as doc.ents for NER
+    doc.set_ents([span for span in spans if span.label_ in tags_ent])
 
+    # replace the 'bib' span with sentence boundaries annotations for Sentencizer
+    spans_to_be_deleted = []
     for span in spans:
         if span.label_ == tag_sentence_start:
             span[0].is_sent_start = True
+            spans_to_be_deleted.append(span)
+    for span in spans_to_be_deleted:
+        spans.remove(span)
+
+    # add annotations as possible overlapped spans for SpanCategorizer
+    doc.spans["bib"] = spans
 
     # from pprint import pprint
     # pprint([(span.label_, span.text) for span in spans if span])
 
     return doc
-
-
-def split_up_large_doc(doc: Doc, max_tokens=512) -> List[Doc]:
-    # TODO
-    return [doc]
 
 
 def convert(
@@ -63,8 +67,8 @@ def convert(
     print(f"CSL processor supports {len_styles} styles")
 
     db = DocBin(store_user_data=True)
-    try:
-        for f in tqdm(crossref_files, desc=docbin_path.name):
+    for f in tqdm(crossref_files, desc=docbin_path.name):
+        try:
             bibliographies = make_bibliography(
                 f, randint(0, len_styles, NUM_STYLES_FOR_DOC).tolist()
             )
@@ -76,14 +80,14 @@ def convert(
                 style = bibliography["style"]
                 doc = references_to_spacy(references, style)
                 if doc:
-                    docs = split_up_large_doc(doc)
-                    for d in docs:
-                        db.add(d)
+                    db.add(doc)
                 else:
                     log.warning("Can't process %s", f)
-    finally:
-        db.to_disk(docbin_path)
-        return docbin_path
+        except:
+            log.exception("An exception while processing %s", f)
+
+    db.to_disk(docbin_path)
+    return docbin_path
 
 
 def main(

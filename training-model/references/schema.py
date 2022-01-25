@@ -12,6 +12,20 @@ tags_span = [
     "publisher",
     "page",
     "month",
+    "doi",
+]
+
+tags_ent = [
+    "citation-number",
+    "family",
+    "given",
+    "title",
+    "container-title",
+    "issued",
+    "url",
+    "publisher",
+    "page",
+    "doi",
 ]
 
 tag_sentence_start = "bib"
