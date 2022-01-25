@@ -20,13 +20,25 @@ log = logging.getLogger(__name__)
 blank_nlp = spacy.blank("en")
 
 
-def references_to_spacy(references, style: str) -> Optional[Doc]:
+def references_to_spacy(
+    references, style: str, references_per_doc=10
+) -> List[Optional[Doc]]:
+    parts = [
+        arr.tolist()
+        for arr in numpy.array_split(
+            numpy.array(references), len(references) // references_per_doc
+        )
+    ]
+    return [references_to_spacy_doc(part, style) for part in parts]
+
+
+def references_to_spacy_doc(references, style: str) -> Optional[Doc]:
     xml = f"<references><bib>{'</bib><bib>'.join(references)}</bib></references>"
     try:
         parser = etree.HTMLParser()
         root = etree.fromstring(xml, parser)
     except etree.XMLSyntaxError as e:
-        print("cannot parse ", references, e)
+        log.exception("cannot parse %s", references)
         return
     # create doc from text
     doc = blank_nlp("".join(root.itertext()))
@@ -56,6 +68,7 @@ def references_to_spacy(references, style: str) -> Optional[Doc]:
     # from pprint import pprint
     # pprint([(span.label_, span.text) for span in spans if span])
 
+    doc.user_data = {"bib": {"style": style}}
     return doc
 
 
@@ -78,11 +91,12 @@ def convert(
                     continue
                 references = bibliography["references"]
                 style = bibliography["style"]
-                doc = references_to_spacy(references, style)
-                if doc:
-                    db.add(doc)
-                else:
-                    log.warning("Can't process %s", f)
+                docs = references_to_spacy(references, style)
+                for doc in docs:
+                    if doc:
+                        db.add(doc)
+                    else:
+                        log.warning("Can't parse a part of %s", f)
         except:
             log.exception("An exception while processing %s", f)
 
