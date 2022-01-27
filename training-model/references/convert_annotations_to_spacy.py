@@ -6,7 +6,7 @@ from tqdm import tqdm
 from lxml import etree
 from numpy.random import randint
 import spacy
-from spacy.tokens import Doc, DocBin
+from spacy.tokens import Doc, DocBin, Span
 import typer
 import numpy
 
@@ -15,6 +15,7 @@ from lxml_iter_tree import annotations
 from schema import tag_sentence_start, tags_span, tags_ent
 
 NUM_STYLES_FOR_DOC = 10
+DOWNSAMPE_RATIO = 10
 
 log = logging.getLogger(__name__)
 blank_nlp = spacy.blank("en")
@@ -68,12 +69,26 @@ def references_to_spacy_doc(
     # create doc from text
     doc = blank_nlp("".join(root.itertext()))
     # add annotations: they are overlapped spans
-    spans = [
-        doc.char_span(start, end, label=tag, alignment_mode="contract")
-        for tag, start, end in annotations(root, tags_to_be_included=tags_span)
-    ]
-    # doc.char_span can return None if character indices can't be snaped to token boundaries
-    spans = [span for span in spans if span]
+
+    spans = []
+    for tag, start, end in annotations(root, tags_to_be_included=tags_span):
+        span = doc.char_span(start, end, label=tag, alignment_mode="contract")
+        if not span:
+            # doc.char_span can return None if character indices can't be snaped to token boundaries
+            continue
+
+        def is_bounding(t):
+            return not (t.is_punct or t.is_space)
+
+        # "If you're training a named entity recognizer, also make sure that none of your
+        #       annotated entity spans have leading or trailing whitespace or punctuation"
+        while len(span) > 1 and not is_bounding(span[0]):
+            span = Span(doc, span.start + 1, span.end, span.label)
+        while len(span) > 1 and not is_bounding(span[-1]):
+            span = Span(doc, span.start, span.end - 1, span.label)
+
+        if is_bounding(span[0]) and is_bounding(span[-1]):
+            spans.append(span)
 
     # add not-overlapped spans as doc.ents for NER
     doc.set_ents([span for span in spans if span.label_ in tags_ent])
@@ -97,9 +112,7 @@ def references_to_spacy_doc(
     return doc
 
 
-def convert(
-    crossref_files: List[Path], docbin_path: Path = Path("bibliographies.docbin")
-):
+def convert(crossref_files: List[Path], docbin_path: Path):
     styles: List[str] = styles_list()
     len_styles = len(styles)
     print(f"CSL processor supports {len_styles} styles")
@@ -117,6 +130,15 @@ def convert(
                 references = bibliography["references"]
                 style = bibliography["style"]
                 docs = references_to_spacy(references, style, fname=f.name)
+
+                # downsample
+                if len(docs) // DOWNSAMPE_RATIO > 0:
+                    docs = numpy.random.choice(
+                        numpy.array(docs, dtype=numpy.dtype("object")),
+                        len(docs) // DOWNSAMPE_RATIO,
+                        replace=False,
+                    )
+
                 for doc in docs:
                     if doc:
                         db.add(doc)
@@ -130,7 +152,10 @@ def convert(
 
 
 def main(
-    crossref_dir: Path, output_dir: Path = Path(), parts: int = 100, parallel: int = 2
+    crossref_dir: Path,
+    output_dir: Path = Path("train.ref"),
+    parts: int = 100,
+    parallel: int = 2,
 ):
     """
     Sends crossref files to CSL processor and convert rendered annotated biblioraphies into Spacy DocBin files
@@ -155,7 +180,7 @@ def main(
         for i, input_files_part in enumerate(input_files_parts):
             futures.append(
                 e.submit(
-                    convert, input_files_part, output_dir / f"references.{i}.docbin"
+                    convert, input_files_part, output_dir / f"references.{i}.spacy"
                 )
             )
         for f in futures:
