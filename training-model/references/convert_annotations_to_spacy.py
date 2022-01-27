@@ -70,40 +70,38 @@ def references_to_spacy_doc(
     doc = blank_nlp("".join(root.itertext()))
     # add annotations: they are overlapped spans
 
-    spans = []
-    for tag, start, end in annotations(root, tags_to_be_included=tags_span):
-        span = doc.char_span(start, end, label=tag, alignment_mode="contract")
-        if not span:
-            # doc.char_span can return None if character indices can't be snaped to token boundaries
-            continue
+    spans = [
+        doc.char_span(start, end, label=tag, alignment_mode="contract")
+        for tag, start, end in annotations(root, tags_to_be_included=tags_span)
+    ]
+    # doc.char_span can return None if character indices can't be snaped to token boundaries
+    spans = [span for span in spans if span is not None]
+
+    # add annotations as possible overlapped spans for SpanCategorizer
+    doc.spans["bib"] = spans
+
+    # add not-overlapped spans as doc.ents for NER
+    ents = []
+    for ent in [span for span in spans if span.label_ in tags_ent]:
 
         def is_bounding(t):
             return not (t.is_punct or t.is_space)
 
         # "If you're training a named entity recognizer, also make sure that none of your
         #       annotated entity spans have leading or trailing whitespace or punctuation"
-        while len(span) > 1 and not is_bounding(span[0]):
-            span = Span(doc, span.start + 1, span.end, span.label)
-        while len(span) > 1 and not is_bounding(span[-1]):
-            span = Span(doc, span.start, span.end - 1, span.label)
+        while len(ent) > 1 and not is_bounding(ent[0]):
+            ent = Span(doc, ent.start + 1, ent.end, ent.label)
+        while len(ent) > 1 and not is_bounding(ent[-1]):
+            ent = Span(doc, ent.start, ent.end - 1, ent.label)
 
-        if is_bounding(span[0]) and is_bounding(span[-1]):
-            spans.append(span)
+        if is_bounding(ent[0]) and is_bounding(ent[-1]):
+            ents.append(ent)
+    doc.set_ents(ents)
 
-    # add not-overlapped spans as doc.ents for NER
-    doc.set_ents([span for span in spans if span.label_ in tags_ent])
-
-    # replace the 'bib' span with sentence boundaries annotations for Sentencizer
-    spans_to_be_deleted = []
+    # set is_sent_start for https://spacy.io/api/sentencerecognizer
     for span in spans:
         if span.label_ == tag_sentence_start:
             span[0].is_sent_start = True
-            spans_to_be_deleted.append(span)
-    for span in spans_to_be_deleted:
-        spans.remove(span)
-
-    # add annotations as possible overlapped spans for SpanCategorizer
-    doc.spans["bib"] = spans
 
     # from pprint import pprint
     # pprint([(span.label_, span.text) for span in spans if span])
