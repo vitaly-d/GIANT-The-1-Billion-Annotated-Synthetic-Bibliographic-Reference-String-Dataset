@@ -1,7 +1,10 @@
-spacy[apple]
+spacy
+# spacy[apple]
 typer
 numpy
+lxml
 
 
+jupyter
 black
 
