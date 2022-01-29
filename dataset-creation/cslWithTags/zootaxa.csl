@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
   <info>
     <title>Zootaxa</title>
     <id>http://www.zotero.org/styles/zootaxa</id>
@@ -14,12 +14,15 @@
       <name>Dimitri Forero</name>
       <email>idf2@cornell.edu</email>
     </contributor>
+    <contributor>
+      <name>Patrick O'Brien</name>
+    </contributor>
     <category citation-format="author-date"/>
     <category field="biology"/>
     <issn>1175-5326</issn>
     <eissn>1175-5334</eissn>
     <summary>The Zootaxa style.</summary>
-    <updated>2013-08-29T04:18:55+00:00</updated>
+    <updated>2019-06-20T13:09:14+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="en-US">
@@ -62,7 +65,7 @@
   </macro>
   <macro name="access">
     <choose>
-      <if type="webpage book" match="any">
+      <if type="webpage book post post-weblog" match="any">
         <choose>
           <if variable="URL">
             <group delimiter=" ">
@@ -74,6 +77,9 @@
           </if>
         </choose>
       </if>
+      <else-if type="article-journal" match="any">
+        <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+      </else-if>
     </choose>
   </macro>
   <macro name="title">
@@ -150,6 +156,12 @@
       </else>
     </choose>
   </macro>
+  <macro name="number-of-pages">
+    <group delimiter=" ">
+      <text variable="number-of-pages" prefix="&lt;number-of-pages>" suffix="&lt;/number-of-pages>"/>
+      <label variable="number-of-pages" form="short"/>
+    </group>
+  </macro>
   <citation et-al-min="3" et-al-use-first="1" collapse="year-suffix" givenname-disambiguation-rule="primary-name">
     
     <layout prefix="(" suffix=")" delimiter="; ">
@@ -164,65 +176,69 @@
   </citation>
   <bibliography hanging-indent="true">
     
-    <layout suffix=" ">
-      <text macro="author" prefix="" suffix=""/>
-      <date variable="issued" prefix=" (&lt;issued>" suffix="&lt;/issued>)">
-        <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
-      </date>
-      <choose>
-        <if type="book" match="any">
-          <text macro="legal_case" prefix="" suffix=""/>
-          <group prefix=" " delimiter=" ">
-            <text macro="title" suffix="." prefix=""/>
-            <text macro="edition" prefix="" suffix=""/>
-            <text macro="editor" suffix="." prefix=""/>
-          </group>
-          <group prefix=" " suffix="." delimiter=", ">
-            <text macro="publisher" prefix="" suffix=""/>
-            <text variable="page" prefix=" &lt;page>" suffix="&lt;/page> pp"/>
-          </group>
-        </if>
-        <else-if type="chapter paper-conference" match="any">
-          <text macro="title" prefix=" " suffix="."/>
-          <group prefix=" In: " delimiter=" ">
-            <text macro="editor" suffix="," prefix=""/>
-            <text variable="container-title" font-style="italic" suffix="&lt;/container-title>." prefix="&lt;container-title>"/>
-            <text variable="collection-title" suffix="&lt;/collection-title>." prefix="&lt;collection-title>"/>
-            <group suffix=".">
-              <text macro="publisher" prefix="" suffix=""/>
-              <group prefix=", pp. " delimiter=" " suffix=".">
-                <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
+    <layout>
+      <group delimiter=" " suffix=".">
+        <text macro="author" prefix="" suffix=""/>
+        <date variable="issued" prefix="(&lt;issued>" suffix="&lt;/issued>)">
+          <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
+        </date>
+        <choose>
+          <if type="book" match="any">
+            <text macro="legal_case" prefix="" suffix=""/>
+            <group delimiter=". ">
+              <text macro="title" suffix="." prefix=""/>
+              <text macro="edition" prefix="" suffix=""/>
+              <text macro="editor" suffix="." prefix=""/>
+              <group prefix=" " suffix="." delimiter=", ">
+                <text macro="publisher" prefix="" suffix=""/>
+                <text macro="number-of-pages" prefix=" " suffix=""/>
               </group>
             </group>
-          </group>
-        </else-if>
-        <else-if type="bill graphic legal_case legislation manuscript motion_picture report song thesis" match="any">
-          <text macro="legal_case" prefix="" suffix=""/>
-          <group prefix=" " delimiter=" ">
+          </if>
+          <else-if type="chapter paper-conference" match="any">
             <text macro="title" suffix="." prefix=""/>
-            <text macro="edition" prefix="" suffix=""/>
-            <text macro="editor" suffix="." prefix=""/>
-          </group>
-          <group prefix=" " delimiter=", ">
-            <text macro="publisher" prefix="" suffix=""/>
-            <text variable="page" prefix=" &lt;page>" suffix="&lt;/page>pp."/>
-          </group>
-        </else-if>
-        <else>
-          <group prefix=" " delimiter=" " suffix=".">
-            <text macro="title" prefix="" suffix=""/>
-            <text macro="editor" prefix="" suffix=""/>
-          </group>
-          <group prefix=" " suffix=".">
-            <text variable="container-title" font-style="italic" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
-            <group prefix=" ">
-              <text variable="volume" prefix="&lt;volume>" suffix="&lt;/volume>"/>
+            <group prefix=" " delimiter=" ">
+              <text term="in" text-case="capitalize-first" suffix=":" prefix=""/>
+              <text macro="editor" suffix="," prefix=""/>
+              <text variable="container-title" font-style="italic" suffix="&lt;/container-title>." prefix="&lt;container-title>"/>
+              <text variable="collection-title" suffix="&lt;/collection-title>." prefix="&lt;collection-title>"/>
+              <group suffix=".">
+                <text macro="publisher" prefix="" suffix=""/>
+                <group prefix=", " delimiter=" ">
+                  <label variable="page" form="short"/>
+                  <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
+                </group>
+              </group>
             </group>
-            <text variable="page" prefix=", &lt;page>" suffix="&lt;/page>."/>
-          </group>
-        </else>
-      </choose>
-      <text prefix=" " macro="access" suffix="."/>
+          </else-if>
+          <else-if type="bill graphic legal_case legislation manuscript motion_picture report song thesis" match="any">
+            <text macro="legal_case" prefix="" suffix=""/>
+            <group delimiter=" ">
+              <text macro="title" suffix="." prefix=""/>
+              <text macro="edition" prefix="" suffix=""/>
+              <text macro="editor" suffix="." prefix=""/>
+            </group>
+            <group prefix=" " delimiter=", ">
+              <text macro="publisher" prefix="" suffix=""/>
+              <text variable="page" prefix=" &lt;page>" suffix="&lt;/page>pp."/>
+            </group>
+          </else-if>
+          <else>
+            <group prefix=" " delimiter=" " suffix=".">
+              <text macro="title" prefix="" suffix=""/>
+              <text macro="editor" prefix="" suffix=""/>
+            </group>
+            <group prefix=" " suffix=".">
+              <text variable="container-title" font-style="italic" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+              <group prefix=" ">
+                <text variable="volume" prefix="&lt;volume>" suffix="&lt;/volume>"/>
+              </group>
+              <text variable="page" prefix=", &lt;page>" suffix="&lt;/page>."/>
+            </group>
+          </else>
+        </choose>
+      </group>
+      <text macro="access" prefix=" " suffix=""/>
     </layout>
   </bibliography>
 </style>

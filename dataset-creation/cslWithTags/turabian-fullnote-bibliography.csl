@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
   <info>
     <title>Turabian 8th edition (full note)</title>
     <id>http://www.zotero.org/styles/turabian-fullnote-bibliography</id>
@@ -11,6 +11,9 @@
     </author>
     <contributor>
       <name>Sebastian Karcher</name>
+    </contributor>
+    <contributor>
+      <name>Brenton M. Wiernik</name>
     </contributor>
     <category citation-format="note"/>
     <category field="history"/>
@@ -455,8 +458,15 @@
     </choose>
   </macro>
   <macro name="event">
-    <group>
-      <text term="presented at" suffix=" " prefix=""/>
+    <group delimiter=" ">
+      <choose>
+        <if variable="genre">
+          <text term="presented at" prefix="" suffix=""/>
+        </if>
+        <else>
+          <text term="presented at" text-case="capitalize-first" prefix="" suffix=""/>
+        </else>
+      </choose>
       <text variable="event" prefix="&lt;event>" suffix="&lt;/event>"/>
     </group>
   </macro>
@@ -471,6 +481,43 @@
           <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
         </group>
       </else>
+    </choose>
+  </macro>
+  <macro name="originally-published">
+    <group delimiter=", ">
+      <group delimiter=": ">
+        <text variable="original-publisher-place" prefix="&lt;original-publisher-place>" suffix="&lt;/original-publisher-place>"/>
+        <text variable="original-publisher" prefix="&lt;original-publisher>" suffix="&lt;/original-publisher>"/>
+      </group>
+      <choose>
+        <if is-uncertain-date="original-date">
+          <date variable="original-date" form="numeric" date-parts="year" prefix="[&lt;original-date>" suffix="&lt;/original-date>?]"/>
+        </if>
+        <else>
+          <date variable="original-date" form="numeric" date-parts="year" prefix="&lt;original-date>" suffix="&lt;/original-date>"/>
+        </else>
+      </choose>
+    </group>
+  </macro>
+  <macro name="reprint-note">
+    <!--needs localization-->
+    <choose>
+      <if variable="original-date issued" match="all">
+        <choose>
+          <!--for whatever reason in notes, when we have both original and new publishers, reprint doesn't appear-->
+          <if variable="original-publisher original-publisher-place" match="none">
+            <text value="repr." prefix="" suffix=""/>
+          </if>
+        </choose>
+      </if>
+    </choose>
+  </macro>
+  <macro name="reprint">
+    <!--needs localization-->
+    <choose>
+      <if variable="original-date issued" match="all">
+        <text value="reprint" text-case="capitalize-first" prefix="" suffix=""/>
+      </if>
     </choose>
   </macro>
   <macro name="issued">
@@ -617,7 +664,13 @@
             </choose>
             <text macro="event" prefix="" suffix=""/>
           </group>
-          <text macro="publisher" prefix="" suffix=""/>
+            <group delimiter="; ">
+              <text macro="originally-published" prefix="" suffix=""/>
+                <group delimiter=", ">
+                <text macro="reprint-note" prefix="" suffix=""/>
+                <text macro="publisher" prefix="" suffix=""/>
+            </group>
+          </group>
           <text macro="issued" prefix="" suffix=""/>
         </group>
       </else-if>
@@ -649,7 +702,13 @@
               <text variable="genre" text-case="capitalize-first" prefix="&lt;genre>" suffix="&lt;/genre>"/>
             </if>
           </choose>
-          <text macro="publisher" prefix="" suffix=""/>
+          <group delimiter=". ">
+            <text macro="originally-published" prefix="" suffix=""/>
+            <group delimiter=", ">
+              <text macro="reprint" prefix="" suffix=""/>
+              <text macro="publisher" prefix="" suffix=""/>
+            </group>
+          </group>
           <text macro="issued" prefix="" suffix=""/>
         </group>
       </else-if>

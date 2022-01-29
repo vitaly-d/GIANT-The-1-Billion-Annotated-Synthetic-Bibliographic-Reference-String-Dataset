@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" and="text" delimiter-precedes-et-al="never" delimiter-precedes-last="never" page-range-format="expanded" demote-non-dropping-particle="never">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" and="text" delimiter-precedes-et-al="never" delimiter-precedes-last="never" page-range-format="expanded" demote-non-dropping-particle="never" default-locale="pl-PL">
   <!-- This style was edited with the Visual CSL Editor (http://editor.citationstyles.org/visualEditor/) -->
   <info>
-    <title>Biuletyn Polskiego Towarzystwa Językoznawczego (Polish)</title>
+    <title>Biuletyn Polskiego Towarzystwa Językoznawczego (Polski)</title>
     <title-short>Biuletyn PTJ</title-short>
     <id>http://www.zotero.org/styles/biuletyn-polskiego-towarzystwa-jezykoznawczego</id>
     <link href="http://www.zotero.org/styles/biuletyn-polskiego-towarzystwa-jezykoznawczego" rel="self"/>
@@ -77,6 +77,9 @@
         <text variable="edition" prefix="&lt;edition>" suffix="&lt;/edition>"/>
       </else>
     </choose>
+  </macro>
+  <macro name="year">
+    <date date-parts="year" form="text" variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>"/>
   </macro>
   <macro name="collection-title-number">
     <group delimiter=" " prefix="(= " suffix=")">

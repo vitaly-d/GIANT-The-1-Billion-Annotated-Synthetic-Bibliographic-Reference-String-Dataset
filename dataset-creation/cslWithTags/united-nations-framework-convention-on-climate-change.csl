@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" demote-non-dropping-particle="sort-only" default-locale="en-GB" page-range-format="expanded">
   <info>
     <title>United Nations Framework Convention on Climate Change</title>
     <title-short>UNFCCC</title-short>
@@ -50,7 +50,7 @@
   <macro name="access">
     <choose>
       <if variable="URL">
-        <text value=" Available at " prefix="" suffix=""/>
+        <text value="Available at " prefix="" suffix=""/>
         <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
       </if>
     </choose>
@@ -101,17 +101,10 @@
   </macro>
   <macro name="issued">
     <choose>
-      <if type="article-newspaper paper-conference broadcast" match="any">
+      <if type="article-newspaper broadcast" match="any">
         <date variable="issued" suffix="&lt;/issued>, " prefix="&lt;issued>">
           <date-part name="day" suffix="&lt;/day> " prefix="&lt;day>"/>
           <date-part name="month" prefix="&lt;month>" suffix="&lt;/month>"/>
-        </date>
-      </if>
-    </choose>
-    <choose>
-      <if type="paper-conference" match="any">
-        <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
-          <date-part name="year" prefix=" &lt;year>" suffix="&lt;/year>"/>
         </date>
       </if>
     </choose>
@@ -138,7 +131,7 @@
       </group>
     </layout>
   </citation>
-  <bibliography hanging-indent="true" et-al-min="4" et-al-use-first="3">
+  <bibliography et-al-min="4" et-al-use-first="3">
     
     <layout>
       <text macro="author" prefix="" suffix=""/>
@@ -179,7 +172,7 @@
             </group>
           </group>
         </else-if>
-        <else-if type="book graphic" match="any">
+        <else-if type="book report graphic" match="any">
           <group prefix=" " delimiter=". " suffix=".">
             <text variable="note" prefix="&lt;note>" suffix="&lt;/note>"/>
             <text macro="title" prefix="" suffix=""/>
@@ -200,7 +193,6 @@
             <text variable="container-title" font-style="italic" suffix="&lt;/container-title>." prefix="&lt;container-title>"/>
             <text variable="collection-title" suffix="&lt;/collection-title>." prefix="&lt;collection-title>"/>
             <text macro="edition" prefix=" " suffix=""/>
-            <text macro="issued" prefix="" suffix=""/>
             <text macro="publisher" suffix="." prefix=""/>
             <group>
               <choose>

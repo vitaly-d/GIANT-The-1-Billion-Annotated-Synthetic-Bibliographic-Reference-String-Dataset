@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" page-range-format="chicago" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" page-range-format="chicago" demote-non-dropping-particle="sort-only" default-locale="en-GB">
   <info>
     <title>Twentieth-Century Music</title>
     <id>http://www.zotero.org/styles/twentieth-century-music</id>
@@ -14,7 +14,7 @@
     <category field="history"/>
     <issn>1478-5722</issn>
     <eissn>1478-5730</eissn>
-    <updated>2018-01-15T17:19:53+00:00</updated>
+    <updated>2018-01-16T09:37:56+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="en">
@@ -174,7 +174,10 @@
         <text variable="genre" prefix="&lt;genre>" suffix="&lt;/genre>"/>
       </if>
       <else-if type="bill book graphic legal_case legislation motion_picture report song" match="any">
-        <text variable="title" text-case="title" font-style="italic" prefix="&lt;title>" suffix="&lt;/title>"/>
+        <group delimiter=", ">
+          <text variable="title" text-case="title" font-style="italic" prefix="&lt;title>" suffix="&lt;/title>"/>
+          <text macro="edition" prefix="" suffix=""/>
+        </group>
       </else-if>
       <else>
         <text variable="title" quotes="true" prefix="&lt;title>" suffix="&lt;/title>"/>
@@ -191,7 +194,10 @@
         </choose>
       </if>
       <else-if type="bill book graphic legal_case legislation motion_picture report song" match="any">
-        <text variable="title" text-case="title" font-style="italic" prefix="&lt;title>" suffix="&lt;/title>"/>
+        <group delimiter=", ">
+          <text variable="title" text-case="title" font-style="italic" prefix="&lt;title>" suffix="&lt;/title>"/>
+          <text macro="edition" prefix="" suffix=""/>
+        </group>
       </else-if>
       <else>
         <text variable="title" quotes="true" prefix="&lt;title>" suffix="&lt;/title>"/>
@@ -267,7 +273,7 @@
   <macro name="locators">
     <choose>
       <if type="article-journal">
-        <group delimiter="/" prefix=", ">
+        <group delimiter="/" prefix=". ">
           <text variable="volume" prefix="&lt;volume>" suffix="&lt;/volume>"/>
           <number variable="issue"/>
         </group>
@@ -333,7 +339,7 @@
         </group>
       </else-if>
       <else>
-        <group delimiter=", " prefix="(" suffix=")">
+        <group delimiter=", ">
           <group delimiter=": ">
             <text variable="publisher-place" prefix="&lt;publisher-place>" suffix="&lt;/publisher-place>"/>
             <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
@@ -345,42 +351,38 @@
   </macro>
   <macro name="issued">
     <choose>
-      <if variable="issued">
-        <choose>
-          <if type="graphic report" match="any">
-            <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
-              <date-part name="month" suffix="&lt;/month> " prefix="&lt;month>"/>
-              <date-part name="day" suffix="&lt;/day>, " prefix="&lt;day>"/>
-              <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
-            </date>
-          </if>
-          <else-if type="legal_case">
-            <text variable="authority" suffix="&lt;/authority> " prefix="&lt;authority>"/>
-            <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
-              <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
-            </date>
-          </else-if>
-          <else-if type="bill book chapter graphic legal_case legislation motion_picture report song thesis" match="any">
-            <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
-              <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
-            </date>
-          </else-if>
-          <else-if type="article-journal">
-            <date variable="issued" prefix="(&lt;issued>" suffix="&lt;/issued>)">
-              <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
-            </date>
-          </else-if>
-          <else-if type="paper-conference" match="any">
-            <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
-              <date-part name="month" prefix="&lt;month>" suffix="&lt;/month>"/>
-              <date-part name="year" prefix=" &lt;year>" suffix="&lt;/year>"/>
-            </date>
-          </else-if>
-          <else>
-            <date form="text" date-parts="year-month-day" variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>"/>
-          </else>
-        </choose>
+      <if type="graphic report" match="any">
+        <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
+          <date-part name="month" suffix="&lt;/month> " prefix="&lt;month>"/>
+          <date-part name="day" suffix="&lt;/day>, " prefix="&lt;day>"/>
+          <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
+        </date>
       </if>
+      <else-if type="legal_case">
+        <text variable="authority" suffix="&lt;/authority> " prefix="&lt;authority>"/>
+        <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
+          <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
+        </date>
+      </else-if>
+      <else-if type="bill book chapter graphic legal_case legislation motion_picture report song thesis" match="any">
+        <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
+          <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
+        </date>
+      </else-if>
+      <else-if type="article-journal">
+        <date variable="issued" prefix="(&lt;issued>" suffix="&lt;/issued>)">
+          <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
+        </date>
+      </else-if>
+      <else-if type="paper-conference" match="any">
+        <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
+          <date-part name="month" prefix="&lt;month>" suffix="&lt;/month>"/>
+          <date-part name="year" prefix=" &lt;year>" suffix="&lt;/year>"/>
+        </date>
+      </else-if>
+      <else>
+        <date form="text" date-parts="year-month-day" variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>"/>
+      </else>
     </choose>
   </macro>
   <macro name="point-locators-subsequent">
@@ -442,8 +444,7 @@
       <if type="chapter paper-conference" match="any">
         <choose>
           <if variable="page">
-            <text variable="volume" suffix="&lt;/volume>:" prefix="&lt;volume>"/>
-            <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
+            <text variable="page" prefix=". &lt;page>" suffix="&lt;/page>"/>
           </if>
         </choose>
       </if>
@@ -462,7 +463,7 @@
         <text macro="issued" prefix=" " suffix=""/>
       </if>
       <else-if variable="publisher-place publisher" match="any">
-        <group delimiter=", " prefix=" ">
+        <group delimiter=", " prefix=". ">
           <group delimiter=", ">
             <choose>
               <if variable="title" match="none"/>
@@ -488,7 +489,7 @@
         <text macro="issued" prefix=" " suffix=""/>
       </if>
       <else-if variable="publisher-place publisher" match="any">
-        <group prefix=", " delimiter=", ">
+        <group delimiter=", " prefix=". ">
           <group delimiter=", ">
             <choose>
               <if variable="title" match="none"/>
@@ -500,12 +501,11 @@
           </group>
           <group delimiter=", ">
             <text macro="publisher" prefix="" suffix=""/>
-            <text macro="issued" prefix="" suffix=""/>
           </group>
         </group>
       </else-if>
       <else>
-        <text macro="issued" prefix=", " suffix=""/>
+        <text macro="issued" prefix="" suffix=""/>
       </else>
     </choose>
   </macro>
@@ -545,6 +545,12 @@
       </else>
     </choose>
   </macro>
+  <macro name="edition">
+    <group>
+      <number variable="edition" form="ordinal"/>
+      <label variable="edition" form="short"/>
+    </group>
+  </macro>
   <citation and="text" et-al-min="4" et-al-use-first="1">
     <layout delimiter="; " suffix=".">
       <choose>
@@ -580,7 +586,7 @@
   <bibliography and="text" et-al-min="11" et-al-use-first="7" subsequent-author-substitute="———" entry-spacing="0" hanging-indent="true">
     
     <layout suffix=".">
-      <group delimiter=", ">
+      <group delimiter=". ">
         <text macro="contributors" prefix="" suffix=""/>
         <text macro="title" prefix="" suffix=""/>
         <text macro="description" prefix="" suffix=""/>
@@ -588,7 +594,6 @@
         <group delimiter=", ">
           <text macro="container-contributors" prefix="" suffix=""/>
           <text macro="container-title" prefix="" suffix=""/>
-          <text macro="locators-chapter" prefix="" suffix=""/>
         </group>
       </group>
       <text macro="locators" prefix="" suffix=""/>
@@ -596,6 +601,7 @@
       <text macro="issue" prefix="" suffix=""/>
       <text macro="locators-newspaper" prefix=", " suffix=""/>
       <text macro="locators-journal" prefix="" suffix=""/>
+      <text macro="locators-chapter" prefix="" suffix=""/>
       <text macro="access" prefix=". " suffix=""/>
     </layout>
   </bibliography>

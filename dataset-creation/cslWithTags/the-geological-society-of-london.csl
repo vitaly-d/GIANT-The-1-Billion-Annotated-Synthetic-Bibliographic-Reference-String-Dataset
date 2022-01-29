@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" page-range-format="expanded" demote-non-dropping-particle="never">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" page-range-format="expanded" demote-non-dropping-particle="never" default-locale="en-GB">
   <info>
     <title>The Geological Society of London</title>
     <id>http://www.zotero.org/styles/the-geological-society-of-london</id>
@@ -9,10 +9,13 @@
     <author>
       <name>Sebastian Karcher</name>
     </author>
+    <contributor>
+      <name>Maxine Smith</name>
+    </contributor>
     <category citation-format="author-date"/>
-    <category field="geography"/>
-    <summary>Parent style for the Journals published by The Geological Society (London); details taken from sample</summary>
-    <updated>2012-09-27T22:06:38+00:00</updated>
+    <category field="geology"/>
+    <summary>Parent style for the Journals and Books published by The Geological Society (London); details provided by publisher</summary>
+    <updated>2020-04-29T02:37:31+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="en-GB">
@@ -25,13 +28,13 @@
   </locale>
   <macro name="editor">
     <names variable="editor" delimiter=", " prefix="&lt;editor>" suffix="&lt;/editor>">
-      <name and="symbol" initialize-with=". " delimiter=", " sort-separator=", " name-as-sort-order="all" delimiter-precedes-last="never"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <name and="text" initialize-with=". " delimiter=", " sort-separator=", " name-as-sort-order="all" delimiter-precedes-last="never"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
       <label form="short" prefix=" (" suffix=")"/>
     </names>
   </macro>
   <macro name="author">
     <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
-      <name name-as-sort-order="all" and="symbol" sort-separator=", " initialize-with="." delimiter-precedes-last="never" delimiter=", "><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <name name-as-sort-order="all" and="text" sort-separator=", " initialize-with="." delimiter-precedes-last="never" delimiter=", "><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
       <label form="short" prefix=" (" suffix=")"/>
       <substitute>
         <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>"/>
@@ -50,7 +53,7 @@
   </macro>
   <macro name="author-short">
     <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
-      <name form="short" and="symbol" delimiter=", " delimiter-precedes-last="never"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <name form="short" and="text" delimiter=", " delimiter-precedes-last="never"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
       <et-al font-style="italic"/>
       <substitute>
         <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>"/>
@@ -82,16 +85,12 @@
   <macro name="publisher">
     <choose>
       <if type="thesis" match="none">
-        <group delimiter=", ">
-          <text variable="publisher-place" prefix="&lt;publisher-place>" suffix="&lt;/publisher-place>"/>
-          <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
-          <group delimiter=" ">
-            <text variable="genre" prefix="&lt;genre>" suffix="&lt;/genre>"/>
-            <text variable="number" font-weight="bold" prefix="&lt;number>" suffix="&lt;/number>"/>
-          </group>
-          <text variable="collection-title" prefix="&lt;collection-title>" suffix="&lt;/collection-title>"/>
-          <text variable="collection-number" font-weight="bold" prefix="&lt;collection-number>" suffix="&lt;/collection-number>"/>
+        <group delimiter=" ">
+          <text variable="genre" prefix="&lt;genre>" suffix="&lt;/genre>"/>
+          <text variable="number" font-weight="bold" prefix="&lt;number>" suffix="&lt;/number>"/>
         </group>
+        <text variable="collection-title" prefix="&lt;collection-title>" suffix="&lt;/collection-title>"/>
+        <text variable="collection-number" font-weight="bold" prefix="&lt;collection-number>" suffix="&lt;/collection-number>"/>
       </if>
     </choose>
   </macro>
@@ -141,7 +140,7 @@
       </else>
     </choose>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-givenname="true" collapse="year-suffix" cite-group-delimiter=", ">
+  <citation et-al-min="3" et-al-use-first="1" collapse="year-suffix" cite-group-delimiter=", ">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">

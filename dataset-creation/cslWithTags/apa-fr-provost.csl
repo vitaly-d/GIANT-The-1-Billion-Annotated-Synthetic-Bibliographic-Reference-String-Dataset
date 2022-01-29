@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never" default-locale="fr-CA">
   <info>
-    <title>American Psychological Association 6th edition (Provost) (French - Canada)</title>
-    <title-short>APA FR Provost</title-short>
+    <title>American Psychological Association 6th edition (Provost) (Français - Canada)</title>
+    <title-short>APA (fr, Provost)</title-short>
     <id>http://www.zotero.org/styles/apa-fr-provost</id>
     <link href="http://www.zotero.org/styles/apa-fr-provost" rel="self"/>
     <link href="http://www.zotero.org/styles/apa" rel="template"/>
@@ -11,6 +11,10 @@
       <name>Laure Mellifluo</name>
       <email>laure.melli@gmail.com</email>
     </author>
+    <contributor>
+      <name>Brenton M. Wiernik</name>
+      <email>zotero@wiernik.org</email>
+    </contributor>
     <category citation-format="author-date"/>
     <category field="psychology"/>
     <category field="generic-base"/>
@@ -181,7 +185,7 @@
       </else-if>
       <else-if type="legislation">
         <text variable="title" font-style="italic" prefix="&lt;title>" suffix="&lt;/title>"/>
-        <group prefix=" (" suffix=")" delimiter=" ; ">
+        <group prefix=" (" suffix=")" delimiter="; ">
           <text variable="number" prefix="&lt;number>" suffix="&lt;/number>"/>
           <text variable="container-title" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
         </group>
@@ -224,7 +228,7 @@
   <macro name="publisher">
     <choose>
       <if type="report" match="any">
-        <group delimiter=" : ">
+        <group delimiter=": ">
           <text variable="publisher-place" prefix="&lt;publisher-place>" suffix="&lt;/publisher-place>"/>
           <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
         </group>
@@ -247,7 +251,7 @@
           </choose>
           <choose>
             <if type="book chapter" match="any">
-              <group delimiter=" : ">
+              <group delimiter=": ">
                 <choose>
                   <if variable="publisher-place">
                     <text variable="publisher-place" prefix="&lt;publisher-place>" suffix="&lt;/publisher-place>"/>
@@ -280,7 +284,7 @@
               </group>
             </else-if>
             <else-if type="article-journal article-magazine article-newspaper" match="none">
-              <group delimiter=" : ">
+              <group delimiter=": ">
                 <text variable="publisher-place" prefix="&lt;publisher-place>" suffix="&lt;/publisher-place>"/>
                 <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
               </group>
@@ -536,7 +540,7 @@
   </macro>
   <citation et-al-min="6" et-al-use-first="1" et-al-subsequent-min="3" et-al-subsequent-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true" collapse="year" givenname-disambiguation-rule="primary-name">
     
-    <layout prefix="(" suffix=")" delimiter=" ; ">
+    <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">
         <text macro="author-short" prefix="" suffix=""/>
         <text macro="issued-year" prefix="" suffix=""/>

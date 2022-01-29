@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" demote-non-dropping-particle="sort-only" class="in-text" page-range-format="expanded" default-locale="de-DE">
+  <info>
+    <title>Klinische Pädiatrie</title>
+    <id>http://www.zotero.org/styles/klinische-padiatrie</id>
+    <link href="http://www.zotero.org/styles/klinische-padiatrie" rel="self"/>
+    <link href="http://www.zotero.org/styles/thieme-german" rel="template"/>
+    <link href="https://www.thieme.de/de/klinische-paediatrie/autoren-3824.htm" rel="documentation"/>
+    <link href="https://www.thieme.de/statics/dokumente/thieme/final/de/dokumente/zw_klinische-paediatrie/Ibc_web.pdf" rel="documentation"/>
+    <link href="https://www.thieme.de/statics/dokumente/thieme/final/de/dokumente/zw_klinische-paediatrie/Information_for_Authors.pdf" rel="documentation"/>
+    <author>
+      <name>Patrick O'Brien</name>
+    </author>
+    <category citation-format="numeric"/>
+    <category field="medicine"/>
+    <issn>0300-8630</issn>
+    <eissn>1439-3824</eissn>
+    <updated>2021-11-10T14:06:32+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+  <locale xml:lang="de">
+    <terms>
+      <term name="et-al">et al.</term>
+      <term name="internet">im Internet</term>
+      <term name="accessed">Stand</term>
+    </terms>
+  </locale>
+  <macro name="author">
+    <names suffix="&lt;/author>. " variable="author" prefix="&lt;author>">
+      <name sort-separator=" " name-as-sort-order="all" initialize-with="" et-al-use-first="3" et-al-min="4" delimiter-precedes-last="always"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <label form="short" prefix=" (" suffix=")"/>
+      <substitute>
+        <names variable="editor translator" prefix="&lt;editor translator>" suffix="&lt;/editor translator>"/>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="editor">
+    <names suffix="&lt;/editor>. " variable="editor" prefix="&lt;editor>">
+      <name sort-separator=" " name-as-sort-order="all" initialize-with="" delimiter-precedes-last="always" delimiter=", "><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <label form="short" prefix=" (" suffix=")"/>
+    </names>
+  </macro>
+  <macro name="publisher">
+    <group delimiter=" ">
+      <group delimiter=", ">
+        <text variable="publisher-place" prefix="&lt;publisher-place>" suffix="&lt;/publisher-place>"/>
+        <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
+      </group>
+      <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
+        <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
+      </date>
+    </group>
+  </macro>
+  <macro name="access">
+    <choose>
+      <if type="article-journal" match="any">
+        <text variable="DOI" prefix=", doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+      </if>
+      <else-if type="webpage post post-weblog" match="any">
+        <group delimiter="; " prefix=". ">
+          <group delimiter=": ">
+            <text term="internet" text-case="capitalize-first" prefix="" suffix=""/>
+            <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
+          </group>
+          <group delimiter=": ">
+            <text term="accessed" prefix="" suffix=""/>
+            <date form="numeric" variable="accessed" prefix="&lt;accessed>" suffix="&lt;/accessed>"/>
+          </group>
+        </group>
+      </else-if>
+    </choose>
+  </macro>
+  <macro name="journal-title">
+    <text form="short" variable="container-title" strip-periods="true" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+  </macro>
+  <macro name="title">
+    <text variable="title" prefix="&lt;title>" suffix="&lt;/title>"/>
+  </macro>
+  <macro name="edition">
+    <choose>
+      <if is-numeric="edition">
+        <group delimiter=" ">
+          <number form="ordinal" variable="edition"/>
+          <text form="short" term="edition" prefix="" suffix=""/>
+        </group>
+      </if>
+      <else>
+        <text suffix="&lt;/edition>." variable="edition" prefix="&lt;edition>"/>
+      </else>
+    </choose>
+  </macro>
+  <citation>
+    <layout delimiter=", " prefix="[" suffix="]">
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
+    </layout>
+  </citation>
+  <bibliography et-al-min="4" et-al-use-first="3" second-field-align="flush">
+    
+    <layout vertical-align="baseline" font-variant="normal">
+      <text variable="citation-number" strip-periods="false" quotes="false" vertical-align="baseline" prefix="[&lt;citation-number>" suffix="&lt;/citation-number>]"/>
+      <text macro="author" prefix="" suffix=""/>
+      <text macro="title" suffix=". " prefix=""/>
+      <choose>
+        <if type="bill book graphic legal_case legislation motion_picture report song thesis" match="any">
+          <group delimiter=" ">
+            <text macro="edition" prefix="" suffix=""/>
+            <text macro="publisher" prefix="" suffix=""/>
+          </group>
+        </if>
+        <else-if type="chapter paper-conference" match="any">
+          <group prefix=" " suffix=".">
+            <text suffix=": " term="in" text-case="capitalize-first" prefix=""/>
+            <text macro="editor" prefix="" suffix=""/>
+            <text variable="container-title" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+          </group>
+          <text prefix=" " macro="publisher" suffix=""/>
+        </else-if>
+        <else>
+          <group delimiter=" ">
+            <text macro="journal-title" prefix="" suffix=""/>
+            <date suffix="&lt;/issued>;" variable="issued" prefix="&lt;issued>">
+              <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
+            </date>
+            <text variable="volume" prefix="&lt;volume>" suffix="&lt;/volume>"/>
+          </group>
+          <text prefix=": &lt;page>" variable="page" suffix="&lt;/page>"/>
+        </else>
+      </choose>
+      <text macro="access" prefix="" suffix=""/>
+    </layout>
+  </bibliography>
+</style>

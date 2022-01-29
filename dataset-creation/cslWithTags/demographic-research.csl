@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-GB">
   <info>
     <title>Demographic Research</title>
     <id>http://www.zotero.org/styles/demographic-research</id>
     <link href="http://www.zotero.org/styles/demographic-research" rel="self"/>
-    <link href="http://www.zotero.org/styles/harvard-cardiff-university-biosi" rel="template"/>
+    <link href="http://www.zotero.org/styles/cardiff-university-harvard" rel="template"/>
     <link href="http://www.demographic-research.org/files/demographic_research_reference_guidelines.pdf" rel="documentation"/>
     <author>
       <name>Ilya Kashnitsky</name>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" default-locale="en-US" name-as-sort-order="all" demote-non-dropping-particle="never">
   <info>
     <title>USDA Forest Service - Pacific Northwest Research Station</title>
     <title-short>USFS PNWRS</title-short>

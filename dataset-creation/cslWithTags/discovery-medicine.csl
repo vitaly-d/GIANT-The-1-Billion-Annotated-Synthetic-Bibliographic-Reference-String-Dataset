@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
   <info>
     <title>Discovery Medicine</title>
     <title-short>DM</title-short>
     <id>http://www.zotero.org/styles/discovery-medicine</id>
     <link href="http://www.zotero.org/styles/discovery-medicine" rel="self"/>
-    <link href="http://www.zotero.org/styles/brain" rel="template"/>
     <link href="http://www.discoverymedicine.com/about/information-for-authors-of-discovery-medicine/" rel="documentation"/>
     <author>
       <name>Patrick O'Brien, PhD</name>

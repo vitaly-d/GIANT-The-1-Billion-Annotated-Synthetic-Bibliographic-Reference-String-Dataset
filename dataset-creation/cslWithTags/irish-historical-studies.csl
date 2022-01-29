@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="note">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="note" default-locale="en-GB" version="1.0" demote-non-dropping-particle="sort-only">
   <!-- INTRODUCTION -->
   <info>
     <title>Irish Historical Studies</title>
@@ -88,7 +88,7 @@
         <single>sec.</single>
         <multiple>secs</multiple>
       </term>
-      <term name="sub verbo" form="short">
+      <term name="sub-verbo" form="short">
         <single>s.v.</single>
         <multiple>s.vv</multiple>
       </term>

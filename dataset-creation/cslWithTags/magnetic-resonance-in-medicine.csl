@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
   <!-- This style was edited with the Visual CSL Editor (http://steveridout.com/csl/visualEditor/) -->
   <info>
     <title>Magnetic Resonance in Medicine</title>
     <id>http://www.zotero.org/styles/magnetic-resonance-in-medicine</id>
     <link href="http://www.zotero.org/styles/magnetic-resonance-in-medicine" rel="self"/>
     <link href="http://www.zotero.org/styles/council-of-science-editors" rel="template"/>
-    <link href="http://onlinelibrary.wiley.com/journal/10.1002/(ISSN)1522-2594/homepage/ForAuthors.html" rel="documentation"/>
+    <link href="http://onlinelibrary.wiley.com/journal/15222594" rel="documentation"/>
     <author>
       <name>Andrew Priest</name>
     </author>
+    <contributor>
+      <name>Francesco Santini</name>
+    </contributor>
     <category citation-format="numeric"/>
     <category field="science"/>
     <issn>0740-3194</issn>
     <eissn>1522-2594</eissn>
     <summary>Magnetic Resonance in Medicine style</summary>
-    <updated>2012-10-18T10:00:00</updated>
+    <updated>2018-08-09T10:00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <macro name="editor">
@@ -24,9 +27,6 @@
       <label form="long" prefix=", " suffix="."/>
     </names>
   </macro>
-  <macro name="anon">
-    <text term="anonymous" form="short" text-case="capitalize-first" strip-periods="true" prefix="" suffix=""/>
-  </macro>
   <macro name="author">
     <group suffix=".">
       <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
@@ -34,7 +34,7 @@
         <label form="short" prefix=" " strip-periods="true"/>
         <substitute>
           <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>"/>
-          <text macro="anon" prefix="" suffix=""/>
+          <text macro="title" prefix="" suffix=""/>
         </substitute>
       </names>
     </group>
@@ -75,11 +75,6 @@
   </macro>
   <macro name="journal">
     <text variable="container-title" form="short" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
-    <choose>
-      <if variable="URL">
-        <text term="internet" prefix=" [" suffix="]" text-case="capitalize-first"/>
-      </if>
-    </choose>
   </macro>
   <macro name="edition">
     <choose>
@@ -101,13 +96,13 @@
       <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
-  <bibliography hanging-indent="false" et-al-min="11" et-al-use-first="3">
-    <layout>
+  <bibliography hanging-indent="false" et-al-min="7" et-al-use-first="3">
+    <layout suffix=".">
       <text variable="citation-number" suffix="&lt;/citation-number>. " prefix="&lt;citation-number>"/>
       <text macro="author" prefix="" suffix=""/>
       <choose>
         <if type="bill book graphic legal_case legislation motion_picture report song thesis" match="any">
-          <group prefix=" " suffix="." delimiter=" ">
+          <group prefix=" " delimiter=" ">
             <text macro="title" suffix="." prefix=""/>
             <text macro="edition" prefix="" suffix=""/>
             <text macro="editor" prefix="(" suffix=")"/>
@@ -129,7 +124,7 @@
             <text variable="volume" prefix="Vol. &lt;volume>" suffix="&lt;/volume>."/>
             <text macro="edition" prefix="" suffix=""/>
             <text variable="collection-title" suffix="&lt;/collection-title>." prefix="&lt;collection-title>"/>
-            <group suffix=".">
+            <group>
               <text macro="publisher" prefix="" suffix=""/>
               <group suffix="." prefix="; " delimiter=". ">
                 <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
@@ -140,12 +135,24 @@
             </group>
           </group>
         </else-if>
+        <else-if type="webpage" match="any">
+          <group delimiter=". " prefix=" ">
+            <text variable="title" prefix="&lt;title>" suffix="&lt;/title>"/>
+            <text variable="container-title" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+            <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
+            <date form="text" variable="issued" prefix="Published &lt;issued>" suffix="&lt;/issued>"/>
+            <group delimiter=" ">
+              <text term="accessed" text-case="capitalize-first" prefix="" suffix=""/>
+              <date form="text" variable="accessed" prefix="&lt;accessed>" suffix="&lt;/accessed>"/>
+            </group>
+          </group>
+        </else-if>
         <else>
           <group suffix=".">
             <text macro="title" prefix=" " suffix=""/>
             <text macro="editor" prefix=" " suffix=""/>
           </group>
-          <group prefix=" " suffix=".">
+          <group prefix=" ">
             <text macro="journal" prefix="" suffix=""/>
             <group delimiter=";" prefix=" ">
               <text macro="issued" prefix="" suffix=""/>

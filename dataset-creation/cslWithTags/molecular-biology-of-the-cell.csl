@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text">
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" default-locale="en-US" demote-non-dropping-particle="sort-only" page-range-format="expanded">
   <info>
     <title>Molecular Biology of the Cell</title>
     <title-short>MBoC</title-short>
@@ -15,29 +15,37 @@
       <name>Jessica Polka</name>
       <email>jessica.polka@gmail.com</email>
     </contributor>
+    <contributor>
+      <name>Patrick O'Brien</name>
+      <uri>https://twitter.com/patobrien333/</uri>
+    </contributor>
     <category citation-format="author-date"/>
     <category field="biology"/>
     <issn>1059-1524</issn>
     <eissn>1939-4586</eissn>
     <summary>Molecular Biology of the Cell.</summary>
-    <updated>2018-05-20T23:35:00+00:00</updated>
+    <updated>2019-02-08T14:47:12+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale>
     <terms>
       <term name="no date">[no date]</term>
+      <term name="editor" form="verb-short">ed.</term>
     </terms>
   </locale>
   <macro name="author-short">
     <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
       <name form="short" and="text"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
       <et-al font-style="italic"/>
+      <substitute>
+        <text macro="editor" prefix="" suffix=""/>
+        <text variable="title" prefix="&lt;title>" suffix="&lt;/title>"/>
+      </substitute>
     </names>
   </macro>
   <macro name="author">
     <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
-      <name name-as-sort-order="all" initialize-with=". " and="text" delimiter-precedes-last="always"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
-      <et-al font-style="italic"/>
+      <name and="text" delimiter-precedes-last="always" initialize-with="" name-as-sort-order="all"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
     </names>
   </macro>
   <macro name="issued">
@@ -53,7 +61,8 @@
   </macro>
   <macro name="editor">
     <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>">
-      <name initialize-with=". " and="text" delimiter-precedes-last="always" prefix="ed. "><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <label form="verb-short"/>
+      <name prefix=" " and="text" delimiter-precedes-last="always" initialize-with=""><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
     </names>
   </macro>
   <citation et-al-min="3" et-al-use-first="1" collapse="year">
@@ -76,8 +85,8 @@
             <text variable="title" suffix="&lt;/title>." prefix="&lt;title>"/>
             <group delimiter=", ">
               <group delimiter=" ">
-                <text variable="container-title" form="short" text-case="title" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
-                <text variable="volume" font-style="italic" prefix="&lt;volume>" suffix="&lt;/volume>"/>
+                <text variable="container-title" form="short" text-case="title" strip-periods="true" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+                <text variable="volume" font-style="normal" prefix="&lt;volume>" suffix="&lt;/volume>"/>
               </group>
               <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
             </group>

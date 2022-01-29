@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" page-range-format="minimal">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" page-range-format="minimal" default-locale="en-GB">
   <info>
     <title>British Journal of Anaesthesia</title>
     <title-short>BJA</title-short>
     <id>http://www.zotero.org/styles/british-journal-of-anaesthesia</id>
     <link href="http://www.zotero.org/styles/british-journal-of-anaesthesia" rel="self"/>
     <link href="http://www.zotero.org/styles/vancouver" rel="template"/>
-    <link href="http://www.oxfordjournals.org/our_journals/bjaint/for_authors/index.html" rel="documentation"/>
+    <link href="https://bjanaesthesia.org/content/authorinfo" rel="documentation"/>
     <author>
       <name>Charles Parnot</name>
       <uri>http://twitter.com/cparnot</uri>
@@ -213,7 +213,7 @@
   </macro>
   <citation collapse="citation-number">
     
-    <layout delimiter=" " vertical-align="sup">
+    <layout delimiter=", " vertical-align="sup">
       <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>

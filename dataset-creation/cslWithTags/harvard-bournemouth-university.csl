@@ -1,27 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-GB">
   <info>
     <title>Bournemouth University - Harvard</title>
     <id>http://www.zotero.org/styles/harvard-bournemouth-university</id>
     <link href="http://www.zotero.org/styles/harvard-bournemouth-university" rel="self"/>
     <link href="http://www.zotero.org/styles/taylor-and-francis-harvard-x" rel="template"/>
-    <link href="http://www.bournemouth.ac.uk/library/local-assets/how-to/docs/citing-references.pdf" rel="documentation"/>
+    <link href="https://libguides.bournemouth.ac.uk/ld.php?content_id=33139758" rel="documentation"/>
     <author>
       <name>Sebastian Karcher</name>
     </author>
+    <contributor>
+      <name>Patrick O'Brien</name>
+    </contributor>
     <category citation-format="author-date"/>
     <category field="generic-base"/>
     <summary>Bournemouth University Harvard style based on based on the British Standards BS 5605:1990 Recommendations for citing and
     referencing published material and BS 1629:1989 Recommendations or references to
     published materials.</summary>
-    <updated>2013-03-16T02:03:44+00:00</updated>
+    <updated>2021-12-05T10:13:22+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <macro name="author">
     <choose>
       <if type="motion_picture broadcast" match="none">
         <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
-          <name name-as-sort-order="all" sort-separator=", " initialize-with=". " delimiter=", " and="text"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+          <name name-as-sort-order="all" sort-separator=", " initialize-with=". " delimiter=", " and="text" delimiter-precedes-last="never"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
           <label form="short" prefix=", "/>
           <et-al font-style="italic"/>
           <substitute>
@@ -307,7 +310,7 @@
   </macro>
   <citation et-al-min="3" et-al-use-first="1" disambiguate-add-names="true" collapse="year">
     
-    <layout prefix="(" suffix=")" delimiter=", ">
+    <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">
         <group delimiter=" ">
           <text macro="author-short" prefix="" suffix=""/>
@@ -323,7 +326,17 @@
   <bibliography hanging-indent="true" entry-spacing="0" line-spacing="1">
     
     <layout suffix=".">
-      <text macro="author" suffix="," prefix=""/>
+      <choose>
+        <if match="any" variable="author">
+          <text macro="author" suffix="," prefix=""/>
+        </if>
+        <else-if match="any" variable="editor">
+          <text macro="author" prefix="" suffix=""/>
+        </else-if>
+        <else>
+          <text macro="author" suffix="," prefix=""/>
+        </else>
+      </choose>
       <group delimiter=". " prefix=" ">
         <text macro="issued" prefix="" suffix=""/>
         <text macro="title" prefix="" suffix=""/>

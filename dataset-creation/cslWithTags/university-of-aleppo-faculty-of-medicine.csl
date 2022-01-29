@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0">
+  <info>
+    <title>University of Aleppo - Faculty of Medicine</title>
+    <title-short>UAFM</title-short>
+    <id>http://www.zotero.org/styles/university-of-aleppo-faculty-of-medicine</id>
+    <link href="http://www.zotero.org/styles/university-of-aleppo-faculty-of-medicine" rel="self"/>
+    <link href="https://github.com/firasuke/Citation-Style-Language-Styles/blob/master/University%20of%20Aleppo%20-%20Faculty%20of%20Medicine/documentation.md" rel="documentation"/>
+    <author>
+      <name>Firas Khalil Khana</name>
+      <email>firasuke@gmail.com</email>
+    </author>
+    <category citation-format="numeric"/>
+    <category field="medicine"/>
+    <issn>1022-680X</issn>
+    <summary>Created for use in articles, dissertations and theses in the Faculty of Medicine at the University of Aleppo</summary>
+    <updated>2019-05-04T14:04:33+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+  <macro name="author">
+    <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
+      <name initialize-with=". " name-as-sort-order="all" sort-separator=" "><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+    </names>
+  </macro>
+  <macro name="title">
+    <text variable="title" text-case="title" prefix="&lt;title>" suffix="&lt;/title>"/>
+  </macro>
+  <macro name="date">
+    <date date-parts="year" form="text" variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>"/>
+  </macro>
+  <macro name="publisher">
+    <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
+  </macro>
+  <macro name="edition">
+    <number suffix=" ed. " variable="edition" form="ordinal"/>
+  </macro>
+  <macro name="publisher-place">
+    <text variable="publisher-place" prefix="&lt;publisher-place>" suffix="&lt;/publisher-place>"/>
+  </macro>
+  <macro name="page">
+    <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
+  </macro>
+  <macro name="volume">
+    <text variable="volume" prefix="&lt;volume>" suffix="&lt;/volume>"/>
+  </macro>
+  <macro name="issue">
+    <text variable="issue" prefix="&lt;issue>" suffix="&lt;/issue>"/>
+  </macro>
+  <macro name="container-title">
+    <text variable="container-title" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+  </macro>
+  <macro name="url">
+    <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
+  </macro>
+  <macro name="doi">
+    <text variable="DOI" prefix="&lt;DOI>" suffix="&lt;/DOI>"/>
+  </macro>
+  <macro name="isbn">
+    <text variable="ISBN" prefix="ISBN: &lt;ISBN>" suffix="&lt;/ISBN>"/>
+  </macro>
+  <citation>
+    
+    <layout vertical-align="sup" delimiter="، " prefix="[" suffix="]">
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
+    </layout>
+  </citation>
+  <bibliography second-field-align="flush">
+    
+    <layout>
+      <text variable="citation-number" prefix="[&lt;citation-number>" suffix="&lt;/citation-number>] "/>
+      <group delimiter=". " suffix=". ">
+        <text macro="author" text-decoration="none" prefix="" suffix=""/>
+        <text macro="date" prefix="" suffix=""/>
+        <text macro="title" text-decoration="underline" prefix="" suffix=""/>
+        <text macro="container-title" font-style="italic" prefix="" suffix=""/>
+        <text macro="publisher" prefix="" suffix=""/>
+      </group>
+      <text macro="edition" prefix="" suffix=""/>
+      <text macro="publisher-place" suffix=". " prefix=""/>
+      <text macro="volume" prefix="" suffix=""/>
+      <text macro="issue" prefix="(" suffix="):"/>
+      <text macro="page" suffix=". " prefix=""/>
+      <choose>
+        <if match="all" variable="DOI">
+          <text macro="doi" prefix="DOI: " suffix=""/>
+        </if>
+        <else-if match="all" variable="URL">
+          <text macro="url" prefix="URL: " suffix=""/>
+        </else-if>
+        <else-if type="book" match="any">
+          <text macro="isbn" prefix="" suffix=""/>
+        </else-if>
+      </choose>
+    </layout>
+  </bibliography>
+</style>

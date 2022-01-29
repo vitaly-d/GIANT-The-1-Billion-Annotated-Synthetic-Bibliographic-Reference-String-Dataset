@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never" default-locale="sk-SK">
   <info>
-    <title>ISO-690 (author-date, Slovak)</title>
+    <title>ISO-690 (author-date, Slovenčina)</title>
     <id>http://www.zotero.org/styles/iso690-author-date-sk</id>
     <link href="http://www.zotero.org/styles/iso690-author-date-sk" rel="self"/>
     <link href="http://www.zotero.org/styles/iso690-author-date-cs" rel="template"/>
@@ -13,7 +13,7 @@
     <category citation-format="author-date"/>
     <category field="generic-base"/>
     <summary>Style based on STN ISO 690:2012</summary>
-    <updated>2014-04-23T23:24:15+00:00</updated>
+    <updated>2020-04-02T22:05:52+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale>
@@ -139,7 +139,6 @@
   <macro name="container-author">
     <names variable="container-author" prefix="&lt;container-author>" suffix="&lt;/container-author>">
       <name and="text" delimiter=", " delimiter-precedes-last="never">
-        <!--name and="text" name-as-sort-order="all" sort-separator=" " delimiter=", " delimiter-precedes-last="never"-->
         <name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/>
         <name-part name="family" text-case="uppercase" prefix="&lt;family>" suffix="&lt;/family>"/>
       </name>
@@ -286,7 +285,6 @@
         <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
           <date-part name="day" suffix="&lt;/day>." prefix="&lt;day>"/>
           <date-part name="month" form="numeric" suffix="&lt;/month>." prefix="&lt;month>"/>
-          <!--date-part name="year"/-->
         </date>
       </if>
     </choose>
@@ -300,8 +298,8 @@
   <macro name="edition">
     <choose>
       <if is-numeric="edition">
-        <number variable="edition" form="ordinal"/>
-        <label variable="edition" form="short" prefix=" "/>
+        <number suffix="." variable="edition"/>
+        <label plural="never" prefix=" " variable="edition" form="short"/>
       </if>
       <else>
         <text variable="edition" form="long" prefix="&lt;edition>" suffix="&lt;/edition>"/>
@@ -323,7 +321,6 @@
             <text variable="publisher-place" prefix="&lt;publisher-place>" suffix="&lt;/publisher-place>"/>
           </if>
           <else>
-            <!-- sine loco (s.l.)-->
             <text value="b.m." text-case="capitalize-first" prefix="" suffix=""/>
           </else>
         </choose>
@@ -362,7 +359,6 @@
             <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
           </if>
           <else>
-            <!-- sine nomine (s.n.)-->
             <text value="b.n." prefix="" suffix=""/>
           </else>
         </choose>
@@ -383,11 +379,11 @@
     <choose>
       <if variable="URL DOI" match="any">
         <group prefix=" [" suffix="]">
-          <text term="accessed" form="short" prefix="" suffix=""/>
-          <date variable="accessed" prefix="&lt;accessed>" suffix="&lt;/accessed>">
-            <date-part name="day" prefix=". &lt;day>" suffix="&lt;/day>"/>
-            <date-part name="month" prefix=". &lt;month>" suffix="&lt;/month>"/>
-            <date-part name="year" prefix=" &lt;year>" suffix="&lt;/year>"/>
+          <text term="accessed" form="short" suffix=". " prefix=""/>
+          <date form="numeric" variable="accessed" prefix="&lt;accessed>" suffix="&lt;/accessed>">
+            <date-part name="day" prefix="&lt;day>" suffix="&lt;/day>"/>
+            <date-part name="month" prefix="&lt;month>" suffix="&lt;/month>"/>
+            <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
           </date>
         </group>
       </if>
@@ -465,14 +461,10 @@
     
     <layout>
       <group delimiter=", " suffix=". ">
-        <!-- Author(s) -->
         <text macro="responsability" prefix="" suffix=""/>
-        <!-- Citation Year -->
         <text macro="year-date" prefix="" suffix=""/>
       </group>
-      <!-- Rest of Citation -->
       <choose>
-        <!-- Specific Formats -->
         <if type="book" match="any">
           <group delimiter=". " suffix=". ">
             <group delimiter=" ">
@@ -482,7 +474,6 @@
                 <text macro="edition" prefix="" suffix=""/>
                 <text macro="secondary-responsability" prefix="" suffix=""/>
                 <text macro="publisher-info" prefix="" suffix=""/>
-                <!--text macro="page"/-->
                 <text macro="collection" prefix="" suffix=""/>
               </group>
               <text macro="accessed" prefix="" suffix=""/>
@@ -499,7 +490,6 @@
             <text macro="edition" prefix="" suffix=""/>
             <text macro="secondary-responsability" prefix="" suffix=""/>
             <text macro="publisher-info" prefix="" suffix=""/>
-            <!--text macro="page"/-->
             <group delimiter=" ">
               <text macro="collection" prefix="" suffix=""/>
               <text macro="accessed" prefix="" suffix=""/>
@@ -541,10 +531,6 @@
             <group delimiter=" ">
               <group delimiter=", ">
                 <text macro="publisher-info" prefix="" suffix=""/>
-                <!--group delimiter=": ">
-                    <text macro="publisher-place"/>
-                    <text macro="publisher"/>
-                  </group-->
                 <text macro="collection" prefix="" suffix=""/>
                 <text macro="page" prefix="" suffix=""/>
               </group>
@@ -679,7 +665,6 @@
           <group delimiter=". " suffix=". ">
             <text macro="title" prefix="" suffix=""/>
             <text macro="interviewer" prefix="" suffix=""/>
-            <!--text macro="event"/-->
             <text macro="date-day-month" prefix="" suffix=""/>
           </group>
         </else-if>

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" demote-non-dropping-particle="display-and-sort" page-range-format="expanded" default-locale="de-DE">
+  <info>
+    <title>Steinbeis-Hochschule - School of Management &amp; Innovation (Deutsch)</title>
+    <id>http://www.zotero.org/styles/steinbeis-hochschule-school-of-management-and-innovation</id>
+    <link href="http://www.zotero.org/styles/steinbeis-hochschule-school-of-management-and-innovation" rel="self"/>
+    <author>
+      <name>Sebastian Karcher</name>
+    </author>
+    <category citation-format="note"/>
+    <category field="social_science"/>
+    <summary>Format for the Steinbeis Hochschule (SMI). Zitierformat nach der Präsentation "Wissenschaftliches Arbeiten"</summary>
+    <updated>2020-04-26T18:22:50+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+  <locale xml:lang="de">
+    <terms>
+      <term name="volume" form="short">Jg.</term>
+      <term name="issue">Heft</term>
+      <term name="et-al">et al.</term>
+      <term name="ibid">ebenda</term>
+      <term name="accessed">Stand</term>
+      <term name="anonymous" form="short">o.V.</term>
+    </terms>
+  </locale>
+  <macro name="author-short">
+    <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
+      <name form="short" delimiter="/ " delimiter-precedes-last="always"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <substitute>
+        <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>"/>
+        <choose>
+          <if type="post-weblog webpage" match="none">
+            <text macro="anon" prefix="" suffix=""/>
+          </if>
+        </choose>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="author-long">
+    <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
+      <name initialize-with=". " delimiter="/ " delimiter-precedes-last="always" name-as-sort-order="all"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <label form="short" prefix=" (" suffix=")"/>
+      <substitute>
+        <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>"/>
+        <text macro="anon" prefix="" suffix=""/>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="year-date">
+    <date variable="issued" form="numeric" date-parts="year" prefix="&lt;issued>" suffix="&lt;/issued>"/>
+  </macro>
+  <macro name="anon">
+    <group>
+      <text value="o." text-case="lowercase" prefix="" suffix=""/>
+      <text value="V." prefix="" suffix=""/>
+    </group>
+  </macro>
+  <macro name="edition">
+    <choose>
+      <if is-numeric="edition">
+        <group delimiter=" ">
+          <number variable="edition" form="ordinal"/>
+          <text term="edition" prefix="" suffix=""/>
+        </group>
+      </if>
+      <else>
+        <text variable="edition" prefix="&lt;edition>" suffix="&lt;/edition>"/>
+      </else>
+    </choose>
+  </macro>
+  <macro name="publisher">
+    <group delimiter=", ">
+      <text macro="edition" prefix="" suffix=""/>
+      <text variable="publisher-place" prefix="&lt;publisher-place>" suffix="&lt;/publisher-place>"/>
+    </group>
+  </macro>
+  <macro name="container-journal">
+    <choose>
+      <if type="article-journal article-magazine article-newspaper" match="any">
+        <group delimiter=", ">
+          <group delimiter=": ">
+            <text term="in" text-case="capitalize-first" prefix="" suffix=""/>
+            <text variable="container-title" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+          </group>
+          <group delimiter=" ">
+            <number variable="volume" form="ordinal"/>
+            <text term="volume" form="short" prefix="" suffix=""/>
+          </group>
+          <group delimiter=" ">
+            <text term="issue" prefix="" suffix=""/>
+            <text variable="issue" prefix="&lt;issue>" suffix="&lt;/issue>"/>
+          </group>
+        </group>
+      </if>
+    </choose>
+  </macro>
+  <macro name="access">
+    <choose>
+      <if variable="URL">
+        <group delimiter=": ">
+          <choose>
+            <if type="post-weblog webpage" match="none">
+              <text term="online" prefix="" suffix=""/>
+            </if>
+          </choose>
+          <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
+        </group>
+        <group delimiter=" " prefix=" (" suffix=")">
+          <text term="accessed" text-case="capitalize-first" prefix="" suffix=""/>
+          <date variable="accessed" form="numeric" prefix="&lt;accessed>" suffix="&lt;/accessed>"/>
+        </group>
+      </if>
+    </choose>
+  </macro>
+  <macro name="container-chapter">
+    <choose>
+      <if type="paper-conference chapter" match="any">
+        <group delimiter=": ">
+          <text term="in" prefix="" suffix=""/>
+          <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>">
+            <name initialize-with=". " delimiter="/ " delimiter-precedes-last="always" name-as-sort-order="all"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+            <label form="short" prefix=" (" suffix=")"/>
+          </names>
+          <text variable="container-title" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+        </group>
+      </if>
+    </choose>
+  </macro>
+  <macro name="pages">
+    <group delimiter=" ">
+      <label variable="page" form="short"/>
+      <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
+    </group>
+  </macro>
+  <macro name="type-sort">
+    <choose>
+      <if type="post-weblog webpage" match="any">
+        <text value="2" prefix="" suffix=""/>
+      </if>
+      <else>
+        <text value="1" prefix="" suffix=""/>
+      </else>
+    </choose>
+  </macro>
+  <macro name="locators">
+    <group delimiter=" ">
+      <label variable="locator" form="short"/>
+      <text variable="locator" prefix="&lt;locator>" suffix="&lt;/locator>"/>
+    </group>
+  </macro>
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-names="true">
+    <layout suffix="." delimiter="; ">
+      <choose>
+        <if position="ibid-with-locator" match="any">
+          <group delimiter=", ">
+            <text term="ibid" prefix="" suffix=""/>
+            <text macro="locators" prefix="" suffix=""/>
+          </group>
+        </if>
+        <else-if position="ibid">
+          <text term="ibid" prefix="" suffix=""/>
+        </else-if>
+        <else>
+          <group delimiter=", ">
+            <choose>
+              <if type="post-weblog webpage" match="none">
+                <group delimiter=" ">
+                  <text macro="author-short" prefix="" suffix=""/>
+                  <text macro="year-date" prefix="(" suffix=")"/>
+                </group>
+              </if>
+              <else>
+                <group delimiter=": ">
+                  <choose>
+                    <if variable="author editor" match="any">
+                      <text macro="author-short" prefix="" suffix=""/>
+                      <text macro="year-date" prefix="(" suffix=")"/>
+                    </if>
+                    <else>
+                      <text macro="access" prefix="" suffix=""/>
+                    </else>
+                  </choose>
+                </group>
+              </else>
+            </choose>
+            <text macro="locators" prefix="" suffix=""/>
+          </group>
+        </else>
+      </choose>
+    </layout>
+  </citation>
+  <bibliography hanging-indent="true" et-al-min="11" et-al-use-first="7" entry-spacing="0">
+    
+    <layout suffix=".">
+      <choose>
+        <if type="post-weblog webpage" match="none">
+          <group delimiter=": ">
+            <group delimiter=" ">
+              <text macro="author-long" prefix="" suffix=""/>
+              <text macro="year-date" prefix="(" suffix=")"/>
+            </group>
+            <group>
+              <group delimiter=", ">
+                <text variable="title" prefix="&lt;title>" suffix="&lt;/title>"/>
+                <text macro="container-chapter" prefix="" suffix=""/>
+              </group>
+              <text macro="container-journal" prefix=". " suffix=""/>
+            </group>
+          </group>
+          <text macro="publisher" prefix=". " suffix=""/>
+          <text macro="pages" prefix=", " suffix=""/>
+          <text macro="access" prefix=", " suffix=""/>
+        </if>
+        <else>
+          <!--Internetquellen-->
+          <group delimiter=": ">
+            <choose>
+              <if variable="author editor" match="any">
+                <group delimiter=" ">
+                  <text macro="author-long" prefix="" suffix=""/>
+                  <text macro="year-date" prefix="(" suffix=")"/>
+                </group>
+              </if>
+              <else>
+                <text macro="anon" prefix="" suffix=""/>
+              </else>
+            </choose>
+            <text macro="access" prefix="" suffix=""/>
+          </group>
+        </else>
+      </choose>
+    </layout>
+  </bibliography>
+</style>

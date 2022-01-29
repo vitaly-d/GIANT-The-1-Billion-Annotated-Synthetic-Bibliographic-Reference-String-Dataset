@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" default-locale="en-GB" demote-non-dropping-particle="never">
   <info>
     <title>London South Bank University - Harvard</title>
     <title-short>harvard-lsbu</title-short>
@@ -127,7 +127,7 @@
           </if>
           <else>
             <choose>
-              <if type="webpage article article-journal" match="any">
+              <if type="webpage article article-journal motion_picture" match="any">
                 <group delimiter=" ">
                   <text value="Available" prefix="" suffix=""/>
                   <text term="from" suffix=":" prefix=""/>

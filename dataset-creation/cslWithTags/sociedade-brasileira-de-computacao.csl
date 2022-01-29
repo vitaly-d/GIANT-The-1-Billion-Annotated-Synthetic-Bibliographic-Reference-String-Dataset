@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text">
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" default-locale="en-US" demote-non-dropping-particle="never">
   <info>
     <title>Sociedade Brasileira de Computação</title>
     <id>http://www.zotero.org/styles/sociedade-brasileira-de-computacao</id>

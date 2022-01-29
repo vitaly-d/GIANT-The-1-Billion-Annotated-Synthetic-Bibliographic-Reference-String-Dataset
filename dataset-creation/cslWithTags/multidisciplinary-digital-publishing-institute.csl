@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" page-range-format="expanded" default-locale="en-US">
   <info>
     <title>Multidisciplinary Digital Publishing Institute</title>
     <title-short>MDPI</title-short>
@@ -12,28 +12,33 @@
     </author>
     <contributor>
       <name>Patrick O'Brien</name>
+    </contributor>  
+    <contributor>  
+      <name>Johan van der Molen Moris</name>
     </contributor>
     <category citation-format="numeric"/>
     <category field="science"/>
     <summary>Style for the MDPI Open access journals</summary>
-    <updated>2017-06-01T08:21:39+00:00</updated>
+    <updated>2020-12-17T13:36:58+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="en">
     <terms>
       <term name="available at">available online</term>
       <term name="accessed">accessed on</term>
+      <term name="presented at">presented at the</term>
     </terms>
   </locale>
   <macro name="editor">
     <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>">
-      <name delimiter-precedes-last="always" initialize-with=". " name-as-sort-order="all"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <name delimiter-precedes-last="always" initialize-with="." name-as-sort-order="all"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
       <label form="short" prefix=", " text-case="capitalize-first"/>
     </names>
   </macro>
   <macro name="author">
     <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
-      <name sort-separator=", " initialize-with=". " name-as-sort-order="all" delimiter="; " delimiter-precedes-last="always"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <name sort-separator=", " et-al-min="11" et-al-use-first="10" initialize-with="." name-as-sort-order="all" delimiter="; " delimiter-precedes-last="always"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <et-al term="et-al"/>
       <label form="short" prefix=", " text-case="capitalize-first"/>
     </names>
   </macro>
@@ -58,7 +63,7 @@
   </macro>
   <macro name="book-container">
     <group delimiter=" ">
-      <text variable="title" suffix="&lt;/title>." prefix="&lt;title>"/>
+      <text variable="title" text-case="title" suffix="&lt;/title>." prefix="&lt;title>"/>
       <text term="in" text-case="capitalize-first" prefix="" suffix=""/>
       <text variable="container-title" font-style="italic" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
     </group>
@@ -70,8 +75,8 @@
   </macro>
   <macro name="full-issued">
     <date variable="issued" delimiter=" " prefix="&lt;issued>" suffix="&lt;/issued>">
-      <date-part name="month" form="long" suffix="&lt;/month> " prefix="&lt;month>"/>
-      <date-part name="day" suffix="&lt;/day>, " prefix="&lt;day>"/>
+      <date-part name="month" form="long" prefix="&lt;month>" suffix="&lt;/month>"/>
+      <date-part name="day" prefix="&lt;day>" suffix="&lt;/day>"/>
       <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
     </date>
   </macro>
@@ -90,11 +95,11 @@
   </macro>
   <macro name="access">
     <choose>
-      <if type="article-journal" match="any">
-        <text variable="DOI" prefix=", doi:&lt;DOI>" suffix="&lt;/DOI>"/>
-      </if>
-      <else-if type="book chapter" match="any">
+      <if type="book chapter" match="any">
         <text variable="ISBN" prefix=" ISBN &lt;ISBN>" suffix="&lt;/ISBN>"/>
+      </if>
+      <else-if type="article-journal">
+        <text variable="DOI" prefix=", doi:&lt;DOI>" suffix="&lt;/DOI>"/>
       </else-if>
     </choose>
   </macro>
@@ -121,7 +126,7 @@
         <else-if type="thesis">
           <group delimiter=", ">
             <group delimiter=". ">
-              <text variable="title" prefix="&lt;title>" suffix="&lt;/title>"/>
+              <text variable="title" text-case="title" prefix="&lt;title>" suffix="&lt;/title>"/>
               <text variable="genre" prefix="&lt;genre>" suffix="&lt;/genre>"/>
             </group>
             <text macro="publisher" prefix="" suffix=""/>
@@ -132,7 +137,7 @@
         </else-if>
         <else-if type="bill book graphic legal_case legislation motion_picture report song" match="any">
           <group delimiter="; " suffix=";">
-            <text variable="title" font-style="italic" prefix="&lt;title>" suffix="&lt;/title>"/>
+            <text variable="title" text-case="title" font-style="italic" prefix="&lt;title>" suffix="&lt;/title>"/>
             <text macro="editor" prefix=" " suffix=""/>
             <text macro="series" prefix="" suffix=""/>
             <text macro="edition" prefix="" suffix=""/>
@@ -146,7 +151,7 @@
             </group>
           </group>
         </else-if>
-        <else-if type="chapter paper-conference" match="any">
+        <else-if type="chapter">
           <group delimiter="; ">
             <text macro="book-container" prefix="" suffix=""/>
             <text macro="editor" prefix="" suffix=""/>
@@ -161,9 +166,26 @@
             </group>
           </group>
         </else-if>
+        <else-if type="paper-conference">
+          <group delimiter="; ">
+            <group delimiter=" ">
+              <text variable="title" text-case="title" suffix="&lt;/title>." prefix="&lt;title>"/>
+              <text variable="container-title" prefix="In Proceedings of the &lt;container-title>" suffix="&lt;/container-title>"/>
+            </group>
+            <text macro="editor" prefix="" suffix=""/>
+            <group delimiter=", ">
+              <text macro="publisher" prefix="" suffix=""/>
+              <text macro="full-issued" prefix="" suffix=""/>
+            </group>
+            <group delimiter=", ">
+              <text macro="volume" prefix="" suffix=""/>
+              <text macro="pages" prefix="" suffix=""/>
+            </group>
+          </group>
+        </else-if>
         <else-if type="webpage">
           <group delimiter=" ">
-            <text variable="title" prefix="&lt;title>" suffix="&lt;/title>"/>
+            <text variable="title" text-case="title" prefix="&lt;title>" suffix="&lt;/title>"/>
             <group delimiter=": ">
               <text term="available at" text-case="capitalize-first" prefix="" suffix=""/>
               <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
@@ -171,16 +193,29 @@
             <group delimiter=" " prefix="(" suffix=")">
               <text term="accessed" prefix="" suffix=""/>
               <date delimiter=" " variable="accessed" prefix="&lt;accessed>" suffix="&lt;/accessed>">
-                <date-part name="month" form="short" strip-periods="true" prefix="&lt;month>" suffix="&lt;/month>"/>
-                <date-part name="day" suffix="&lt;/day>, " prefix="&lt;day>"/>
+                <date-part name="day" prefix="&lt;day>" suffix="&lt;/day>"/>
+                <date-part name="month" prefix="&lt;month>" suffix="&lt;/month>"/>
                 <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
               </date>
             </group>
           </group>
         </else-if>
+        <else-if type="speech">
+          <group delimiter=" ">
+            <text variable="title" text-case="title" suffix="&lt;/title>." prefix="&lt;title>"/>
+             <group delimiter=", ">
+              <group delimiter=" ">
+                <text term="presented at" text-case="capitalize-first" prefix="" suffix=""/>
+                <text variable="event" prefix="&lt;event>" suffix="&lt;/event>"/>
+              </group>
+              <text variable="event-place" prefix="&lt;event-place>" suffix="&lt;/event-place>"/>
+              <text macro="issued" prefix="" suffix=""/>
+            </group>
+          </group>
+        </else-if>
         <else-if type="article-journal">
           <group delimiter=" ">
-            <text variable="title" suffix="&lt;/title>." prefix="&lt;title>"/>
+            <text variable="title" text-case="title" suffix="&lt;/title>." prefix="&lt;title>"/>
             <text variable="container-title" font-style="italic" form="short" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
             <group delimiter=", ">
               <text macro="issued" font-weight="bold" prefix="" suffix=""/>
@@ -192,7 +227,7 @@
         <else>
           <group delimiter=" ">
             <group delimiter=". ">
-              <text variable="title" prefix="&lt;title>" suffix="&lt;/title>"/>
+              <text variable="title" text-case="title" prefix="&lt;title>" suffix="&lt;/title>"/>
               <text variable="container-title" font-style="italic" form="short" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
             </group>
             <group delimiter=", ">

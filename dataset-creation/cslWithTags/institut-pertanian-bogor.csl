@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="id-ID">
+  <info>
+    <title>Institut Pertanian Bogor: Pedoman Penulisan Karya Ilmiah Edisi ke-3 (Bahasa Indonesia)</title>
+    <title-short>IPB PPKI 3</title-short>
+    <id>http://www.zotero.org/styles/institut-pertanian-bogor</id>
+    <link href="http://www.zotero.org/styles/institut-pertanian-bogor" rel="self"/>
+    <link href="http://www.zotero.org/styles/apa" rel="template"/>
+    <link href="http://ppki.staff.ipb.ac.id/unduhan/" rel="documentation"/>
+    <link href="https://drive.google.com/file/d/0B0YEuQotqd_BQVpkR0lHNHctSHM/view" rel="documentation"/>
+    <author>
+      <name>Auriza Rahmad Akbar</name>
+      <email>auriza.akbar@gmail.com</email>
+    </author>
+    <author>
+      <name>M. Rachmatarramadhan</name>
+      <email>rachmatarramadhan@gmail.com</email>
+    </author>
+    <category citation-format="author-date"/>
+    <category field="science"/>
+    <summary>IPB PPKI 3 style, Name-Year system: author-date in text, sorted in alphabetical order by author.</summary>
+    <updated>2016-06-02T00:09:25+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+  <locale xml:lang="id">
+    <style-options punctuation-in-quote="true"/>
+    <date form="text" prefix="" suffix="">
+      <date-part name="day" suffix="&lt;/day> " prefix="&lt;day>"/>
+      <date-part name="month" suffix="&lt;/month> " prefix="&lt;month>"/>
+      <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
+    </date>
+    <date form="numeric" prefix="" suffix="">
+      <date-part name="day" form="numeric-leading-zeros" suffix="&lt;/day>-" prefix="&lt;day>"/>
+      <date-part name="month" form="numeric-leading-zeros" suffix="&lt;/month>-" prefix="&lt;month>"/>
+      <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
+    </date>
+    <terms>
+      <term name="accessed">diunduh</term>
+      <term name="and">dan</term>
+      <term name="and others">dan lainnya</term>
+      <term name="anonymous">anonim</term>
+      <term name="anonymous" form="short">anon.</term>
+      <term name="at">pada</term>
+      <term name="available at">tersedia pada</term>
+      <term name="by">by</term>
+      <term name="circa">circa</term>
+      <term name="circa" form="short">c.</term>
+      <term name="cited">dikutip</term>
+      <term name="edition">
+        <single>edisi</single>
+        <multiple>edisi</multiple>
+      </term>
+      <term name="edition" form="short">ed</term>
+      <term name="et-al">et al.</term>
+      <term name="forthcoming">mendatang</term>
+      <term name="from">dari</term>
+      <term name="ibid">ibid.</term>
+      <term name="in">di dalam</term>
+      <term name="in press">di dalam press</term>
+      <term name="internet">internet</term>
+      <term name="interview">wawancara</term>
+      <term name="letter">surat</term>
+      <term name="no date">tanpa tanggal</term>
+      <term name="no date" form="short">n.d.</term>
+      <term name="online">daring</term>
+      <term name="presented at">dipresentasikan pada</term>
+      <term name="reference">
+        <single>reference</single>
+        <multiple>references</multiple>
+      </term>
+      <term name="reference" form="short">
+        <single>ref.</single>
+        <multiple>ref.</multiple>
+      </term>
+      <term name="retrieved">diambil</term>
+      <term name="scale">skala</term>
+      <term name="version">versi</term>
+      <term name="ad">M</term>
+      <term name="bc">SM</term>
+      <term name="open-quote">“</term>
+      <term name="close-quote">”</term>
+      <term name="open-inner-quote">‘</term>
+      <term name="close-inner-quote">’</term>
+      <term name="page-range-delimiter">–</term>
+      <term name="ordinal"/>
+      <term name="ordinal-01"/>
+      <term name="ordinal-02"/>
+      <term name="ordinal-03"/>
+      <term name="ordinal-11"/>
+      <term name="ordinal-12"/>
+      <term name="ordinal-13"/>
+      <term name="long-ordinal-01">pertama</term>
+      <term name="long-ordinal-02">kedua</term>
+      <term name="long-ordinal-03">ketiga</term>
+      <term name="long-ordinal-04">keempat</term>
+      <term name="long-ordinal-05">kelima</term>
+      <term name="long-ordinal-06">keenam</term>
+      <term name="long-ordinal-07">ketujuh</term>
+      <term name="long-ordinal-08">kedelapan</term>
+      <term name="long-ordinal-09">kesembilan</term>
+      <term name="long-ordinal-10">kesepuluh</term>
+      <term name="book">
+        <single>buku</single>
+        <multiple>buku</multiple>
+      </term>
+      <term name="chapter">
+        <single>bab</single>
+        <multiple>bab</multiple>
+      </term>
+      <term name="column">
+        <single>kolom</single>
+        <multiple>kolom</multiple>
+      </term>
+      <term name="figure">
+        <single>gambar</single>
+        <multiple>gambar</multiple>
+      </term>
+      <term name="folio">
+        <single>folio</single>
+        <multiple>folio</multiple>
+      </term>
+      <term name="issue">
+        <single>nomor</single>
+        <multiple>nomor</multiple>
+      </term>
+      <term name="line">
+        <single>baris</single>
+        <multiple>baris</multiple>
+      </term>
+      <term name="note">
+        <single>catatan</single>
+        <multiple>catatan</multiple>
+      </term>
+      <term name="opus">
+        <single>opus</single>
+        <multiple>opera</multiple>
+      </term>
+      <term name="page">
+        <single>halaman</single>
+        <multiple>halaman</multiple>
+      </term>
+      <term name="number-of-pages">
+        <single>halaman</single>
+        <multiple>halaman</multiple>
+      </term>
+      <term name="paragraph">
+        <single>paragraf</single>
+        <multiple>paragraf</multiple>
+      </term>
+      <term name="part">
+        <single>bagian</single>
+        <multiple>bagian</multiple>
+      </term>
+      <term name="section">
+        <single>section</single>
+        <multiple>section</multiple>
+      </term>
+      <term name="sub-verbo">
+        <single>sub verbo</single>
+        <multiple>sub verbis</multiple>
+      </term>
+      <term name="verse">
+        <single>ayat</single>
+        <multiple>ayat</multiple>
+      </term>
+      <term name="volume">
+        <single>volume</single>
+        <multiple>volume</multiple>
+      </term>
+      <term name="book" form="short">bk.</term>
+      <term name="chapter" form="short">chap.</term>
+      <term name="column" form="short">col.</term>
+      <term name="figure" form="short">gam.</term>
+      <term name="folio" form="short">f.</term>
+      <term name="issue" form="short">no.</term>
+      <term name="line" form="short">l.</term>
+      <term name="note" form="short">n.</term>
+      <term name="opus" form="short">op.</term>
+      <term name="page" form="short">
+        <single>hlm.</single>
+        <multiple>hlm.</multiple>
+      </term>
+      <term name="number-of-pages" form="short">
+        <single>hlm.</single>
+        <multiple>hlm.</multiple>
+      </term>
+      <term name="paragraph" form="short">para.</term>
+      <term name="part" form="short">pt.</term>
+      <term name="section" form="short">sec.</term>
+      <term name="sub-verbo" form="short">
+        <single>s.v.</single>
+        <multiple>s.vv.</multiple>
+      </term>
+      <term name="verse" form="short">
+        <single>a.</single>
+        <multiple>a.</multiple>
+      </term>
+      <term name="volume" form="short">
+        <single>vol.</single>
+        <multiple>vol.</multiple>
+      </term>
+      <term name="paragraph" form="symbol">
+        <single>¶</single>
+        <multiple>¶¶</multiple>
+      </term>
+      <term name="section" form="symbol">
+        <single>§</single>
+        <multiple>§§</multiple>
+      </term>
+      <term name="director">
+        <single>direktur</single>
+        <multiple>direktur</multiple>
+      </term>
+      <term name="editor">
+        <single>editor</single>
+        <multiple>editor</multiple>
+      </term>
+      <term name="editorial-director">
+        <single>editor</single>
+        <multiple>editor</multiple>
+      </term>
+      <term name="illustrator">
+        <single>ilustrator</single>
+        <multiple>ilustrator</multiple>
+      </term>
+      <term name="translator">
+        <single>penerjemah</single>
+        <multiple>penerjemah</multiple>
+      </term>
+      <term name="editortranslator">
+        <single>editor &amp; penerjemah</single>
+        <multiple>editor &amp; penerjemah</multiple>
+      </term>
+      <term name="director" form="short">
+        <single>dir.</single>
+        <multiple>dirs.</multiple>
+      </term>
+      <term name="editor" form="short">
+        <single>ed.</single>
+        <multiple>ed.</multiple>
+      </term>
+      <term name="editorial-director" form="short">
+        <single>ed.</single>
+        <multiple>ed.</multiple>
+      </term>
+      <term name="illustrator" form="short">
+        <single>il.</single>
+        <multiple>il.</multiple>
+      </term>
+      <term name="translator" form="short">
+        <single>penerj.</single>
+        <multiple>penerj.</multiple>
+      </term>
+      <term name="editortranslator" form="short">
+        <single>ed. &amp; tran.</single>
+        <multiple>ed. &amp; tran.</multiple>
+      </term>
+      <term name="container-author" form="verb">oleh</term>
+      <term name="director" form="verb">diarahkan oleh</term>
+      <term name="editor" form="verb">diedit oleh</term>
+      <term name="editorial-director" form="verb">diedit oleh</term>
+      <term name="illustrator" form="verb">diilustrasi oleh</term>
+      <term name="interviewer" form="verb">interview oleh</term>
+      <term name="recipient" form="verb">kepada</term>
+      <term name="reviewed-author" form="verb">oleh</term>
+      <term name="translator" form="verb">diterjemahkan oleh</term>
+      <term name="editortranslator" form="verb">disunting &amp; diterjemahkan oleh</term>
+      <term name="director" form="verb-short">dir. oleh</term>
+      <term name="editor" form="verb-short">ed. oleh</term>
+      <term name="editorial-director" form="verb-short">ed. oleh</term>
+      <term name="illustrator" form="verb-short">illus. oleh</term>
+      <term name="translator" form="verb-short">trans. oleh</term>
+      <term name="editortranslator" form="verb-short">ed. &amp; trans. oleh</term>
+      <term name="month-01">Januari</term>
+      <term name="month-02">Februari</term>
+      <term name="month-03">Maret</term>
+      <term name="month-04">April</term>
+      <term name="month-05">Mei</term>
+      <term name="month-06">Juni</term>
+      <term name="month-07">Juli</term>
+      <term name="month-08">Agustus</term>
+      <term name="month-09">September</term>
+      <term name="month-10">Oktober</term>
+      <term name="month-11">November</term>
+      <term name="month-12">Desember</term>
+      <term name="month-01" form="short">Jan</term>
+      <term name="month-02" form="short">Feb</term>
+      <term name="month-03" form="short">Mar</term>
+      <term name="month-04" form="short">Apr</term>
+      <term name="month-05" form="short">Mei</term>
+      <term name="month-06" form="short">Jun</term>
+      <term name="month-07" form="short">Jul</term>
+      <term name="month-08" form="short">Agu</term>
+      <term name="month-09" form="short">Sep</term>
+      <term name="month-10" form="short">Okt</term>
+      <term name="month-11" form="short">Nov</term>
+      <term name="month-12" form="short">Des</term>
+      <term name="season-01">Semi</term>
+      <term name="season-02">Panas</term>
+      <term name="season-03">Gugur</term>
+      <term name="season-04">Dingin</term>
+    </terms>
+  </locale>
+  <macro name="editor">
+    <names variable="editor translator" delimiter="; " suffix="&lt;/editor translator>." prefix="&lt;editor translator>">
+      <name delimiter=", " delimiter-precedes-last="always" initialize-with="" name-as-sort-order="all" sort-separator=" "><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <label prefix=", "/>
+    </names>
+  </macro>
+  <macro name="author">
+    <names variable="author" delimiter=", " prefix="&lt;author>" suffix="&lt;/author>">
+      <name delimiter-precedes-last="always" initialize-with="" name-as-sort-order="all" sort-separator=" "><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <et-al font-style="italic"/>
+      <label form="long" prefix=", " strip-periods="true"/>
+      <substitute>
+        <names variable="editor translator" prefix="&lt;editor translator>" suffix="&lt;/editor translator>"/>
+        <text variable="title" prefix="&lt;title>" suffix="&lt;/title>"/>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="author-short">
+    <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
+      <name form="short" delimiter=", " initialize-with="." and="text"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <et-al font-style="italic"/>
+      <substitute>
+        <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>"/>
+        <names variable="translator" prefix="&lt;translator>" suffix="&lt;/translator>"/>
+        <text variable="title-short" prefix="&lt;title-short>" suffix="&lt;/title-short>"/>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="review">
+    <group delimiter=". ">
+      <text variable="reviewed-title" prefix="&lt;reviewed-title>" suffix="&lt;/reviewed-title>"/>
+      <text variable="container-title" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+    </group>
+  </macro>
+  <macro name="access">
+    <choose>
+      <if variable="accessed" match="any">
+        <group delimiter=". ">
+          <group prefix=" [" suffix="]" delimiter=" ">
+            <text term="accessed" prefix="" suffix=""/>
+            <date variable="accessed" delimiter=" " prefix="&lt;accessed>" suffix="&lt;/accessed>">
+              <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
+              <date-part name="month" form="short" strip-periods="true" prefix="&lt;month>" suffix="&lt;/month>"/>
+              <date-part name="day" prefix="&lt;day>" suffix="&lt;/day>"/>
+            </date>
+          </group>
+          <text variable="URL" prefix="Tersedia pada: &lt;URL>" suffix="&lt;/URL>"/>
+        </group>
+      </if>
+    </choose>
+  </macro>
+  <macro name="title">
+    <group delimiter=" ">
+      <choose>
+        <if type="book" match="all">
+          <text variable="title" text-case="title" font-style="italic" prefix="&lt;title>" suffix="&lt;/title>"/>
+        </if>
+        <else>
+          <text variable="title" prefix="&lt;title>" suffix="&lt;/title>"/>
+        </else>
+      </choose>
+      <choose>
+        <if type="thesis" match="any">
+          <text variable="genre" prefix="[&lt;genre>" suffix="&lt;/genre>]."/>
+        </if>
+      </choose>
+    </group>
+  </macro>
+  <macro name="publisher">
+    <group delimiter=": ">
+      <text variable="publisher-place" prefix="&lt;publisher-place>" suffix="&lt;/publisher-place>"/>
+      <text variable="publisher" suffix="&lt;/publisher>." prefix="&lt;publisher>"/>
+    </group>
+  </macro>
+  <macro name="pages">
+    <group delimiter="; ">
+      <group>
+        <label variable="page" form="short" suffix=" " plural="never"/>
+        <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
+      </group>
+      <group>
+        <text variable="number-of-pages" prefix="&lt;number-of-pages>" suffix="&lt;/number-of-pages>"/>
+        <choose>
+          <if is-numeric="number-of-pages">
+            <label variable="number-of-pages" form="short" prefix=" " plural="never"/>
+          </if>
+        </choose>
+      </group>
+    </group>
+  </macro>
+  <macro name="year-date">
+    <group delimiter=" ">
+      <date variable="issued" delimiter=" " prefix="&lt;issued>" suffix="&lt;/issued>">
+        <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
+      </date>
+      <choose>
+        <if type="patent article-newspaper webpage" match="any">
+          <date variable="issued" delimiter=" " prefix="&lt;issued>" suffix="&lt;/issued>">
+            <date-part name="month" form="short" strip-periods="true" prefix="&lt;month>" suffix="&lt;/month>"/>
+            <date-part name="day" prefix="&lt;day>" suffix="&lt;/day>"/>
+          </date>
+        </if>
+        <else-if type="article-journal article-magazine" match="any">
+          <choose>
+            <if variable="volume issue" match="none">
+              <date variable="issued" delimiter=" " prefix="&lt;issued>" suffix="&lt;/issued>">
+                <date-part name="month" form="short" strip-periods="true" prefix="&lt;month>" suffix="&lt;/month>"/>
+                <date-part name="day" prefix="&lt;day>" suffix="&lt;/day>"/>
+              </date>
+            </if>
+          </choose>
+        </else-if>
+      </choose>
+    </group>
+  </macro>
+  <macro name="edition">
+    <choose>
+      <if is-numeric="edition">
+        <group delimiter=" ">
+          <text term="edition" form="short" text-case="title" strip-periods="false" prefix="" suffix=""/>
+          <number prefix="ke-" variable="edition" form="ordinal"/>
+        </group>
+      </if>
+      <else>
+        <text variable="edition" suffix="&lt;/edition>." prefix="&lt;edition>"/>
+      </else>
+    </choose>
+  </macro>
+  <macro name="collection">
+    <choose>
+      <if type="report">
+        <group prefix=" " suffix="." delimiter=" ">
+          <text variable="collection-title" prefix="&lt;collection-title>" suffix="&lt;/collection-title>"/>
+          <text variable="number" prefix=" Report No.: &lt;number>" suffix="&lt;/number>"/>
+        </group>
+      </if>
+      <else>
+        <group prefix=" (" suffix=")." delimiter=" ">
+          <names variable="collection-editor" suffix="&lt;/collection-editor>. " prefix="&lt;collection-editor>">
+            <name delimiter-precedes-last="always" initialize-with="" name-as-sort-order="all" sort-separator=" "><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+            <label prefix=", "/>
+          </names>
+          <text variable="collection-title" prefix="&lt;collection-title>" suffix="&lt;/collection-title>"/>
+        </group>
+      </else>
+    </choose>
+  </macro>
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true">
+    
+    <layout prefix="(" suffix=")" delimiter="; ">
+      <group delimiter=" ">
+        <text macro="author-short" prefix="" suffix=""/>
+        <text macro="year-date" prefix="" suffix=""/>
+      </group>
+      <text variable="locator" prefix=": &lt;locator>" suffix="&lt;/locator>"/>
+    </layout>
+  </citation>
+  <bibliography hanging-indent="false" et-al-min="11" et-al-use-first="10">
+    
+    <layout>
+      <group suffix="." delimiter=". ">
+        <text macro="author" prefix="" suffix=""/>
+        <text macro="year-date" prefix="" suffix=""/>
+        <text macro="title" prefix="" suffix=""/>
+      </group>
+      <group suffix=".">
+        <choose>
+          <if type="bill book graphic legal_case legislation motion_picture report song thesis" match="any">
+            <group prefix=" " suffix="." delimiter=" ">
+              <text macro="edition" prefix="" suffix=""/>
+              <text variable="volume" prefix="Volume ke-&lt;volume>" suffix="&lt;/volume>."/>
+              <text macro="editor" suffix="." prefix=""/>
+            </group>
+            <text prefix=" " macro="publisher" suffix=""/>
+            <text prefix=" " macro="collection" suffix=""/>
+            <text variable="page" prefix="hlm &lt;page>" suffix="&lt;/page>"/>
+            <text variable="original-title" font-style="italic" prefix=" Terjemahan dari: &lt;original-title>" suffix="&lt;/original-title>."/>
+            <text variable="note" prefix=" Ed ke-&lt;note>" suffix="&lt;/note>."/>
+          </if>
+          <else-if type="chapter paper-conference entry-dictionary entry-encyclopedia" match="any">
+            <group prefix=" " delimiter=" " suffix=".">
+              <group delimiter=" ">
+                <text term="in" text-case="capitalize-first" suffix=":" prefix=""/>
+                <text macro="editor" suffix="." prefix=""/>
+                <text variable="container-title" text-case="title" font-style="italic" suffix="&lt;/container-title>." prefix="&lt;container-title>"/>
+                <choose>
+                  <if match="any" variable="accessed">
+                    <text term="internet" prefix="[" suffix="]"/>
+                  </if>
+                </choose>
+              </group>
+              <text variable="volume" prefix="Vol. &lt;volume>" suffix="&lt;/volume>."/>
+              <text macro="edition" prefix="" suffix=""/>
+              <group suffix="." delimiter=". ">
+                <text variable="event" suffix="&lt;/event>;" font-style="italic" prefix="&lt;event>"/>
+                <text variable="event-place" suffix="&lt;/event-place>." prefix="&lt;event-place>"/>
+                <text macro="publisher" prefix="" suffix=""/>
+                <text prefix=" " macro="collection" suffix=""/>
+                <text macro="pages" prefix="" suffix=""/>
+              </group>
+            </group>
+          </else-if>
+          <else-if type="review review-book" match="any">
+            <text macro="editor" prefix=" " suffix="[ulasan]."/>
+            <group prefix=" " suffix=".">
+              <text macro="review" suffix="." prefix=""/>
+              <group prefix=" ">
+                <text variable="volume" prefix="&lt;volume>" suffix="&lt;/volume>"/>
+                <text variable="issue" prefix="(&lt;issue>" suffix="&lt;/issue>)"/>
+              </group>
+              <text variable="page" prefix=":&lt;page>" suffix="&lt;/page>"/>
+            </group>
+          </else-if>
+          <else-if type="personal_communication" match="any">
+            <text macro="editor" suffix="[komunikasi singkat]." prefix=""/>
+          </else-if>
+          <else>
+            <text variable="original-title" prefix=" [&lt;original-title>" suffix="&lt;/original-title>]."/>
+            <text macro="editor" prefix=" " suffix="[editorial]."/>
+            <group prefix=" " suffix=".">
+              <text variable="container-title" form="short" font-style="italic" suffix="&lt;/container-title>." prefix="&lt;container-title>"/>
+              <text variable="volume" prefix=" &lt;volume>" suffix="&lt;/volume>"/>
+              <text variable="issue" prefix="(&lt;issue>" suffix="&lt;/issue>)"/>
+              <text variable="page" prefix=":&lt;page>" suffix="&lt;/page>"/>
+              <text variable="DOI" prefix=".doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+            </group>
+          </else>
+        </choose>
+      </group>
+      <text prefix=" " macro="access" suffix=""/>
+    </layout>
+  </bibliography>
+</style>

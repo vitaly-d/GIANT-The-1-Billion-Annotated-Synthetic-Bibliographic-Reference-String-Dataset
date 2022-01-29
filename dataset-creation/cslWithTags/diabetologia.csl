@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" default-locale="en-US" version="1.0" demote-non-dropping-particle="sort-only">
+  <info>
+    <title>Diabetologia</title>
+    <id>http://www.zotero.org/styles/diabetologia</id>
+    <link href="http://www.zotero.org/styles/diabetologia" rel="self"/>
+    <link href="http://www.zotero.org/styles/springer-basic-brackets" rel="template"/>
+    <link href="http://diabetologia-journal.org/for-authors/instructions-to-authors/" rel="documentation"/>
+    <author>
+      <name>Patrick O'Brien</name>
+      <uri>https://twitter.com/patobrien333/</uri>
+    </author>
+    <category citation-format="numeric"/>
+    <category field="biology"/>
+    <category field="medicine"/>
+    <issn>0012-186X</issn>
+    <eissn>1432-0428</eissn>
+    <updated>2019-02-06T16:38:10+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+  <locale>
+    <terms>
+      <term name="et-al">et al</term>
+    </terms>
+  </locale>
+  <macro name="author">
+    <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
+      <name sort-separator=" " initialize-with="" name-as-sort-order="all" delimiter=", " delimiter-precedes-last="always"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <substitute>
+        <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>"/>
+        <names variable="translator" prefix="&lt;translator>" suffix="&lt;/translator>"/>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="edition">
+    <choose>
+      <if is-numeric="edition">
+        <group delimiter=" ">
+          <number variable="edition" form="ordinal"/>
+          <text term="edition" form="short" strip-periods="true" prefix="" suffix=""/>
+        </group>
+      </if>
+      <else>
+        <text variable="edition" prefix="&lt;edition>" suffix="&lt;/edition>"/>
+      </else>
+    </choose>
+  </macro>
+  <macro name="title">
+    <choose>
+      <if type="book">
+        <group delimiter=", ">
+          <text variable="title" prefix="&lt;title>" suffix="&lt;/title>"/>
+          <text macro="edition" prefix="" suffix=""/>
+        </group>
+      </if>
+      <else>
+        <text variable="title" prefix="&lt;title>" suffix="&lt;/title>"/>
+      </else>
+    </choose>
+  </macro>
+  <macro name="year-parenth">
+    <date prefix="(&lt;issued>" suffix="&lt;/issued>)" variable="issued">
+      <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
+    </date>
+  </macro>
+  <citation collapse="citation-number">
+    
+    <layout prefix="[" suffix="]" delimiter=", ">
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
+    </layout>
+  </citation>
+  <bibliography et-al-min="7" et-al-use-first="3" second-field-align="flush">
+    <layout>
+      <text variable="citation-number" suffix="&lt;/citation-number>. " prefix="&lt;citation-number>"/>
+      <group delimiter=" ">
+        <text macro="author" prefix="" suffix=""/>
+        <text macro="year-parenth" prefix="" suffix=""/>
+        <text macro="title" prefix="" suffix=""/>
+      </group>
+      <choose>
+        <if type="chapter paper-conference" match="any">
+          <group delimiter=" " prefix=". ">
+            <text term="in" text-case="capitalize-first" suffix=":" prefix=""/>
+            <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>">
+              <name sort-separator=" " initialize-with="" name-as-sort-order="all" delimiter=", " delimiter-precedes-last="always"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+              <label form="short" strip-periods="true" prefix=" (" suffix=")"/>
+            </names>
+            <group delimiter=", ">
+              <text variable="container-title" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+              <text macro="edition" prefix="" suffix=""/>
+            </group>
+          </group>
+          <group prefix=". " delimiter=", ">
+            <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
+            <text variable="publisher-place" prefix="&lt;publisher-place>" suffix="&lt;/publisher-place>"/>
+            <group delimiter=" ">
+              <label variable="page" form="short" strip-periods="true"/>
+              <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
+            </group>
+          </group>
+        </if>
+        <else-if type="article-journal">
+          <choose>
+            <if variable="page volume" match="any">
+              <group prefix=". " delimiter=". ">
+                <group delimiter=" ">
+                  <text variable="container-title" form="short" strip-periods="true" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+                  <group delimiter=":">
+                    <group>
+                      <text variable="volume" prefix="&lt;volume>" suffix="&lt;/volume>"/>
+                      <text variable="issue" prefix="(&lt;issue>" suffix="&lt;/issue>)"/>
+                    </group>
+                    <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
+                  </group>
+                </group>
+                <text prefix="https://doi.org/&lt;DOI>" variable="DOI" suffix="&lt;/DOI>"/>
+              </group>
+            </if>
+            <else>
+              <group prefix=". " delimiter=". ">
+                <text variable="container-title" form="short" strip-periods="true" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+                <text prefix="https://doi.org/&lt;DOI>" variable="DOI" suffix="&lt;/DOI>"/>
+              </group>
+            </else>
+          </choose>
+        </else-if>
+        <else-if type="bill book graphic legal_case legislation motion_picture report song" match="any">
+          <group prefix=". " delimiter=", ">
+            <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
+            <text variable="publisher-place" prefix="&lt;publisher-place>" suffix="&lt;/publisher-place>"/>
+          </group>
+        </else-if>
+        <else-if type="webpage post-weblog" match="any">
+          <group prefix=". " delimiter=". ">
+            <text prefix="In: &lt;container-title>" variable="container-title" form="short" suffix="&lt;/container-title>"/>
+            <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
+            <date variable="accessed" prefix="&lt;accessed>" suffix="&lt;/accessed>">
+              <date-part prefix="Accessed &lt;day>" name="day" suffix="&lt;/day> "/>
+              <date-part name="month" form="short" suffix="&lt;/month> " strip-periods="true" prefix="&lt;month>"/>
+              <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
+            </date>
+          </group>
+        </else-if>
+        <else-if type="thesis">
+          <group prefix=". " delimiter=", ">
+            <text variable="genre" text-case="capitalize-first" prefix="&lt;genre>" suffix="&lt;/genre>"/>
+            <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
+          </group>
+        </else-if>
+        <else>
+          <group prefix=". " delimiter=" ">
+            <text variable="container-title" form="short" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+            <group delimiter=":">
+              <text variable="volume" prefix="&lt;volume>" suffix="&lt;/volume>"/>
+              <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
+            </group>
+          </group>
+        </else>
+      </choose>
+    </layout>
+  </bibliography>
+</style>

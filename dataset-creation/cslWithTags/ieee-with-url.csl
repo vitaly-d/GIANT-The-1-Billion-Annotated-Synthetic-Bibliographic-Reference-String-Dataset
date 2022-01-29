@@ -4,8 +4,8 @@
     <title>IEEE (with URL)</title>
     <id>http://www.zotero.org/styles/ieee-with-url</id>
     <link href="http://www.zotero.org/styles/ieee-with-url" rel="self"/>
-    <link href="http://www.ieee.org/documents/style_manual.pdf" rel="documentation"/>
-    <link href="http://www.ieee.org/documents/auinfo07.pdf" rel="documentation"/>
+    <link href="https://ieeeauthorcenter.ieee.org/wp-content/uploads/IEEE-Reference-Guide.pdf" rel="documentation"/>
+    <link href="https://journals.ieeeauthorcenter.ieee.org/your-role-in-article-production/ieee-editorial-style-manual/" rel="documentation"/>
     <author>
       <name>Michael Berkowitz</name>
       <email>mberkowi@gmu.edu</email>
@@ -28,10 +28,16 @@
     <category citation-format="numeric"/>
     <category field="engineering"/>
     <category field="generic-base"/>
-    <updated>2017-11-14T12:30:00+00:00</updated>
+    <summary>IEEE style with URLs as per the 2018 guidelines, V 11.12.2018.</summary>
+    <updated>2019-12-20T09:20:25+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="en">
+    <date form="text" prefix="" suffix="">
+      <date-part name="month" form="short" suffix="&lt;/month> " prefix="&lt;month>"/>
+      <date-part name="day" form="numeric-leading-zeros" suffix="&lt;/day>, " prefix="&lt;day>"/>
+      <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
+    </date>
     <terms>
       <term name="chapter" form="short">ch.</term>
       <term name="presented at">presented at the</term>
@@ -64,17 +70,22 @@
           <date-part name="year" form="long" prefix="&lt;year>" suffix="&lt;/year>"/>
         </date>
       </if>
-      <else-if type="bill book chapter graphic legal_case legislation motion_picture paper-conference song thesis" match="any">
+      <else-if type="bill book chapter graphic legal_case legislation song thesis" match="any">
         <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
           <date-part name="year" form="long" prefix="&lt;year>" suffix="&lt;/year>"/>
         </date>
       </else-if>
-      <else>
+      <else-if type="paper-conference" match="any">
         <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
-          <date-part name="day" form="numeric-leading-zeros" suffix="&lt;/day>-" prefix="&lt;day>"/>
-          <date-part name="month" form="short" suffix="&lt;/month>-" strip-periods="true" prefix="&lt;month>"/>
-          <date-part name="year" form="long" prefix="&lt;year>" suffix="&lt;/year>"/>
+          <date-part name="month" form="short" prefix="&lt;month>" suffix="&lt;/month>"/>
+          <date-part name="year" prefix=" &lt;year>" suffix="&lt;/year>"/>
         </date>
+      </else-if>
+      <else-if type="motion_picture" match="any">
+        <date variable="issued" form="text" prefix="(&lt;issued>" suffix="&lt;/issued>)"/>
+      </else-if>
+      <else>
+        <date variable="issued" form="text" prefix="&lt;issued>" suffix="&lt;/issued>"/>
       </else>
     </choose>
   </macro>
@@ -176,11 +187,7 @@
           </group>
           <group prefix="[" suffix="]" delimiter=": ">
             <text term="accessed" text-case="capitalize-first" prefix="" suffix=""/>
-            <date variable="accessed" prefix="&lt;accessed>" suffix="&lt;/accessed>">
-              <date-part name="day" form="numeric-leading-zeros" suffix="&lt;/day>-" prefix="&lt;day>"/>
-              <date-part name="month" form="short" suffix="&lt;/month>-" strip-periods="true" prefix="&lt;month>"/>
-              <date-part name="year" form="long" prefix="&lt;year>" suffix="&lt;/year>"/>
-            </date>
+            <date variable="accessed" form="text" prefix="&lt;accessed>" suffix="&lt;/accessed>"/>
           </group>
         </group>
       </if>
@@ -204,6 +211,9 @@
       </choose>
       <text variable="locator" prefix="&lt;locator>" suffix="&lt;/locator>"/>
     </group>
+  </macro>
+  <macro name="doi">
+    <text variable="DOI" prefix="doi: &lt;DOI>" suffix="&lt;/DOI>"/>
   </macro>
   <!-- Citation -->
   <citation collapse="citation-number">
@@ -233,6 +243,7 @@
               <text macro="locators" prefix="" suffix=""/>
               <text macro="page" prefix="" suffix=""/>
               <text macro="issued" prefix="" suffix=""/>
+              <text macro="doi" suffix="." prefix=""/>
             </group>
           </if>
           <else-if type="paper-conference">
@@ -242,6 +253,7 @@
               <text macro="issued" prefix="" suffix=""/>
               <text macro="locators" prefix="" suffix=""/>
               <text macro="page" prefix="" suffix=""/>
+              <text macro="doi" prefix="" suffix=""/>
             </group>
           </else-if>
           <else-if type="report">
@@ -263,7 +275,7 @@
               <text macro="issued" prefix="" suffix=""/>
             </group>
           </else-if>
-          <else-if type="webpage">
+          <else-if type="webpage post post-weblog" match="any">
             <group delimiter=", " suffix=". ">
               <text macro="title" prefix="" suffix=""/>
               <text variable="container-title" font-style="italic" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>

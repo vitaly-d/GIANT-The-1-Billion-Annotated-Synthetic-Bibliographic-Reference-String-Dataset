@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" and="text" name-as-sort-order="all" page-range-format="chicago" demote-non-dropping-particle="never">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" and="text" name-as-sort-order="all" page-range-format="chicago" demote-non-dropping-particle="never" default-locale="en-GB">
   <info>
     <title>International Journal of Urban and Regional Research</title>
     <title-short>IJURR</title-short>

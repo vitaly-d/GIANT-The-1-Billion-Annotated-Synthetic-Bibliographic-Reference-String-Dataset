@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" delimiter-precedes-et-al="always" delimiter-precedes-last="never" et-al-min="7" et-al-use-first="6" page-range-format="minimal-two" demote-non-dropping-particle="sort-only" default-locale="en-GB">
+  <!-- This style was edited with the Visual CSL Editor (http://editor.citationstyles.org/visualEditor/) -->
+  <info>
+    <title>The European Research Journal</title>
+    <title-short>EuRJ</title-short>
+    <id>http://www.zotero.org/styles/the-european-research-journal</id>
+    <link href="http://www.zotero.org/styles/the-european-research-journal" rel="self"/>
+    <link href="http://www.zotero.org/styles/annals-of-oncology" rel="template"/>
+    <link href="http://eurj.org/?page_id=29" rel="documentation"/>
+    <author>
+      <name>Hakan Kocoglu</name>
+      <email>hakan@pooltext.com</email>
+    </author>
+    <category citation-format="numeric"/>
+    <category field="medicine"/>
+    <eissn>2149-3189</eissn>
+    <summary>Provided by PoolText</summary>
+    <updated>2018-04-18T19:07:26+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+  <locale xml:lang="en">
+    <terms>
+      <term name="editor" form="short">
+        <single>ed</single>
+        <multiple>eds</multiple>
+      </term>
+    </terms>
+  </locale>
+  <macro name="author">
+    <names variable="author" suffix="&lt;/author>. " prefix="&lt;author>">
+      <name delimiter-precedes-et-al="always" delimiter-precedes-last="never" et-al-min="7" et-al-use-first="6" initialize-with="" name-as-sort-order="all" sort-separator=" "><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+    </names>
+  </macro>
+  <macro name="editor">
+    <names variable="editor" prefix=" In: &lt;editor>" suffix="&lt;/editor>. ">
+      <name sort-separator=" " initialize-with="" name-as-sort-order="all" delimiter=", " delimiter-precedes-last="always" et-al-min="5" et-al-use-first="3" delimiter-precedes-et-al="never"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <label form="short" prefix=" "/>
+    </names>
+  </macro>
+  <macro name="publisher">
+    <text variable="publisher-place" suffix="&lt;/publisher-place>: " prefix="&lt;publisher-place>"/>
+    <text variable="publisher" suffix="&lt;/publisher>. " prefix="&lt;publisher>"/>
+  </macro>
+  <macro name="container-title">
+    <text variable="container-title" form="short" vertical-align="baseline" suffix="&lt;/container-title>." prefix="&lt;container-title>"/>
+  </macro>
+  <macro name="edition">
+    <choose>
+      <if is-numeric="edition">
+        <group delimiter=" ">
+          <number variable="edition" form="ordinal"/>
+          <text term="edition" form="long" suffix="." prefix=""/>
+        </group>
+      </if>
+      <else>
+        <text variable="edition" suffix="&lt;/edition>." prefix="&lt;edition>"/>
+      </else>
+    </choose>
+  </macro>
+  <macro name="accessed-date">
+    <choose>
+      <if variable="URL">
+        <group delimiter=" ">
+          <text term="accessed" text-case="capitalize-first" prefix=" " suffix=""/>
+          <date form="text" variable="accessed" prefix="&lt;accessed>" suffix="&lt;/accessed>"/>
+        </group>
+      </if>
+    </choose>
+  </macro>
+  <citation collapse="citation-number">
+    
+    <layout prefix="[" suffix="]" delimiter=", ">
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
+    </layout>
+  </citation>
+  <bibliography et-al-min="7" et-al-use-first="6" delimiter-precedes-et-al="never" second-field-align="flush">
+    <layout suffix=".">
+      <text variable="citation-number" prefix="[&lt;citation-number>" suffix="&lt;/citation-number>] "/>
+      <choose>
+        <if type="webpage">
+          <text variable="title" suffix="&lt;/title>. " prefix="&lt;title>"/>
+          <text variable="URL" prefix=" (&lt;URL>" suffix="&lt;/URL>)."/>
+          <text macro="accessed-date" prefix="" suffix=""/>
+        </if>
+        <else>
+          <text macro="author" prefix="" suffix=""/>
+          <text variable="title" suffix="&lt;/title>. " prefix="&lt;title>"/>
+          <choose>
+            <if type="bill book graphic legal_case legislation motion_picture report song" match="any">
+              <group delimiter=" ">
+                <text macro="edition" prefix="" suffix=""/>
+                <text macro="publisher" prefix="" suffix=""/>
+              </group>
+            </if>
+            <else-if type="chapter paper-conference" match="any">
+              <text macro="editor" prefix="" suffix=""/>
+              <text macro="container-title" suffix=" " prefix=""/>
+              <group delimiter=" ">
+                <text macro="edition" suffix="." prefix=""/>
+                <text macro="publisher" prefix="" suffix=""/>
+              </group>
+            </else-if>
+            <else>
+              <text macro="container-title" suffix=" " prefix=""/>
+            </else>
+          </choose>
+          <date date-parts="year" form="numeric" variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
+            <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
+          </date>
+          <choose>
+            <if variable="page">
+              <text variable="volume" prefix=";&lt;volume>" suffix="&lt;/volume>"/>
+              <text variable="page" prefix=":&lt;page>" suffix="&lt;/page>"/>
+            </if>
+            <else>
+              <text variable="DOI" prefix=". doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+            </else>
+          </choose>
+        </else>
+      </choose>
+    </layout>
+  </bibliography>
+</style>

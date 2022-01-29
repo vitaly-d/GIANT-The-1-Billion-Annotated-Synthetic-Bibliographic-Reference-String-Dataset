@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" page-range-format="chicago" demote-non-dropping-particle="never">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" page-range-format="chicago" demote-non-dropping-particle="never" default-locale="en-US">
   <info>
     <title>Annual Review of Astronomy and Astrophysics</title>
     <id>http://www.zotero.org/styles/annual-review-of-astronomy-and-astrophysics</id>
@@ -255,7 +255,7 @@
       <else-if type="webpage" match="any">
         <group delimiter=". ">
           <text variable="container-title" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
-          <text variable="URL" form="short" prefix="&lt;URL>" suffix="&lt;/URL>"/>
+          <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
         </group>
       </else-if>
       <else-if type="manuscript">

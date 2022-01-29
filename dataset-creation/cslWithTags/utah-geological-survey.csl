@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
   <info>
     <title>Utah Geological Survey</title>
     <id>http://www.zotero.org/styles/utah-geological-survey</id>
@@ -12,7 +12,7 @@
     <category citation-format="author-date"/>
     <category field="geology"/>
     <summary>The style of the Utah Geological Survey, Utah Geological Association, and the Geology of the Intermountain West</summary>
-    <updated>2016-01-11T07:39:00+00:00</updated>
+    <updated>2019-08-26T15:04:41+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <macro name="editor-translator">
@@ -84,11 +84,11 @@
       </group>
       <choose>
         <if type="report">
-          <group prefix=" " delimiter=", " suffix=".">
+          <group delimiter=", " prefix=" ">
             <group delimiter=" ">
               <text variable="title" suffix="&lt;/title>:" prefix="&lt;title>"/>
               <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
-              <text variable="collection-title" prefix="&lt;collection-title>" suffix="&lt;/collection-title>"/>
+              <text variable="genre" prefix="&lt;genre>" suffix="&lt;/genre>"/>
               <text variable="number" prefix="&lt;number>" suffix="&lt;/number>"/>
             </group>
             <group>
@@ -102,10 +102,10 @@
             <text variable="title" prefix=" &lt;title>" suffix="&lt;/title>"/>
             <text macro="editor-translator" prefix=" " suffix=""/>
           </group>
-          <group prefix=" " suffix="." delimiter=", ">
+          <group delimiter=", " prefix=" ">
             <text variable="collection-title" prefix="&lt;collection-title>" suffix="&lt;/collection-title>"/>
             <text macro="publisher" prefix="" suffix=""/>
-            <text variable="genre" prefix="&lt;genre>" suffix="&lt;/genre>"/>
+            <text variable="collection-title" prefix="&lt;collection-title>" suffix="&lt;/collection-title>"/>
             <text variable="number-of-pages" suffix="&lt;/number-of-pages> p." prefix="&lt;number-of-pages>"/>
           </group>
         </else-if>
@@ -169,6 +169,11 @@
             <text variable="page" prefix="p. &lt;page>" suffix="&lt;/page>"/>
           </group>
         </else>
+      </choose>
+      <choose>
+        <if match="any" variable="DOI">
+          <text variable="DOI" prefix=", doi: &lt;DOI>" suffix="&lt;/DOI>"/>
+        </if>
       </choose>
     </layout>
   </bibliography>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" demote-non-dropping-particle="sort-only" page-range-format="minimal" default-locale="en-US">
   <info>
     <title>American Journal of Archaeology</title>
     <title-short>AJA</title-short>
@@ -15,7 +15,7 @@
     <issn>0002-9114</issn>
     <eissn>1939-828X</eissn>
     <summary>The American Journal of Archaeology style</summary>
-    <updated>2017-04-13T16:17:59+00:00</updated>
+    <updated>2021-11-12T14:22:00+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale>
@@ -32,7 +32,7 @@
             <if variable="author">
               <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>">
                 <label form="verb-short" prefix=" " text-case="capitalize-first" suffix=" "/>
-                <name and="text" delimiter=", "><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+                <name and="text" delimiter=", " suffix=". "><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
               </names>
             </if>
           </choose>
@@ -170,10 +170,10 @@
         </choose>
       </if>
       <else-if type="bill book graphic legal_case legislation motion_picture report song" match="any">
-        <text variable="title" font-style="italic" prefix="&lt;title>" suffix="&lt;/title>"/>
+        <text variable="title" font-style="italic" text-case="title" prefix="&lt;title>" suffix="&lt;/title>"/>
       </else-if>
       <else>
-        <text variable="title" suffix="&lt;/title>. " quotes="true" prefix="&lt;title>"/>
+        <text variable="title" suffix="&lt;/title>. " quotes="true" text-case="title" prefix="&lt;title>"/>
       </else>
     </choose>
   </macro>
@@ -188,7 +188,7 @@
             </group>
           </if>
           <else>
-            <text variable="edition" suffix="&lt;/edition>." prefix="&lt;edition>"/>
+            <text variable="edition" prefix="&lt;edition>" suffix="&lt;/edition>"/>
           </else>
         </choose>
       </if>
@@ -198,7 +198,7 @@
     <choose>
       <if type="article-journal">
         <text variable="volume" prefix=" &lt;volume>" suffix="&lt;/volume>"/>
-        <text variable="issue" prefix=" &lt;issue>" suffix="&lt;/issue>"/>
+        <text variable="issue" prefix=" (&lt;issue>" suffix="&lt;/issue>)"/>
       </if>
       <else-if type="bill book graphic legal_case legislation motion_picture report song" match="any">
         <group prefix=". " delimiter=". ">
@@ -239,7 +239,7 @@
         </group>
       </if>
       <else-if type="article-journal">
-        <text variable="page" prefix=": &lt;page>" suffix="&lt;/page>"/>
+        <text variable="page" prefix=":&lt;page>" suffix="&lt;/page>"/>
       </else-if>
     </choose>
   </macro>
@@ -265,9 +265,19 @@
     <text variable="container-title" font-style="italic" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
   </macro>
   <macro name="publisher">
-    <group delimiter=": ">
-      <text variable="publisher-place" prefix="&lt;publisher-place>" suffix="&lt;/publisher-place>"/>
-      <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
+    <group>
+      <choose>
+        <if type="thesis" match="none">
+          <text value=". " prefix="" suffix=""/>
+          <group delimiter=": ">
+            <text variable="publisher-place" prefix="&lt;publisher-place>" suffix="&lt;/publisher-place>"/>
+            <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
+          </group>
+        </if>
+        <else>
+          <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
+        </else>
+      </choose>
     </group>
   </macro>
   <macro name="date">
@@ -287,7 +297,14 @@
   </macro>
   <macro name="event">
     <group>
-      <text term="presented at" suffix=" " prefix=""/>
+      <choose>
+        <if variable="genre" match="none">
+          <text term="presented at" suffix=" " text-case="capitalize-first" prefix=""/>
+        </if>
+        <else>
+          <text term="presented at" suffix=" " text-case="lowercase" prefix=""/>
+        </else>
+      </choose>
       <text variable="event" prefix="&lt;event>" suffix="&lt;/event>"/>
     </group>
   </macro>
@@ -300,7 +317,7 @@
       <if variable="title" match="none"/>
       <else-if type="thesis"/>
       <else>
-        <text variable="genre" text-case="capitalize-first" prefix=". &lt;genre>" suffix="&lt;/genre>"/>
+        <text variable="genre" text-case="capitalize-first" prefix=" &lt;genre>" suffix="&lt;/genre>"/>
       </else>
     </choose>
   </macro>
@@ -320,14 +337,13 @@
         <text macro="day-month" prefix=", " suffix=""/>
       </else-if>
       <else>
-        <group prefix=". " delimiter=", ">
+        <group prefix="" delimiter=", ">
           <choose>
             <if type="thesis">
               <text variable="genre" text-case="capitalize-first" prefix="&lt;genre>" suffix="&lt;/genre>"/>
             </if>
           </choose>
           <text macro="publisher" prefix="" suffix=""/>
-          <text macro="day-month" prefix="" suffix=""/>
         </group>
       </else>
     </choose>
@@ -339,7 +355,6 @@
         <group delimiter=" ">
           <text macro="contributors-short" prefix="" suffix=""/>
           <text macro="date" prefix="" suffix=""/>
-          <text macro="day-month" prefix=" (" suffix="), "/>
         </group>
         <text macro="point-locators" prefix="" suffix=""/>
       </group>
@@ -350,14 +365,13 @@
     <layout suffix=".">
       <text macro="contributors" suffix=". " prefix=""/>
       <text macro="date" suffix=". " prefix=""/>
-      <text macro="day-month" text-case="capitalize-first" suffix=". " prefix=""/>
       <text macro="title" prefix="" suffix=""/>
       <text macro="description" prefix="" suffix=""/>
-      <text macro="secondary-contributors" prefix=". " suffix=""/>
+      <text macro="secondary-contributors" prefix=" " suffix=""/>
       <text macro="container-title" prefix="" suffix=""/>
       <text macro="container-contributors" prefix=", " suffix=""/>
       <text macro="locators-chapter" prefix="" suffix=""/>
-      <text macro="edition" prefix=". " suffix=""/>
+      <text macro="edition" prefix=". " strip-periods="true" suffix=""/>
       <text macro="locators" prefix="" suffix=""/>
       <text macro="collection-title" prefix=". " suffix=""/>
       <text macro="issue" prefix="" suffix=""/>

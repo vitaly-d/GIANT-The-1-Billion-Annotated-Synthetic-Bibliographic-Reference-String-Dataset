@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never" default-locale="en-US">
   <info>
     <title>Accident Analysis and Prevention</title>
     <id>http://www.zotero.org/styles/accident-analysis-and-prevention</id>
@@ -76,7 +76,7 @@
       <if variable="DOI">
         <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
       </if>
-      <else-if type="webpage">
+      <else-if type="post post-weblog webpage">
         <group delimiter=" ">
           <text value="URL" prefix="" suffix=""/>
           <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>

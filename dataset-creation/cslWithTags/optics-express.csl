@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" demote-non-dropping-particle="sort-only" version="1.0" class="in-text">
+<style xmlns="http://purl.org/net/xbiblio/csl" demote-non-dropping-particle="sort-only" version="1.0" class="in-text" default-locale="en-US">
   <info>
     <title>Optics Express</title>
     <id>http://www.zotero.org/styles/optics-express</id>

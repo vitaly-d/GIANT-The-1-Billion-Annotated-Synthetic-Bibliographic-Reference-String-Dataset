@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" page-range-format="chicago" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" page-range-format="chicago" demote-non-dropping-particle="sort-only" default-locale="en-GB">
   <info>
     <title>Ageing &amp; Society</title>
     <id>http://www.zotero.org/styles/ageing-and-society</id>
@@ -14,7 +14,7 @@
     <category field="biology"/>
     <issn>0144-686X</issn>
     <eissn>1469-1779</eissn>
-    <updated>2017-06-04T17:19:24+00:00</updated>
+    <updated>2021-04-10T17:19:24+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="en">
@@ -107,7 +107,7 @@
   <macro name="pages">
     <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-names="true">
+  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-names="true">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=": ">

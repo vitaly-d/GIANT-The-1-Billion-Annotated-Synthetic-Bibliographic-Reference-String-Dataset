@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never" default-locale="en-US">
   <info>
     <title>Aerosol Science and Technology</title>
     <id>http://www.zotero.org/styles/aerosol-science-and-technology</id>
@@ -8,12 +8,11 @@
     <link href="http://www.tandfonline.com/action/authorSubmission?journalCode=uast20&amp;page=instructions" rel="documentation"/>
     <author>
       <name>Patrick O'Brien</name>
-      <email>obrienpat86@gmail.com</email>
     </author>
     <category citation-format="author-date"/>
     <category field="chemistry"/>
     <issn>0278-6826</issn>
-    <updated>2017-03-29T13:20:23+00:00</updated>
+    <updated>2020-07-09T20:19:32+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <macro name="author">
@@ -88,7 +87,7 @@
         <text variable="container-title" form="short" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
       </else-if>
       <else>
-        <group delimiter=", " prefix=" " suffix=",">
+        <group delimiter=", " prefix=" ">
           <text variable="container-title" form="short" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
           <text variable="collection-title" prefix="&lt;collection-title>" suffix="&lt;/collection-title>"/>
         </group>
@@ -97,7 +96,7 @@
   </macro>
   <macro name="access">
     <choose>
-      <if type="webpage">
+      <if type="webpage post post-weblog" match="any">
         <group delimiter=" ">
           <text term="available at" text-case="capitalize-first" prefix="" suffix=""/>
           <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
@@ -111,6 +110,9 @@
           </group>
         </group>
       </if>
+      <else-if type="article-journal" match="any">
+        <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+      </else-if>
     </choose>
   </macro>
   <macro name="publisher">
@@ -156,7 +158,7 @@
     <choose>
       <if type="article-journal article-magazine article-newspaper" match="any">
         <group delimiter=":" prefix=" ">
-          <group>
+          <group delimiter=" ">
             <text variable="volume" prefix="&lt;volume>" suffix="&lt;/volume>"/>
             <text variable="issue" prefix="(&lt;issue>" suffix="&lt;/issue>)"/>
           </group>
@@ -199,7 +201,7 @@
   </citation>
   <bibliography hanging-indent="true" entry-spacing="0" line-spacing="1">
     
-    <layout>
+    <layout suffix=".">
       <group suffix=".">
         <text macro="author" suffix="" prefix=""/>
         <text macro="issued" prefix=" (" suffix=")"/>

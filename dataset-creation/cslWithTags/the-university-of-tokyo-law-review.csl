@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" default-locale="ja-JP">
+  <info>
+    <title>東京大学法科大学院ローレビュー (The University of Tokyo Law Review) (日本語)</title>
+    <id>http://www.zotero.org/styles/the-university-of-tokyo-law-review</id>
+    <link href="http://www.zotero.org/styles/the-university-of-tokyo-law-review" rel="self"/>
+    <link href="http://www.sllr.j.u-tokyo.ac.jp/" rel="documentation"/>
+    <link href="http://www.j.u-tokyo.ac.jp/students/wp-content/uploads/sites/5/2017/11/20180115quote.pdf" rel="documentation"/>
+    <link href="https://ysmatsud.hatenablog.com/entry/2020/03/05/200900" rel="documentation"/>
+    <author>
+      <name>MATSUDA Yoshiro</name>
+      <email>ysmatsud@gmail.com</email>
+    </author>
+    <category citation-format="author-date"/>
+    <category field="law"/>
+    <issn>2187-2902</issn>
+    <eissn>2188-0689</eissn>
+    <updated>2020-03-02T09:52:29+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+  <macro name="author">
+    <names variable="author" delimiter="＝" prefix="&lt;author>" suffix="&lt;/author>">
+      <name delimiter="＝" et-al-min="3" et-al-use-first="1"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+    </names>
+  </macro>
+  <macro name="title">
+    <choose>
+      <if type="book">
+        <text variable="title" prefix="『&lt;title>" suffix="&lt;/title>』"/>
+      </if>
+      <else>
+        <text variable="title" prefix="「&lt;title>" suffix="&lt;/title>」"/>
+      </else>
+    </choose>
+  </macro>
+  <macro name="publisher">
+    <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
+  </macro>
+  <macro name="volume">
+    <text variable="volume" suffix="&lt;/volume>巻" prefix="&lt;volume>"/>
+  </macro>
+  <macro name="issue">
+    <text variable="issue" suffix="&lt;/issue>号" prefix="&lt;issue>"/>
+  </macro>
+  <macro name="pageno">
+    <text variable="page" suffix="&lt;/page>頁" prefix="&lt;page>"/>
+  </macro>
+  <macro name="container">
+    <text variable="container-title" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+  </macro>
+  <macro name="issued-date">
+    <date variable="issued" prefix=" (&lt;issued>" suffix="&lt;/issued>)">
+      <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
+    </date>
+  </macro>
+  <macro name="book_suffix">
+    <text variable="publisher" prefix=" (&lt;publisher>" suffix="&lt;/publisher>, "/>
+    <date variable="issued" suffix="&lt;/issued>)" prefix="&lt;issued>">
+      <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
+    </date>
+  </macro>
+  <macro name="webpage_suffix">
+    <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
+      <date-part name="year" suffix="&lt;/year>年" prefix="&lt;year>"/>
+      <date-part name="month" suffix="&lt;/month>月" form="numeric" prefix="&lt;month>"/>
+      <date-part name="day" suffix="&lt;/day>日" prefix="&lt;day>"/>
+    </date>
+    <text variable="URL" prefix=" (&lt;URL>" suffix="&lt;/URL>,"/>
+    <date variable="accessed" suffix="&lt;/accessed>)" prefix="&lt;accessed>">
+      <date-part name="year" suffix="&lt;/year>年" prefix="&lt;year>"/>
+      <date-part name="month" suffix="&lt;/month>月" form="numeric" prefix="&lt;month>"/>
+      <date-part name="day" suffix="&lt;/day>日最終閲覧" prefix="&lt;day>"/>
+    </date>
+  </macro>
+  <citation>
+    <layout>
+      <group delimiter=" " suffix="。">
+        <choose>
+          <if type="book">
+            <text macro="author" prefix="" suffix=""/>
+            <text macro="title" prefix="" suffix=""/>
+            <text macro="pageno" prefix="" suffix=""/>
+            <text macro="book_suffix" prefix="" suffix=""/>
+          </if>
+          <else-if type="article-journal article-magazine article-newspaper" match="any">
+            <text macro="author" prefix="" suffix=""/>
+            <text macro="title" prefix="" suffix=""/>
+            <text macro="container" prefix="" suffix=""/>
+            <text macro="volume" prefix="" suffix=""/>
+            <text macro="issue" prefix="" suffix=""/>
+            <text macro="pageno" prefix="" suffix=""/>
+            <text macro="issued-date" prefix="" suffix=""/>
+          </else-if>
+          <else-if type="webpage">
+            <text macro="author" prefix="" suffix=""/>
+            <text macro="title" prefix="" suffix=""/>
+            <text macro="publisher" prefix="" suffix=""/>
+            <text macro="webpage_suffix" prefix="" suffix=""/>
+          </else-if>
+          <else>
+            <text macro="title" prefix="" suffix=""/>
+          </else>
+        </choose>
+      </group>
+    </layout>
+  </citation>
+  <bibliography>
+    
+    <layout>
+      <group delimiter=" ">
+        <choose>
+          <if type="book">
+            <text macro="author" prefix="" suffix=""/>
+            <text macro="title" prefix="" suffix=""/>
+            <text macro="pageno" prefix="" suffix=""/>
+            <text macro="book_suffix" prefix="" suffix=""/>
+          </if>
+          <else-if type="article-journal article-magazine article-newspaper" match="any">
+            <text macro="author" prefix="" suffix=""/>
+            <text macro="title" prefix="" suffix=""/>
+            <text macro="container" prefix="" suffix=""/>
+            <text macro="volume" prefix="" suffix=""/>
+            <text macro="issue" prefix="" suffix=""/>
+            <text macro="pageno" prefix="" suffix=""/>
+            <text macro="issued-date" prefix="" suffix=""/>
+          </else-if>
+          <else-if type="webpage">
+            <text macro="author" prefix="" suffix=""/>
+            <text macro="title" prefix="" suffix=""/>
+            <text macro="publisher" prefix="" suffix=""/>
+            <text macro="webpage_suffix" prefix="" suffix=""/>
+          </else-if>
+          <else>
+            <text macro="title" prefix="" suffix=""/>
+          </else>
+        </choose>
+      </group>
+    </layout>
+  </bibliography>
+</style>

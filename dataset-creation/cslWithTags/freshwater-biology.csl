@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
   <info>
     <title>Freshwater Biology</title>
     <id>http://www.zotero.org/styles/freshwater-biology</id>
     <link href="http://www.zotero.org/styles/freshwater-biology" rel="self"/>
-    <link href="http://www.zotero.org/styles/journal-of-fish-diseases" rel="template"/>
     <link href="http://onlinelibrary.wiley.com/journal/10.1111/%28ISSN%291365-2427/homepage/ForAuthors.html" rel="documentation"/>
     <author>
       <name>Sebastian Karcher</name>
@@ -17,8 +16,8 @@
     <category field="biology"/>
     <issn>0046-5070</issn>
     <eissn>1365-2427</eissn>
-    <summary>Style for the Wiley journal Freshwater Biology</summary>
-    <updated>2012-09-27T22:06:38+00:00</updated>
+    <summary>Style for the Wiley journal Freshwater Biology.</summary>
+    <updated>2019-02-04T11:05:36+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale>
@@ -88,6 +87,13 @@
       </else>
     </choose>
   </macro>
+  <macro name="access">
+    <choose>
+      <if type="article-journal" match="any">
+        <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+      </if>
+    </choose>
+  </macro>
   <citation et-al-min="4" et-al-subsequent-min="3" et-al-use-first="1" et-al-subsequent-use-first="1" disambiguate-add-names="false" disambiguate-add-givenname="false" collapse="year-suffix" year-suffix-delimiter=" ">
     
     <layout prefix="(" suffix=")" delimiter="; ">
@@ -100,14 +106,14 @@
   </citation>
   <bibliography hanging-indent="true" et-al-min="7" et-al-use-first="6" entry-spacing="0">
     
-    <layout suffix=".">
+    <layout>
       <text macro="author" prefix="" suffix=""/>
-      <date variable="issued" prefix=" (&lt;issued>" suffix="&lt;/issued>)">
+      <date variable="issued" prefix=" (&lt;issued>" suffix="&lt;/issued>).">
         <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
       </date>
       <choose>
         <if type="bill book graphic legal_case legislation motion_picture report song thesis" match="any">
-          <group delimiter=" " prefix=" ">
+          <group delimiter=" " prefix=" " suffix=".">
             <group delimiter=", " prefix=" " suffix=".">
               <text macro="title" font-style="italic" prefix="" suffix=""/>
               <text macro="edition" prefix="" suffix=""/>
@@ -136,13 +142,16 @@
           </group>
         </else-if>
         <else>
-          <text macro="title" prefix=" " suffix="."/>
-          <group delimiter=", " prefix=" " suffix=".">
-            <group delimiter=" ">
-              <text variable="container-title" font-style="italic" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
-              <text variable="volume" font-weight="bold" prefix="&lt;volume>" suffix="&lt;/volume>"/>
+          <group delimiter=". ">
+            <text macro="title" prefix=" " suffix=""/>
+            <group delimiter=", ">
+              <group delimiter=" ">
+                <text variable="container-title" font-style="italic" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+                <text variable="volume" font-weight="bold" prefix="&lt;volume>" suffix="&lt;/volume>"/>
+              </group>
+              <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
             </group>
-            <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
+            <text macro="access" prefix="" suffix=""/>
           </group>
         </else>
       </choose>

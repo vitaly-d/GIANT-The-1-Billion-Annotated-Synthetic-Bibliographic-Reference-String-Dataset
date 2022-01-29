@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" page-range-format="expanded">
+  <!-- Polyglot; journal publishes in French and English -->
+  <info>
+    <title>Préhistoires méditerranéennes</title>
+    <title-short>PréhMéd</title-short>
+    <id>http://www.zotero.org/styles/prehistoires-mediterraneennes</id>
+    <link href="http://www.zotero.org/styles/prehistoires-mediterraneennes" rel="self"/>
+    <link href="https://journals.openedition.org/pm/" rel="documentation"/>
+    <author>
+      <name>Sébastien Plutniak</name>
+      <email>sebastien.plutniak@posteo.net</email>
+    </author>
+    <category citation-format="author-date"/>
+    <category field="history"/>
+    <issn>2118-8211</issn>
+    <eissn>2105-2565</eissn>
+    <summary>Style for the Préhistoires méditerranéennes journal.</summary>
+    <updated>2019-08-10T15:20:00+01:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+  <locale xml:lang="fr">
+    <terms>
+      <term name="editor" form="short">
+        <single>(Dir.)</single>
+        <multiple>(Dir.)</multiple>
+      </term>
+      <term name="editorial-director" form="short">
+        <single>(Dir.)</single>
+        <multiple>(Dir.)</multiple>
+      </term>
+      <term name="page" form="short">
+        <single>p.</single>
+        <multiple>p.</multiple>
+      </term>
+    </terms>
+  </locale>
+  <locale xml:lang="en">
+    <terms>
+      <term name="editor" form="short">
+        <single>(ed.)</single>
+        <multiple>(ed.)</multiple>
+      </term>
+      <term name="page" form="short">
+        <single>p.</single>
+        <multiple>p.</multiple>
+      </term>
+    </terms>
+  </locale>
+  <!-- Macros definitions -->
+  <macro name="editor">
+    <names variable="editor" delimiter=" " prefix="&lt;editor>" suffix="&lt;/editor>">
+      <name name-as-sort-order="all" sort-separator=" " delimiter=", " delimiter-precedes-last="never" initialize-with="."><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <label form="short" prefix=" " suffix=" " text-case="lowercase"/>
+      <et-al term="et-al" font-style="italic"/>
+      <substitute>
+        <names variable="editorial-director" prefix="&lt;editorial-director>" suffix="&lt;/editorial-director>"/>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="author-short">
+    <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
+      <name and="symbol" form="short" delimiter=", " delimiter-precedes-last="never" initialize-with="."><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <et-al font-style="italic"/>
+      <substitute>
+        <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>"/>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="author-long">
+    <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
+      <name name-as-sort-order="all" sort-separator=" " delimiter=", " delimiter-precedes-last="contextual" initialize-with=".">
+        <name-part name="family" text-case="uppercase" prefix="&lt;family>" suffix="&lt;/family>"/>
+      <name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <et-al term="et-al" font-style="italic"/>
+      <label form="short" prefix=" " text-case="lowercase"/>
+      <substitute>
+        <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>">
+          <name name-as-sort-order="all" sort-separator=", " delimiter=", " delimiter-precedes-last="always" initialize-with=". "><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+          <et-al font-style="italic"/>
+          <label form="short" prefix=" " suffix="" text-case="lowercase"/>
+          <substitute>
+            <names variable="editorial-director" prefix="&lt;editorial-director>" suffix="&lt;/editorial-director>"/>
+          </substitute>
+        </names>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="collection-info">
+    <choose>
+      <if variable="collection-title collection-number" match="all">
+        <text variable="collection-title" suffix="&lt;/collection-title> ; " prefix="&lt;collection-title>"/>
+        <text variable="collection-number" prefix="&lt;collection-number>" suffix="&lt;/collection-number>"/>
+      </if>
+      <else-if variable="collection-title">
+        <text variable="collection-title" prefix="&lt;collection-title>" suffix="&lt;/collection-title>"/>
+      </else-if>
+    </choose>
+  </macro>
+  <macro name="year-date-short">
+    <choose>
+      <if variable="issued">
+        <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
+          <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
+        </date>
+      </if>
+      <else>
+        <text term="no date" form="short" prefix="" suffix=""/>
+      </else>
+    </choose>
+  </macro>
+  <macro name="citation-locator">
+    <group>
+      <label variable="locator" form="short" suffix=". "/>
+      <text variable="locator" prefix="&lt;locator>" suffix="&lt;/locator>"/>
+    </group>
+  </macro>
+  <macro name="page">
+    <group>
+      <label variable="page" suffix=". " form="short"/>
+      <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
+    </group>
+  </macro>
+  <!-- End of macros definition -->
+  <!-- Format of short entries -->
+  <citation et-al-min="2" et-al-use-first="1" disambiguate-add-names="true" collapse="year">
+    
+    <layout prefix="" suffix="" delimiter="  ">
+      <group delimiter=" " suffix=" ">
+        <text macro="author-short" prefix="" suffix=""/>
+      </group>
+      <group delimiter=", ">
+        <text macro="year-date-short" prefix="" suffix=""/>
+        <text macro="citation-locator" prefix="" suffix=""/>
+      </group>
+    </layout>
+  </citation>
+  <!-- Format of full entries -->
+  <bibliography>
+    
+    <layout suffix=".">
+      <text macro="author-short" font-weight="bold" suffix=" " prefix=""/>
+      <text macro="year-date-short" font-weight="bold" suffix=", " prefix=""/>
+      <text macro="author-long" suffix=", " prefix=""/>
+      <choose>
+        <if type="article article-newspaper article-magazine" match="any">
+          <group delimiter=" ">
+            <text variable="title" quotes="false" prefix="&lt;title>" suffix="&lt;/title>"/>
+            <text variable="container-title" font-style="italic" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+          </group>
+          <group delimiter=", ">
+            <text macro="page" prefix="" suffix=""/>
+            <text variable="DOI" prefix="DOI : &lt;DOI>" suffix="&lt;/DOI>"/>
+          </group>
+        </if>
+        <else-if type="book">
+          <group delimiter=", ">
+            <text variable="title" font-style="italic" text-case="capitalize-first" prefix="&lt;title>" suffix="&lt;/title>"/>
+            <text variable="edition" prefix="&lt;edition>" suffix="&lt;/edition>"/>
+            <text variable="publisher-place" prefix="&lt;publisher-place>" suffix="&lt;/publisher-place>"/>
+            <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
+            <text macro="year-date-short" prefix="" suffix=""/>
+            <text variable="number-of-pages" suffix="&lt;/number-of-pages> p." prefix="&lt;number-of-pages>"/>
+          </group>
+          <text macro="collection-info" prefix=" (" suffix=")"/>
+        </else-if>
+        <else-if type="chapter paper-conference" match="any">
+          <text variable="title" suffix="&lt;/title>," font-style="italic" quotes="false" prefix="&lt;title>"/>
+          <group delimiter=" ">
+            <text value="in :" prefix=" " suffix=" "/>
+          </group>
+          <group delimiter=", ">
+            <text macro="editor" suffix="" prefix=""/>
+            <text variable="container-title" suffix="&lt;/container-title>" font-style="italic" prefix="&lt;container-title>"/>
+            <text variable="publisher-place" prefix="&lt;publisher-place>" suffix="&lt;/publisher-place>"/>
+            <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
+            <text macro="year-date-short" prefix="" suffix=""/>
+            <text macro="page" prefix="" suffix=""/>
+          </group>
+          <text macro="collection-info" prefix=" (" suffix=")"/>
+        </else-if>
+        <else-if type="thesis">
+          <group delimiter=", ">
+            <text variable="title" font-style="italic" prefix="&lt;title>" suffix="&lt;/title>"/>
+            <text variable="publisher-place" prefix="&lt;publisher-place>" suffix="&lt;/publisher-place>"/>
+            <text macro="year-date-short" prefix="" suffix=""/>
+            <choose>
+              <if variable="genre">
+                <text variable="genre" prefix="&lt;genre>" suffix="&lt;/genre>"/>
+              </if>
+              <else>
+                <text value="thèse de doctorat" prefix="" suffix=""/>
+              </else>
+            </choose>
+            <text variable="number-of-pages" suffix="&lt;/number-of-pages> p." prefix="&lt;number-of-pages>"/>
+          </group>
+        </else-if>
+        <else-if type="report">
+          <group delimiter=", ">
+            <text variable="title" font-style="italic" quotes="false" prefix="&lt;title>" suffix="&lt;/title>"/>
+            <text variable="genre" prefix="&lt;genre>" suffix="&lt;/genre>"/>
+            <text variable="collection-title" font-style="italic" prefix="&lt;collection-title>" suffix="&lt;/collection-title>"/>
+            <text variable="number" prefix="&lt;number>" suffix="&lt;/number>"/>
+            <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
+            <text variable="publisher-place" prefix="&lt;publisher-place>" suffix="&lt;/publisher-place>"/>
+            <text macro="year-date-short" prefix="" suffix=""/>
+          </group>
+        </else-if>
+        <else>
+          <text variable="title" suffix="&lt;/title>, " quotes="false" prefix="&lt;title>"/>
+          <group delimiter=", ">
+            <text variable="container-title" font-style="italic" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+            <text variable="volume" prefix="&lt;volume>" suffix="&lt;/volume>"/>
+            <text variable="issue" prefix="&lt;issue>" suffix="&lt;/issue>"/>
+            <text macro="year-date-short" prefix="" suffix=""/>
+            <text macro="page" prefix="" suffix=""/>
+            <text variable="DOI" prefix="DOI : &lt;DOI>" suffix="&lt;/DOI>"/>
+          </group>
+        </else>
+      </choose>
+    </layout>
+  </bibliography>
+</style>

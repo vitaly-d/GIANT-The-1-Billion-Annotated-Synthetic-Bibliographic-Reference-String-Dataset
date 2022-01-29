@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" page-range-format="chicago" default-locale="en-US">
   <info>
     <title>Journal of Consumer Research</title>
+    <title-short>JCR</title-short>
     <id>http://www.zotero.org/styles/journal-of-consumer-research</id>
     <link href="http://www.zotero.org/styles/journal-of-consumer-research" rel="self"/>
     <link href="http://www.zotero.org/styles/international-studies-association" rel="template"/>
-    <link href="http://www.ejcr.org/newstylesheet.pdf" rel="documentation"/>
+    <link href="https://consumerresearcher.com/manuscript-preparation" rel="documentation"/>
+    <link href="https://consumerresearcher.com/wp-content/uploads/2021/01/stylesheet.pdf" rel="documentation"/>
     <author>
       <name>Sebastian Karcher</name>
     </author>
     <category citation-format="author-date"/>
     <category field="social_science"/>
     <issn>0093-5301</issn>
-    <updated>2012-09-27T22:06:38+00:00</updated>
+    <eissn>1537-5277</eissn>
+    <updated>2021-04-01T06:57:26+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <macro name="editor">
@@ -33,7 +36,7 @@
   </macro>
   <macro name="author-short">
     <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
-      <name form="short" and="text" delimiter=", " initialize-with=". " sort-separator=", "><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <name form="short" and="text" delimiter-precedes-last="never" initialize-with=". "><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
       <substitute>
         <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>"/>
         <names variable="translator" prefix="&lt;translator>" suffix="&lt;/translator>"/>

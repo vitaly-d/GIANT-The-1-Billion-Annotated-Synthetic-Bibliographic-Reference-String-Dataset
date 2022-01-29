@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-GB">
   <info>
     <title>Anglia Ruskin University - Harvard</title>
+    <title-short>ARU</title-short>
     <id>http://www.zotero.org/styles/harvard-anglia-ruskin-university</id>
     <link href="http://www.zotero.org/styles/harvard-anglia-ruskin-university" rel="self"/>
     <link href="http://libweb.anglia.ac.uk/referencing/harvard.htm" rel="documentation"/>
@@ -12,7 +13,7 @@
     <category citation-format="author-date"/>
     <category field="generic-base"/>
     <summary>Anglia Ruskin University Harvard style</summary>
-    <updated>2014-09-06T22:02:33+00:00</updated>
+    <updated>2021-03-08T09:06:46+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <macro name="cite-author">
@@ -182,7 +183,7 @@
       <if type="chapter entry-dictionary entry-encyclopedia paper-conference" match="any">
         <group suffix=".">
           <text term="in" text-case="capitalize-first" suffix=": " prefix=""/>
-          <group delimiter=", ">
+          <group delimiter=". ">
             <names variable="editor" delimiter=", " prefix="&lt;editor>" suffix="&lt;/editor>">
               <name and="text" sort-separator=", " initialize-with="." delimiter-precedes-last="never" delimiter=", "><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
               <label form="short" prefix=", "/>
@@ -289,7 +290,7 @@
       <else-if type="book chapter paper-conference manuscript entry-dictionary entry-encyclopedia thesis motion_picture song report" match="any">
         <group suffix=".">
           <text variable="event" suffix="&lt;/event>. " prefix="&lt;event>"/>
-          <group delimiter=", ">
+          <group delimiter=".">
             <text macro="publisher" prefix="" suffix=""/>
             <group>
               <label variable="page" form="short"/>
@@ -314,7 +315,10 @@
   </macro>
   <macro name="online-access">
     <choose>
-      <if variable="URL">
+      <if match="any" variable="DOI">
+        <text variable="DOI" prefix=" https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+      </if>
+      <else-if variable="URL">
         <group>
           <text term="available at" text-case="capitalize-first" prefix=" " suffix=": "/>
           <text variable="URL" prefix="&amp;amp;lt;&lt;URL>" suffix="&lt;/URL>&amp;amp;gt;"/>
@@ -327,7 +331,7 @@
             </date>
           </group>
         </group>
-      </if>
+      </else-if>
     </choose>
   </macro>
   <macro name="author-short">

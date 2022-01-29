@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" name-delimiter="/" demote-non-dropping-particle="never">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" name-delimiter="/" demote-non-dropping-particle="never" default-locale="de-AT">
   <!-- This style was edited with the Visual CSL Editor (http://editor.citationstyles.org/visualEditor/) -->
   <info>
-    <title>Wirtschaftsuniversität Wien - Handel und Marketing (German - Austria)</title>
+    <title>Wirtschaftsuniversität Wien - Handel und Marketing (Deutsch - Österreich)</title>
     <title-short>WU H&amp;M</title-short>
     <id>http://www.zotero.org/styles/wirtschaftsuniversitat-wien-handel-und-marketing</id>
     <link href="http://www.zotero.org/styles/wirtschaftsuniversitat-wien-handel-und-marketing" rel="self"/>
     <link href="https://learn.wu.ac.at/bibliothek/literaturverwaltung" rel="documentation"/>
-    <link href="https://www.wu.ac.at/fileadmin/wu/d/i/retail/PDF_Dokumente/Bachelor/HM_Zitiervorschriften_Juni2016.pdf" rel="documentation"/>
+    <link href="https://www.wu.ac.at/fileadmin/wu/d/i/retail/PDF_Dokumente/Bachelor/HM_Zitiervorschriften_Juni.2017.pdf" rel="documentation"/>
     <author>
-      <name>Georg Duffner</name>
-      <email>georg.duffner@wu.ac.at</email>
+      <name>Georg Mayr-Duffner</name>
+      <email>bibliothek@wu.ac.at</email>
     </author>
     <category citation-format="author-date"/>
     <category field="social_science"/>
     <summary>Citation style for WU Vienna’s Institute for Retailing &amp; Marketing.</summary>
-    <updated>2016-09-26T13:44:05+00:00</updated>
+    <updated>2019-11-27T09:55:57+01:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="de">
@@ -55,9 +55,9 @@
               <text variable="collection-title" prefix="&lt;collection-title>" suffix="&lt;/collection-title>"/>
             </group>
           </group>
-          <group>
+          <group delimiter=" ">
             <text variable="volume" prefix="&lt;volume>" suffix="&lt;/volume>"/>
-            <text variable="issue" prefix=" (&lt;issue>" suffix="&lt;/issue>)"/>
+            <text variable="issue" prefix="(&lt;issue>" suffix="&lt;/issue>)"/>
           </group>
           <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
         </group>
@@ -129,19 +129,11 @@
           <group delimiter="; " prefix="(" suffix=").">
             <group delimiter=": ">
               <text value="Stand" prefix="" suffix=""/>
-              <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
-                <date-part name="day" form="numeric-leading-zeros" prefix="&lt;day>" suffix="&lt;/day>"/>
-                <date-part name="month" form="numeric-leading-zeros" prefix="&lt;month>" suffix="&lt;/month>"/>
-                <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
-              </date>
+              <date variable="issued" form="numeric" prefix="&lt;issued>" suffix="&lt;/issued>"/>
             </group>
             <group delimiter=": ">
               <text term="accessed" prefix="" suffix=""/>
-              <date variable="accessed" prefix="&lt;accessed>" suffix="&lt;/accessed>">
-                <date-part name="day" form="numeric-leading-zeros" suffix="&lt;/day>." prefix="&lt;day>"/>
-                <date-part name="month" form="numeric-leading-zeros" suffix="&lt;/month>." prefix="&lt;month>"/>
-                <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
-              </date>
+              <date variable="accessed" form="numeric" prefix="&lt;accessed>" suffix="&lt;/accessed>"/>
             </group>
           </group>
         </group>
@@ -189,9 +181,7 @@
   <macro name="issued">
     <choose>
       <if variable="issued">
-        <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
-          <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
-        </date>
+        <date date-parts="year" form="numeric" variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>"/>
       </if>
       <else>
         <text term="no date" form="short" prefix="" suffix=""/>
@@ -203,7 +193,7 @@
       <choose>
         <if is-numeric="edition">
           <number variable="edition" form="ordinal"/>
-          <text term="edition" form="short" prefix="" suffix=""/>
+          <text term="edition" prefix="" suffix=""/>
         </if>
         <else>
           <text variable="edition" prefix="&lt;edition>" suffix="&lt;/edition>"/>
@@ -289,10 +279,8 @@
     <layout suffix=".">
       <group delimiter=". ">
         <text macro="author-year-title" prefix="" suffix=""/>
-        <group>
-          <text macro="container" prefix="" suffix=""/>
-          <text macro="locators" prefix="" suffix=""/>
-        </group>
+        <text macro="container" prefix="" suffix=""/>
+        <text macro="locators" prefix="" suffix=""/>
       </group>
       <text macro="access" prefix=". " suffix=""/>
     </layout>

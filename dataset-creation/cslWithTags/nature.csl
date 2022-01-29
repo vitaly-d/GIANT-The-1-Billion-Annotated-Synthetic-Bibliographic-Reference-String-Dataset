@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-GB">
   <info>
     <title>Nature</title>
     <id>http://www.zotero.org/styles/nature</id>
@@ -15,7 +15,7 @@
     <category field="generic-base"/>
     <issn>0028-0836</issn>
     <eissn>1476-4687</eissn>
-    <updated>2014-09-10T06:11:43+00:00</updated>
+    <updated>2019-10-08T13:18:12+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <macro name="title">
@@ -41,32 +41,28 @@
       <else-if variable="DOI">
         <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
       </else-if>
-      <else-if type="webpage" variable="URL" match="all">
-        <text term="available at" text-case="capitalize-first" suffix=": " prefix=""/>
-        <text variable="URL" suffix="&lt;/URL>. " prefix="&lt;URL>"/>
-        <group prefix="(" suffix=")" delimiter=": ">
-          <text term="accessed" text-case="capitalize-first" prefix="" suffix=""/>
-          <date variable="accessed" prefix="&lt;accessed>" suffix="&lt;/accessed>">
-            <date-part name="day" suffix="&lt;/day> " form="ordinal" prefix="&lt;day>"/>
-            <date-part name="month" suffix="&lt;/month> " prefix="&lt;month>"/>
-            <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
-          </date>
-        </group>
-      </else-if>
     </choose>
   </macro>
   <macro name="issuance">
     <choose>
-      <if type="bill book graphic legal_case legislation motion_picture report song thesis chapter paper-conference" match="any">
-        <group delimiter=", " prefix="(" suffix=").">
-          <text variable="publisher" form="long" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
-          <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
-            <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
-          </date>
+      <if type="bill book graphic legal_case legislation motion_picture song thesis chapter paper-conference" match="any">
+        <group delimiter="; " suffix=".">
+          <group delimiter=", " prefix="(" suffix=")">
+            <text variable="publisher" form="long" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
+            <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
+              <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
+            </date>
+          </group>
         </group>
       </if>
+      <else-if type="report webpage post post-weblog" match="any">
+        <group delimiter=" ">
+          <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
+          <date date-parts="year" form="text" variable="issued" prefix="(&lt;issued>" suffix="&lt;/issued>)"/>
+        </group>
+      </else-if>
       <else>
-        <date prefix="(&lt;issued>" suffix="&lt;/issued>)." variable="issued">
+        <date variable="issued" prefix="(&lt;issued>" suffix="&lt;/issued>)">
           <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
         </date>
       </else>
@@ -92,6 +88,19 @@
       </if>
     </choose>
   </macro>
+  <macro name="volume">
+    <choose>
+      <if type="article-journal" match="any">
+        <text variable="volume" font-weight="bold" suffix="&lt;/volume>," prefix="&lt;volume>"/>
+      </if>
+      <else>
+        <group delimiter=" ">
+          <label variable="volume" form="short"/>
+          <text variable="volume" prefix="&lt;volume>" suffix="&lt;/volume>"/>
+        </group>
+      </else>
+    </choose>
+  </macro>
   <citation collapse="citation-number">
     
     <layout vertical-align="sup" delimiter=",">
@@ -99,7 +108,7 @@
     </layout>
   </citation>
   <bibliography et-al-min="6" et-al-use-first="1" second-field-align="flush" entry-spacing="0" line-spacing="2">
-    <layout>
+    <layout suffix=".">
       <text variable="citation-number" suffix="&lt;/citation-number>." prefix="&lt;citation-number>"/>
       <group delimiter=" ">
         <text macro="author" suffix="." prefix=""/>
@@ -111,9 +120,7 @@
         </choose>
         <text macro="container-title" prefix="" suffix=""/>
         <text macro="editor" prefix="" suffix=""/>
-        <group font-weight="bold">
-          <text variable="volume" suffix="&lt;/volume>," prefix="&lt;volume>"/>
-        </group>
+        <text macro="volume" prefix="" suffix=""/>
         <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
         <text macro="issuance" prefix="" suffix=""/>
         <text macro="access" prefix="" suffix=""/>

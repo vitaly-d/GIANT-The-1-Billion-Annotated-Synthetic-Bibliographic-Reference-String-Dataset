@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
   <info>
     <title>Cell Research</title>
     <id>http://www.zotero.org/styles/cell-research</id>
     <link href="http://www.zotero.org/styles/cell-research" rel="self"/>
-    <link href="http://www.zotero.org/styles/kidney-international" rel="template"/>
+    <link href="http://www.zotero.org/styles/american-medical-association" rel="template"/>
     <link href="http://mts-cr.nature.com/cgi-bin/main.plex?form_type=display_auth_instructions" rel="documentation"/>
     <author>
       <name>Sebastian Karcher</name>

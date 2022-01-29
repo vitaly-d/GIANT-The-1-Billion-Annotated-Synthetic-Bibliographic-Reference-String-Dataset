@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-GB">
   <info>
     <title>Royal Society of Chemistry</title>
     <id>http://www.zotero.org/styles/royal-society-of-chemistry</id>
@@ -17,7 +17,7 @@
     <category citation-format="numeric"/>
     <category field="chemistry"/>
     <summary>The Royal Society of Chemistry journal style.</summary>
-    <updated>2017-04-12T22:42:45+00:00</updated>
+    <updated>2018-12-26T22:22:35+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <macro name="editor">
@@ -26,6 +26,11 @@
       <name initialize-with=". " and="text" delimiter=", " delimiter-precedes-last="never"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
     </names>
   </macro>
+  <locale xml:lang="en">
+    <terms>
+      <term name="presented at">presented in part at the</term>
+    </terms>
+  </locale>
   <macro name="author">
     <choose>
       <if type="patent">
@@ -82,9 +87,17 @@
     </group>
   </macro>
   <macro name="issued">
-    <date variable="issued" delimiter=" " prefix="&lt;issued>" suffix="&lt;/issued>">
-      <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
-    </date>
+    <choose>
+      <if type="speech" match="any">
+        <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
+          <date-part name="month" suffix="&lt;/month>, " prefix="&lt;month>"/>
+          <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
+        </date>
+      </if>
+      <else>
+        <date date-parts="year" form="text" variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>"/>
+      </else>
+    </choose>
   </macro>
   <macro name="edition">
     <choose>
@@ -159,6 +172,16 @@
               <text term="accessed" prefix="" suffix=""/>
               <date form="text" variable="accessed" prefix="&lt;accessed>" suffix="&lt;/accessed>"/>
             </group>
+          </group>
+        </else-if>
+        <else-if type="speech" match="any">
+          <group delimiter=", ">
+            <group delimiter=" ">
+              <text term="presented at" prefix="" suffix=""/>
+              <text variable="event" prefix="&lt;event>" suffix="&lt;/event>"/>
+            </group>
+            <text variable="event-place" prefix="&lt;event-place>" suffix="&lt;/event-place>"/>
+            <text macro="issued" prefix="" suffix=""/>
           </group>
         </else-if>
         <else>

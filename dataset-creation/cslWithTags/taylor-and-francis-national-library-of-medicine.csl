@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" page-range-format="expanded">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" page-range-format="expanded" default-locale="en-US">
   <info>
     <title>Taylor &amp; Francis - National Library of Medicine</title>
     <title-short>TF-NLM</title-short>
@@ -14,7 +14,7 @@
     <category field="medicine"/>
     <category field="generic-base"/>
     <summary>NLM style as used by T &amp; F : Brackets, no et-al, no issue numbers, locators in text possible.</summary>
-    <updated>2012-09-27T22:06:38+00:00</updated>
+    <updated>2020-05-14T22:06:38+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="en">
@@ -94,7 +94,7 @@
     <choose>
       <if type="article-journal article-magazine chapter paper-conference article-newspaper" match="any">
         <group suffix="." delimiter=" ">
-          <text variable="container-title" form="short" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+          <text variable="container-title" form="short" strip-periods="true" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
           <choose>
             <if variable="URL">
               <text term="internet" prefix="[" suffix="]" text-case="capitalize-first"/>

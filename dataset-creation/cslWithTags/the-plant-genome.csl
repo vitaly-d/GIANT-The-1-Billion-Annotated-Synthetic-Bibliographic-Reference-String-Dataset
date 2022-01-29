@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
   <info>
     <title>The Plant Genome</title>
     <id>http://www.zotero.org/styles/the-plant-genome</id>
@@ -12,18 +12,18 @@
     <category citation-format="author-date"/>
     <category field="biology"/>
     <eissn>1940-3372</eissn>
-    <updated>2017-08-16T13:03:54+00:00</updated>
+    <updated>2021-05-05T12:00:00+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <macro name="editor">
     <names variable="editor" delimiter=", " prefix="&lt;editor>" suffix="&lt;/editor>">
-      <name and="text" initialize-with="." delimiter=", "><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
-      <label form="short" plural="never" prefix=", "/>
+      <name and="symbol" initialize-with="." delimiter=", " delimiter-precedes-last="never"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <label form="short" text-case="capitalize-first" prefix=" (" suffix=")"/>
     </names>
   </macro>
   <macro name="author">
     <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
-      <name name-as-sort-order="first" and="text" sort-separator=", " initialize-with="." delimiter=", " delimiter-precedes-last="always"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <name name-as-sort-order="all" and="symbol" sort-separator=", " initialize-with="." delimiter=", " delimiter-precedes-last="always"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
       <label form="short" prefix=" "/>
       <substitute>
         <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>"/>
@@ -33,7 +33,7 @@
   </macro>
   <macro name="author-short">
     <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
-      <name form="short" and="text" delimiter=", " initialize-with="."><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <name form="short" and="symbol" delimiter=", " initialize-with="."><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
       <substitute>
         <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>"/>
         <names variable="translator" prefix="&lt;translator>" suffix="&lt;/translator>"/>
@@ -44,7 +44,7 @@
   <macro name="title">
     <choose>
       <if type="book webpage" match="any">
-        <text variable="title" text-case="title" prefix="&lt;title>" suffix="&lt;/title>"/>
+        <text variable="title" text-case="title" font-style="italic" prefix="&lt;title>" suffix="&lt;/title>"/>
       </if>
       <else>
         <text variable="title" prefix="&lt;title>" suffix="&lt;/title>"/>
@@ -85,22 +85,22 @@
       </group>
     </layout>
   </citation>
-  <bibliography line-spacing="2" hanging-indent="true">
+  <bibliography line-spacing="1" hanging-indent="true">
     
     <layout>
       <group delimiter=". ">
         <text macro="author" prefix="" suffix=""/>
         <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
-          <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
+          <date-part name="year" prefix="(&lt;year>" suffix="&lt;/year>)"/>
         </date>
         <choose>
           <if type="book report chapter" match="any">
-            <group delimiter=". " prefix=" ">
-              <text macro="title" prefix="" suffix=""/>
+            <group delimiter=" ">
+              <text macro="title" suffix="." prefix=""/>
               <text macro="edition" prefix="" suffix=""/>
-              <text macro="editor" prefix="" suffix=""/>
-              <text variable="collection-title" prefix="&lt;collection-title>" suffix="&lt;/collection-title>"/>
-              <text variable="collection-number" prefix="No. &lt;collection-number>" suffix="&lt;/collection-number>"/>
+              <text macro="editor" prefix=" In " suffix=","/>
+              <text variable="container-title" font-style="italic" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+              <text variable="page" prefix="(pp. &lt;page>" suffix="&lt;/page>)."/>
               <text macro="publisher" prefix="" suffix=""/>
             </group>
           </if>
@@ -139,8 +139,8 @@
           </else-if>
           <else-if type="thesis" match="any">
             <group prefix=" ">
-              <text macro="title" suffix="." prefix=""/>
-              <text variable="genre" prefix=" &lt;genre>" suffix="&lt;/genre> Thesis."/>
+              <text macro="title" font-style="italic" prefix="" suffix=""/>
+              <text variable="genre" prefix=" [&lt;genre>" suffix="&lt;/genre>]."/>
               <text variable="publisher" form="short" prefix=" &lt;publisher>" suffix="&lt;/publisher>,"/>
               <text variable="publisher-place" prefix=" &lt;publisher-place>" suffix="&lt;/publisher-place>"/>
             </group>
@@ -158,12 +158,12 @@
           <else>
             <group prefix=" ">
               <text macro="title" prefix="" suffix=""/>
-              <text variable="container-title" form="short" font-style="normal" prefix=". &lt;container-title>" suffix="&lt;/container-title>"/>
-              <group delimiter=":" prefix=" ">
-                <text variable="volume" prefix="&lt;volume>" suffix="&lt;/volume>"/>
+              <text variable="container-title" font-style="italic" prefix=". &lt;container-title>" suffix="&lt;/container-title>, "/>
+              <group delimiter=", " prefix=" ">
+                <text variable="volume" font-style="italic" prefix="&lt;volume>" suffix="&lt;/volume>"/>
                 <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
               </group>
-              <text variable="DOI" prefix=". doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+              <text variable="DOI" prefix=". https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
             </group>
           </else>
         </choose>

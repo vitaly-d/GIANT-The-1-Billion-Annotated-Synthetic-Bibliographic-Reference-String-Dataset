@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never" default-locale="cs-CZ">
   <info>
-    <title>ISO-690 (author-date, Czech)</title>
+    <title>ISO-690 (author-date, Čeština)</title>
     <id>http://www.zotero.org/styles/iso690-author-date-cs</id>
     <link href="http://www.zotero.org/styles/iso690-author-date-cs" rel="self"/>
     <link href="http://www.zotero.org/styles/iso690-author-date-en" rel="template"/>
@@ -23,6 +23,7 @@
   <locale>
     <terms>
       <term name="from">z</term>
+      <term name="no date">b.r.</term>
     </terms>
   </locale>
   <macro name="author">
@@ -103,7 +104,7 @@
         </choose>
       </if>
       <else>
-        <text term="anonymous" form="short" text-case="uppercase" prefix="" suffix=""/>
+        <text term="anonymous" form="short" text-case="capitalize-first" prefix="" suffix=""/>
       </else>
     </choose>
   </macro>
@@ -135,14 +136,13 @@
         </names>
       </if>
       <else>
-        <text term="anonymous" form="short" text-case="uppercase" prefix="" suffix=""/>
+        <text term="anonymous" form="short" text-case="capitalize-first" prefix="" suffix=""/>
       </else>
     </choose>
   </macro>
   <macro name="container-author">
     <names variable="container-author" prefix="&lt;container-author>" suffix="&lt;/container-author>">
       <name and="text" delimiter=", " delimiter-precedes-last="never">
-        <!--name and="text" name-as-sort-order="all" sort-separator=" " delimiter=", " delimiter-precedes-last="never"-->
         <name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/>
         <name-part name="family" text-case="uppercase" prefix="&lt;family>" suffix="&lt;/family>"/>
       </name>
@@ -164,7 +164,7 @@
         </choose>
       </if>
       <else>
-        <text term="anonymous" text-case="uppercase" prefix="" suffix=""/>
+        <text term="anonymous" text-case="capitalize-first" prefix="" suffix=""/>
       </else>
     </choose>
   </macro>
@@ -181,7 +181,7 @@
         </date>
       </if>
       <else>
-        <text term="no date" prefix="" suffix=""/>
+        <text term="no date" suffix="]" prefix="["/>
       </else>
     </choose>
   </macro>
@@ -283,17 +283,6 @@
       </if>
     </choose>
   </macro>
-  <!--<macro name="date-day-month">
-    <choose>
-      <if variable="issued">
-        <date variable="issued">
-          <date-part name="day" suffix=".&#160;"/>
-          <date-part name="month" form="numeric" suffix="."/>-->
-  <!--date-part name="year"/-->
-  <!--</date>
-      </if>
-    </choose>
-  </macro>-->
   <macro name="scale">
     <group delimiter=" ">
       <text term="scale" text-case="capitalize-first" prefix="" suffix=""/>
@@ -485,7 +474,6 @@
                 <text macro="edition" prefix="" suffix=""/>
                 <text macro="secondary-responsability" prefix="" suffix=""/>
                 <text macro="publisher-info" prefix="" suffix=""/>
-                <!--text macro="page"/-->
                 <text macro="collection" prefix="" suffix=""/>
               </group>
               <text macro="accessed" prefix="" suffix=""/>
@@ -502,7 +490,6 @@
             <text macro="edition" prefix="" suffix=""/>
             <text macro="secondary-responsability" prefix="" suffix=""/>
             <text macro="publisher-info" prefix="" suffix=""/>
-            <!--text macro="page"/-->
             <group delimiter=" ">
               <text macro="collection" prefix="" suffix=""/>
               <text macro="accessed" prefix="" suffix=""/>
@@ -516,7 +503,10 @@
             <text macro="title" prefix="" suffix=""/>
             <text macro="genre" prefix="" suffix=""/>
             <text macro="edition" prefix="" suffix=""/>
-            <text macro="accessed" prefix="" suffix=""/>
+            <group delimiter=" ">
+              <text macro="publisher-info" prefix="" suffix=""/>
+              <text macro="accessed" prefix="" suffix=""/>
+            </group>
             <text macro="collection" prefix="" suffix=""/>
             <text macro="isbn" prefix="" suffix=""/>
           </group>
@@ -528,8 +518,6 @@
             <text macro="edition" prefix="" suffix=""/>
             <group delimiter=" ">
               <group delimiter=", ">
-                <text macro="publisher-info" prefix="" suffix=""/>
-                <!--<text macro="date-day-month"/>-->
                 <text macro="issue" prefix="" suffix=""/>
               </group>
               <text macro="accessed" prefix="" suffix=""/>
@@ -545,10 +533,6 @@
             <group delimiter=" ">
               <group delimiter=", ">
                 <text macro="publisher-info" prefix="" suffix=""/>
-                <!--group delimiter=": ">
-                    <text macro="publisher-place"/>
-                    <text macro="publisher"/>
-                  </group-->
                 <text macro="collection" prefix="" suffix=""/>
                 <text macro="page" prefix="" suffix=""/>
               </group>
@@ -564,7 +548,6 @@
             <text macro="genre" prefix="" suffix=""/>
             <text macro="publisher-place" prefix="" suffix=""/>
             <group delimiter=" ">
-              <!--<text macro="date-day-month"/>-->
               <text macro="accessed" prefix="" suffix=""/>
             </group>
             <text macro="page" prefix="" suffix=""/>
@@ -600,11 +583,10 @@
           <text macro="url" prefix="" suffix=""/>
         </else-if>
         <else-if type="webpage">
-          <group delimiter=". " suffix=". ">
-            <group delimiter=" ">
-              <text macro="title" prefix="" suffix=""/>
-              <text macro="accessed" prefix="" suffix=""/>
-            </group>
+          <group suffix=". ">
+            <text macro="title" prefix="" suffix=""/>
+            <text macro="publisher-info" prefix=". " suffix=""/>
+            <text macro="accessed" prefix=" " suffix=""/>
           </group>
           <text macro="url" prefix="" suffix=""/>
         </else-if>
@@ -683,8 +665,6 @@
           <group delimiter=". " suffix=". ">
             <text macro="title" prefix="" suffix=""/>
             <text macro="interviewer" prefix="" suffix=""/>
-            <!--text macro="event"/-->
-            <!--<text macro="date-day-month"/>-->
           </group>
         </else-if>
         <else>

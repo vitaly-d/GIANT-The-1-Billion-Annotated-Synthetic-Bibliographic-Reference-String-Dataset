@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never" default-locale="en-US">
   <info>
     <title>Journal of International Business Studies</title>
     <title-short>JIBS</title-short>
     <id>http://www.zotero.org/styles/journal-of-international-business-studies</id>
     <link href="http://www.zotero.org/styles/journal-of-international-business-studies" rel="self"/>
     <link href="http://www.zotero.org/styles/academy-of-management-review" rel="template"/>
-    <link href="http://www.palgrave-journals.com/jibs/style_guide.html#references" rel="documentation"/>
+    <link href="https://www.palgrave.com/gp/journal/41267/authors/presentation-formatting" rel="documentation"/>
     <author>
       <name>Philipp Zumstein</name>
       <uri>https://github.com/zuphilip</uri>
     </author>
+    <contributor>
+      <name>Patrick O'Brien</name>
+    </contributor>
     <category citation-format="author-date"/>
     <category field="social_science"/>
     <issn>0047-2506</issn>
     <eissn>1478-6990</eissn>
     <summary>Basically the only difference with Academy of Management Review is that the titles of books and journals should not be bold, only italicized.</summary>
-    <updated>2015-01-14T20:11:11+00:00</updated>
+    <updated>2021-01-16T14:53:39+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <macro name="container-contributors">
@@ -70,16 +73,35 @@
   </macro>
   <macro name="access">
     <choose>
-      <if variable="URL">
-        <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
-        <group prefix=", ">
-          <date variable="accessed" prefix="&lt;accessed>" suffix="&lt;/accessed>">
-            <date-part name="month" suffix="&lt;/month> " prefix="&lt;month>"/>
-            <date-part name="day" suffix="&lt;/day>, " prefix="&lt;day>"/>
-            <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
-          </date>
-        </group>
+      <if type="article-journal" match="any">
+        <choose>
+          <if match="none" variable="volume page">
+            <group delimiter=". " prefix=", ">
+              <group delimiter=" ">
+                <text value="advance online publication" prefix="" suffix=""/>
+                <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
+                  <date-part name="day" suffix="&lt;/day> " prefix="&lt;day>"/>
+                  <date-part name="month" prefix="&lt;month>" suffix="&lt;/month>"/>
+                </date>
+              </group>
+              <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+            </group>
+          </if>
+        </choose>
       </if>
+      <else>
+        <group delimiter=". " prefix=". ">
+          <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
+          <group delimiter=" ">
+            <text term="accessed" text-case="capitalize-first" prefix="" suffix=""/>
+            <date variable="accessed" prefix="&lt;accessed>" suffix="&lt;/accessed>">
+              <date-part name="day" suffix="&lt;/day> " prefix="&lt;day>"/>
+              <date-part name="month" suffix="&lt;/month> " prefix="&lt;month>"/>
+              <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
+            </date>
+          </group>
+        </group>
+      </else>
     </choose>
   </macro>
   <macro name="title">
@@ -92,7 +114,7 @@
         </group>
       </if>
       <else-if type="bill book graphic legal_case legislation motion_picture report song" match="any">
-        <text variable="title" font-style="italic" font-weight="normal" prefix="&lt;title>" suffix="&lt;/title>"/>
+        <text variable="title" text-case="title" font-style="italic" font-weight="normal" prefix="&lt;title>" suffix="&lt;/title>"/>
       </else-if>
       <else>
         <text variable="title" prefix="&lt;title>" suffix="&lt;/title>"/>
@@ -107,7 +129,7 @@
           <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
         </group>
       </if>
-      <else-if type="article-journal article-magazine" match="none">
+      <else-if type="article-journal article-magazine article-newspaper" match="none">
         <text variable="genre" suffix="&lt;/genre>, " prefix="&lt;genre>"/>
         <group delimiter=": ">
           <text variable="publisher-place" prefix="&lt;publisher-place>" suffix="&lt;/publisher-place>"/>
@@ -127,19 +149,9 @@
   <macro name="issued">
     <choose>
       <if variable="issued">
-        <group prefix=" " suffix=".">
-          <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
-            <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
-          </date>
-          <choose>
-            <if type="article-journal bill book chapter graphic legal_case legislation motion_picture paper-conference report song" match="none">
-              <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
-                <date-part prefix=", &lt;month>" name="month" suffix="&lt;/month>"/>
-                <date-part prefix=" &lt;day>" name="day" suffix="&lt;/day>"/>
-              </date>
-            </if>
-          </choose>
-        </group>
+        <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
+          <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
+        </date>
       </if>
       <else>
         <text prefix=" " term="no date" suffix="." form="short"/>
@@ -173,7 +185,7 @@
   </macro>
   <macro name="locators">
     <choose>
-      <if type="article-journal article-magazine article-newspaper" match="any">
+      <if type="article-journal article-magazine" match="any">
         <group prefix=", " delimiter=": ">
           <group>
             <text variable="volume" prefix="&lt;volume>" suffix="&lt;/volume>"/>
@@ -187,6 +199,12 @@
           <text macro="edition" prefix="" suffix=""/>
         </group>
         <text variable="page" prefix=": &lt;page>" suffix="&lt;/page>"/>
+      </else-if>
+      <else-if type="article-newspaper" match="any">
+        <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
+          <date-part prefix=", &lt;month>" name="month" suffix="&lt;/month>"/>
+          <date-part prefix=" &lt;day>" name="day" suffix="&lt;/day>"/>
+        </date>
       </else-if>
     </choose>
   </macro>
@@ -207,24 +225,22 @@
   </citation>
   <bibliography hanging-indent="true" et-al-min="7" et-al-use-first="6" entry-spacing="0" line-spacing="2">
     
-    <layout>
-      <group suffix=".">
-        <text macro="author" suffix="." prefix=""/>
-        <text macro="issued" suffix=" " prefix=""/>
-        <group delimiter=". ">
-          <text macro="title" prefix="" suffix=""/>
-          <group>
-            <text macro="container-contributors" prefix="" suffix=""/>
-            <text macro="secondary-contributors" prefix="" suffix=""/>
-            <text variable="container-title" font-style="italic" font-weight="normal" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
-          </group>
+    <layout suffix=".">
+      <group delimiter=". ">
+        <text macro="author" prefix="" suffix=""/>
+        <text macro="issued" prefix="" suffix=""/>
+        <text macro="title" prefix="" suffix=""/>
+        <group>
+          <text macro="container-contributors" prefix="" suffix=""/>
+          <text macro="secondary-contributors" prefix="" suffix=""/>
+          <text variable="container-title" font-style="italic" font-weight="normal" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
         </group>
-        <text macro="locators" prefix="" suffix=""/>
-        <group delimiter=", " prefix=". ">
-          <text macro="event" prefix="" suffix=""/>
-          <text macro="access" prefix="" suffix=""/>
-          <text macro="publisher" prefix="" suffix=""/>
-        </group>
+      </group>
+      <text macro="locators" prefix="" suffix=""/>
+      <group delimiter=", ">
+        <text macro="event" prefix="" suffix=""/>
+        <text macro="access" prefix="" suffix=""/>
+        <text macro="publisher" prefix=". " suffix=""/>
       </group>
     </layout>
   </bibliography>

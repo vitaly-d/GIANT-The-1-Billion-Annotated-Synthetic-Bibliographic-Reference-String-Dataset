@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="fr-FR">
   <info>
-    <title>Anthropologie et Sociétés (French)</title>
+    <title>Anthropologie et Sociétés (Français)</title>
     <id>http://www.zotero.org/styles/anthropologie-et-societes</id>
     <link href="http://www.zotero.org/styles/anthropologie-et-societes" rel="self"/>
     <link href="http://www.zotero.org/styles/limnetica" rel="template"/>
     <link href="http://www.anthropologie-societes.ant.ulaval.ca/regles-de-publication/normes-editoriales" rel="documentation"/>
     <author>
       <name>Patrick O'Brien, PhD</name>
-      <email>obrienpat86@gmail.com</email>
     </author>
     <category citation-format="author-date"/>
     <category field="biology"/>
     <issn>0702-8997</issn>
     <eissn>1703-7921</eissn>
-    <updated>2018-02-19T14:43:12+00:00</updated>
+    <updated>2020-07-31T08:06:37+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="fr">
     <terms>
       <term name="internet">site internet</term>
+      <term name="editor" form="short">
+        <single>dir.</single>
+        <multiple>dir.</multiple>
+      </term>
     </terms>
   </locale>
   <macro name="editor">
@@ -34,7 +37,7 @@
   <macro name="author">
     <names variable="author" vertical-align="baseline" prefix="&lt;author>" suffix="&lt;/author>">
       <name and="text" delimiter-precedes-last="never" initialize-with="." name-as-sort-order="first" sort-separator=" ">
-        <name-part name="family" text-case="uppercase" prefix="&lt;family>" suffix="&lt;/family>"/>
+        <name-part name="family" font-variant="small-caps" prefix="&lt;family>" suffix="&lt;/family>"/>
       <name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
       <et-al font-style="italic"/>
       <label form="short" prefix=" "/>
@@ -111,14 +114,15 @@
   <macro name="year-date">
     <choose>
       <if variable="issued">
-        <group>
+        <group delimiter=" ">
           <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
             <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
           </date>
+          <date date-parts="year" form="text" variable="original-date" prefix="[&lt;original-date>" suffix="&lt;/original-date>]"/>
         </group>
       </if>
       <else>
-        <text term="no date" form="short" suffix=")" prefix=""/>
+        <text term="no date" form="short" prefix="" suffix=""/>
       </else>
     </choose>
   </macro>
@@ -160,20 +164,20 @@
       </group>
     </layout>
   </citation>
-  <bibliography et-al-min="99" et-al-use-first="98" hanging-indent="true">
+  <bibliography hanging-indent="true" subsequent-author-substitute="———">
     
     <layout suffix=".">
-      <text macro="author" text-case="uppercase" strip-periods="false" font-variant="normal" suffix=", " prefix=""/>
-      <date variable="issued" suffix="&lt;/issued>," prefix="&lt;issued>">
-        <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
-      </date>
+      <text macro="author" text-case="uppercase" strip-periods="false" suffix=", " prefix=""/>
+      <text macro="year-date" prefix="" suffix=""/>
       <choose>
         <if type="book" match="any">
           <text macro="legal_case" prefix="" suffix=""/>
-          <group delimiter=", " prefix=" ">
-            <text macro="title" prefix="" suffix=""/>
-            <text macro="edition" prefix="" suffix=""/>
-            <text macro="editor" prefix="" suffix=""/>
+          <group delimiter=". ">
+            <group delimiter=", " prefix=" ">
+              <text macro="title" prefix="" suffix=""/>
+              <text macro="edition" prefix="" suffix=""/>
+              <text macro="editor" prefix="" suffix=""/>
+            </group>
             <text macro="publisher" prefix="" suffix=""/>
           </group>
         </if>
@@ -215,7 +219,7 @@
             <group delimiter=", ">
               <text variable="container-title" font-style="italic" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
               <text variable="volume" prefix="&lt;volume>" suffix="&lt;/volume>"/>
-              <text variable="issue" prefix="(&lt;issue>" suffix="&lt;/issue>)"/>
+              <text variable="issue" prefix="&lt;issue>" suffix="&lt;/issue>"/>
             </group>
             <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
           </group>

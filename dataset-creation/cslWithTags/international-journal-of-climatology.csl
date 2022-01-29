@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never" default-locale="en-US">
   <info>
     <title>International Journal of Climatology</title>
     <id>http://www.zotero.org/styles/international-journal-of-climatology</id>
@@ -16,7 +16,7 @@
     <issn>0899-8418</issn>
     <eissn>1097-0088</eissn>
     <summary>The International Journal of Climatology citation style.</summary>
-    <updated>2014-08-01T09:53:26</updated>
+    <updated>2019-04-04T12:57:24+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <macro name="author">
@@ -113,9 +113,9 @@
   <macro name="locators">
     <choose>
       <if type="article-journal article-magazine" match="any">
-        <group prefix=" " delimiter=": ">
+        <group delimiter=": " prefix=", ">
           <group>
-            <text variable="volume" font-weight="bold" prefix="&lt;volume>" suffix="&lt;/volume>"/>
+            <text variable="volume" prefix="&lt;volume>" suffix="&lt;/volume>"/>
             <text variable="issue" prefix="(&lt;issue>" suffix="&lt;/issue>)"/>
           </group>
           <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
@@ -136,6 +136,13 @@
       <else>
         <text variable="page" prefix=", &lt;page>" suffix="&lt;/page>"/>
       </else>
+    </choose>
+  </macro>
+  <macro name="access">
+    <choose>
+      <if type="article-journal" match="any">
+        <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+      </if>
     </choose>
   </macro>
   <citation et-al-min="3" et-al-use-first="1" collapse="year">
@@ -163,7 +170,7 @@
         <text macro="publisher" prefix="" suffix=""/>
       </group>
       <text macro="locators" prefix="" suffix=""/>
-      <text variable="DOI" prefix=". DOI: &lt;DOI>" suffix="&lt;/DOI>"/>
+      <text macro="access" prefix=". " suffix=""/>
     </layout>
   </bibliography>
 </style>

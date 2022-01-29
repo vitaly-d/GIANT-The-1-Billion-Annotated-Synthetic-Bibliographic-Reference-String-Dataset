@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" default-locale="en-US">
+  <info>
+    <title>Wikipedia Templates</title>
+    <title-short>Wikipedia Templates</title-short>
+    <author>
+      <name>Sally Baker</name>
+    </author>
+    <id>http://www.zotero.org/styles/wikipedia-templates</id>
+    <link href="http://www.zotero.org/styles/wikipedia-templates" rel="self"/>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+    <link href="https://en.wikipedia.org/wiki/Template:Citation" rel="documentation"/>
+    <link href="https://en.wikipedia.org/wiki/Template:Cite_book" rel="documentation"/>
+    <link href="https://en.wikipedia.org/wiki/Template:Cite_journal" rel="documentation"/>
+    <category field="generic-base"/>
+    <category citation-format="numeric"/>
+    <updated>2021-10-14T13:30:00+10:00</updated>
+  </info>
+  <!-- Top level macro which defines what bibliographical format will be returned -->
+  <macro name="citations">
+    <choose>
+      <if type="book chapter" match="any">
+        <text macro="book-citation" prefix="" suffix=""/>
+      </if>
+      <else-if type="article-journal">
+        <text macro="journal-citation" prefix="" suffix=""/>
+      </else-if>
+      <else-if type="entry-encyclopedia">
+        <text macro="encyclopedia" prefix="" suffix=""/>
+      </else-if>
+      <else>
+        <text macro="generic-citation" prefix="" suffix=""/>
+      </else>
+    </choose>
+  </macro>
+  <!-- Inline citations are bibliographical entries wrapped in 'ref' tags -->
+  <macro name="inline-citation">
+    <text macro="citations" prefix="&amp;amp;lt;ref&amp;amp;gt;" suffix="&amp;amp;lt;/ref&amp;amp;gt;"/>
+  </macro>
+  <!-- Macros defining format types -->
+<!-- TO DO: edition, if not the first edition -->
+  <macro name="book-citation">
+    <group prefix="{{cite book" suffix="}}">
+      <text macro="contributor-statements" prefix="" suffix=""/>
+      <text macro="date" prefix="" suffix=""/>
+      <text macro="title-statements" prefix="" suffix=""/>
+      <text macro="publisher" prefix="" suffix=""/>
+      <text macro="series" prefix="" suffix=""/>
+      <text macro="volume" prefix="" suffix=""/>
+      <text macro="edition" prefix="" suffix=""/>
+      <text macro="place" prefix="" suffix=""/>
+      <text macro="pagination" prefix="" suffix=""/>
+      <text macro="url" prefix="" suffix=""/>
+      <text macro="doi" prefix="" suffix=""/>
+      <text macro="isbn" prefix="" suffix=""/>
+    </group>
+  </macro>
+  <macro name="journal-citation">
+    <group prefix="{{cite journal" suffix="}}">
+      <text macro="contributor-statements" prefix="" suffix=""/>
+      <text macro="title-statements" prefix="" suffix=""/>
+      <text macro="volume" prefix="" suffix=""/>
+      <text macro="issue" prefix="" suffix=""/>
+      <text macro="pagination" prefix="" suffix=""/>
+      <text macro="publisher" prefix="" suffix=""/>
+      <text macro="place" prefix="" suffix=""/>
+      <text macro="date" prefix="" suffix=""/>
+      <text macro="url" prefix="" suffix=""/>
+      <text macro="issn" prefix="" suffix=""/>
+      <text macro="doi" prefix="" suffix=""/>
+      <text macro="access-date" prefix="" suffix=""/>
+    </group>
+  </macro>
+  <macro name="encyclopedia">
+    <group prefix="{{cite encyclopedia" suffix="}}">
+      <text macro="contributor-statements" prefix="" suffix=""/>
+      <text macro="title-statements" prefix="" suffix=""/>
+      <text macro="date" prefix="" suffix=""/>
+      <text macro="publisher" prefix="" suffix=""/>
+      <text macro="place" prefix="" suffix=""/>
+      <text macro="url" prefix="" suffix=""/>
+      <text macro="access-date" prefix="" suffix=""/>
+      <text macro="edition" prefix="" suffix=""/>
+      <text macro="series" prefix="" suffix=""/>
+      <text macro="volume" prefix="" suffix=""/>
+      <text macro="isbn" prefix="" suffix=""/>
+      <text macro="issn" prefix="" suffix=""/>
+      <text macro="doi" prefix="" suffix=""/>
+      <text macro="pagination" prefix="" suffix=""/>
+    </group>
+  </macro>
+  <macro name="generic-citation">
+    <group prefix="{{Citation" suffix="}}">
+      <text macro="contributor-statements" prefix="" suffix=""/>
+      <text macro="date" prefix="" suffix=""/>
+      <text macro="title-statements" prefix="" suffix=""/>
+      <text macro="publisher" prefix="" suffix=""/>
+      <text macro="place" prefix="" suffix=""/>
+      <text macro="pagination" prefix="" suffix=""/>
+      <text macro="url" prefix="" suffix=""/>
+      <text macro="access-date" prefix="" suffix=""/>
+    </group>
+  </macro>
+<!-- Macros defining required fields-->
+  <macro name="contributor-statements">
+    <names variable="author" prefix=" | vauthors=&lt;author>" suffix="&lt;/author>">
+      <name name-as-sort-order="all" initialize-with=". " delimiter=", " prefix="((" suffix="))"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+    </names>
+    <names variable="editor" prefix=" | veditors=&lt;editor>" suffix="&lt;/editor>">
+      <name name-as-sort-order="all" initialize-with=". " delimiter=", " prefix="((" suffix="))"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+    </names>
+  </macro>
+  <macro name="date">
+    <choose>
+      <if type="book article-journal chapter" match="any">
+        <date variable="issued" prefix=" | date=&lt;issued>" suffix="&lt;/issued>">
+          <date-part name="day" form="numeric" prefix="&lt;day>" suffix="&lt;/day>"/>
+          <date-part name="month" form="long" prefix=" &lt;month>" suffix="&lt;/month>"/>
+          <date-part name="year" form="long" prefix=" &lt;year>" suffix="&lt;/year>"/>
+        </date>
+      </if>
+      <else>
+        <date variable="issued" prefix=" | year=&lt;issued>" suffix="&lt;/issued>">
+          <date-part name="year" form="long" prefix="&lt;year>" suffix="&lt;/year>"/>
+        </date>
+      </else>
+    </choose>
+  </macro>
+  <macro name="title-statements">
+    <choose>
+        <if type="chapter">
+          <text variable="container-title" prefix=" | chapter=&lt;container-title>" suffix="&lt;/container-title>"/>
+          <text variable="title" prefix=" | title=&lt;title>" suffix="&lt;/title>"/>
+        </if>
+        <else-if type="article-journal">
+          <text variable="container-title" prefix=" | journal=&lt;container-title>" suffix="&lt;/container-title>"/>
+          <text variable="title" prefix=" | title=&lt;title>" suffix="&lt;/title>"/>
+        </else-if>
+        <else-if type="entry-encyclopedia">
+          <text variable="container-title" prefix=" | encyclopedia=&lt;container-title>" suffix="&lt;/container-title>"/>
+          <text variable="title" prefix=" | title=&lt;title>" suffix="&lt;/title>"/>
+        </else-if>
+        <else>
+          <text variable="title" prefix=" | title=&lt;title>" suffix="&lt;/title>"/>
+        </else>
+    </choose>
+  </macro>
+  <macro name="publisher">
+    <text variable="publisher" prefix=" | publisher=&lt;publisher>" suffix="&lt;/publisher>"/>
+  </macro>
+  <macro name="place">
+    <text variable="original-publisher-place" prefix=" | publication-place=&lt;original-publisher-place>" suffix="&lt;/original-publisher-place>"/>
+  </macro>
+  <macro name="series">
+    <text variable="collection-title" prefix=" | series=&lt;collection-title>" suffix="&lt;/collection-title>"/>
+  </macro>
+  <macro name="volume">
+    <number variable="volume" prefix=" | volume="/>
+  </macro>
+  <macro name="edition">
+    <number variable="edition" form="ordinal" prefix=" | edition="/>
+  </macro>
+  <macro name="doi">
+    <text variable="DOI" prefix=" | doi=&lt;DOI>" suffix="&lt;/DOI>"/>
+  </macro>
+  <macro name="isbn">
+    <text variable="ISBN" prefix=" | isbn=&lt;ISBN>" suffix="&lt;/ISBN>"/>
+  </macro>
+   <macro name="issn">
+    <text variable="ISSN" prefix=" | issn=&lt;ISSN>" suffix="&lt;/ISSN>"/>
+  </macro>
+  <macro name="pagination">
+    <choose>
+      <if type="article-journal chapter entry-encyclopedia" match="any">
+        <text variable="page" prefix=" | pages=&lt;page>" suffix="&lt;/page>"/>
+      </if>
+    </choose>
+  </macro>
+  <macro name="url">
+    <text variable="URL" prefix=" | url=&lt;URL>" suffix="&lt;/URL>"/>
+  </macro>
+  <macro name="access-date">
+    <date variable="accessed" prefix=" | access-date=&lt;accessed>" suffix="&lt;/accessed>">
+      <date-part name="day" form="numeric" suffix="&lt;/day> " prefix="&lt;day>"/>
+      <date-part name="month" form="long" suffix="&lt;/month> " prefix="&lt;month>"/>
+      <date-part name="year" form="long" prefix="&lt;year>" suffix="&lt;/year>"/>
+    </date>
+  </macro>
+  <macro name="issue">
+    <number variable="issue" prefix=" | issue="/>
+  </macro>
+<!-- Inline citations -->
+  <citation>
+    <layout>
+      <text macro="inline-citation" prefix="" suffix=""/>
+    </layout>
+  </citation>
+  <!-- Bibliography -->
+  <bibliography>
+    
+    <layout>
+      <text macro="citations" prefix="" suffix=""/>
+    </layout>
+  </bibliography>
+</style>

@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-GB">
   <info>
     <title>Journal of Glaciology</title>
+    <title-short>JOG</title-short>
     <id>http://www.zotero.org/styles/journal-of-glaciology</id>
     <link href="http://www.zotero.org/styles/journal-of-glaciology" rel="self"/>
     <link href="http://www.zotero.org/styles/international-journal-of-wildland-fire" rel="template"/>
-    <link href="http://www.igsoc.org/production/Journal_instructions_2014.pdf" rel="documentation"/>
+    <link href="https://www.cambridge.org/core/journals/journal-of-glaciology/information" rel="documentation"/>
+    <link href="https://www.cambridge.org/core/services/aop-file-manager/file/5b431f1d2c1c7a5063243b24/jglac-instructionsforauthors-11Apr2019.pdf" rel="documentation"/>
     <author>
       <name>Sebastian Karcher</name>
     </author>
+    <contributor>
+      <name>Patrick O'Brien</name>
+    </contributor>
     <category citation-format="author-date"/>
     <category field="science"/>
     <issn>0022-1430</issn>
-    <updated>2012-10-18T22:38:43+00:00</updated>
+    <summary>Style for JOG as per the guidelines from 11 April 2019.</summary>
+    <updated>2021-01-18T12:19:06+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <macro name="editor">
@@ -37,6 +43,7 @@
   <macro name="author">
     <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
       <name name-as-sort-order="all" sort-separator=" " and="text" initialize-with="" delimiter=", " delimiter-precedes-last="never"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <et-al term="and others"/>
       <label form="short" prefix=" "/>
       <substitute>
         <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>"/>
@@ -60,7 +67,7 @@
     <group>
       <choose>
         <if variable="DOI" match="any">
-          <text variable="DOI" prefix="(doi:&lt;DOI>" suffix="&lt;/DOI>)"/>
+          <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
         </if>
         <else>
           <choose>
@@ -82,16 +89,7 @@
     </group>
   </macro>
   <macro name="container-title">
-    <group>
-      <choose>
-        <if type="article-journal">
-          <text variable="container-title" form="short" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
-        </if>
-        <else>
-          <text variable="container-title" font-style="italic" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
-        </else>
-      </choose>
-    </group>
+    <text variable="container-title" font-style="italic" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
   </macro>
   <citation collapse="year-suffix" et-al-min="3" et-al-use-first="1" disambiguate-add-names="true">
     
@@ -105,10 +103,10 @@
       </group>
     </layout>
   </citation>
-  <bibliography hanging-indent="true">
+  <bibliography et-al-min="7" et-al-use-first="1" hanging-indent="true">
     
-    <layout>
-      <text macro="author" prefix="" suffix=""/>
+    <layout suffix=".">
+      <text macro="author" font-weight="bold" prefix="" suffix=""/>
       <date variable="issued" prefix=" (&lt;issued>" suffix="&lt;/issued>)">
         <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
       </date>
@@ -157,7 +155,7 @@
           </group>
         </else>
       </choose>
-      <text macro="access" prefix=" " suffix=""/>
+      <text macro="access" prefix=". " suffix=""/>
     </layout>
   </bibliography>
 </style>

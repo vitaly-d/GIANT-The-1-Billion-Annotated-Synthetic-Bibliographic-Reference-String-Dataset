@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US" page-range-format="minimal">
   <info>
     <title>Medicine &amp; Science in Sports &amp; Exercise</title>
     <title-short>MSSE</title-short>
@@ -18,7 +18,7 @@
     <category field="medicine"/>
     <issn>0195-9131</issn>
     <eissn>1530-0315</eissn>
-    <updated>2017-12-13T13:21:47+00:00</updated>
+    <updated>2020-08-23T15:13:28+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="en">
@@ -62,7 +62,7 @@
                 <if match="none" variable="page">
                   <group prefix="[" suffix="]" delimiter=" ">
                     <text term="cited" prefix="" suffix=""/>
-                    <date variable="accessed" suffix="&lt;/accessed> " prefix="&lt;accessed>">
+                    <date variable="accessed" prefix="&lt;accessed>" suffix="&lt;/accessed>">
                       <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
                       <date-part name="month" prefix=" &lt;month>" form="short" strip-periods="true" suffix="&lt;/month>"/>
                       <date-part name="day" prefix=" &lt;day>" suffix="&lt;/day>"/>
@@ -91,7 +91,7 @@
           <if match="none" variable="page">
             <group delimiter=". ">
               <group delimiter=": ">
-                <text term="available at" prefix="" suffix=""/>
+                <text term="available at" text-case="capitalize-first" prefix="" suffix=""/>
                 <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
               </group>
               <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
@@ -120,15 +120,6 @@
   <macro name="title">
     <group delimiter=" ">
       <text variable="title" prefix="&lt;title>" suffix="&lt;/title>"/>
-      <choose>
-        <if type="article-journal" match="any">
-          <choose>
-            <if variable="page" match="none">
-              <text term="internet" prefix="[" suffix="]" text-case="capitalize-first"/>
-            </if>
-          </choose>
-        </if>
-      </choose>
     </group>
   </macro>
   <macro name="edition">
@@ -183,7 +174,18 @@
         </else-if>
         <else>
           <text macro="title" suffix=". " prefix=""/>
-          <text variable="container-title" form="short" strip-periods="true" font-style="italic" suffix="&lt;/container-title>. " prefix="&lt;container-title>"/>
+          <group delimiter=" " suffix=". ">
+            <text variable="container-title" form="short" strip-periods="true" font-style="italic" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+            <choose>
+              <if type="article-journal" match="any">
+                <choose>
+                  <if variable="page" match="none">
+                    <text term="internet" prefix="[" suffix="]" text-case="capitalize-first"/>
+                  </if>
+                </choose>
+              </if>
+            </choose>
+          </group>
           <text macro="date" suffix=";" prefix=""/>
           <text variable="volume" prefix="&lt;volume>" suffix="&lt;/volume>"/>
           <text variable="issue" prefix="(&lt;issue>" suffix="&lt;/issue>)"/>

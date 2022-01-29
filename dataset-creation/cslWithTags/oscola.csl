@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" demote-non-dropping-particle="never">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" demote-non-dropping-particle="never" default-locale="en-GB">
   <info>
     <title>OSCOLA (Oxford University Standard for Citation of Legal Authorities)</title>
     <title-short>OSCOLA</title-short>
@@ -255,7 +255,7 @@
   <!--publication info -->
   <macro name="publisher">
     <choose>
-      <if type="book chapter broadcast personal_communication manuscript paper-conference article-newspaper report legislation motion_picture speech interview thesis entry-encyclopedia webpage post-weblog" match="any">
+      <if type="book chapter broadcast personal_communication manuscript paper-conference article-newspaper report legislation motion_picture speech interview thesis entry-encyclopedia webpage post-weblog article" match="any">
         <group delimiter=" ">
           <group prefix="(" suffix=")" delimiter=", ">
             <choose>
@@ -301,6 +301,10 @@
                     <text macro="issued-full" prefix="" suffix=""/>
                   </else-if>
                   <else-if type="interview" match="any">
+                    <text macro="issued-full" prefix="" suffix=""/>
+                  </else-if>
+                  <else-if type="article" match="any">
+                    <text variable="publisher" strip-periods="true" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
                     <text macro="issued-full" prefix="" suffix=""/>
                   </else-if>
                   <else>
@@ -579,8 +583,12 @@
                 <text macro="author-note" prefix="" suffix=""/>
                 <text macro="title-short" prefix="" suffix=""/>
                 <text macro="looseleaf-note" prefix="" suffix=""/>
-                <text variable="first-reference-note-number" prefix="(n &lt;first-reference-note-number>" suffix="&lt;/first-reference-note-number>)"/>
-                <text macro="locator-space" prefix="" suffix=""/>
+                <choose>
+                  <if type="legislation" match="none">
+                    <text variable="first-reference-note-number" prefix="(n &lt;first-reference-note-number>" suffix="&lt;/first-reference-note-number>)"/>
+                  </if>
+                </choose>
+                <text macro="locator-basic" prefix="" suffix=""/>
               </group>
             </if>
             <else>

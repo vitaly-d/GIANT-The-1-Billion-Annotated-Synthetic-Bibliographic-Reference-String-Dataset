@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" default-locale="en-US" version="1.0" demote-non-dropping-particle="sort-only">
   <info>
     <title>Springer - Vancouver</title>
     <id>http://www.zotero.org/styles/springer-vancouver</id>
@@ -16,7 +16,7 @@
     <category citation-format="numeric"/>
     <category field="generic-base"/>
     <summary>Springer Vancouver style - like the author-date style, but numeric</summary>
-    <updated>2012-10-18T22:38:43+00:00</updated>
+    <updated>2019-09-25T22:38:43+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="en">
@@ -68,12 +68,12 @@
   <citation collapse="citation-number">
     
     <layout prefix="[" suffix="]" delimiter=", ">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography et-al-min="11" et-al-use-first="3" second-field-align="flush">
     <layout>
-      
+      <text variable="citation-number" suffix="&lt;/citation-number>. " prefix="&lt;citation-number>"/>
       <group delimiter=" ">
         <text macro="author" prefix="" suffix=""/>
         <text macro="year-parenth" prefix="" suffix=""/>
@@ -128,7 +128,7 @@
 	       J Mol Med. doi:10.1007/s001090000086     -->
           <group delimiter=". ">
             <text variable="container-title" form="short" strip-periods="true" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
-            <text prefix="doi: &lt;DOI>" variable="DOI" suffix="&lt;/DOI>"/>
+            <text prefix="https://doi.org/&lt;DOI>" variable="DOI" suffix="&lt;/DOI>"/>
           </group>
         </else-if>
         <else-if type="bill book graphic legal_case legislation motion_picture report song" match="any">

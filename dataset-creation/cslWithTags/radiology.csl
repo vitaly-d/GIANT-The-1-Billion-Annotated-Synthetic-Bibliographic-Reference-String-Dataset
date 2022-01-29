@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" page-range-format="expanded">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" page-range-format="expanded" default-locale="en-US">
   <info>
     <title>Radiology</title>
     <id>http://www.zotero.org/styles/radiology</id>
     <link href="http://www.zotero.org/styles/radiology" rel="self"/>
     <link href="http://www.zotero.org/styles/vancouver" rel="template"/>
-    <link href="http://radiology.rsna.org/site/pia/manprep12.xhtml" rel="documentation"/>
+    <link href="https://pubs.rsna.org/page/radiology/author-instructions#references" rel="documentation"/>
     <author>
       <name>Adam Tunis</name>
       <email>atunis@gmail.com</email>
@@ -60,12 +60,15 @@
   </macro>
   <macro name="access">
     <choose>
-      <if variable="URL">
+      <if variable="DOI">
+        <text variable="DOI" prefix="doi: &lt;DOI>" suffix="&lt;/DOI>"/>
+      </if>
+      <else-if variable="URL">
         <group delimiter=". ">
           <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
           <text macro="accessed-date" prefix="" suffix=""/>
         </group>
-      </if>
+      </else-if>
     </choose>
   </macro>
   <macro name="accessed-date">
@@ -204,18 +207,20 @@
         <text macro="author" prefix="" suffix=""/>
         <text macro="title" prefix="" suffix=""/>
       </group>
-      <group delimiter=". " suffix=". ">
+      <group delimiter=". ">
         <text macro="editor" prefix="" suffix=""/>
         <text macro="container-title" prefix="" suffix=""/>
         <text macro="publisher" prefix="" suffix=""/>
+        <group>
+          <text macro="date" prefix="" suffix=""/>
+          <text macro="journal-location" prefix="" suffix=""/>
+          <text macro="pages" prefix="" suffix=""/>
+        </group>
       </group>
-      <group>
-        <text macro="date" prefix="" suffix=""/>
-        <text macro="journal-location" prefix="" suffix=""/>
-        <text macro="pages" prefix="" suffix=""/>
+      <group prefix=". " delimiter=". ">
+        <text macro="report-details" prefix="" suffix=""/>
+        <text macro="access" prefix="" suffix=""/>
       </group>
-      <text macro="report-details" suffix=". " prefix=""/>
-      <text macro="access" prefix="" suffix=""/>
     </layout>
   </bibliography>
 </style>

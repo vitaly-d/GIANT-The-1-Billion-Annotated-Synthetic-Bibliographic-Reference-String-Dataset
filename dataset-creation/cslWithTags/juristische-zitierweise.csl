@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="note">
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="note" default-locale="de-DE">
   <!-- This style was edited with the Visual CSL Editor (http://editor.citationstyles.org/visualEditor/) -->
   <info>
-    <title>Juristische Zitierweise (Stüber) (German)</title>
+    <title>Juristische Zitierweise (Stüber) (Deutsch)</title>
     <id>http://www.zotero.org/styles/juristische-zitierweise</id>
     <link href="http://www.zotero.org/styles/juristische-zitierweise" rel="self"/>
     <link href="www.niederle-media.de/Zitieren.pdf" rel="documentation"/>
@@ -17,7 +17,7 @@
     <category citation-format="note"/>
     <category field="law"/>
     <summary>Juristische Zitierweise nach Stüber www.niederle-media.de/Zitieren.pdf</summary>
-    <updated>2017-01-29T14:33:14+00:00</updated>
+    <updated>2018-07-21T09:10:53+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="de-DE">
@@ -40,7 +40,7 @@
     </names>
   </macro>
   <macro name="locator-with-label">
-    <group delimiter=" ">
+    <group delimiter=" ">
       <label variable="locator" form="symbol"/>
       <text variable="locator" prefix="&lt;locator>" suffix="&lt;/locator>"/>
     </group>
@@ -60,7 +60,7 @@
         <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>">
           <name form="short" delimiter="/" initialize-with=""><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
         </names>
-        <text variable="title" prefix="&lt;title>" suffix="&lt;/title>"/>
+        <text variable="container-title" form="short" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
       </group>
     </group>
   </macro>
@@ -111,14 +111,22 @@
           <group delimiter=", ">
             <text macro="author-note" prefix="" suffix=""/>
             <text macro="inbook" prefix="" suffix=""/>
-            <text macro="locator-with-label" prefix="" suffix=""/>
+            <group delimiter=" ">
+              <group delimiter=" ">
+                <text term="page" form="short" prefix="" suffix=""/>
+                <text variable="page-first" prefix="&lt;page-first>" suffix="&lt;/page-first>"/>
+              </group>
+              <text variable="locator" prefix="(&lt;locator>" suffix="&lt;/locator>)"/>
+            </group>
           </group>
         </else-if>
         <else-if type="entry-encyclopedia">
-          <text value="Bearbeiter," suffix=" " font-style="italic" prefix=""/>
+          <text value="Bearbeiter," font-style="italic" suffix=" " prefix=""/>
           <text value="in: " prefix="" suffix=""/>
-          <text variable="title" suffix="&lt;/title>, " form="short" prefix="&lt;title>"/>
-          <text variable="locator" suffix="&lt;/locator>. " prefix="&lt;locator>"/>
+          <group delimiter=", ">
+            <text variable="title" form="short" prefix="&lt;title>" suffix="&lt;/title>"/>
+            <text variable="locator" prefix="&lt;locator>" suffix="&lt;/locator>"/>
+          </group>
         </else-if>
         <else-if type="legal_case" match="any">
           <group delimiter=", ">
@@ -147,7 +155,7 @@
         <else>
           <group delimiter=", ">
             <text macro="author-note" prefix="" suffix=""/>
-            <text variable="title" prefix="&lt;title>" suffix="&lt;/title>"/>
+            <text variable="title" form="short" prefix="&lt;title>" suffix="&lt;/title>"/>
             <text macro="locator-with-label" prefix="" suffix=""/>
           </group>
         </else>
@@ -244,6 +252,7 @@
           <group delimiter=", ">
             <text macro="author" prefix="" suffix=""/>
             <text variable="title" prefix="&lt;title>" suffix="&lt;/title>"/>
+            <date form="text" variable="issued" prefix="Stand: &lt;issued>" suffix="&lt;/issued>"/>
             <group delimiter=" ">
               <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
               <group delimiter=" " prefix="(" suffix=")">

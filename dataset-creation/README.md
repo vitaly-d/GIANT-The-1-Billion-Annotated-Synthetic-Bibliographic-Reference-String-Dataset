@@ -21,9 +21,14 @@ Changes:
 ## Install
 `cd dataset-creation` 
 
-### on a dev machile (tested on Ubuntu 20.04)
+### on a dev machile (tested on Ubuntu 20.04), in the `dataset-creation` dir
  - install node
  - install deps: `tar xjf node_modules.tar.bz2`
+
+ To update CSL styles/locales:
+ - remove 'local' copies: `rm -rf csl locales```
+ - clone CSL styles: `git clone https://github.com/citation-style-language/styles.git csl`
+ - clone CSL locales: `git clone  https://github.com/citation-style-language/locales`
 
 ### in Docker
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" demote-non-dropping-particle="display-and-sort" page-range-format="chicago">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" demote-non-dropping-particle="display-and-sort" page-range-format="chicago" default-locale="en-US">
   <info>
     <title>European Journal for Philosophy of Religion</title>
     <id>http://www.zotero.org/styles/european-journal-for-philosophy-of-religion</id>
@@ -244,7 +244,6 @@
       </else>
     </choose>
   </macro>
-  
   <macro name="title-short">
     <choose>
       <if variable="title" match="none">
@@ -262,7 +261,7 @@
           <if variable="reviewed-title">
             <group delimiter=", ">
               <text variable="reviewed-title" text-case="title" font-style="italic" prefix="Review of &lt;reviewed-title>" form="short" suffix="&lt;/reviewed-title>"/>
-          </group>
+            </group>
           </if>
           <else>
             <text variable="title" text-case="title" font-style="italic" prefix="Review of &lt;title>" form="short" suffix="&lt;/title>"/>

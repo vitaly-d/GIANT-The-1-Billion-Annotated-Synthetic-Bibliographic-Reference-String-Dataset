@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
   <info>
     <title>American Society of Agronomy, Crop Science Society of America, Soil Science Society of America</title>
     <title-short>ASA-CSSA-SSSA</title-short>
@@ -21,8 +21,8 @@
   </info>
   <macro name="editor-translator">
     <names variable="editor translator" prefix="(&lt;editor translator>" suffix="&lt;/editor translator>)" delimiter=", ">
-      <name and="text" initialize-with="" delimiter=", "><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
-      <label form="short" prefix=", " text-case="capitalize-first"/>
+      <name and="text" initialize-with="." delimiter=", "><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <label prefix=", "/>
     </names>
   </macro>
   <macro name="edition">
@@ -41,7 +41,7 @@
   <macro name="author">
     <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
       <name name-as-sort-order="first" and="text" sort-separator=", " initialize-with="." delimiter=", " delimiter-precedes-last="always"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
-      <label form="short" prefix=" (" suffix=")" text-case="capitalize-first" strip-periods="true"/>
+      <label prefix=", "/>
       <substitute>
         <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>"/>
         <names variable="translator" prefix="&lt;translator>" suffix="&lt;/translator>"/>
@@ -106,11 +106,13 @@
   <citation collapse="year-suffix" et-al-min="3" et-al-use-first="1">
     
     <layout prefix="(" suffix=")" delimiter="; ">
-      <group delimiter=" ">
-        <text macro="author-short" suffix="," prefix=""/>
-        <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
-          <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
-        </date>
+      <group delimiter=", ">
+        <group delimiter=" ">
+          <text macro="author-short" suffix="," prefix=""/>
+          <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
+            <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
+          </date>
+        </group>
         <group>
           <label variable="locator" form="short"/>
           <text variable="locator" prefix=" &lt;locator>" suffix="&lt;/locator>"/>
@@ -118,7 +120,7 @@
       </group>
     </layout>
   </citation>
-  <bibliography hanging-indent="true">
+  <bibliography hanging-indent="true" et-al-min="6" et-al-use-first="5">
     
     <layout>
       <text macro="author" suffix="." prefix=""/>
@@ -135,19 +137,23 @@
           <text prefix=" " suffix="." macro="publisher"/>
         </if>
         <else-if type="chapter paper-conference" match="any">
-          <text macro="title" prefix=" " suffix=". "/>
-          <text variable="page" prefix="p. &lt;page>" suffix="&lt;/page>. "/>
-          <group>
-            <text term="in" text-case="capitalize-first" suffix=" " font-style="italic" prefix=""/>
-            <names variable="editor translator" prefix="&lt;editor translator>" suffix="&lt;/editor translator>">
-              <name name-as-sort-order="all" sort-separator=", " initialize-with="." delimiter=", " delimiter-precedes-last="always"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
-              <label form="short" prefix=" (" suffix=".)," strip-periods="true"/>
-            </names>
-            <text variable="container-title" prefix=" &lt;container-title>" suffix="&lt;/container-title>."/>
-            <text macro="edition" prefix=" " suffix=""/>
-            <text variable="collection-title" prefix=" &lt;collection-title>" suffix="&lt;/collection-title>."/>
-            <group suffix=".">
-              <text macro="publisher" prefix=" " suffix="."/>
+          <group delimiter=". " prefix=" ">
+            <text macro="title" prefix="" suffix=""/>
+            <group delimiter=", ">
+              <group delimiter=": ">
+                <text term="in" text-case="capitalize-first" prefix="" suffix=""/>
+                <names variable="editor translator" prefix="&lt;editor translator>" suffix="&lt;/editor translator>">
+                  <name name-as-sort-order="all" sort-separator=", " initialize-with="." delimiter=", " and="text"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+                  <label prefix=", "/>
+                </names>
+              </group>
+              <text variable="container-title" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+            </group>
+            <text macro="edition" prefix="" suffix=""/>
+            <text macro="publisher" prefix="" suffix=""/>
+            <group delimiter=" ">
+              <label variable="page" form="short" plural="never"/>
+              <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
             </group>
           </group>
         </else-if>

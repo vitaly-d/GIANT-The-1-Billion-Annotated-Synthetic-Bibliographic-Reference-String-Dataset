@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
+  <info>
+    <title>American Physical Society (without titles)</title>
+    <title-short>APS (without titles)</title-short>
+    <id>http://www.zotero.org/styles/american-physics-society-without-titles</id>
+    <link href="http://www.zotero.org/styles/american-physics-society-without-titles" rel="self"/>
+    <link href="http://www.zotero.org/styles/american-physics-society" rel="template"/>
+    <link href="https://journals.aps.org/prl/authors#techformat" rel="documentation"/>
+    <author>
+      <name>Richard Karnesky</name>
+      <email>karnesky+zotero@gmail.com</email>
+      <uri>http://arc.nucapt.northwestern.edu/Richard_Karnesky</uri>
+    </author>
+    <author>
+      <name>Brenton M. Wiernik</name>
+    </author>
+    <category citation-format="numeric"/>
+    <category field="physics"/>
+    <summary>Common style use by APS publications, without article titles.</summary>
+    <updated>2012-09-27T22:06:38+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+  <macro name="author">
+    <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
+      <name delimiter=", " initialize-with=". " and="text"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <label form="long" prefix=", " suffix=" "/>
+      <substitute>
+        <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>"/>
+        <names variable="translator" prefix="&lt;translator>" suffix="&lt;/translator>"/>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="editor">
+    <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>">
+      <label form="verb" suffix=" "/>
+      <name delimiter=", " initialize-with=". " and="text"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+    </names>
+  </macro>
+  <macro name="year-date">
+    <choose>
+      <if variable="issued">
+        <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
+          <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
+        </date>
+      </if>
+      <else>
+        <text term="no date" form="short" prefix="" suffix=""/>
+      </else>
+    </choose>
+  </macro>
+  <macro name="day-date">
+    <choose>
+      <if variable="issued">
+        <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
+          <date-part name="day" suffix="&lt;/day> " prefix="&lt;day>"/>
+          <date-part name="month" form="long" suffix="&lt;/month> " prefix="&lt;month>"/>
+          <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
+        </date>
+      </if>
+      <else>
+        <text term="no date" form="short" prefix="" suffix=""/>
+      </else>
+    </choose>
+  </macro>
+  <macro name="publisher">
+    <group prefix="(" suffix=")" delimiter=", ">
+      <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
+      <text variable="publisher-place" text-case="title" prefix="&lt;publisher-place>" suffix="&lt;/publisher-place>"/>
+      <text macro="year-date" prefix="" suffix=""/>
+    </group>
+  </macro>
+  <macro name="edition-volume">
+    <group delimiter=", ">
+      <choose>
+        <if is-numeric="edition">
+          <group delimiter=" ">
+            <number variable="edition" form="ordinal"/>
+            <text term="edition" form="short" prefix="" suffix=""/>
+          </group>
+        </if>
+        <else>
+          <text variable="edition" prefix="&lt;edition>" suffix="&lt;/edition>"/>
+        </else>
+      </choose>
+      <group delimiter=" ">
+        <label variable="volume" form="short" text-case="capitalize-first"/>
+        <text variable="volume" prefix="&lt;volume>" suffix="&lt;/volume>"/>
+      </group>
+    </group>
+  </macro>
+  <citation collapse="citation-number">
+    
+    <layout delimiter="," prefix=" [" suffix="]">
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
+    </layout>
+  </citation>
+  <bibliography entry-spacing="0" second-field-align="flush">
+    <!-- Reference for arxiv: https://doi.org/10.1103/PhysRevLett.116.135503 -->
+    <layout suffix=".">
+      <text variable="citation-number" prefix="[&lt;citation-number>" suffix="&lt;/citation-number>]"/>
+      <text macro="author" suffix=", " prefix=""/>
+      <choose>
+        <if type="bill book figure graphic legal_case legislation map motion_picture song treaty" match="any">
+          <group delimiter=" ">
+            <group delimiter=", ">
+              <text variable="title" text-case="title" font-style="italic" prefix="&lt;title>" suffix="&lt;/title>"/>
+              <text macro="edition-volume" prefix="" suffix=""/>
+            </group>
+            <text macro="publisher" prefix="" suffix=""/>
+          </group>
+        </if>
+        <else-if type="broadcast chapter entry entry-dictionary entry-encyclopedia paper-conference" match="any">
+          <group delimiter=" ">
+            <choose>
+              <if variable="container-title">
+                <group delimiter=" ">
+                  <text term="in" prefix="" suffix=""/>
+                  <group delimiter=", ">
+                    <text variable="container-title" text-case="title" font-style="italic" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+                    <text macro="editor" prefix="" suffix=""/>
+                    <text macro="edition-volume" prefix="" suffix=""/>
+                  </group>
+                </group>
+              </if>
+              <else>
+                <group delimiter=", ">
+                  <text variable="title" text-case="title" font-style="italic" prefix="&lt;title>" suffix="&lt;/title>"/>
+                  <text macro="edition-volume" prefix="" suffix=""/>
+                </group>
+              </else>
+            </choose>
+            <group delimiter=", ">
+              <text macro="publisher" prefix="" suffix=""/>
+              <group delimiter=" ">
+                <label variable="page" form="short"/>
+                <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
+              </group>
+            </group>
+          </group>
+        </else-if>
+        <else-if type="patent">
+          <group delimiter=" ">
+            <text variable="number" prefix="&lt;number>" suffix="&lt;/number>"/>
+            <text macro="day-date" prefix="(" suffix=")"/>
+          </group>
+        </else-if>
+        <else-if type="thesis report" match="any">
+          <group delimiter=", ">
+            <text variable="title" text-case="title" prefix="&lt;title>" suffix="&lt;/title>"/>
+            <group delimiter=" ">
+              <text variable="genre" prefix="&lt;genre>" suffix="&lt;/genre>"/>
+              <group delimiter=" ">
+                <text term="issue" form="short" text-case="capitalize-first" prefix="" suffix=""/>
+                <text variable="number" prefix="&lt;number>" suffix="&lt;/number>"/>
+              </group>
+            </group>
+            <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
+            <text macro="year-date" prefix="" suffix=""/>
+          </group>
+        </else-if>
+        <else-if type="article" match="any">
+          <choose>
+            <if variable="container-title">
+              <text variable="container-title" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+            </if>
+            <else>
+              <text variable="number" prefix="&lt;number>" suffix="&lt;/number>"/>
+            </else>
+          </choose>
+        </else-if>
+        <else-if type="dataset interview manuscript pamphlet personal_communication post post-weblog speech webpage">
+          <!-- unpublished materials; guidelines call for 'enough information to be retrievable' -->
+          <!-- Based on arXiv format -->
+          <group delimiter=", ">
+            <choose>
+              <if variable="DOI">
+                <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+              </if>
+              <else-if variable="URL">
+                <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
+              </else-if>
+              <else>
+                <text value="(unpublished)" prefix="" suffix=""/>
+              </else>
+            </choose>
+          </group>
+        </else-if>
+        <else>
+          <!--article-journal article-magazine article-newspaper review review-book-->
+          <group delimiter=" ">
+            <text variable="container-title" form="short" text-case="title" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+            <group delimiter=", ">
+              <text variable="volume" font-weight="bold" prefix="&lt;volume>" suffix="&lt;/volume>"/>
+              <group delimiter=" ">
+                <text variable="page-first" form="short" prefix="&lt;page-first>" suffix="&lt;/page-first>"/>
+                <text macro="year-date" prefix="(" suffix=")"/>
+              </group>
+            </group>
+          </group>
+        </else>
+      </choose>
+    </layout>
+  </bibliography>
+</style>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never" default-locale="en-US">
   <info>
     <title>Conservation Biology</title>
     <id>http://www.zotero.org/styles/conservation-biology</id>
@@ -16,7 +16,7 @@
     <category field="biology"/>
     <issn>0888-8892</issn>
     <eissn>1523-1739</eissn>
-    <updated>2016-02-11T07:27:17+00:00</updated>
+    <updated>2021-10-06T23:33:10+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="en-US">
@@ -29,7 +29,7 @@
       <if type="chapter paper-conference" match="any">
         <text term="in" suffix=" " prefix=""/>
         <names variable="editor translator" delimiter=", " prefix="&lt;editor translator>" suffix="&lt;/editor translator>">
-          <name and="text" initialize-with=". " delimiter=", "><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+          <name initialize-with="" name-as-sort-order="all" sort-separator=" "><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
           <label form="long" prefix=", " suffix="."/>
         </names>
       </if>
@@ -170,6 +170,11 @@
         <text variable="container-title" prefix=". &lt;container-title>" suffix="&lt;/container-title>"/>
         <text variable="volume" prefix=" &lt;volume>" font-weight="bold" suffix="&lt;/volume>"/>
         <text variable="page" prefix=":&lt;page>" suffix="&lt;/page>"/>
+        <choose>
+          <if match="none" variable="volume page">
+            <text variable="DOI" prefix="DOI: &lt;DOI>" suffix="&lt;/DOI>"/>
+          </if>
+        </choose>
       </if>
       <else-if type="bill book chapter graphic legal_case legislation motion_picture paper-conference report song" match="any">
         <group prefix=". " delimiter=" ">

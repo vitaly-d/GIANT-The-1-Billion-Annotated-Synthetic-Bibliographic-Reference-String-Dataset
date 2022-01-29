@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
   <info>
     <title>Economic Geology</title>
     <id>http://www.zotero.org/styles/economic-geology</id>
@@ -25,14 +25,12 @@
   <macro name="editor-translator">
     <names variable="editor translator" prefix="(&lt;editor translator>" suffix="&lt;/editor translator>)" delimiter=", ">
       <name and="symbol" initialize-with=". " delimiter=", "><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
-      <et-al term="and others"/>
       <label form="short" prefix=", " text-case="capitalize-first"/>
     </names>
   </macro>
   <macro name="author">
     <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
       <name and="text" delimiter-precedes-last="always" initialize-with=". " name-as-sort-order="all"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
-      <et-al term="and others"/>
       <label form="short" prefix=", "/>
       <substitute>
         <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>"/>
@@ -41,10 +39,18 @@
       </substitute>
     </names>
   </macro>
+  <macro name="author-count">
+    <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
+      <name form="count"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <substitute>
+        <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>"/>
+        <names variable="translator" prefix="&lt;translator>" suffix="&lt;/translator>"/>
+      </substitute>
+    </names>
+  </macro>
   <macro name="author-short">
     <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
       <name form="short" and="text" delimiter=", " initialize-with="."><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
-      <et-al term="and others"/>
       <substitute>
         <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>"/>
         <names variable="translator" prefix="&lt;translator>" suffix="&lt;/translator>"/>
@@ -141,7 +147,6 @@
             <text term="in" prefix="" suffix=""/>
             <names variable="editor translator" prefix=" &lt;editor translator>" suffix="&lt;/editor translator>," delimiter=", ">
               <name and="text" initialize-with=". " name-as-sort-order="all"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
-              <et-al term="and others"/>
               <label form="short" prefix=" "/>
             </names>
             <text variable="event" prefix=" &lt;event>" suffix="&lt;/event> –"/>

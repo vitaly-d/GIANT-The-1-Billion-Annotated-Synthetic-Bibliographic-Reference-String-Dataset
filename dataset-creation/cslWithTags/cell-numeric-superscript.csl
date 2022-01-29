@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
   <info>
     <title>Cell journals (numeric, superscript)</title>
     <id>http://www.zotero.org/styles/cell-numeric-superscript</id>
@@ -15,7 +15,7 @@
     <category citation-format="numeric"/>
     <category field="biology"/>
     <summary>The style for Cell Journals using numerical citations in superscript, such as Chem</summary>
-    <updated>2016-07-28T09:56:00+00:00</updated>
+    <updated>2019-10-29T19:17:19+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <macro name="editor">
@@ -27,7 +27,6 @@
   <macro name="author">
     <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
       <name name-as-sort-order="all" and="text" sort-separator=", " initialize-with="." delimiter=", " delimiter-precedes-last="always"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
-      <et-al font-style="italic"/>
       <label form="short" prefix=" "/>
       <substitute>
         <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>"/>
@@ -38,16 +37,11 @@
   <macro name="access">
     <choose>
       <if variable="URL">
-        <text value="Available at:" suffix=" " prefix=""/>
-        <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
-        <group prefix=" [" suffix="]">
-          <text term="accessed" text-case="capitalize-first" suffix=" " prefix=""/>
-          <date variable="accessed" prefix="&lt;accessed>" suffix="&lt;/accessed>">
-            <date-part name="month" suffix="&lt;/month> " prefix="&lt;month>"/>
-            <date-part name="day" suffix="&lt;/day>, " prefix="&lt;day>"/>
-            <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
-          </date>
-        </group>
+        <choose>
+          <if type="webpage dataset entry-dictionary entry-encyclopedia post post-weblog" match="any">
+            <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
+          </if>
+        </choose>
       </if>
     </choose>
   </macro>
@@ -55,10 +49,7 @@
     <text variable="title" prefix="&lt;title>" suffix="&lt;/title>"/>
   </macro>
   <macro name="publisher">
-    <group prefix="(" delimiter=": " suffix=")">
-      <text variable="publisher-place" prefix="&lt;publisher-place>" suffix="&lt;/publisher-place>"/>
-      <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
-    </group>
+    <text variable="publisher" prefix="(&lt;publisher>" suffix="&lt;/publisher>)"/>
   </macro>
   <macro name="edition">
     <choose>

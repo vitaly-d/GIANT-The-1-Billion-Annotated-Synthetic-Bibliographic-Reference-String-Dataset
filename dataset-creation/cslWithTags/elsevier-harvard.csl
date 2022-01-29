@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="never" default-locale="en-US">
   <info>
     <title>Elsevier - Harvard (with titles)</title>
     <id>http://www.zotero.org/styles/elsevier-harvard</id>
@@ -94,7 +94,7 @@
       <if variable="DOI">
         <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
       </if>
-      <else-if type="webpage">
+      <else-if type="webpage post-weblog" match="any">
         <group delimiter=" ">
           <text value="URL" prefix="" suffix=""/>
           <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>

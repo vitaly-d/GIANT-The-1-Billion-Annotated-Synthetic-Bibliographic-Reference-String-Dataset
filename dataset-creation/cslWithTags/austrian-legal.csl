@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="note">
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="note" default-locale="de-AT">
   <!-- This style was edited with the Visual CSL Editor (http://editor.citationstyles.org/visualEditor/) -->
   <info>
-    <title>Austrian Legal (German - Austria)</title>
+    <title>Austrian Legal (Deutsch - Österreich)</title>
     <id>http://www.zotero.org/styles/austrian-legal</id>
     <link href="http://www.zotero.org/styles/austrian-legal" rel="self"/>
     <link href="http://www.lexisnexis.at/service/training-und-hilfe/zitieren.aspx" rel="documentation"/>
@@ -34,7 +34,7 @@
           </else>
         </choose>
       </if>
-      <else-if type="bill">
+      <else-if type="bill legislation" match="any">
         <!-- move statutes to the bottom -->
         <text value="ZZZZ" prefix="" suffix=""/>
       </else-if>
@@ -99,7 +99,7 @@
             </else>
           </choose>
         </if>
-        <else-if type="bill">
+        <else-if type="bill legislation" match="any">
           <choose>
             <if variable="container-title section" match="all">
               <text variable="section" suffix="&lt;/section> " prefix="&lt;section>"/>
@@ -304,7 +304,7 @@
             </else>
           </choose>
         </if>
-        <else-if type="bill">
+        <else-if type="bill legislation" match="any">
           <text value=" " prefix="" suffix=""/>
         </else-if>
         <else-if type="article-journal">

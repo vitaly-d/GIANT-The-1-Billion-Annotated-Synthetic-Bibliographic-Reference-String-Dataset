@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
   <info>
     <title>Biophysical Journal</title>
+    <title-short>BPJ</title-short>
     <id>http://www.zotero.org/styles/biophysical-journal</id>
     <link href="http://www.zotero.org/styles/biophysical-journal" rel="self"/>
     <link href="http://download.cell.com/images/edimages/Biophys/Instructions_to_Authors.pdf" rel="documentation"/>
@@ -72,7 +73,7 @@
       <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
-  <bibliography et-al-min="99" et-al-use-first="98" second-field-align="flush">
+  <bibliography second-field-align="flush">
     <layout suffix=".">
       <text variable="citation-number" suffix="&lt;/citation-number>. " prefix="&lt;citation-number>"/>
       <text macro="author" prefix="" suffix=""/>
@@ -96,16 +97,13 @@
           </group>
         </else-if>
         <else>
-          <text variable="container-title" suffix="&lt;/container-title>. " form="short" prefix="&lt;container-title>"/>
-          <choose>
-            <if variable="page">
+          <group delimiter=". ">
+            <text variable="container-title" form="short" font-style="italic" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+            <group delimiter=":">
               <text variable="volume" prefix="&lt;volume>" suffix="&lt;/volume>"/>
-              <text variable="page" prefix=": &lt;page>" suffix="&lt;/page>."/>
-            </if>
-            <else>
-              <text variable="volume" suffix="&lt;/volume>." prefix="&lt;volume>"/>
-            </else>
-          </choose>
+              <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
+            </group>
+          </group>
         </else>
       </choose>
     </layout>

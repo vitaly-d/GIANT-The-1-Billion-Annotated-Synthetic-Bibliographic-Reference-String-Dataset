@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" demote-non-dropping-particle="sort-only" default-locale="en-GB" page-range-format="expanded">
   <info>
     <title>King's College London - Harvard</title>
     <id>http://www.zotero.org/styles/harvard-kings-college-london</id>
@@ -11,7 +11,7 @@
     <category citation-format="author-date"/>
     <category field="humanities"/>
     <summary>Harvard author-date style created for King's College London</summary>
-    <updated>2012-09-27T22:06:38+00:00</updated>
+    <updated>2018-02-15T16:23:12+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <!-- format EDITOR entry -->
@@ -267,7 +267,6 @@
             <text macro="editor" prefix="" suffix=""/>
           </group>
           <text variable="container-title" suffix="&lt;/container-title> " prefix="&lt;container-title>"/>
-          <text macro="access" suffix=". " prefix=""/>
           <group suffix="." delimiter=" ">
             <group>
               <text variable="volume" prefix="&lt;volume>" suffix="&lt;/volume>"/>

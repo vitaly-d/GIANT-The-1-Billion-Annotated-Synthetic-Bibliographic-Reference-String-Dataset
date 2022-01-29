@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" initialize-with-hyphen="false" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" initialize-with-hyphen="false" demote-non-dropping-particle="sort-only" default-locale="pl-PL">
   <info>
-    <title>Postępy Higieny i Medycyny Doświadczalnej (Polish)</title>
+    <title>Postępy Higieny i Medycyny Doświadczalnej (Polski)</title>
     <title-short>PHiMD</title-short>
     <id>http://www.zotero.org/styles/postepy-higieny-i-medycyny-doswiadczalnej</id>
     <link href="http://www.zotero.org/styles/postepy-higieny-i-medycyny-doswiadczalnej" rel="self"/>
@@ -31,13 +31,13 @@
   <citation collapse="citation-number">
     
     <layout delimiter="," prefix="[" suffix="]">
-      
+      <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography>
     
     <layout suffix=";">
-      
+      <text variable="citation-number" prefix="[&lt;citation-number>" suffix="&lt;/citation-number>] "/>
       <choose>
         <if type="article-journal">
           <text macro="name" prefix="" suffix=""/>

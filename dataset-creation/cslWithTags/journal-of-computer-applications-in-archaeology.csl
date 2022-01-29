@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-GB">
   <info>
     <title>Journal of Computer Applications in Archaeology</title>
     <title-short>JCAA</title-short>
@@ -11,11 +11,15 @@
       <name>Patrick O'Brien</name>
       <email>obrienpat86@gmail.com</email>
     </author>
+	<contributor>
+      <name>Ronald Visser</name>
+      <email>r.m.visser@saxion.nl</email>
+    </contributor>
     <category citation-format="author-date"/>
     <category field="science"/>
     <eissn>2514-8362</eissn>
     <summary>Harvard author-date style edited for Journal of Computer Applications in Archaeology.</summary>
-    <updated>2017-05-24T15:41:19+00:00</updated>
+    <updated>2017-05-28T00:39:40+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="en">
@@ -25,7 +29,7 @@
   </locale>
   <macro name="editor">
     <names variable="editor" delimiter=", " prefix="&lt;editor>" suffix="&lt;/editor>">
-      <name and="text" initialize-with="." name-as-sort-order="all"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <name and="text" initialize-with="" name-as-sort-order="all"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
       <label form="short" prefix=" (" suffix=")"/>
     </names>
   </macro>
@@ -34,8 +38,8 @@
   </macro>
   <macro name="author">
     <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
-      <name and="text" delimiter-precedes-last="never" initialize-with=" " name-as-sort-order="all"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
-      <label form="short" prefix=" "/>
+      <name and="text" delimiter-precedes-last="never" initialize-with="" name-as-sort-order="all"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <label form="short" prefix=" (" suffix=")"/>
       <substitute>
         <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>"/>
         <names variable="translator" prefix="&lt;translator>" suffix="&lt;/translator>"/>
@@ -72,7 +76,7 @@
         <text variable="title" font-style="italic" prefix="&lt;title>" suffix="&lt;/title>"/>
       </else-if>
       <else-if type="article-journal" match="any">
-        <text variable="title" suffix="&lt;/title>," prefix="&lt;title>"/>
+        <text variable="title" suffix="&lt;/title>" prefix="&lt;title>"/>
       </else-if>
       <else>
         <text variable="title" suffix="&lt;/title>." prefix="&lt;title>"/>
@@ -163,10 +167,10 @@
     
     <layout suffix=".">
       <text macro="author" prefix="" suffix=""/>
-      <text macro="year-date" prefix=" " suffix=""/>
+      <text macro="year-date" prefix=". " suffix=""/>
       <choose>
         <if type="thesis">
-          <group prefix=" " delimiter=". ">
+          <group prefix=". " delimiter=". ">
             <text macro="title" font-style="italic" prefix="" suffix=""/>
             <text macro="edition" prefix="" suffix=""/>
             <text variable="genre" prefix="&lt;genre>" suffix="&lt;/genre>"/>
@@ -174,7 +178,7 @@
           </group>
         </if>
         <else-if type="webpage">
-          <group prefix=" " delimiter=". ">
+          <group prefix=". " delimiter=". ">
             <text macro="title" prefix="" suffix=""/>
             <text macro="edition" prefix="" suffix=""/>
           </group>
@@ -194,7 +198,7 @@
           </group>
           <choose>
             <if variable="author" match="any">
-              <text variable="container-title" font-style="italic" prefix=" &lt;container-title>" suffix="&lt;/container-title>,"/>
+              <text variable="container-title" font-style="italic" prefix=". &lt;container-title>" suffix="&lt;/container-title>"/>
             </if>
           </choose>
           <group prefix=" " suffix=".">
@@ -209,7 +213,7 @@
           </group>
         </else-if>
         <else-if type="book graphic" match="any">
-          <group prefix=" " delimiter=". ">
+          <group prefix=". " delimiter=". ">
             <text macro="title" prefix="" suffix=""/>
             <group delimiter=" ">
               <text variable="collection-title" prefix="&lt;collection-title>" suffix="&lt;/collection-title>"/>
@@ -221,7 +225,7 @@
           </group>
         </else-if>
         <else-if type="chapter paper-conference" match="any">
-          <group delimiter=" " prefix=" " suffix=".">
+          <group delimiter=". " prefix=" " suffix=".">
             <text macro="title" suffix="." prefix=""/>
             <text term="in" text-case="capitalize-first" suffix=":" prefix=""/>
             <text macro="editor" prefix="" suffix=""/>

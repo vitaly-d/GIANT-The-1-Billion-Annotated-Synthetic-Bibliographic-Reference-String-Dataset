@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="de-DE">
   <info>
-    <title>Institut für Praxisforschung - Harvard (Bahr &amp; Frackmann) (German)</title>
+    <title>Institut für Praxisforschung - Harvard (Bahr &amp; Frackmann) (Deutsch)</title>
     <id>http://www.zotero.org/styles/harvard-institut-fur-praxisforschung-de</id>
     <link href="http://www.zotero.org/styles/harvard-institut-fur-praxisforschung-de" rel="self"/>
     <link href="http://www.zotero.org/styles/fachhochschule-vorarlberg-author-date" rel="template"/>
@@ -13,27 +13,28 @@
       narrow no break space: uni202F / &#8239; - but this is not supported widely!
       em dash: &#8212;
       -->
-    <contributor>
+    <author>
       <name>Saskia Mestern</name>
       <email>saskia.mestern@gmail.com</email>
-    </contributor>
+    </author>
     <category citation-format="author-date"/>
     <category field="generic-base"/>
     <category field="political_science"/>
     <category field="social_science"/>
     <summary>A Harvard author-date style variant as used for Political Science and others, mostly German. The in-text citation style is changed to [author year: page], avoiding the abbreviation for pages (S.) and changing the delimiters.</summary>
-    <updated>2012-09-27T22:06:38+00:00</updated>
+    <updated>2020-07-13T09:24:45+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="de">
     <terms>
       <term name="anonymous" form="short">o. A.</term>
       <term name="no date" form="short">o. J.</term>
+      <term name="volume" form="short">Jg.</term>
     </terms>
   </locale>
   <macro name="editor">
     <names variable="editor" delimiter="; " prefix="&lt;editor>" suffix="&lt;/editor>">
-      <name name-as-sort-order="all" sort-separator=", " delimiter="; " delimiter-precedes-last="always" form="long"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <name and="text"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
       <label form="short" prefix=" (" suffix=")"/>
     </names>
   </macro>
@@ -45,7 +46,8 @@
       <name name-as-sort-order="all" sort-separator=", " delimiter="; " delimiter-precedes-last="always" form="long"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
       <label form="short" prefix=" (" suffix=")"/>
       <substitute>
-        <text macro="editor" prefix="" suffix=""/>
+        <names variable="editor" prefix="&lt;editor>" suffix="&lt;/editor>"/>
+        <names variable="translator" prefix="&lt;translator>" suffix="&lt;/translator>"/>
         <text macro="anon" prefix="" suffix=""/>
       </substitute>
     </names>
@@ -65,25 +67,17 @@
       <if variable="DOI">
         <text variable="DOI" prefix="doi: &lt;DOI>" suffix="&lt;/DOI>"/>
       </if>
-      <else>
-        <choose>
-          <if type="webpage">
-            <group>
-              <text term="retrieved" text-case="capitalize-first" suffix=" " prefix=""/>
-              <text value="am" suffix=" " prefix=""/>
-              <date variable="accessed" prefix="&lt;accessed>" suffix="&lt;/accessed>">
-                <date-part name="day" form="numeric-leading-zeros" suffix="&lt;/day>." prefix="&lt;day>"/>
-                <date-part name="month" form="numeric-leading-zeros" suffix="&lt;/month>." prefix="&lt;month>"/>
-                <date-part name="year" form="long" prefix="&lt;year>" suffix="&lt;/year>"/>
-              </date>
-              <group>
-                <text term="from" prefix=" " suffix=" "/>
-                <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
-              </group>
-            </group>
-          </if>
-        </choose>
-      </else>
+      <else-if type="webpage post post-weblog" match="any">
+        <group delimiter=" ">
+          <text term="online" prefix="[" suffix="]"/>
+          <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
+          <date variable="accessed" prefix="[&lt;accessed>" suffix="&lt;/accessed>]">
+            <date-part name="day" form="numeric-leading-zeros" suffix="&lt;/day>." prefix="&lt;day>"/>
+            <date-part name="month" form="numeric-leading-zeros" suffix="&lt;/month>." prefix="&lt;month>"/>
+            <date-part name="year" form="long" prefix="&lt;year>" suffix="&lt;/year>"/>
+          </date>
+        </group>
+      </else-if>
     </choose>
   </macro>
   <macro name="title">
@@ -92,7 +86,7 @@
         <text variable="title" font-style="italic" prefix="&lt;title>" suffix="&lt;/title>"/>
       </if>
       <else>
-        <text variable="title" prefix="„&lt;title>" suffix="&lt;/title>“"/>
+        <text variable="title" prefix="&lt;title>" suffix="&lt;/title>"/>
       </else>
     </choose>
   </macro>
@@ -101,7 +95,6 @@
       <if type="report thesis" match="any">
         <group prefix=" (" suffix=")">
           <text variable="genre" prefix="&lt;genre>" suffix="&lt;/genre>"/>
-          <!--<text term="number" form="short" suffix=" "/>-->
           <text variable="number" prefix=" Nr. &lt;number>" suffix="&lt;/number>"/>
         </group>
       </if>
@@ -119,20 +112,27 @@
         <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
           <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
         </date>
+        <text variable="year-suffix" prefix="&lt;year-suffix>" suffix="&lt;/year-suffix>"/>
       </if>
       <else>
         <text term="no date" form="short" prefix="" suffix=""/>
+        <text variable="year-suffix" prefix="&lt;year-suffix>" suffix="&lt;/year-suffix>"/>
       </else>
     </choose>
   </macro>
   <macro name="locator">
     <choose>
       <if type="article-journal">
-        <text variable="volume" suffix="&lt;/volume> " prefix="&lt;volume>"/>
-        <!-- <date variable="issued">
-          <date-part name="year" prefix="(" suffix=")"/>
-          </date>-->
-        <text variable="issue" prefix="(&lt;issue>" suffix="&lt;/issue>)"/>
+        <group delimiter=", ">
+          <group delimiter=" ">
+            <label text-case="capitalize-first" variable="volume" form="short"/>
+            <text variable="volume" prefix="&lt;volume>" suffix="&lt;/volume>"/>
+          </group>
+          <group delimiter=" ">
+            <label variable="issue" form="short"/>
+            <text variable="issue" prefix="&lt;issue>" suffix="&lt;/issue>"/>
+          </group>
+        </group>
       </if>
     </choose>
   </macro>
@@ -163,9 +163,9 @@
   <macro name="edition">
     <choose>
       <if is-numeric="edition">
-        <group>
-          <number variable="edition" form="numeric" suffix=". "/>
-          <text term="edition" form="short" prefix="" suffix=""/>
+        <group delimiter=". ">
+          <number variable="edition" form="numeric"/>
+          <text term="edition" prefix="" suffix=""/>
         </group>
       </if>
       <else>
@@ -176,7 +176,7 @@
   <macro name="container-prefix">
     <choose>
       <if type="chapter paper-conference article-journal" match="any">
-        <text term="in" text-case="capitalize-first" suffix=":" prefix=""/>
+        <text term="in" suffix=":" prefix=""/>
       </if>
     </choose>
   </macro>
@@ -208,25 +208,24 @@
           </else>
         </choose>
         <text macro="year-date" prefix="(" suffix="):"/>
-        <text macro="title" suffix="." prefix=""/>
+        <text macro="title" suffix="," prefix=""/>
         <text macro="container-prefix" prefix="" suffix=""/>
         <choose>
           <if type="chapter paper-conference" match="any">
-            <text macro="editor" prefix="" suffix=""/>
+            <text macro="editor" suffix="," prefix=""/>
           </if>
         </choose>
-        <text variable="container-title" font-style="italic" suffix="&lt;/container-title>." prefix="&lt;container-title>"/>
+        <text variable="container-title" font-style="italic" suffix="&lt;/container-title>," prefix="&lt;container-title>"/>
         <text macro="edition" prefix="" suffix=""/>
         <text macro="genre" prefix="" suffix=""/>
-        <text macro="publisher" prefix="" suffix=""/>
         <group delimiter=", ">
-          <group delimiter=", " prefix="(" suffix=")">
-            <text variable="collection-title" prefix="&lt;collection-title>" suffix="&lt;/collection-title>"/>
+          <group delimiter=" ">
+            <text macro="publisher" prefix="" suffix=""/>
+            <text variable="collection-title" prefix="(&lt;collection-title>" suffix="&lt;/collection-title>)"/>
           </group>
           <text macro="locator" prefix="" suffix=""/>
           <text macro="published-date" prefix="" suffix=""/>
           <text macro="pages" prefix="" suffix=""/>
-          <!--<text macro="duration"/>-->
           <text macro="access" prefix="" suffix=""/>
         </group>
       </group>

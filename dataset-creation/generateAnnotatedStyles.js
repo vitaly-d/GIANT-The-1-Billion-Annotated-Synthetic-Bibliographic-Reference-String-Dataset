@@ -70,7 +70,7 @@ for (var i = 0, len = csls.length; i < len; i++) {
   console.log(i + ". " + csls[i]);
   var styleString = fs.readFileSync(cslFolder + csls[i] + '.csl', 'utf8');
 
-  styleString = styleString.replace(/<([^>]*)(\sdefault-locale=\".+?\"(\s|))(.*?)>/, '<$1$3>'); //prevent error caused by default locale https://github.com/Juris-M/citeproc-js/issues/81
+  // styleString = styleString.replace(/<([^>]*)(\sdefault-locale=\".+?\"(\s|))(.*?)>/, '<$1$3>'); //prevent error caused by default locale https://github.com/Juris-M/citeproc-js/issues/81
   styleString = styleString.replace(/<sort>([\s\S]*?)<\/sort>/g, ''); //remove sorting
   // styleString = styleString.replace(/<text variable=\"citation-number\"(.*?)\/>/g, ''); //remove citation number at the beginning of the string
   styleString = styleString.replace(/disambiguate-add-year-suffix=\"true\"/g, ''); //remove year suffix such as 2006b
@@ -80,6 +80,8 @@ for (var i = 0, len = csls.length; i < len; i++) {
   var variable, newprefix, newsuffix;
 
   var doc = xml.parseFromString(styleString, 'application/xml');
+
+  // console.log(doc.documentElement.nodeName ,  doc.documentElement.getAttribute("version"))
 
   var xmlname = doc.getElementsByTagName("name");
   for (var a = 0; a < xmlname.length; a++) {

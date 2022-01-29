@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="de-DE">
   <info>
-    <title>Hochschule München - Fakultät für Angewandte Sozialwissenschaften (German)</title>
+    <title>Hochschule München - Fakultät für Angewandte Sozialwissenschaften (Deutsch)</title>
     <title-short>MUAS</title-short>
     <id>http://www.zotero.org/styles/hochschule-munchen-fakultat-fur-angewandte-sozialwissenschaften</id>
     <link href="http://www.zotero.org/styles/hochschule-munchen-fakultat-fur-angewandte-sozialwissenschaften" rel="self"/>
@@ -31,7 +31,7 @@
         <text term="in" text-case="capitalize-first" font-style="normal" suffix=": " prefix=""/>
         <group delimiter=" ">
           <names variable="editor translator" delimiter=", " prefix="&lt;editor translator>" suffix="&lt;/editor translator>">
-            <name and="text" name-as-sort-order="all"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+            <name delimiter="; " and="text" delimiter-precedes-et-al="never" delimiter-precedes-last="never" name-as-sort-order="all"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
             <label form="short" prefix=" (" suffix=")"/>
           </names>
           <text variable="container-title" font-style="normal" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>

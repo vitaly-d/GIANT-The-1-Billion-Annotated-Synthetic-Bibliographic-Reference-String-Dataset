@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="note">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="note" default-locale="en-GB" version="1.0" demote-non-dropping-particle="sort-only">
   <info>
     <title>Middle East Critique</title>
     <id>http://www.zotero.org/styles/middle-east-critique</id>

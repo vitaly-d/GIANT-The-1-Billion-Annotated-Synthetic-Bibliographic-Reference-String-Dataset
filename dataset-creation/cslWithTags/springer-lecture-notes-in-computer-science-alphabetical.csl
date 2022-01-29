@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
   <info>
     <title>Springer - Lecture Notes in Computer Science (sorted alphabetically)</title>
     <title-short>Springer LNCS</title-short>
@@ -20,9 +20,14 @@
     </contributor>
     <category citation-format="numeric"/>
     <category field="engineering"/>
-    <updated>2012-09-27T22:06:38+00:00</updated>
+    <updated>2019-09-25T13:54:37+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
+  <locale xml:lang="en">
+    <terms>
+      <term name="accessed">last accessed</term>
+    </terms>
+  </locale>
   <macro name="author">
     <group>
       <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
@@ -130,10 +135,18 @@
             </date>
           </group>
         </else-if>
-        <else-if type="webpage">
+        <else-if type="webpage post-weblog post" match="any">
           <group delimiter=", ">
             <text macro="title" prefix="" suffix=""/>
             <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
+            <group delimiter=" ">
+              <text term="accessed" prefix="" suffix=""/>
+              <date variable="accessed" prefix="&lt;accessed>" suffix="&lt;/accessed>">
+                <date-part name="year" prefix="&lt;year>" suffix="&lt;/year>"/>
+                <date-part name="month" form="numeric-leading-zeros" prefix="/&lt;month>" suffix="&lt;/month>"/>
+                <date-part name="day" form="numeric-leading-zeros" prefix="/&lt;day>" suffix="&lt;/day>"/>
+              </date>
+            </group>
           </group>
         </else-if>
         <else-if type="speech">
@@ -156,6 +169,7 @@
           </group>
         </else>
       </choose>
+      <text variable="DOI" prefix=". https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
     </layout>
   </bibliography>
 </style>

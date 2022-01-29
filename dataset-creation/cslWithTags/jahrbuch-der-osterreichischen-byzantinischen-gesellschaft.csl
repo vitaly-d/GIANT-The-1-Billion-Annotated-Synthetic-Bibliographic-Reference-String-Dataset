@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" default-locale="en-US" demote-non-dropping-particle="display-and-sort">
   <info>
     <title>Jahrbuch der Österreichischen Byzantinischen Gesellschaft</title>
     <id>http://www.zotero.org/styles/jahrbuch-der-osterreichischen-byzantinischen-gesellschaft</id>

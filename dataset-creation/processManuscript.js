@@ -44,6 +44,13 @@ function load_references_from_string(data, crossref = true) {
     ...bibliography.map((item) => ({ [item.id]: item }))
   );
 
+   sys.retrieveLocale = function (lang){
+     console.log("retrieveLocale", lang); 
+     return fs.readFileSync("./locales/locales-" + lang + ".xml", "utf-8")
+   };
+   
+  
+
   return sys;
 }
 

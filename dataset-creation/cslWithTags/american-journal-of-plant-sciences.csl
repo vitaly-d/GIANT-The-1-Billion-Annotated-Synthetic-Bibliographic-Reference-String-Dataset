@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
   <info>
     <title>American Journal of Plant Sciences</title>
     <id>http://www.zotero.org/styles/american-journal-of-plant-sciences</id>
@@ -113,12 +113,12 @@
   <citation collapse="citation-number">
     
     <layout delimiter="," prefix="[" suffix="]">
-      
+      <text variable="citation-number" form="long" font-style="normal" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography et-al-min="99" et-al-use-first="98" second-field-align="flush" entry-spacing="0">
     <layout suffix=".">
-      
+      <text variable="citation-number" form="long" suffix="&lt;/citation-number> " prefix="&lt;citation-number>"/>
       <group suffix=".">
         <text macro="author" suffix="." prefix=""/>
         <text macro="issued" prefix="" suffix=""/>

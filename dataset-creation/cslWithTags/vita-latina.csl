@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" demote-non-dropping-particle="sort-only" default-locale="fr-FR">
   <!--
 
 Feuille de style CSL 
@@ -13,7 +13,7 @@ Remarques :
  -->
   <!-- INFORMATIONS RELATIVES A LA FEUILLE DE STYLE -->
   <info>
-    <title>Vita Latina (French)</title>
+    <title>Vita Latina (Français)</title>
     <title-short>VL</title-short>
     <id>http://www.zotero.org/styles/vita-latina</id>
     <link href="http://www.zotero.org/styles/vita-latina" rel="self"/>

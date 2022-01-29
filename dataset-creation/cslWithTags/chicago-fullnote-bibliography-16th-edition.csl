@@ -25,6 +25,9 @@
       <name>Andrew Dunning</name>
       <email>andrew.dunning@utoronto.ca</email>
     </contributor>
+    <contributor>
+      <name>Brenton M. Wiernik</name>
+    </contributor>
     <category citation-format="note"/>
     <category field="generic-base"/>
     <summary>Chicago format with full notes and bibliography</summary>
@@ -63,21 +66,21 @@
   </macro>
   <macro name="secondary-contributors-note">
     <choose>
-      <if type="chapter paper-conference" match="none">
+      <if type="chapter entry-dictionary entry-encyclopedia paper-conference" match="none">
         <text macro="editor-translator" prefix="" suffix=""/>
       </if>
     </choose>
   </macro>
   <macro name="container-contributors-note">
     <choose>
-      <if type="chapter paper-conference" match="any">
+      <if type="chapter entry-dictionary entry-encyclopedia paper-conference" match="any">
         <text macro="editor-translator" prefix="" suffix=""/>
       </if>
     </choose>
   </macro>
   <macro name="secondary-contributors">
     <choose>
-      <if type="chapter paper-conference" match="none">
+      <if type="chapter entry-dictionary entry-encyclopedia paper-conference" match="none">
         <names variable="editor translator" delimiter=". " prefix="&lt;editor translator>" suffix="&lt;/editor translator>">
           <label form="verb" text-case="capitalize-first" suffix=" "/>
           <name and="text" delimiter=", "><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
@@ -87,7 +90,7 @@
   </macro>
   <macro name="container-contributors">
     <choose>
-      <if type="chapter paper-conference" match="any">
+      <if type="chapter entry-dictionary entry-encyclopedia paper-conference" match="any">
         <group delimiter=", ">
           <choose>
             <if variable="author">
@@ -178,6 +181,11 @@
         <substitute>
           <text macro="editor" prefix="" suffix=""/>
           <text macro="translator" prefix="" suffix=""/>
+          <choose>
+            <if type="article-magazine article-newspaper webpage post-weblog" match="any">
+              <text variable="container-title" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+            </if>
+          </choose>
         </substitute>
       </names>
       <text macro="recipient" prefix="" suffix=""/>
@@ -361,7 +369,7 @@
   <macro name="container-title-note">
     <group delimiter=" ">
       <choose>
-        <if type="chapter paper-conference" match="any">
+        <if type="chapter entry-dictionary entry-encyclopedia paper-conference" match="any">
           <text term="in" prefix="" suffix=""/>
         </if>
       </choose>
@@ -375,7 +383,7 @@
   <macro name="container-title">
     <group delimiter=" ">
       <choose>
-        <if type="chapter paper-conference" match="any">
+        <if type="chapter entry-dictionary entry-encyclopedia paper-conference" match="any">
           <text term="in" text-case="capitalize-first" prefix="" suffix=""/>
         </if>
       </choose>
@@ -627,7 +635,7 @@
           </group>
         </group>
       </else-if>
-      <else-if type="chapter paper-conference" match="any">
+      <else-if type="chapter entry-dictionary entry-encyclopedia paper-conference" match="any">
         <group delimiter=". ">
           <text macro="edition" prefix="" suffix=""/>
           <choose>
@@ -665,7 +673,14 @@
     <choose>
       <if variable="title">
         <group delimiter=" ">
-          <text term="presented at" prefix="" suffix=""/>
+          <choose>
+            <if variable="genre">
+              <text term="presented at" prefix="" suffix=""/>
+            </if>
+            <else>
+              <text term="presented at" text-case="capitalize-first" prefix="" suffix=""/>
+            </else>
+          </choose>
           <text variable="event" prefix="&lt;event>" suffix="&lt;/event>"/>
         </group>
       </if>
@@ -900,7 +915,7 @@
   </macro>
   <macro name="locators-chapter">
     <choose>
-      <if type="chapter paper-conference" match="any">
+      <if type="chapter entry-dictionary entry-encyclopedia paper-conference" match="any">
         <choose>
           <if variable="author container-author" match="all"/>
           <else>

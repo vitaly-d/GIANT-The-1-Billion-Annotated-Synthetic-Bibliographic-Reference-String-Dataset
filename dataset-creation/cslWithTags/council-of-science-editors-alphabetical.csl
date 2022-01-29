@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
   <info>
     <title>Council of Science Editors, Citation-Name (numeric, sorted alphabetically)</title>
     <title-short>CSE C-N</title-short>
@@ -21,7 +21,7 @@
     <category citation-format="numeric"/>
     <category field="science"/>
     <summary>The Council of Science Editors style 8th edition, Citation-Name system: numbers in text, sorted in alphabetical order by author.</summary>
-    <updated>2017-07-20T08:32:51+00:00</updated>
+    <updated>2019-01-16T10:56:50+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="en">
@@ -59,11 +59,7 @@
     </group>
   </macro>
   <macro name="access">
-    <choose>
-      <if variable="accessed" match="any">
-        <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
-      </if>
-    </choose>
+    <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
   </macro>
   <macro name="title">
     <group delimiter=" ">
@@ -227,6 +223,7 @@
             <text macro="editor" prefix="" suffix=""/>
           </group>
           <group prefix=" " suffix=".">
+            <text variable="container-title" suffix="&lt;/container-title>." prefix="&lt;container-title>"/>
             <group delimiter=";" prefix=" ">
               <text macro="issued" prefix="" suffix=""/>
               <group>

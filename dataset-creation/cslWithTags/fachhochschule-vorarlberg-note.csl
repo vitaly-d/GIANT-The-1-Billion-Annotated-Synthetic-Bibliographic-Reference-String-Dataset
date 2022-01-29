@@ -28,7 +28,7 @@
     <category citation-format="note"/>
     <category field="generic-base"/>
     <summary>Citation Style of the University of Applied Sciences Vorarlberg/Austria, based on A Harvard author-date style variant, mostly german, footnote style</summary>
-    <updated>2018-02-24T16:00:00+00:00</updated>
+    <updated>2021-06-12T09:00:00+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="de">
@@ -268,7 +268,7 @@
         <date variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>">
           <date-part name="year" prefix="(&lt;year>" suffix="&lt;/year>)"/>
         </date>
-        <text variable="issue" prefix=", H. &lt;issue>" suffix="&lt;/issue>"/>
+        <text variable="issue" prefix=", &lt;issue>" suffix="&lt;/issue>"/>
         <choose>
           <if variable="page">
             <text value="" prefix="" suffix=""/>
@@ -383,9 +383,11 @@
     </choose>
   </macro>
   <citation et-al-min="4" et-al-use-first="1" et-al-subsequent-min="4" et-al-subsequent-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true" collapse="year">
-    <layout delimiter="; ">
-      <text macro="author-short" prefix="" suffix=""/>
-      <text macro="year-date" prefix=" " suffix=""/>
+    <layout delimiter="; " suffix=".">
+      <group delimiter=" ">
+        <text macro="author-short" prefix="" suffix=""/>
+        <text macro="year-date" prefix="" suffix=""/>
+      </group>
       <choose>
         <if variable="locator">
           <text term="page" form="short" prefix=", " suffix=" "/>

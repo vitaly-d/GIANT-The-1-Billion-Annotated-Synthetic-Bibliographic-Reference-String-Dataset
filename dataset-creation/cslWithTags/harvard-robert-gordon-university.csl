@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-GB" page-range-format="expanded">
   <info>
     <title>Robert Gordon University - Harvard</title>
     <id>http://www.zotero.org/styles/harvard-robert-gordon-university</id>
     <link href="http://www.zotero.org/styles/harvard-robert-gordon-university" rel="self"/>
-    <link href="http://www.zotero.org/styles/harvard-southampton-solent-university" rel="template"/>
-    <link href="http://ask.fxplus.ac.uk/harvard-falmouth" rel="documentation"/>
+    <link href="http://www.zotero.org/styles/solent-university-harvard" rel="template"/>
+    <link href="https://libguides.rgu.ac.uk/harvard-referencing-templates" rel="documentation"/>
     <author>
       <name>Sebastian Karcher</name>
     </author>

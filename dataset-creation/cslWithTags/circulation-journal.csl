@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" page-range-format="expanded" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" page-range-format="expanded" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
   <info>
     <title>Circulation Journal</title>
     <title-short>Circ.J.</title-short>
@@ -12,11 +12,15 @@
       <email>naritatsu@gmail.com</email>
       <uri>http://www.mendeley.com/profiles/naritatsu-saito/</uri>
     </author>
+    <contributor>
+      <name>Naritatsu Saito, M.D., Ph.D.</name>
+      <uri>https://www.mendeley.com/profiles/naritatsu-saito/</uri>
+    </contributor>
     <category citation-format="numeric"/>
     <category field="medicine"/>
     <issn>1346-9843</issn>
     <eissn>1347-4820</eissn>
-    <updated>2017-11-30T07:54:21+00:00</updated>
+    <updated>2020-08-27T01:19:44+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <macro name="author">
@@ -85,13 +89,13 @@
   </macro>
   <citation collapse="citation-number">
     
-    <layout prefix="[" suffix="]" delimiter=",">
+    <layout vertical-align="sup" delimiter=",">
       <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
     </layout>
   </citation>
   <bibliography entry-spacing="0" second-field-align="flush" et-al-min="7" et-al-use-first="6">
     <layout suffix=".">
-      <text variable="citation-number" prefix="[&lt;citation-number>" suffix="&lt;/citation-number>]"/>
+      <text variable="citation-number" suffix="&lt;/citation-number>." prefix="&lt;citation-number>"/>
       <text macro="author" suffix=". " prefix=""/>
       <choose>
         <if type="bill book graphic legal_case legislation motion_picture report song" match="any">
@@ -154,7 +158,7 @@
                 <text variable="volume" prefix="&lt;volume>" suffix="&lt;/volume>"/>
               </group>
             </group>
-            <text variable="page" form="short" prefix="&lt;page>" suffix="&lt;/page>"/>
+            <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
           </group>
         </else>
       </choose>

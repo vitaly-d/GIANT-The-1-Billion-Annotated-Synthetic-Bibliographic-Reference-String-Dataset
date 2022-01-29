@@ -8,14 +8,29 @@
     <link href="http://www.zotero.org/styles/sozialwissenschaften-heilmann" rel="template"/>
     <link href="https://www.sachverstaendigenrat-wirtschaft.de/fileadmin/dateiablage/Sonstiges/SVR_Styleguide_Literaturverzeichnis_Stand_16.03.2017.pdf" rel="documentation"/>
     <author>
+      <name>Waldemar Hamm</name>
+      <email>waldemar.hamm@destatis.de</email>
+      <uri>http://www.sachverstaendigenrat-wirtschaft.de/index.html</uri>
+    </author>
+    <contributor>
       <name>Chris-Gabriel Islam</name>
       <email>chris-gabriel.islam@destatis.de</email>
       <uri>http://www.sachverstaendigenrat-wirtschaft.de/index.html</uri>
-    </author>
+    </contributor>
+    <contributor>
+      <name>Lara Wiengarten</name>
+      <email>lara.wiengarten@destatis.de</email>
+      <uri>http://www.sachverstaendigenrat-wirtschaft.de/index.html</uri>
+    </contributor>
+    <contributor>
+      <name>Adina Ehm</name>
+      <email>adina.ehm@destatis.de</email>
+      <uri>http://www.sachverstaendigenrat-wirtschaft.de/index.html</uri>
+    </contributor>
     <category citation-format="author-date"/>
     <category field="political_science"/>
     <summary>Style for the German Council of Economic Experts</summary>
-    <updated>2017-10-31T15:43:27+00:00</updated>
+    <updated>2021-09-13T14:00:00+02:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="de">
@@ -149,15 +164,10 @@
     </choose>
   </macro>
   <macro name="publisher">
-    <choose>
-      <if variable="publisher-place">
-        <text prefix="&lt;publisher>" variable="publisher" suffix="&lt;/publisher>, "/>
-      </if>
-      <else>
-        <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
-      </else>
-    </choose>
-    <text variable="publisher-place" prefix="&lt;publisher-place>" suffix="&lt;/publisher-place>"/>
+    <group delimiter=", ">
+      <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
+      <text variable="publisher-place" prefix="&lt;publisher-place>" suffix="&lt;/publisher-place>"/>
+    </group>
   </macro>
   <macro name="access">
     <choose>
@@ -230,11 +240,17 @@
   <macro name="issued">
     <choose>
       <if type="report">
-        <text variable="collection-title" prefix=", &lt;collection-title>" suffix="&lt;/collection-title>"/>
-        <text variable="genre" prefix=", &lt;genre>" suffix="&lt;/genre>"/>
-        <text variable="number" prefix=" &lt;number>" suffix="&lt;/number>"/>
-        <text variable="publisher" prefix=", &lt;publisher>" suffix="&lt;/publisher>"/>
-        <text variable="publisher-place" prefix=", &lt;publisher-place>" suffix="&lt;/publisher-place>"/>
+        <group delimiter=", ">
+          <group delimiter=" ">
+            <group delimiter=", ">
+              <text variable="collection-title" prefix="&lt;collection-title>" suffix="&lt;/collection-title>"/>
+              <text variable="genre" prefix="&lt;genre>" suffix="&lt;/genre>"/>
+            </group>
+            <text variable="number" prefix="&lt;number>" suffix="&lt;/number>"/>
+          </group>
+          <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
+          <text variable="publisher-place" prefix="&lt;publisher-place>" suffix="&lt;/publisher-place>"/>
+        </group>
       </if>
       <else-if type="article-journal article-newspaper article-magazine" match="any">
         <number prefix=" " variable="volume"/>
@@ -248,15 +264,19 @@
     </choose>
     <choose>
       <if type="chapter book" match="any">
-        <text macro="collection" prefix=", " suffix=""/>
-        <choose>
-          <if variable="volume">
-            <text term="volume" form="short" prefix=", " suffix=". "/>
-            <text variable="volume" prefix="&lt;volume>" suffix="&lt;/volume>"/>
-          </if>
-        </choose>
-        <text macro="edition" prefix=", " suffix=""/>
-        <text macro="publisher" prefix=", " suffix=""/>
+        <group delimiter=", " prefix=", ">
+          <text macro="collection" prefix="" suffix=""/>
+          <choose>
+            <if variable="volume">
+              <group delimiter=" ">
+                <text term="volume" form="short" suffix="." prefix=""/>
+                <text variable="volume" prefix="&lt;volume>" suffix="&lt;/volume>"/>
+              </group>
+            </if>
+          </choose>
+          <text macro="edition" prefix="" suffix=""/>
+          <text macro="publisher" prefix="" suffix=""/>
+        </group>
       </if>
     </choose>
   </macro>
@@ -268,7 +288,17 @@
     </choose>
   </macro>
   <macro name="citation-locator">
-    <text variable="locator" prefix="&lt;locator>" suffix="&lt;/locator>"/>
+    <group delimiter=" ">
+      <choose>
+        <if locator="page">
+          <label variable="locator" form="short"/>
+        </if>
+        <else>
+          <label variable="locator" form="short" text-case="capitalize-first"/>
+        </else>
+      </choose>
+      <text variable="locator" prefix="&lt;locator>" suffix="&lt;/locator>"/>
+    </group>
   </macro>
   <macro name="exact-date">
     <choose>
@@ -290,11 +320,9 @@
   <citation et-al-min="3" et-al-use-first="1" disambiguate-add-givenname="true" collapse="year" year-suffix-delimiter=", ">
     
     <layout prefix="(" suffix=")" delimiter="; ">
-      <group delimiter=": ">
-        <group delimiter=", ">
-          <text macro="contributors-short" prefix="" suffix=""/>
-          <text macro="date" prefix="" suffix=""/>
-        </group>
+      <group delimiter=", ">
+        <text macro="contributors-short" prefix="" suffix=""/>
+        <text macro="date" prefix="" suffix=""/>
         <text macro="citation-locator" prefix="" suffix=""/>
       </group>
     </layout>
@@ -307,16 +335,27 @@
           <text macro="contributors-long" prefix="" suffix=""/>
           <text prefix="(" macro="date" suffix=")"/>
         </group>
-        <text macro="title" prefix="" suffix=""/>
-        <text macro="container" prefix="" suffix=""/>
-      </group>
-      <group delimiter=", ">
-        <text macro="issued" prefix="" suffix=""/>
-        <text macro="pages" prefix="" suffix=""/>
-        <text macro="access" prefix="" suffix=""/>
-        <text macro="exact-date" prefix="" suffix=""/>
-        <text macro="mimeo" prefix="" suffix=""/>
-        <text prefix="doi:&lt;DOI>" variable="DOI" suffix="&lt;/DOI>"/>
+        <choose>
+          <if type="book">
+            <group>
+              <text macro="title" prefix="" suffix=""/>
+              <text macro="issued" prefix="" suffix=""/>
+            </group>
+          </if>
+          <else>
+            <text macro="title" prefix="" suffix=""/>
+            <group>
+              <text macro="container" prefix="" suffix=""/>
+              <text macro="issued" prefix="" suffix=""/>
+            </group>
+          </else>
+        </choose>
+        <group delimiter=", ">
+          <text macro="pages" prefix="" suffix=""/>
+          <text macro="access" prefix="" suffix=""/>
+          <text macro="exact-date" prefix="" suffix=""/>
+          <text macro="mimeo" prefix="" suffix=""/>
+        </group>
       </group>
     </layout>
   </bibliography>

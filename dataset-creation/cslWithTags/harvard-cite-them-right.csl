@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-GB">
   <info>
-    <title>Cite Them Right 10th edition - Harvard</title>
+    <title>Cite Them Right 11th edition - Harvard</title>
     <id>http://www.zotero.org/styles/harvard-cite-them-right</id>
     <link href="http://www.zotero.org/styles/harvard-cite-them-right" rel="self"/>
-    <link href="http://www.zotero.org/styles/harvard-university-of-greenwich" rel="template"/>
+    <link href="http://www.zotero.org/styles/harvard-cite-them-right-10th-edition" rel="template"/>
     <link href="http://www.citethemrightonline.com/" rel="documentation"/>
     <author>
-      <name>Sebastian Karcher</name>
+      <name>Patrick O'Brien</name>
     </author>
-    <contributor>
-      <name>Scott Wagstaff</name>
-      <uri>http://www.mendeley.com/profiles/scott-wagstaff/</uri>
-    </contributor>
     <category citation-format="author-date"/>
     <category field="generic-base"/>
-    <summary>Harvard according to Cite Them Right, 10th edition.</summary>
-    <updated>2017-05-17T00:00:00+00:00</updated>
+    <summary>Harvard according to Cite Them Right, 11th edition.</summary>
+    <updated>2021-09-01T07:43:59+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="en-GB">
@@ -38,7 +34,7 @@
         <choose>
           <if variable="container-author" match="none">
             <names variable="editor translator" delimiter=", " prefix="&lt;editor translator>" suffix="&lt;/editor translator>">
-              <name and="text" initialize-with=". " delimiter=", " sort-separator=", " name-as-sort-order="all"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+              <name and="text" initialize-with="." name-as-sort-order="all"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
               <label form="short" prefix=" (" suffix=")"/>
             </names>
           </if>
@@ -51,7 +47,7 @@
       <if type="chapter paper-conference" match="none">
         <names variable="editor translator" delimiter=". " prefix="&lt;editor translator>" suffix="&lt;/editor translator>">
           <label form="verb" text-case="capitalize-first" suffix=" "/>
-          <name and="text" initialize-with=". " delimiter=", "><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+          <name and="text" initialize-with="."><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
         </names>
       </if>
       <else-if variable="container-author" match="any">
@@ -64,7 +60,7 @@
   </macro>
   <macro name="author">
     <names variable="author" prefix="&lt;author>" suffix="&lt;/author>">
-      <name and="text" delimiter-precedes-last="never" initialize-with=". " name-as-sort-order="all"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
+      <name and="text" delimiter-precedes-last="never" initialize-with="." name-as-sort-order="all"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
       <label form="short" prefix=" (" suffix=")"/>
       <et-al font-style="italic"/>
       <substitute>
@@ -102,7 +98,7 @@
   <macro name="access">
     <choose>
       <if variable="DOI">
-        <text variable="DOI" prefix="doi: &lt;DOI>" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
       </if>
       <else-if variable="URL">
         <text term="available at" suffix=": " text-case="capitalize-first" prefix=""/>
@@ -130,10 +126,13 @@
   </macro>
   <macro name="title">
     <choose>
-      <if type="bill book graphic legal_case legislation motion_picture report song thesis webpage" match="any">
+      <if type="bill book legal_case legislation motion_picture report song thesis webpage graphic" match="any">
         <group delimiter=". ">
           <group delimiter=" ">
-            <text variable="title" font-style="italic" prefix="&lt;title>" suffix="&lt;/title>"/>
+            <group delimiter=" ">
+              <text variable="title" font-style="italic" prefix="&lt;title>" suffix="&lt;/title>"/>
+              <text variable="medium" prefix="[&lt;medium>" suffix="&lt;/medium>]"/>
+            </group>
             <text macro="number-volumes" prefix="" suffix=""/>
           </group>
           <text macro="edition" prefix="" suffix=""/>
@@ -164,7 +163,7 @@
           </group>
         </group>
       </else-if>
-      <else-if type="article-newspaper article-magazine" match="none">
+      <else-if type="article-journal article-newspaper article-magazine" match="none">
         <group delimiter=" ">
           <group delimiter=", ">
             <choose>
@@ -231,7 +230,18 @@
     <choose>
       <if variable="container-title">
         <group delimiter=". ">
-          <text variable="container-title" font-style="italic" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+          <group delimiter=" ">
+            <text variable="container-title" font-style="italic" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
+            <choose>
+              <if type="article article-journal" match="any">
+                <choose>
+                  <if match="none" variable="page volume">
+                    <text value="Preprint" prefix="[" suffix="]"/>
+                  </if>
+                </choose>
+              </if>
+            </choose>
+          </group>
           <text macro="edition" prefix="" suffix=""/>
         </group>
       </if>

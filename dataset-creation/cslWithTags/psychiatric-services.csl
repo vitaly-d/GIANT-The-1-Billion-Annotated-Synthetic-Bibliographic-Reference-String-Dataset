@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" page-range-format="expanded">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" page-range-format="expanded" default-locale="en-US">
   <info>
     <title>Psychiatric Services</title>
     <id>http://www.zotero.org/styles/psychiatric-services</id>
@@ -65,26 +65,17 @@
   </macro>
   <macro name="journal-title">
     <choose>
-      <if type="article-journal article-magazine" match="any">
-        <text variable="container-title" suffix="&lt;/container-title> " prefix="&lt;container-title>"/>
+      <if type="article-journal" match="any">
+        <text variable="container-title" suffix="&lt;/container-title> " form="short" strip-periods="true" prefix="&lt;container-title>"/>
       </if>
       <else>
-        <text variable="container-title" suffix="&lt;/container-title>. " form="short" prefix="&lt;container-title>"/>
+        <text variable="container-title" suffix="&lt;/container-title>. " prefix="&lt;container-title>"/>
       </else>
     </choose>
   </macro>
   <macro name="title">
     <group delimiter=" ">
       <text variable="title" prefix="&lt;title>" suffix="&lt;/title>"/>
-      <choose>
-        <if type="article-journal article-magazine" match="none">
-          <choose>
-            <if variable="URL">
-              <text term="internet" prefix="[" suffix="]" text-case="capitalize-first"/>
-            </if>
-          </choose>
-        </if>
-      </choose>
       <choose>
         <if type="thesis">
           <text variable="genre" prefix="[&lt;genre>" suffix="&lt;/genre>]"/>

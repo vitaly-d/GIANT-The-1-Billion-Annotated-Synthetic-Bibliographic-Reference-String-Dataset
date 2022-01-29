@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" page-range-format="expanded">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" page-range-format="expanded" default-locale="en-US">
   <info>
     <title>Paleobiology</title>
     <id>http://www.zotero.org/styles/paleobiology</id>
@@ -163,7 +163,7 @@
                 <choose>
                   <if is-numeric="volume">
                     <group delimiter=" ">
-                      <text value="Vol. " prefix="" suffix=""/>
+                      <text term="volume" form="short" text-case="capitalize-first" prefix="" suffix=""/>
                       <number variable="volume" form="numeric" suffix=". "/>
                     </group>
                   </if>

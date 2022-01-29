@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
   <info>
     <title>The Geological Society of America</title>
     <title-short>GSA</title-short>
     <id>http://www.zotero.org/styles/the-geological-society-of-america</id>
     <link href="http://www.zotero.org/styles/the-geological-society-of-america" rel="self"/>
-    <link href="http://www.geosociety.org/pubs/geoguid5.htm" rel="documentation"/>
+    <link href="http://www.geosociety.org/gsa/pubs/geology/home.aspx#overview" rel="documentation"/>
+    <link href="http://www.geosociety.org/documents/gsa/pubs/GSA_RefGuide_Examples.pdf" rel="documentation"/>
     <author>
       <name>Rintze Zelle</name>
       <uri>http://twitter.com/rintzezelle</uri>
@@ -15,7 +16,7 @@
     </contributor>
     <category citation-format="author-date"/>
     <category field="geology"/>
-    <updated>2016-02-26T22:06:38+00:00</updated>
+    <updated>2018-09-26T13:06:59+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <macro name="editor-translator">
@@ -74,7 +75,7 @@
   <macro name="access">
     <choose>
       <if variable="DOI">
-        <text variable="DOI" prefix="doi: &lt;DOI>" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
       </if>
       <else-if variable="URL">
         <group>
@@ -87,7 +88,8 @@
       </else-if>
     </choose>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-names="true" collapse="year">
+  <citation et-al-min="3" et-al-use-first="1" collapse="year">
+    
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">
         <text macro="author-short" prefix="" suffix=""/>
@@ -101,7 +103,7 @@
       </group>
     </layout>
   </citation>
-  <bibliography hanging-indent="true" et-al-min="15" et-al-use-first="14">
+  <bibliography et-al-min="11" et-al-use-first="1" hanging-indent="true">
     
     <layout suffix=".">
       <group delimiter=", ">
@@ -153,7 +155,6 @@
           <text variable="title" prefix=" &lt;title>" suffix="&lt;/title>"/>
           <text variable="genre" prefix=" [&lt;genre>" suffix="&lt;/genre>]"/>
           <group prefix=": " delimiter=", ">
-            <!--text variable="place" -->
             <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
             <text variable="number-of-pages" suffix="&lt;/number-of-pages> p." prefix="&lt;number-of-pages>"/>
           </group>
