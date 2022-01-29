@@ -11,6 +11,7 @@ from random import random
 import spacy
 from spacy.tokens import Doc
 from spacy.training import Example
+import typer
 
 def insert_hanging_indent(example_dict, pos, orth = "\n  "): 
 
@@ -29,23 +30,32 @@ def insert_hanging_indent(example_dict, pos, orth = "\n  "):
 
 
 @spacy.registry.augmenters("hanging_indent_augmenter.v1")
-def create_augmenter(level =.1, orth = "\n", insert_after_span_names = ["title", "author"]):
-    """
-    create augmenter. It will work only if example.reference.spans["bib"] contains `insert_after` spans 
-    """
+def create_augmenter(orth = "\n", levels = {"title":0.2, "author":0.8}):
+
+    def style(s, color=typer.colors.GREEN):
+        return typer.style(str(s), fg=color, bold=True) 
+
+    typer.echo(f"Creating augmenter func: orth='{style(orth)}', levels={style(levels)}") 
+    typer.echo(style("It will work only if example.reference.spans['bib'] contains spans defined in the levels arg", color=typer.colors.RED))
+
+
     def augment(nlp, example):
         
-        if random() > level:
-            # no augment, just return example
+        _rnd = {span_name:random() for span_name in levels.keys()}
+        _insert_after = [span_name for (span_name, level) in levels.items() if level < _rnd[span_name]]
+
+        if not _insert_after:
+            # no augment, just yield example and exit
             yield example
             return
 
         # Create augmented training example
         example_dict = example.to_dict()
+
         
         _doc = example.reference
         for span in reversed(_doc.spans["bib"]):
-            if span.label_ in insert_after_span_names:
+            if span.label_ in _insert_after:
                 
                 # print(span.label_, span)
                 pos = span.end
