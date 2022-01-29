@@ -168,6 +168,7 @@ def main(
                   than one dataset-creation/processManuscript.js node process, i.e. in k8s cluster,
                   if you need high parallelism
     """
+    Path(output_dir).mkdir(parents=True, exist_ok=True)
 
     input_files = [path for path in crossref_dir.glob("**/*.json")]
     input_files_parts = [

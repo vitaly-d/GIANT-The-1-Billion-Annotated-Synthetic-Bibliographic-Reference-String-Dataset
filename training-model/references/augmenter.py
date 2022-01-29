@@ -59,7 +59,7 @@ def create_augmenter(orth = "\n", levels = {"title":0.2, "author":0.8}):
                 
                 # print(span.label_, span)
                 pos = span.end
-                # try to keep punctuation on prev previous line"
+                # try to keep punctuation on previous line"
                 for i in range(pos, len(_doc)):
                     # print(span, _doc[i], _doc[i].is_punct)
                     if _doc[i].is_punct:
