@@ -116,7 +116,7 @@ def convert(
     crossref_files: List[Path],
     docbin_path: Path,
     csl_http_port=3000,
-    csl_processor_path="../../../dataset-creation/processManuscript.js",
+    csl_processor_path=f"{Path(__file__).parent}/../../dataset-creation/processManuscript.js",
 ):
 
     csl_processor_path = Path(csl_processor_path).resolve()
