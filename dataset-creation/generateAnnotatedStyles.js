@@ -126,14 +126,10 @@ for (var i = 0, len = csls.length; i < len; i++) {
       newprefix = "";
       newsuffix = "";
       if (variable) {
+	// console.log(variable)  
         newprefix = "<" + variable + ">";
         newsuffix = "</" + variable + ">"; //match(/[a-zA-Z0-9_-]+/)[0]
       }
-
-      // an example how to generate end-of-line after the author name
-      // if (variable == "author") {
-      //    newsuffix = "</" + variable + "><eol/>";
-      // }
 
       try {
         text[id].setAttribute("prefix", escapeXml2(text[id].getAttribute("prefix")) + newprefix);

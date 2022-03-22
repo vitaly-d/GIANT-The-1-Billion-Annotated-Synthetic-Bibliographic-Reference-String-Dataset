@@ -91,6 +91,6 @@ for (var i = 0; i < lines.length; i++) {
 //console.log(unknowns);
 var newFile = "./cslCiteprocOutput/cslciteproc.json";
 fs.writeFileSync(newFile, JSON.stringify(citations));
-console.log('Saved JSON to ' + newFile);
+// console.log('Saved JSON to ' + newFile);
 return citations;
 }}

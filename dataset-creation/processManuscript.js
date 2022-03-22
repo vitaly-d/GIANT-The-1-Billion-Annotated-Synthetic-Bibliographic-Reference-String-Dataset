@@ -18,7 +18,7 @@ function load_references(fileName, crossref = true) {
 }
 
 function load_references_from_string(data, crossref = true) {
-  console.time("readrawfile");
+  // console.time("readrawfile");
   if (crossref) {
     data = data.replace(/</g, "&lt;").replace(/>/g, "&rt;");
     lines = data.split("\n");
@@ -35,7 +35,7 @@ function load_references_from_string(data, crossref = true) {
   }
 
   // console.log(JSON.stringify(bibliography, undefined, 2));
-  console.timeEnd("readrawfile");
+  // console.timeEnd("readrawfile");
   var sys = new citeproc.simpleSys();
   var enUS = fs.readFileSync("./locales/locales-en-US.xml", "utf8");
   sys.addLocale("en-US", enUS);
@@ -45,7 +45,7 @@ function load_references_from_string(data, crossref = true) {
   );
 
    sys.retrieveLocale = function (lang){
-     console.log("retrieveLocale", lang); 
+     // console.log("retrieveLocale", lang); 
      return fs.readFileSync("./locales/locales-" + lang + ".xml", "utf-8")
    };
    
@@ -103,9 +103,9 @@ function makebib(sys, stylePath, citations) {
     var bib = engine.makeBibliography();
     //console.log(JSON.stringify(bib[0], null, 2));
 
-    if (bib[1] === undefined){
-      console.log("WARNING: bibliography is undefined, style: " + stylePath)
-    }
+    // if (bib[1] === undefined){
+    //   console.log("WARNING: bibliography is undefined, style: " + stylePath)
+    // }
 
     return {
       citations: rendered_citations,
@@ -157,12 +157,12 @@ app.post("/", cpUpload, function (req, res) {
     styles = JSON.parse(styles);
   }
 
-  console.log("Processing", crossref ? "CrossRef citeproc-json" : "csl-json");
+  // console.log("Processing", crossref ? "CrossRef citeproc-json" : "csl-json");
   sys = load_references_from_string(references_list_str, crossref);
   var rendered_bibliographies = [];
   for (style of styles) {
     var stylePath = cslFolder + csls[style] + ".csl";
-    console.log("rendering bibliograpgy using", stylePath);
+    // console.log("rendering bibliograpgy using", stylePath);
     try {
       references = makebib(sys, stylePath, citations_ragged_array);
       references["style"] = csls[style];
@@ -180,4 +180,10 @@ app.get("/styles", function (req, res) {
   res.json(csls);
 });
 app.set("json spaces", 2);
-app.listen(3000, "0.0.0.0");
+var args = process.argv.slice(2);
+port = 3000
+if (args.length > 0){
+    port = parseInt(args[0])
+}
+console.log("starting at http://localhost:" + port)
+app.listen(args[0], "0.0.0.0");

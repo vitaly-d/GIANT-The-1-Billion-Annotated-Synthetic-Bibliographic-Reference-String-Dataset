@@ -1,5 +1,6 @@
 from concurrent.futures import Future, ProcessPoolExecutor
 import logging
+import time
 from pathlib import Path
 from typing import List, Optional
 from tqdm import tqdm
@@ -9,8 +10,9 @@ import spacy
 from spacy.tokens import Doc, DocBin, Span
 import typer
 import numpy
+import subprocess
 
-from csl_client import make_bibliography, styles_list
+from csl_client import make_bibliography, styles_list, base_url
 from lxml_iter_tree import annotations
 from schema import tag_sentence_start, tags_span, tags_ent
 
@@ -110,42 +112,62 @@ def references_to_spacy_doc(
     return doc
 
 
-def convert(crossref_files: List[Path], docbin_path: Path):
-    styles: List[str] = styles_list()
-    len_styles = len(styles)
-    print(f"CSL processor supports {len_styles} styles")
+def convert(
+    crossref_files: List[Path],
+    docbin_path: Path,
+    csl_http_port=3000,
+    csl_processor_path="../../../dataset-creation/processManuscript.js",
+):
 
-    db = DocBin(store_user_data=True)
-    for f in tqdm(crossref_files, desc=docbin_path.name):
-        try:
-            bibliographies = make_bibliography(
-                f, randint(0, len_styles, NUM_STYLES_FOR_DOC).tolist()
-            )
-            for bibliography in bibliographies:
-                if "references" not in bibliography:
-                    print("a problem for style ", bibliography["style"])
-                    continue
-                references = bibliography["references"]
-                style = bibliography["style"]
-                docs = references_to_spacy(references, style, fname=f.name)
+    csl_processor_path = Path(csl_processor_path).resolve()
+    if not csl_processor_path.is_file():
+        print(f"{csl_processor_path} does not exist")
+        exit(1)
+    csl_processor_cwd = csl_processor_path.parent
+    with subprocess.Popen(
+        ["node", csl_processor_path, str(csl_http_port)],
+        cwd=csl_processor_cwd,
+    ) as p:
+        print(f"CSL processor: {csl_processor_path}, pid: {p.pid}")
+        time.sleep(1)
+        styles: List[str] = styles_list(url=base_url(csl_http_port))
+        len_styles = len(styles)
+        print(f"CSL processor supports {len_styles} styles")
 
-                # downsample
-                if len(docs) // DOWNSAMPE_RATIO > 0:
-                    docs = numpy.random.choice(
-                        numpy.array(docs, dtype=numpy.dtype("object")),
-                        len(docs) // DOWNSAMPE_RATIO,
-                        replace=False,
-                    )
+        db = DocBin(store_user_data=True)
+        for f in tqdm(crossref_files, desc=docbin_path.name):
+            try:
+                bibliographies = make_bibliography(
+                    f,
+                    randint(0, len_styles, NUM_STYLES_FOR_DOC).tolist(),
+                    url=base_url(csl_http_port),
+                )
+                for bibliography in bibliographies:
+                    if "references" not in bibliography:
+                        # print("a problem for style ", bibliography["style"])
+                        continue
+                    references = bibliography["references"]
+                    style = bibliography["style"]
+                    docs = references_to_spacy(references, style, fname=f.name)
 
-                for doc in docs:
-                    if doc:
-                        db.add(doc)
-                    else:
-                        log.warning("Can't parse a part of %s", f)
-        except:
-            log.exception("An exception while processing %s", f)
+                    # downsample
+                    if len(docs) // DOWNSAMPE_RATIO > 0:
+                        docs = numpy.random.choice(
+                            numpy.array(docs, dtype=numpy.dtype("object")),
+                            len(docs) // DOWNSAMPE_RATIO,
+                            replace=False,
+                        )
 
-    db.to_disk(docbin_path)
+                    for doc in docs:
+                        if doc:
+                            db.add(doc)
+                        else:
+                            log.warning("Can't parse a part of %s", f)
+            except:
+                log.exception("An exception while processing %s", f)
+
+        p.terminate()
+        db.to_disk(docbin_path)
     return docbin_path
 
 
@@ -179,7 +201,10 @@ def main(
         for i, input_files_part in enumerate(input_files_parts):
             futures.append(
                 e.submit(
-                    convert, input_files_part, output_dir / f"references.{i}.spacy"
+                    convert,
+                    input_files_part,
+                    output_dir / f"references.{i}.spacy",
+                    3000 + i,
                 )
             )
         for f in futures:
