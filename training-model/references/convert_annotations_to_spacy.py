@@ -69,7 +69,9 @@ def references_to_spacy_doc(
         log.exception("cannot parse %s", references)
         return
     # create doc from text
-    doc = blank_nlp("".join(root.itertext()))
+    text = "".join(root.itertext())
+    text = text.replace("\n", " ")
+    doc = blank_nlp(text)
     # add annotations: they are overlapped spans
 
     spans = [
