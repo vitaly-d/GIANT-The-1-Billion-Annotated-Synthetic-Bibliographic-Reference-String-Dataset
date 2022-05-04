@@ -14,7 +14,8 @@ RUN apt-get -y install xz-utils zip unzip curl
 
 # install Node
 ARG node_version=v16.13.1
-ARG node_distro=linux-x64
+#ARG node_distro=linux-x64
+ARG node_distro=linux-arm64
 RUN echo "Downloading https://nodejs.org/dist/${node_version}/node-${node_version}-${node_distro}.tar.xz"
 RUN mkdir -p /usr/local/lib/nodejs \
 && curl -L https://nodejs.org/dist/${node_version}/node-${node_version}-${node_distro}.tar.xz | tar xJv -C /usr/local/lib/nodejs
@@ -36,5 +37,7 @@ sh ./createCitations.sh \n\
 node processManuscript.js \n\
 ' >> ~/.bash_history 
 
-EXPOSE 3000
-CMD node processManuscript.js
+ARG port=8082
+ENV PORT=${port}
+EXPOSE ${port}
+CMD node processManuscript.js ${PORT}

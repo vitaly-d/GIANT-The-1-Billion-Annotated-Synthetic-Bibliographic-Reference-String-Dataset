@@ -181,9 +181,9 @@ app.get("/styles", function (req, res) {
 });
 app.set("json spaces", 2);
 var args = process.argv.slice(2);
-port = 3000
+port = 8082
 if (args.length > 0){
     port = parseInt(args[0])
 }
-console.log("starting at http://localhost:" + port)
+console.log("starting at http://0.0.0.0:" + port)
 app.listen(args[0], "0.0.0.0");
