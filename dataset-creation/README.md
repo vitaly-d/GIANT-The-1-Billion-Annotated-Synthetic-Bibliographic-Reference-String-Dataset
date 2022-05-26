@@ -45,7 +45,7 @@ Changes:
 
 ## processManuscript server
 
- `node processManuscript.js ` 
+ `node processManuscript.js 8082` 
 
  processManuscript server accept POST / request at localhost:8082. 
  It processes multipart requests. 
