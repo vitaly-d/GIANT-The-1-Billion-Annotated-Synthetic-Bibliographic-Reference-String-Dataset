@@ -155,7 +155,7 @@ app.post("/", cpUpload, function (req, res) {
   
   var csls = cslsWithTags;
   var cslFolder = cslFolderWithTags  
-  if ("on" == req.query.without_tags){
+  if ("on" == req.query.without_tags || "on" == req.body.without_tags){
       csls = cslsWithoutTags
       cslFolder = cslFolderWithoutTags
   }
