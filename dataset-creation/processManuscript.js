@@ -6,7 +6,8 @@ var citeproc = require("citeproc-js-node");
 var failedBibs = new Set();
 
 //This folder should have all the CSL files
-const cslFolder = "./cslWithTags/";
+const cslFolderWithTags = "./cslWithTags/";
+const cslFolderWithoutTags = "./csl/";
 
 var crossref_converter = require("./crossref2citeprocjson.js");
 // reads crossref csl json from fileName & returns sys with items in csl-json
@@ -124,7 +125,8 @@ function makebib(sys, stylePath, citations) {
 //
 
 // read CLS templates
-csls = readCSLs(cslFolder);
+cslsWithTags = readCSLs(cslFolderWithTags);
+cslsWithoutTags = readCSLs(cslFolderWithoutTags);
 
 //
 var express = require("express");
@@ -132,6 +134,7 @@ var express = require("express");
 var app = express();
 
 const multer = require("multer");
+const {Console} = require("console");
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 const cpUpload = upload.fields([
@@ -148,7 +151,14 @@ app.post("/", cpUpload, function (req, res) {
     : undefined;
 
   // input format: csl-json by default, CrossRef citeproc-json if crossref field is on, see crossref/crossrefDownload.py
-  crossref = "on" == req.body["crossref"];
+  var crossref = "on" == req.body.crossref || "on" == req.query.crossref;
+  
+  var csls = cslsWithTags;
+  var cslFolder = cslFolderWithTags  
+  if ("on" == req.query.without_tags){
+      csls = cslsWithoutTags
+      cslFolder = cslFolderWithoutTags
+  }
   // array of indexes of styles applied to the manuscript, see the '/styles' peer
   var styles = req.body["styles"];
   if (styles === undefined) {
@@ -177,6 +187,7 @@ app.post("/", cpUpload, function (req, res) {
 });
 
 app.get("/styles", function (req, res) {
+  csls = ("on" == req.params["without_tags"]) ? cslsWithoutTags : cslsWithTags  
   res.json(csls);
 });
 app.set("json spaces", 2);
@@ -186,4 +197,4 @@ if (args.length > 0){
     port = parseInt(args[0])
 }
 console.log("starting at http://0.0.0.0:" + port)
-app.listen(args[0], "0.0.0.0");
+app.listen(port, "0.0.0.0");
