@@ -6,8 +6,8 @@ var citeproc = require("citeproc-js-node");
 var failedBibs = new Set();
 
 //This folder should have all the CSL files
-const cslFolderWithTags = "./cslWithTags/";
-const cslFolderWithoutTags = "./csl/";
+const path = require('path');
+const defaultCslFolder = "./cslWithTags/";
 
 var crossref_converter = require("./crossref2citeprocjson.js");
 // reads crossref csl json from fileName & returns sys with items in csl-json
@@ -83,7 +83,7 @@ function makebib(sys, stylePath, citations) {
       engine.updateItems(citationKeys);
     } else {
       for (var i = 0; i < citations.length; i++) {
-        citationItems = [];
+        var citationItems = [];
         for (refId of citations[i]) {
           citationItems.push({ id: refId });
         }
@@ -125,8 +125,7 @@ function makebib(sys, stylePath, citations) {
 //
 
 // read CLS templates
-cslsWithTags = readCSLs(cslFolderWithTags);
-cslsWithoutTags = readCSLs(cslFolderWithoutTags);
+csls = {defaultCslFolder: readCSLs(defaultCslFolder)};
 
 //
 var express = require("express");
@@ -153,11 +152,10 @@ app.post("/", cpUpload, function (req, res) {
   // input format: csl-json by default, CrossRef citeproc-json if crossref field is on, see crossref/crossrefDownload.py
   var crossref = "on" == req.body.crossref || "on" == req.query.crossref;
   
-  var csls = cslsWithTags;
-  var cslFolder = cslFolderWithTags  
-  if ("on" == req.query.without_tags || "on" == req.body.without_tags){
-      csls = cslsWithoutTags
-      cslFolder = cslFolderWithoutTags
+  var cslFolder = req.query.csl_folder || req.body.csl_folder || defaultCslFolder
+  if (!(cslFolder in csls)){
+      console.log("Read CSLs from ", cslFolder)  
+      csls[cslFolder] = readCSLs(cslFolder)
   }
   // array of indexes of styles applied to the manuscript, see the '/styles' peer
   var styles = req.body["styles"];
@@ -171,11 +169,11 @@ app.post("/", cpUpload, function (req, res) {
   sys = load_references_from_string(references_list_str, crossref);
   var rendered_bibliographies = [];
   for (style of styles) {
-    var stylePath = cslFolder + csls[style] + ".csl";
+    var stylePath = path.join(cslFolder, csls[cslFolder][style] + ".csl");
     // console.log("rendering bibliograpgy using", stylePath);
     try {
       references = makebib(sys, stylePath, citations_ragged_array);
-      references["style"] = csls[style];
+      references["style"] = csls[cslFolder][style];
       rendered_bibliographies.push(references);
     } catch (exception) {
       console.error(

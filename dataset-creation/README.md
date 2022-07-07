@@ -58,6 +58,8 @@ Changes:
 
  - The `styles` input field allows to select styles to be applied to the references and citations. It is the list that consists indexes of CSL templates. You can see CSL templates and their indexes at `http://localhost:8082/styles`
 
+
+ - the csl_folder input field allows to specify an alternative dir with CSL styles *on the server*, e.g., `-F csl_folder=cslWithoutTags` 
 Response is the list that consists of bibliography and citations rendered for each specified style 
 
 ### Examples:
