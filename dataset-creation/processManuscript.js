@@ -125,7 +125,7 @@ function makebib(sys, stylePath, citations) {
 //
 
 // read CLS templates
-csls = {defaultCslFolder: readCSLs(defaultCslFolder)};
+const csls = {defaultCslFolder: readCSLs(defaultCslFolder)};
 
 //
 var express = require("express");
@@ -152,9 +152,9 @@ app.post("/", cpUpload, function (req, res) {
   // input format: csl-json by default, CrossRef citeproc-json if crossref field is on, see crossref/crossrefDownload.py
   var crossref = "on" == req.body.crossref || "on" == req.query.crossref;
   
-  var cslFolder = req.query.csl_folder || req.body.csl_folder || defaultCslFolder
+  var cslFolder = req.query.styles_dir || req.body.styles_dir || defaultCslFolder
   if (!(cslFolder in csls)){
-      console.log("Read CSLs from ", cslFolder)  
+      console.log("Read CSLs from", cslFolder)  
       csls[cslFolder] = readCSLs(cslFolder)
   }
   // array of indexes of styles applied to the manuscript, see the '/styles' peer
@@ -185,8 +185,12 @@ app.post("/", cpUpload, function (req, res) {
 });
 
 app.get("/styles", function (req, res) {
-  csls = ("on" == req.params["without_tags"]) ? cslsWithoutTags : cslsWithTags  
-  res.json(csls);
+  var cslFolder = req.query.styles_dir || defaultCslFolder
+  if (!(cslFolder in csls)){
+      console.log("Read CSLs from", cslFolder)  
+      csls[cslFolder] = readCSLs(cslFolder)
+  }
+  res.json(csls[cslFolder]);
 });
 app.set("json spaces", 2);
 var args = process.argv.slice(2);
