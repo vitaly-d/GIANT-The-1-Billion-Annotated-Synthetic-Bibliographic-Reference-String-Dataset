@@ -124,8 +124,8 @@ function makebib(sys, stylePath, citations) {
 // HTTP Peer
 //
 
-// read CLS templates
-const csls = {defaultCslFolder: readCSLs(defaultCslFolder)};
+// CLS templates dictionary: {cslFolder, csls}
+const csls = {};
 
 //
 var express = require("express");
@@ -152,7 +152,7 @@ app.post("/", cpUpload, function (req, res) {
   // input format: csl-json by default, CrossRef citeproc-json if crossref field is on, see crossref/crossrefDownload.py
   var crossref = "on" == req.body.crossref || "on" == req.query.crossref;
   
-  var cslFolder = req.query.styles_dir || req.body.styles_dir || defaultCslFolder
+  var cslFolder = path.normalize(req.query.styles_dir || req.body.styles_dir || defaultCslFolder)
   if (!(cslFolder in csls)){
       console.log("Read CSLs from", cslFolder)  
       csls[cslFolder] = readCSLs(cslFolder)
@@ -185,7 +185,7 @@ app.post("/", cpUpload, function (req, res) {
 });
 
 app.get("/styles", function (req, res) {
-  var cslFolder = req.query.styles_dir || defaultCslFolder
+  var cslFolder = path.normalize(req.query.styles_dir || defaultCslFolder)
   if (!(cslFolder in csls)){
       console.log("Read CSLs from", cslFolder)  
       csls[cslFolder] = readCSLs(cslFolder)
