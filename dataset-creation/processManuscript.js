@@ -169,11 +169,12 @@ app.post("/", cpUpload, function (req, res) {
   sys = load_references_from_string(references_list_str, crossref);
   var rendered_bibliographies = [];
   for (style of styles) {
-    var stylePath = path.join(cslFolder, csls[cslFolder][style] + ".csl");
+    const styleName = typeof style == 'number'? csls[cslFolder][style] : style 
+    var stylePath = path.join(cslFolder, styleName + ".csl");
     // console.log("rendering bibliograpgy using", stylePath);
     try {
       references = makebib(sys, stylePath, citations_ragged_array);
-      references["style"] = csls[cslFolder][style];
+      references["style"] = styleName;
       rendered_bibliographies.push(references);
     } catch (exception) {
       console.error(

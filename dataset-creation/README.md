@@ -56,7 +56,7 @@ Changes:
 
  - The `citations` input field is a file name that contain the ragged array of citation clusters, for example, see inputFiles/sampleCrossref.citations.json
 
- - The `styles` input field allows to select styles to be applied to the references and citations. It is the list that consists indexes of CSL templates. You can see CSL templates and their indexes at `http://localhost:8082/styles`
+ - The `styles` input field allows to select styles to be applied to the references and citations. The field value is the JSon list that consists of style names (string) or style indexes (number). You can see styles names (Firefox also dispays style indexes) at `http://localhost:8082/styles`
 
  - the `styles_dir` input field (or HTTP request parameter) allows to specify an alternative dir with CSL styles *on the server*, e.g., `-F styles_dir=cslWithoutTags` 
 
