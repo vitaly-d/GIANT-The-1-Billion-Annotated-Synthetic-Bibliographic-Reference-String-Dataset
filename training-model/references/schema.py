@@ -1,22 +1,6 @@
-tags_span = [
-    "citation-number",
-    "family",
-    "given",
-    "author",
-    "title",
-    "container-title",
-    "year",
-    "issued",
-    "url",
-    "bib",
-    "publisher",
-    "page",
-    "month",
-    "doi",
-]
-
 tags_ent = [
     "citation-number",
+    "citation-label",
     "family",
     "given",
     "title",
@@ -37,14 +21,19 @@ tags_ent = [
     "volume",
     "title-short",
     "number",
-    # "container-title-short",
-    # "locator",
-    # "day",
-    # "month",
-    # "year",
     "note",
     "archive",
     "archive_location",
 ]
+
+tags_span = [
+    "author",
+    "year",
+    "month",
+    "day",
+    "issued",
+    "url",
+    "bib",
+] + tags_ent
 
 tag_sentence_start = "bib"

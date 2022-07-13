@@ -178,6 +178,7 @@ def main(
     output_dir: Path = Path("train.ref"),
     parts: int = 100,
     parallel: int = 2,
+    csl_processor_path=f"{Path(__file__).parent}/../../dataset-creation/processManuscript.js",
 ):
     """
     Sends crossref files to CSL processor and convert rendered annotated biblioraphies into Spacy DocBin files
@@ -207,6 +208,7 @@ def main(
                     input_files_part,
                     output_dir / f"references.{i}.spacy",
                     3000 + i,
+                    csl_processor_path,
                 )
             )
         for f in futures:

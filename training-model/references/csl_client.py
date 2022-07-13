@@ -3,7 +3,7 @@ import json
 from json.decoder import JSONDecodeError
 import logging
 from pathlib import Path
-from typing import Any, List, Sequence
+from typing import Any, List, Sequence, Union
 
 import requests
 from requests.exceptions import RequestException
@@ -12,28 +12,34 @@ from crossref_json_example import crossref_json
 
 log = logging.Logger(__name__)
 
+
 def base_url(port=3000) -> str:
-        return f"http://localhost:{port}"
+    return f"http://localhost:{port}"
 
 
 URL = base_url()
+DEFAULT_STYLES_DIR = "cslSmallWithTags"
 
-def styles_list(url=URL):
+
+def styles_list(url=URL, styles_dir=DEFAULT_STYLES_DIR):
     """returns list of supported styles"""
-    return requests.get(f"{url}/styles").json()
+    return requests.get(f"{url}/styles", params={"styles_dir": styles_dir}).json()
 
 
 def make_bibliography(
-    references: Path, style_ids: Sequence[int] = [0], url=URL
+    references: Path,
+    style_ids: Union[Sequence[int], Sequence[str]] = ["ieee"],
+    url=URL,
+    styles_dir=DEFAULT_STYLES_DIR,
 ) -> List[Any]:
     try:
-
 
         with open(references, "rb") as references_stream:
             files = {
                 "references": (references.name, references_stream, "applicaion/json"),
                 "styles": (None, json.dumps(style_ids)),
                 "crossref": (None, "on"),
+                "styles_dir": (None, styles_dir),
             }
             r = requests.post(url, files=files)
 
@@ -47,12 +53,13 @@ def make_bibliography(
         raise e
 
 
-def _review_styles(crossref_json=crossref_json):
+def _review_styles(crossref_json=crossref_json, styles_dir=DEFAULT_STYLES_DIR):
 
     files = {
         "references": ("references.jsonl", StringIO(crossref_json), "applicaion/json"),
         "styles": (None, json.dumps(list(range(len(styles_list(url=URL)))))),
         "crossref": (None, "on"),
+        "styles_dir": (None, DEFAULT_STYLES_DIR),
     }
     r = requests.post(URL, files=files)
     r.raise_for_status()

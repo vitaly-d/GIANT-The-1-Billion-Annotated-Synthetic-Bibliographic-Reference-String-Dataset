@@ -6,8 +6,8 @@ rm -rf train.ref dev.ref
 python convert_annotations_to_spacy.py ../../dataset-creation/crossref/out --output-dir train.ref --parallel 8
 
 mkdir dev.ref
-cp train.ref/references.0.spacy dev.ref
-cp train.ref/references.7.spacy dev.ref
+mv train.ref/references.0.spacy dev.ref
+mv train.ref/references.7.spacy dev.ref
 
 ```
 
