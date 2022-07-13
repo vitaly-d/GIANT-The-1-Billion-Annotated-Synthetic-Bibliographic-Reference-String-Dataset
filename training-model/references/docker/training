@@ -1,0 +1,39 @@
+# BUILD (in docker):
+# docker$ docker build -f training  --tag training_bib_ref . 
+# 
+# RUN (in the project root):
+# mkdir output && chmod o+rwx output
+# docker run --runtime=nvidia --shm-size 2G --network host --rm -it --mount type=bind,source=$(pwd),target=/opt/ml/code training_bib_ref:latest
+#
+arg cuda_version=11.3
+
+ARG model_dir=/opt/ml/model
+ARG app_dir=/opt/ml/code
+
+WORKDIR ${app_dir}
+
+
+# define requirements: https://hub.docker.com/r/mambaorg/micromamba 
+RUN printf "name: base\n\
+channels:\n\
+  - pytorch\n\
+  - conda-forge\n\
+dependencies:\n\
+  - pytorch=1.12.0\n\
+  - python=3.9.7\n\
+  - spacy=3.4.0\n\
+  - spacy-transformers\n\
+  - sentencepiece\n\
+  - cupy\n\
+  - ipython\n\
+  - jupyter\n\
+" > /tmp/env.yaml
+RUN cat /tmp/env.yaml
+# install
+#
+RUN micromamba install -y -n base -f /tmp/env.yaml && \
+    micromamba clean --all --yes
+
+
+
+
