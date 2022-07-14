@@ -51,6 +51,10 @@ token_tags = [
     "author",
     "title",
     "container-title",
+    "publisher",
+    "issued",
+    "volume",
+    "page",
     "URL",
     "DOI",
 ]
