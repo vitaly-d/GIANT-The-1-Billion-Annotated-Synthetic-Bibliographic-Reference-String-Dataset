@@ -15,12 +15,14 @@ import subprocess
 from csl_client import make_bibliography, styles_list, base_url
 from lxml_iter_tree import annotations
 from schema import tag_sentence_start, tags_span, tags_ent
+from tokenizer import create_references_tokenizer
 
 NUM_STYLES_FOR_DOC = 10
 DOWNSAMPE_RATIO = 10
 
 log = logging.getLogger(__name__)
 blank_nlp = spacy.blank("en")
+blank_nlp.tokenizer = create_references_tokenizer()(blank_nlp)
 
 
 def references_to_spacy(
@@ -81,8 +83,19 @@ def references_to_spacy_doc(
     # doc.char_span can return None if character indices can't be snaped to token boundaries
     spans = [span for span in spans if span is not None]
 
-    # add annotations as possible overlapped spans for SpanCategorizer
+    # store annotations as possible overlapped spans
     doc.spans["bib"] = spans
+
+    # add bib item boundaries as spans.
+    # rationale: predictiong entire bib item span require generation a lot of candidates:
+    # something like max_bib_len*doc.len, that could be expensive
+    # instead we can predict just one-token spans
+    bibs = [span for span in spans if span.label_ == tag_sentence_start]
+    _len = 2
+    bib_boundaries = [
+        Span(doc, bib.start, bib.start + _len, "bib_start") for bib in bibs
+    ] + [Span(doc, bib.end - _len, bib.end, "bib_end") for bib in bibs]
+    doc.spans["bib_boundaries"] = bib_boundaries
 
     # add not-overlapped spans as doc.ents for NER
     ents = []

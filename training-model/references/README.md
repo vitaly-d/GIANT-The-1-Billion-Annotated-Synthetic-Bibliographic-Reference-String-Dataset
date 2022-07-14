@@ -18,11 +18,11 @@ mv train.ref/references.7.spacy dev.ref
 
 ## Init config
 ```
-python -m spacy init fill-config base_config_trf.cfg config.cfg
+python -m spacy init fill-config base_config_trf.cfg config.cfg -c bib_tokenizers.py
 
 ```
 
 ## train
 ```
-python -m spacy train config.cfg --output ./output -c augmenter.py  --gpu-id 0
+python -m spacy train config.cfg --output ./output -c bib_tokenizers.py  --gpu-id 0
 ```
