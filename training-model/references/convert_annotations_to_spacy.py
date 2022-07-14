@@ -1,32 +1,34 @@
 from concurrent.futures import Future, ProcessPoolExecutor
+import hashlib
 import logging
-import time
 from pathlib import Path
+import subprocess
+import time
 from typing import List, Optional
-from tqdm import tqdm
+
 from lxml import etree
+import numpy
 from numpy.random import randint
 import spacy
 from spacy.tokens import Doc, DocBin, Span
+from tqdm import tqdm
 import typer
-import numpy
-import subprocess
 
-from csl_client import make_bibliography, styles_list, base_url
+from bib_tokenizers import create_references_tokenizer
+from csl_client import base_url, make_bibliography, styles_list
 from lxml_iter_tree import annotations
 from schema import (
     tag_sentence_start,
-    tags_span,
     tags_ent,
+    tags_span,
     token_bib_end,
     token_bib_start,
     token_other,
     token_tags,
 )
-from bib_tokenizers import create_references_tokenizer
 
 NUM_STYLES_FOR_DOC = 10
-DOWNSAMPE_RATIO = 10
+DOWNSAMPE_RATIO = 5
 
 log = logging.getLogger(__name__)
 blank_nlp = spacy.blank("en")
@@ -169,6 +171,7 @@ def convert(
         print(f"CSL processor supports {len_styles} styles")
 
         db = DocBin(store_user_data=True)
+        digests = set()
         for f in tqdm(crossref_files, desc=docbin_path.name):
             try:
                 bibliographies = make_bibliography(
@@ -182,6 +185,20 @@ def convert(
                         continue
                     references = bibliography["references"]
                     style = bibliography["style"]
+
+                    # check digest if two styles produce the same string representation of the same crossref item
+                    _references = []
+                    for ref in references:
+                        digest = hashlib.md5(ref.encode("utf-8")).digest()
+                        if digest not in digests:
+                            digests.add(digest)
+                            _references.append(ref)
+                        # else:
+                        #     print("duplicate bib item: %s, style: %s", ref, style)
+                    references = _references
+                    if not references:
+                        continue
+
                     docs = references_to_spacy(references, style, fname=f.name)
 
                     # downsample
@@ -232,19 +249,30 @@ def main(
         arr.tolist() for arr in numpy.array_split(numpy.array(input_files), parts)
     ]
     futures: List[Future] = []
-    with ProcessPoolExecutor(parallel) as e:
-        for i, input_files_part in enumerate(input_files_parts):
-            futures.append(
-                e.submit(
-                    convert,
-                    input_files_part,
-                    output_dir / f"references.{i}.spacy",
-                    3000 + i,
-                    csl_processor_path,
+    if parallel > 0:
+        with ProcessPoolExecutor(parallel) as e:
+            for i, input_files_part in enumerate(input_files_parts):
+                futures.append(
+                    e.submit(
+                        convert,
+                        input_files_part,
+                        output_dir / f"references.{i}.spacy",
+                        3000 + i,
+                        csl_processor_path,
+                    )
                 )
+            for f in futures:
+                print("convert:done:", f.result())
+    else:
+        # useful for debugging with ipython.embed()
+        for i, input_files_part in enumerate(input_files_parts):
+            result = convert(
+                input_files_part,
+                output_dir / f"references.{i}.spacy",
+                3000 + i,
+                csl_processor_path,
             )
-        for f in futures:
-            print("convert:done:", f.result())
+            print("convert:done:", result)
 
 
 if __name__ == "__main__":
