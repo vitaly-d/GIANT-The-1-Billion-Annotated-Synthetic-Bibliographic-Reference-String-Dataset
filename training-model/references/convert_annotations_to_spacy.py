@@ -14,8 +14,16 @@ import subprocess
 
 from csl_client import make_bibliography, styles_list, base_url
 from lxml_iter_tree import annotations
-from schema import tag_sentence_start, tags_span, tags_ent
-from tokenizer import create_references_tokenizer
+from schema import (
+    tag_sentence_start,
+    tags_span,
+    tags_ent,
+    token_bib_end,
+    token_bib_start,
+    token_other,
+    token_tags,
+)
+from bib_tokenizers import create_references_tokenizer
 
 NUM_STYLES_FOR_DOC = 10
 DOWNSAMPE_RATIO = 10
@@ -90,12 +98,20 @@ def references_to_spacy_doc(
     # rationale: predictiong entire bib item span require generation a lot of candidates:
     # something like max_bib_len*doc.len, that could be expensive
     # instead we can predict just one-token spans
-    bibs = [span for span in spans if span.label_ == tag_sentence_start]
-    _len = 2
-    bib_boundaries = [
-        Span(doc, bib.start, bib.start + _len, "bib_start") for bib in bibs
-    ] + [Span(doc, bib.end - _len, bib.end, "bib_end") for bib in bibs]
-    doc.spans["bib_boundaries"] = bib_boundaries
+    # bibs = [span for span in spans if span.label_ == tag_sentence_start]
+    # _len = 2
+    # bib_boundaries = [
+    #     Span(doc, bib.start, bib.start + _len, "bib_start") for bib in bibs
+    # ] + [Span(doc, bib.end - _len, bib.end, "bib_end") for bib in bibs]
+    # doc.spans["bib_boundaries"] = bib_boundaries
+
+    # add tagger annotations:
+    for t in doc:
+        t.tag_ = token_other
+    for span in spans:
+        if span.label_ in token_tags:
+            for i in range(span.start, span.end):
+                doc[i].tag_ = span.label_
 
     # add not-overlapped spans as doc.ents for NER
     ents = []
@@ -119,6 +135,9 @@ def references_to_spacy_doc(
     for span in spans:
         if span.label_ == tag_sentence_start:
             span[0].is_sent_start = True
+            # also alter tagger annotations by adding bib item boundaries
+            doc[span.start].tag_ = token_bib_start
+            doc[span.end - 1].tag_ = token_bib_end
 
     # from pprint import pprint
     # pprint([(span.label_, span.text) for span in spans if span])

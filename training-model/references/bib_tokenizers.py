@@ -49,7 +49,7 @@ def create_references_tokenizer():
             "10.R. Nakamura and T. Kenzaka",
             "10R. Nakamura and T. Kenzaka",
         ]:
-            print(s, [t for t in tokenizer(s)])
+            print(s, "->", [t for t in tokenizer(s)])
 
         return tokenizer
 
