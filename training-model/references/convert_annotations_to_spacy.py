@@ -133,8 +133,10 @@ def references_to_spacy_doc(
             span[0].is_sent_start = True
 
             # experimental: add 'sent start span': it is easiest way to get scores when inference
-            sent_start_spans.append(doc[span.start : span.start + 1])
-    doc.spans[spankey_sentence_start] = sent_start_spans
+            sent_start_spans.append(
+                Span(doc, span.start, span.start + 1, tag_sentence_start)
+            )
+    doc.spans[spankey_sentence_start] = sent_start_spans  # "bib, bib,... bib ... "
 
     # from pprint import pprint
     # pprint([(span.label_, span.text) for span in spans if span])
