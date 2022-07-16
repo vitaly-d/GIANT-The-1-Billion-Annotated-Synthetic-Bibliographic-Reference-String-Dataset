@@ -41,20 +41,4 @@ tags_span = [
 # span tag used for adding sentence boundaries annotations: an annotated CSL style encloses each bib item with <bib>..</bib>
 tag_sentence_start = "bib"
 
-#
-# 'special' labels for the tokens classification task (e.g., for Spacy Tagger)
-#
-token_other = "other"
-token_bib_start = "bib_start"
-token_bib_end = "bib_end"
-token_tags = [
-    "author",
-    "title",
-    "container-title",
-    "publisher",
-    "issued",
-    "volume",
-    "page",
-    "URL",
-    "DOI",
-]
+spankey_sentence_start = "sc"

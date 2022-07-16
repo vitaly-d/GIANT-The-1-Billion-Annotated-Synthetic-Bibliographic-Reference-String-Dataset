@@ -21,10 +21,11 @@ from schema import (
     tag_sentence_start,
     tags_ent,
     tags_span,
-    token_bib_end,
-    token_bib_start,
-    token_other,
-    token_tags,
+    spankey_sentence_start,
+    # token_bib_end,
+    # token_bib_start,
+    # token_other,
+    # token_tags,
 )
 
 NUM_STYLES_FOR_DOC = 10
@@ -107,14 +108,6 @@ def references_to_spacy_doc(
     # ] + [Span(doc, bib.end - _len, bib.end, "bib_end") for bib in bibs]
     # doc.spans["bib_boundaries"] = bib_boundaries
 
-    # add tagger annotations:
-    for t in doc:
-        t.tag_ = token_other
-    for span in spans:
-        if span.label_ in token_tags:
-            for i in range(span.start, span.end):
-                doc[i].tag_ = span.label_
-
     # add not-overlapped spans as doc.ents for NER
     ents = []
     for ent in [span for span in spans if span.label_ in tags_ent]:
@@ -134,12 +127,14 @@ def references_to_spacy_doc(
     doc.set_ents(ents)
 
     # set is_sent_start for https://spacy.io/api/sentencerecognizer
+    sent_start_spans = []
     for span in spans:
         if span.label_ == tag_sentence_start:
             span[0].is_sent_start = True
-            # also alter tagger annotations by adding bib item boundaries
-            doc[span.start].tag_ = token_bib_start
-            doc[span.end - 1].tag_ = token_bib_end
+
+            # experimental: add 'sent start span': it is easiest way to get scores when inference
+            sent_start_spans.append(doc[span.start : span.start + 1])
+    doc.spans[spankey_sentence_start] = sent_start_spans
 
     # from pprint import pprint
     # pprint([(span.label_, span.text) for span in spans if span])

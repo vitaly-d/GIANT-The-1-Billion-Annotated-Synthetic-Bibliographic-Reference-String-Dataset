@@ -2,6 +2,7 @@ import spacy
 from spacy import displacy
 
 import gradio as gr
+from bib_tokenizers import create_references_tokenizer
 
 
 def split_up_references(references: str, nlp, nlp_blank=spacy.blank("en")):
@@ -42,6 +43,7 @@ def split_up_references(references: str, nlp, nlp_blank=spacy.blank("en")):
 
 nlp = spacy.load("output/model-best")
 nlp_blank = spacy.blank("en")
+nlp_blank.tokenizer = create_references_tokenizer()(nlp_blank)
 
 
 def text_analysis(text):
@@ -88,6 +90,11 @@ CFR
 (3) Zanger, U.M. & Klein, K. Pharmacogenetics of cytochrome P450 2B6 (CYP2B6): advances on polymorphisms, mechanisms, and clinical relevance. Front Genet  4, 24 (2013).
 (4) Holzinger, E.R. et al. Genome-wide association study of plasma efavirenz pharmacokinetics in AIDS Clinical Trials Group protocols implicates several CYP2B6 variants. Pharmacogenet Genomics  22, 858-67 (2012).
 """
+        ],
+        [
+            """[Ein05] Albert Einstein. Zur Elektrodynamik bewegter K ̈orper. (German)
+[On the electrodynamics of moving bodies]. Annalen der Physik,
+322(10):891–921, 1905. [GMS93] Michel Goossens, Frank Mittelbach, and Alexander Samarin. The LATEX Companion. Addison-Wesley, Reading, Massachusetts, 1993. [Knu] Donald Knuth. Knuth: Computers and typesetting."""
         ],
     ],
     layout="vertical",  # TBD: vertical seems does not work
