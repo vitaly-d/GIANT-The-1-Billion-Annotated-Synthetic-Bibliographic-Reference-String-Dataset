@@ -1,11 +1,63 @@
+import io
+import gradio as gr
 import spacy
 from spacy import displacy
 
-import gradio as gr
 from bib_tokenizers import create_references_tokenizer
 
 
-def split_up_references(references: str, nlp, nlp_blank=spacy.blank("en")):
+nlp = spacy.load("output/model-best")
+# return score for each token:
+# with threshold set to zero each suggested span is returned, and span == token,
+# because suggester is configured to suggest spans with len(span) == 1:
+#     [components.spancat.suggester]
+#     @misc = "spacy.ngram_suggester.v1"
+#     sizes = [1]
+nlp.get_pipe("spancat").cfg["threshold"] = 0.0  #  see )
+print(nlp.get_pipe("spancat").cfg)
+
+
+def create_bib_item_start_scorer_for_doc(doc, spanskey="sc"):
+
+    span_group = doc.spans[spanskey]
+    assert not span_group.has_overlap
+    assert len(span_group) == len(
+        doc
+    ), "Check suggester config and the spancat threshold to make sure that spangroup contains single token span for each token"
+
+    spans_idx = {
+        offset: span.start
+        for span in span_group
+        for offset in range(span.start_char, span.end_char + 1)
+    }
+
+    def scorer(char_offset, fuzzy=0):
+        i = spans_idx[char_offset]
+
+        span = span_group[i]
+        assert i == span.start
+        if not fuzzy:
+            # print(span, span_group.attrs["scores"][i])
+            return span, span_group.attrs["scores"][i]
+        else:
+            # might improve fault tolerance if the model made a small mistake, e.g., a number from prev line is classified as "citation number",
+            # see example at https://www.deeplearningbook.org/contents/bib.html
+            return span, max(
+                span_group.attrs["scores"][i]
+                for i in range(i - fuzzy, i + fuzzy)
+                if i >= 0 and i < len(doc.text)
+            )
+
+    return scorer
+
+
+nlp_blank = spacy.blank("en")
+nlp_blank.tokenizer = create_references_tokenizer()(nlp_blank)
+
+
+def split_up_references(
+    references: str, nlp, nlp_blank=spacy.blank("en"), is_eol_mode=False
+):
     """
     Args:
         references - a references section, ideally without a header
@@ -22,35 +74,46 @@ def split_up_references(references: str, nlp, nlp_blank=spacy.blank("en")):
     # the problem here is that docs differ in a number of tokens
     # however, it should be easy to align on characters level because both '\n' and ' ' are whitespace, so spans have the same boundaries
 
-    doc_with_linebreaks = nlp_blank(references)
-    # senter annotations
-    for t in doc:
-        if t.is_sent_start:
-            span = doc_with_linebreaks.char_span(t.idx, t.idx + len(t))
-            span[0].is_sent_start = True
-    if doc_with_linebreaks and not doc_with_linebreaks[0].is_sent_start:
-        # 1st token
-        doc_with_linebreaks[0].is_sent_start = True
+    target_doc = nlp_blank(references)
+    target_tokens_idx = {
+        offset: t.i for t in target_doc for offset in range(t.idx, t.idx + len(t))
+    }
 
-    # ner annotations:
-    doc_with_linebreaks.ents = [
-        doc_with_linebreaks.char_span(ent.start_char, ent.end_char, ent.label_)
+    # senter annotations
+    for i, t in enumerate(target_doc):
+        t.is_sent_start = i == 0
+    if is_eol_mode:
+        # use SpanCat scores to set sentence boundaries on the target doc
+        char_offset = 0
+        f = io.StringIO(references)
+        token_scorer = create_bib_item_start_scorer_for_doc(doc)
+        threshold = 0.5
+        for line in f:
+            _, score = token_scorer(char_offset)
+            if score > threshold:
+                target_doc[target_tokens_idx[char_offset]].is_sent_start = True
+            char_offset += len(line)
+    else:
+        # copy SentenceRecognizer annotations from doc without '\n' to the target doc
+        for t in doc:
+            if t.is_sent_start:
+                target_doc[target_tokens_idx[t.idx]].is_sent_start = True
+
+    # copy ner annotations:
+    target_doc.ents = [
+        target_doc.char_span(ent.start_char, ent.end_char, ent.label_)
         for ent in doc.ents
     ]
 
-    return doc_with_linebreaks
+    return target_doc
 
 
-nlp = spacy.load("output/model-best")
-nlp_blank = spacy.blank("en")
-nlp_blank.tokenizer = create_references_tokenizer()(nlp_blank)
-
-
-def text_analysis(text):
+def text_analysis(text, is_eol_mode):
 
     html = ""
 
-    doc_with_linebreaks = split_up_references(text, nlp, nlp_blank)
+    doc_with_linebreaks = split_up_references(text, nlp, nlp_blank, is_eol_mode)
+
     for i, sent in enumerate(doc_with_linebreaks.sents):
         bib_item_doc = sent.as_doc()
         bib_item_doc.user_data = {"title": f"***** Bib Item {i+1}: *****"}
@@ -67,7 +130,12 @@ def text_analysis(text):
 
 iface = gr.Interface(
     text_analysis,
-    [gr.inputs.Textbox(placeholder="Enter bibliography here...", lines=20)],
+    [
+        gr.components.Textbox(placeholder="Enter bibliography here...", lines=20),
+        gr.components.Checkbox(
+            label="One line cannot contain more than one bibitem (Multi-line bibitems are supported regardless of this choise)"
+        ),
+    ],
     ["html"],
     examples=[
         [
@@ -97,6 +165,5 @@ CFR
 322(10):891–921, 1905. [GMS93] Michel Goossens, Frank Mittelbach, and Alexander Samarin. The LATEX Companion. Addison-Wesley, Reading, Massachusetts, 1993. [Knu] Donald Knuth. Knuth: Computers and typesetting."""
         ],
     ],
-    layout="vertical",  # TBD: vertical seems does not work
     allow_flagging="never",
 ).launch(share=False, server_name="0.0.0.0", server_port=7080)
