@@ -36,17 +36,15 @@ def create_bib_item_start_scorer_for_doc(doc, spanskey="sc"):
 
         span = span_group[i]
         assert i == span.start
-        if not fuzzy:
-            # print(span, span_group.attrs["scores"][i])
-            return span, span_group.attrs["scores"][i]
-        else:
-            # might improve fault tolerance if the model made a small mistake, e.g., a number from prev line is classified as "citation number",
-            # see example at https://www.deeplearningbook.org/contents/bib.html
-            return span, max(
-                span_group.attrs["scores"][i]
-                for i in range(i - fuzzy, i + fuzzy)
-                if i >= 0 and i < len(doc.text)
-            )
+        # fuzzines might improve fault tolerance if the model made a small mistake,
+        # e.g., if a number from prev line is classified as "citation number",
+        #    see example at https://www.deeplearningbook.org/contents/bib.html
+        # if fuzzy == 0, it return score for the selected span only
+        return span, max(
+            span_group.attrs["scores"][i]
+            for i in range(i - fuzzy, i + fuzzy + 1)
+            if i >= 0 and i < len(doc.text)
+        )
 
     return scorer
 
@@ -89,7 +87,7 @@ def split_up_references(
         token_scorer = create_bib_item_start_scorer_for_doc(doc)
         threshold = 0.5
         for line in f:
-            _, score = token_scorer(char_offset)
+            _, score = token_scorer(char_offset, fuzzy=2)
             if score > threshold:
                 target_doc[target_tokens_idx[char_offset]].is_sent_start = True
             char_offset += len(line)
