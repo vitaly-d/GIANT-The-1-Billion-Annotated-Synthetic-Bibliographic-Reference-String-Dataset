@@ -3,7 +3,7 @@
 ```
 rm -rf train.ref dev.ref
 
-python convert_annotations_to_spacy.py ~/Code/transformation-data/datasource/crossref/citeproc-json --output-dir train.ref --parallel 4 --csl-processor-path ../../dataset-creation/processManuscript.js
+python convert_annotations_to_spacy.py ../../dataset-creation/crossref/out --output-dir train.ref --parallel 4 --csl-processor-path ../../dataset-creation/processManuscript.js
 
 mkdir dev.ref
 mv train.ref/references.0.spacy dev.ref
