@@ -42,7 +42,7 @@ $ nix-env -iA nixpkgs.git-lfs
 $ pip install -U spacy-huggingface-hub
 
 $ cd output/en_bib_references_trf-1.0.0/dist
+$ huggingface-cli login
 $ python -m spacy huggingface-hub push en_bib_references_trf-1.0.0-py3-none-any.whl
-huggingface-cli login
 ```
 
