@@ -69,7 +69,7 @@ def split_up_references(
     # the model trained on 'normalized' references - the ones without '\n'
     doc = nlp(normalized_references)
 
-    # 'transfer' annotations from doc without '\n' (normalized references) to the original doc
+    # 'transfer' annotations from doc without '\n' (normalized references) to the target doc created from the original input string
     # the problem here is that docs differ in a number of tokens
     # however, it should be easy to align on characters level because both '\n' and ' ' are whitespace, so spans have the same boundaries
 
