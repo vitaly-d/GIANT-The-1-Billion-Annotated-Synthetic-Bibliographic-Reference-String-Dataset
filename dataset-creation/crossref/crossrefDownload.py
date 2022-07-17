@@ -4,12 +4,14 @@ from habanero import cn
 from habanero import Crossref
 import time
 
+from tqdm import tqdm
+
 start = time.time()
 
 cr = Crossref()
-i = 0
+cr.mailto = "vdaviden@wiley.com"
 
-while i < 6000:
+for i in tqdm(range(6000)):
     # get random dois (Max: 100)
     try:
         randomDois = cr.random_dois(100)
@@ -23,16 +25,15 @@ while i < 6000:
             ids=randomDois, format="citeproc-json")
 
         # append to file
-        with open('results.json', 'a+') as f:
+        with open(f'out/results.{i}.json', 'w') as f:
             for item in resultsCrossRefAPI:
                 f.write("%s\n" % item)
 
-        print("Completed: ", i * 100)
+        # print("Completed: ", i * 100)
     except:
         print("Exception occured with getting results on loop:", i)
         pass
 
-    i += 1
     time.sleep(0.5)
 
 end = time.time()
