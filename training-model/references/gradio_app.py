@@ -110,6 +110,8 @@ def split_up_references(
     target_doc.ents = [
         target_doc.char_span(ent.start_char, ent.end_char, ent.label_)
         for ent in doc.ents
+        # remove entities crossing sentence boundaries
+        if not any([t.is_sent_start for t in ent if t.i != ent.start])
     ]
 
     return target_doc
@@ -140,7 +142,7 @@ iface = gr.Interface(
     [
         gr.components.Textbox(placeholder="Enter bibliography here...", lines=20),
         gr.components.Checkbox(
-            label="One line cannot contain more than one bibitem (Multi-line bibitems are supported regardless of this choise)"
+            label="One line cannot contain more than one bibitem (Multiline bibitems are supported regardless of this choice)"
         ),
     ],
     ["html"],
