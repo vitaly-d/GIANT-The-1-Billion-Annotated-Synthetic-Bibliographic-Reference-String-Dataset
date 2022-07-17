@@ -144,7 +144,11 @@ def text_analysis(text, is_eol_mode):
 demo = gr.Blocks()
 with demo:
 
-    textbox = gr.components.Textbox(placeholder="Enter bibliography here...", lines=20)
+    textbox = gr.components.Textbox(
+        label="Unparsed Bibliography Section",
+        placeholder="Enter bibliography here...",
+        lines=20,
+    )
     is_eol_mode = gr.components.Checkbox(
         label="a line does not contain more than one bibitem (Multiline bibitems are supported regardless of this choice)"
     )
