@@ -32,7 +32,7 @@ python -m spacy train config.cfg --output ./output -c bib_tokenizers.py  --gpu-i
 ##Push the model to the HuggingFace Hub
 
 ```
-$ nvim spacy-pipelines/model-best/meta.json
+$ nvim output/model-best/meta.json
   3   "name":"bib_references_trf",
   4   "version":"1.0.0",
 
