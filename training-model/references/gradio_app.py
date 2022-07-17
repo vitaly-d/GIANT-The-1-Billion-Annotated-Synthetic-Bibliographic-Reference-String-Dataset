@@ -178,7 +178,9 @@ CFR
             [
                 """[Ein05] Albert Einstein. Zur Elektrodynamik bewegter K ̈orper. (German)
 [On the electrodynamics of moving bodies]. Annalen der Physik,
-322(10):891–921, 1905. [GMS93] Michel Goossens, Frank Mittelbach, and Alexander Samarin. The LATEX Companion. Addison-Wesley, Reading, Massachusetts, 1993. [Knu] Donald Knuth. Knuth: Computers and typesetting."""
+322(10):891–921, 1905. 
+[GMS93] Michel Goossens, Frank Mittelbach, and Alexander Samarin. The LATEX Companion. Addison-Wesley, Reading, Massachusetts, 1993. 
+[Knu] Donald Knuth. Knuth: Computers and typesetting."""
             ],
             [
                 """References
