@@ -88,12 +88,13 @@ def split_up_references(
         token_scorer = create_bib_item_start_scorer_for_doc(doc)
         threshold = 0.5
         lines = [line for line in f]
+        lines_len_in_tokens = [
+            _len for _len in map(lambda line: len(nlp_blank.tokenizer(line)), lines)
+        ]
         for line_num, line in enumerate(lines):
             fuzzy = (
-                0
-                if line_num == 0
-                else len(nlp_blank.tokenizer(lines[line_num - 1])) // 4,
-                len(nlp_blank.tokenizer(lines[line_num])) // 4,
+                0 if line_num == 0 else lines_len_in_tokens[line_num - 1] // 4,
+                lines_len_in_tokens[line_num] // 4,
             )
             _, score = token_scorer(char_offset, fuzzy_in_tokens=fuzzy)
             if score > threshold:
