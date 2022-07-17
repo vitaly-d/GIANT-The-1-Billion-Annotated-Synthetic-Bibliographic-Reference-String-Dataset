@@ -6,6 +6,7 @@ from spacy import displacy
 from bib_tokenizers import create_references_tokenizer
 
 
+nlp = None
 nlp = spacy.load("output/model-best")
 # return score for each token:
 # with threshold set to zero each suggested span is returned, and span == token,
@@ -55,7 +56,7 @@ nlp_blank.tokenizer = create_references_tokenizer()(nlp_blank)
 
 
 def split_up_references(
-    references: str, nlp, nlp_blank=spacy.blank("en"), is_eol_mode=False
+    references: str, is_eol_mode=False, nlp=nlp, nlp_blank=nlp_blank
 ):
     """
     Args:
@@ -86,7 +87,7 @@ def split_up_references(
         char_offset = 0
         f = io.StringIO(references)
         token_scorer = create_bib_item_start_scorer_for_doc(doc)
-        threshold = 0.5
+        threshold = 0.2
         lines = [line for line in f]
         lines_len_in_tokens = [
             _len for _len in map(lambda line: len(nlp_blank.tokenizer(line)), lines)
@@ -96,7 +97,8 @@ def split_up_references(
                 0 if line_num == 0 else lines_len_in_tokens[line_num - 1] // 4,
                 lines_len_in_tokens[line_num] // 4,
             )
-            _, score = token_scorer(char_offset, fuzzy_in_tokens=fuzzy)
+            span, score = token_scorer(char_offset, fuzzy_in_tokens=fuzzy)
+            print(span, score)
             if score > threshold:
                 target_doc[target_tokens_idx[char_offset]].is_sent_start = True
             char_offset += len(line)
@@ -121,7 +123,9 @@ def text_analysis(text, is_eol_mode):
 
     html = ""
 
-    doc_with_linebreaks = split_up_references(text, nlp, nlp_blank, is_eol_mode)
+    doc_with_linebreaks = split_up_references(
+        text, is_eol_mode=is_eol_mode, nlp=nlp, nlp_blank=nlp_blank
+    )
 
     for i, sent in enumerate(doc_with_linebreaks.sents):
         bib_item_doc = sent.as_doc()
@@ -137,21 +141,24 @@ def text_analysis(text, is_eol_mode):
     return html
 
 
-iface = gr.Interface(
-    text_analysis,
-    [
-        gr.components.Textbox(placeholder="Enter bibliography here...", lines=20),
-        gr.components.Checkbox(
-            label="One line cannot contain more than one bibitem (Multiline bibitems are supported regardless of this choice)"
-        ),
-    ],
-    ["html"],
-    examples=[
-        [
-            """[1] B. Foxman, R. Barlow, H. D'Arcy, B. Gillespie, and J. D. Sobel, "Urinary tract infection: self-reported incidence and associated costs," Ann Epidemiol, vol. 10, pp. 509-515, 2000. [2] B. Foxman, "Epidemiology of urinary tract infections: incidence, morbidity, and economic costs," Am J Med, vol. 113, pp. 5-13, 2002. [3] L. Nicolle, "Urinary tract infections in the elderly," Clin Geriatr Med, vol. 25, pp. 423-436, 2009."""
-        ],
-        [
-            """Barth, Fredrik, ed.
+demo = gr.Blocks()
+with demo:
+
+    textbox = gr.components.Textbox(placeholder="Enter bibliography here...", lines=20)
+    is_eol_mode = gr.components.Checkbox(
+        label="a line does not contain more than one bibitem (Multiline bibitems are supported regardless of this choice)"
+    )
+    html = gr.components.HTML(label="Parsed Bib Items")
+    textbox.change(fn=text_analysis, inputs=[textbox, is_eol_mode], outputs=[html])
+    is_eol_mode.change(fn=text_analysis, inputs=[textbox, is_eol_mode], outputs=[html])
+
+    gr.Examples(
+        examples=[
+            [
+                """[1] B. Foxman, R. Barlow, H. D'Arcy, B. Gillespie, and J. D. Sobel, "Urinary tract infection: self-reported incidence and associated costs," Ann Epidemiol, vol. 10, pp. 509-515, 2000. [2] B. Foxman, "Epidemiology of urinary tract infections: incidence, morbidity, and economic costs," Am J Med, vol. 113, pp. 5-13, 2002. [3] L. Nicolle, "Urinary tract infections in the elderly," Clin Geriatr Med, vol. 25, pp. 423-436, 2009."""
+            ],
+            [
+                """Barth, Fredrik, ed.
 	1969	Ethnic groups and boundaries: The social organization of culture difference. Oslo: Scandinavian University Press.
 Bondokji, Neven
 	2016	The Expectation Gap in Humanitarian Operations: Field Perspectives from Jordan. Asian Journal of Peace Building 4(1):1-28.
@@ -161,18 +168,50 @@ Carrion, Doris
 	2015	Are Syrian Refguees a Security Threat to the MIddle East Vol. 2016. London Reuters.
 CFR
 	2016	The Global Humanitarian Regime: Priorities and Prospects for Reform. Council on Foerign Relations, International Institutues and Global Governance Program"""
-        ],
-        [
-            """(2)	Hofmann, M.H. et al. Aberrant splicing caused by single nucleotide polymorphism c.516G>T [Q172H], a marker of CYP2B6*6, is responsible for decreased expression and activity of CYP2B6 in liver. J Pharmacol Exp Ther  325, 284-92 (2008).
+            ],
+            [
+                """(2)	Hofmann, M.H. et al. Aberrant splicing caused by single nucleotide polymorphism c.516G>T [Q172H], a marker of CYP2B6*6, is responsible for decreased expression and activity of CYP2B6 in liver. J Pharmacol Exp Ther  325, 284-92 (2008).
 (3) Zanger, U.M. & Klein, K. Pharmacogenetics of cytochrome P450 2B6 (CYP2B6): advances on polymorphisms, mechanisms, and clinical relevance. Front Genet  4, 24 (2013).
 (4) Holzinger, E.R. et al. Genome-wide association study of plasma efavirenz pharmacokinetics in AIDS Clinical Trials Group protocols implicates several CYP2B6 variants. Pharmacogenet Genomics  22, 858-67 (2012).
 """
-        ],
-        [
-            """[Ein05] Albert Einstein. Zur Elektrodynamik bewegter K ̈orper. (German)
+            ],
+            [
+                """[Ein05] Albert Einstein. Zur Elektrodynamik bewegter K ̈orper. (German)
 [On the electrodynamics of moving bodies]. Annalen der Physik,
 322(10):891–921, 1905. [GMS93] Michel Goossens, Frank Mittelbach, and Alexander Samarin. The LATEX Companion. Addison-Wesley, Reading, Massachusetts, 1993. [Knu] Donald Knuth. Knuth: Computers and typesetting."""
+            ],
+            [
+                """References
+Bartkiewicz, A., Szymczak, M., Cohen, R. J., & Richards, A. M. S. 2005, MN- RAS, 361, 623
+Bartkiewicz, A., Szymczak, M., & van Langevelde, H. J. 2016, A&A, 587, A104
+Benjamin, R. A., Churchwell, E., Babler, B. L., et al. 2003, PASP, 115, 953 
+Beuther, H., Mottram, J. C., Ahmadi, A., et al. 2018, A&A, 617, A100
+Beuther, H., Walsh, A. J., Thorwirth, S., et al. 2007, A&A, 466, 989
+Brogan, C. L., Hunter, T. R., Cyganowski, C. J., et al. 2011, ApJ, 739, L16
+Brown, A. T., Little, L. T., MacDonald, G. H., Riley, P. W., & Matheson, D. N.
+1981, MNRAS, 195, 607
+Brown, R. D. & Cragg, D. M. 1991, ApJ, 378, 445
+Carrasco-González, C., Sanna, A., Rodríguez-Kamenetzky, A., et al. 2021, ApJ,
+914, L1
+Cesaroni, R., Walmsley, C. M., & Churchwell, E. 1992, A&A, 256, 618
+Cheung, A. C., Rank, D. M., Townes, C. H., Thornton, D. D., & Welch, W. J.
+1968, Phys. Rev. Lett., 21, 1701
+Churchwell, E., Babler, B. L., Meade, M. R., et al. 2009, PASP, 121, 213
+Cohen, R. J. & Brebner, G. C. 1985, MNRAS, 216, 51P
+Comito, C., Schilke, P., Endesfelder, U., Jiménez-Serra, I., & Martín-Pintado, J.
+2007, A&A, 469, 207
+Curiel, S., Ho, P. T. P., Patel, N. A., et al. 2006, ApJ, 638, 878
+Danby, G., Flower, D. R., Valiron, P., Schilke, P., & Walmsley, C. M. 1988,
+MNRAS, 235, 229
+De Buizer, J. M., Liu, M., Tan, J. C., et al. 2017, ApJ, 843, 33
+De Buizer, J. M., Radomski, J. T., Telesco, C. M., & Piña, R. K. 2003, ApJ, 598,
+1127
+Dzib, S., Loinard, L., Rodríguez, L. F., Mioduszewski, A. J., & Torres, R. M.
+2011, ApJ, 733, 71
+Flower, D. R., Offer, A., & Schilke, P. 1990, MNRAS, 244, 4P
+Galván-Madrid, R., Keto, E., Zhang, Q., et al. 2009, ApJ, 706, 1036"""
+            ],
         ],
-    ],
-    allow_flagging="never",
-).launch(share=False, server_name="0.0.0.0", server_port=7080)
+        inputs=textbox,
+    )
+demo.launch(share=False, server_name="0.0.0.0", server_port=7080)
