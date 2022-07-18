@@ -1,5 +1,5 @@
 """get random citeproc-json records from Crossref"""
-
+import os
 from habanero import cn
 from habanero import Crossref
 import time
@@ -9,7 +9,10 @@ from tqdm import tqdm
 start = time.time()
 
 cr = Crossref()
-cr.mailto = "vdaviden@wiley.com"
+cr.mailto = os.environ["crossref_user_email"]
+assert (
+    cr.mailto
+), "Please set the 'crossref_user_email' env var, e.g., `export crossref_user_email=your@email`"
 
 for i in tqdm(range(6000)):
     # get random dois (Max: 100)
@@ -22,10 +25,11 @@ for i in tqdm(range(6000)):
 
     try:
         resultsCrossRefAPI = cn.content_negotiation(
-            ids=randomDois, format="citeproc-json")
+            ids=randomDois, format="citeproc-json"
+        )
 
         # append to file
-        with open(f'out/results.{i}.json', 'w') as f:
+        with open(f"out/results.{i}.json", "w") as f:
             for item in resultsCrossRefAPI:
                 f.write("%s\n" % item)
 
