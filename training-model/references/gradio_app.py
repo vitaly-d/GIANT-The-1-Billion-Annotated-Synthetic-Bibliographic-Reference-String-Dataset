@@ -51,6 +51,20 @@ def create_bib_item_start_scorer_for_doc(doc):
 
 nlp_blank = spacy.blank("en")
 nlp_blank.tokenizer = create_references_tokenizer()(nlp_blank)
+# nlp_blank.tokenizer = nlp.tokenizer
+
+
+def _tokenize_test(nlp):
+    _text = """MNRAS, 216, 51P
+Comito"""
+    tokens = [f"'{t}'" for t in nlp(_text)]
+    print(tokens)
+    return tokens
+
+
+assert len(_tokenize_test(nlp)) == len(
+    _tokenize_test(nlp_blank)
+), "Check that the same tokenizer is used for both: trained model (in its config) and nlp_blank"
 
 
 def split_up_references(

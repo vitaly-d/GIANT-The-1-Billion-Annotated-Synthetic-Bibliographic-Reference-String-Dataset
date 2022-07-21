@@ -1,3 +1,15 @@
+# Generate annotated CSLs
+
+```
+cd ../../dataset-creation
+
+mkdir cslSmallWithTags
+node generateAnnotatedStyles.js
+```
+
+> the dir with original CSLs, `const cslFolder`, is hard-coded within generateAnnotatedStyles.js
+
+
 # Convert json downloaded from crossref
 
 ```
@@ -10,8 +22,6 @@ mv train.ref/references.0.spacy dev.ref
 mv train.ref/references.7.spacy dev.ref
 
 ```
-
-
 
 # spacy train
 
