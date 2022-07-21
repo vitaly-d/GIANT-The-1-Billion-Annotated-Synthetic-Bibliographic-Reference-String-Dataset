@@ -1,5 +1,6 @@
 from concurrent.futures import Future, ProcessPoolExecutor
 import hashlib
+import io
 import logging
 from pathlib import Path
 import subprocess
@@ -17,16 +18,7 @@ import typer
 from bib_tokenizers import create_references_tokenizer
 from csl_client import base_url, make_bibliography, styles_list
 from lxml_iter_tree import annotations
-from schema import (
-    tag_sentence_start,
-    tags_ent,
-    tags_span,
-    spankey_sentence_start,
-    # token_bib_end,
-    # token_bib_start,
-    # token_other,
-    # token_tags,
-)
+from schema import spankey_sentence_start, tag_sentence_start, tags_ent, tags_span
 
 NUM_STYLES_FOR_DOC = 10
 DOWNSAMPE_RATIO = 5
@@ -71,10 +63,23 @@ def references_to_spacy(
     ]
 
 
+def normalize_multiline(text) -> str:
+    """
+    In [7]: text = "I \t like   \n   cheese."
+    In [8]: normalize_multiline(text)
+    Out[8]: 'I \t like cheese.'
+    """
+    f = io.StringIO(text)
+    lines = (line for line in f)
+    return " ".join((line.strip() for line in lines if line.strip()))
+
+
 def references_to_spacy_doc(
     references, style: str, fname: Optional[str] = None, part=0
 ) -> Optional[Doc]:
-    xml = f"<references><bib>{'</bib><bib>'.join(references)}</bib></references>"
+    norm_references = (normalize_multiline(ref) for ref in references)
+    # don't miss the space between already normalized lines:
+    xml = f"<references><bib>{' </bib><bib>'.join(norm_references)}</bib></references>"
     try:
         parser = etree.HTMLParser()
         root = etree.fromstring(xml, parser)
@@ -83,7 +88,7 @@ def references_to_spacy_doc(
         return
     # create doc from text
     text = "".join(root.itertext())
-    text = text.replace("\n", " ")
+
     doc = blank_nlp(text)
     # add annotations: they are overlapped spans
 
