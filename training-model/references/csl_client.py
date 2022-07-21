@@ -2,6 +2,7 @@ from io import StringIO
 import json
 from json.decoder import JSONDecodeError
 import logging
+import os
 from pathlib import Path
 from typing import Any, List, Sequence, Union
 
@@ -13,7 +14,7 @@ from crossref_json_example import crossref_json
 log = logging.Logger(__name__)
 
 
-def base_url(port=3000) -> str:
+def base_url(port=8082) -> str:
     return f"http://localhost:{port}"
 
 
@@ -53,13 +54,21 @@ def make_bibliography(
         raise e
 
 
-def _review_styles(crossref_json=crossref_json, styles_dir=DEFAULT_STYLES_DIR):
+def _review_styles(
+    crossref_json=crossref_json,
+    styles_dir=os.environ.get("STYLES_DIR", DEFAULT_STYLES_DIR),
+):
+
+    from rich import print
 
     files = {
         "references": ("references.jsonl", StringIO(crossref_json), "applicaion/json"),
-        "styles": (None, json.dumps(list(range(len(styles_list(url=URL)))))),
+        "styles": (
+            None,
+            json.dumps(list(range(len(styles_list(url=URL, styles_dir=styles_dir))))),
+        ),
         "crossref": (None, "on"),
-        "styles_dir": (None, DEFAULT_STYLES_DIR),
+        "styles_dir": (None, styles_dir),
     }
     r = requests.post(URL, files=files)
     r.raise_for_status()
@@ -72,14 +81,15 @@ def _review_styles(crossref_json=crossref_json, styles_dir=DEFAULT_STYLES_DIR):
 
         if "references" not in rendered:
             errors.append(style)
+            print(f"[bold]STYLE ERROR:[/bold] {style}")
             continue
 
         references = rendered["references"]
         doc = references_to_spacy_doc(references, style)
         if doc:
-            print(f"{style}:\n{doc.text}")
+            print(f"[bold]{style}[/bold]:\n{doc.text}")
         else:
-            print(f"{style}: ERROR")
+            print(f"[bold]CONVERTER ERROR:[/bold] {style}")
 
     print("Not working styles:", len(errors))
 

@@ -1,6 +1,7 @@
 # spacy
 spacy[apple]
 typer
+rich
 numpy
 lxml
 

@@ -1,9 +1,13 @@
 import io
+
 import gradio as gr
+import numpy as np
 import spacy
 from spacy import displacy
+from spacy.training import Example, alignment
 
 from bib_tokenizers import create_references_tokenizer
+from schema import spankey_sentence_start, tag_sentence_start, tags_ent
 
 
 nlp = None
@@ -18,24 +22,18 @@ nlp.get_pipe("spancat").cfg["threshold"] = 0.0  #  see )
 print(nlp.get_pipe("spancat").cfg)
 
 
-def create_bib_item_start_scorer_for_doc(doc, spanskey="sc"):
+def create_bib_item_start_scorer_for_doc(doc):
 
-    span_group = doc.spans[spanskey]
+    span_group = doc.spans[spankey_sentence_start]
     assert not span_group.has_overlap
     assert len(span_group) == len(
         doc
     ), "Check suggester config and the spancat threshold to make sure that spangroup contains single token span for each token"
 
-    spans_idx = {
-        offset: span.start
-        for span in span_group
-        for offset in range(span.start_char, span.end_char + 1)
-    }
+    def scorer(token_index_in_doc, fuzzy_in_tokens=(0, 0)):
+        i = token_index_in_doc
 
-    def scorer(char_offset, fuzzy_in_tokens=(0, 0)):
-        i = spans_idx[char_offset]
-
-        span = span_group[i]
+        span = span_group[i]  # our spans are one token length
         assert i == span.start
 
         # fuzzines might improve fault tolerance if the model made a small mistake,
@@ -65,82 +63,124 @@ def split_up_references(
         nlp_blank - a blank nlp with the same tokenizer/language
     """
 
-    normalized_references = references.replace("\n", " ")
-
-    # the model trained on 'normalized' references - the ones without '\n'
-    doc = nlp(normalized_references)
-
-    # 'transfer' annotations from doc without '\n' (normalized references) to the target doc created from the original input string
-    # the problem here is that docs differ in a number of tokens
-    # however, it should be easy to align on characters level because both '\n' and ' ' are whitespace, so spans have the same boundaries
-
     target_doc = nlp_blank(references)
     target_tokens_idx = {
         offset: t.i for t in target_doc for offset in range(t.idx, t.idx + len(t))
     }
+    f = io.StringIO(references)
+    lines = [line for line in f]
 
-    # senter annotations
-    for i, t in enumerate(target_doc):
-        t.is_sent_start = i == 0
+    # strip lines and remove any extra space between lines
+    norm_doc = nlp(" ".join([line.strip() for line in lines if line.strip()]))
+
+    example = Example(target_doc, norm_doc)
+
     if is_eol_mode:
+        alignment_data = example.alignment.y2x.data
+        print(alignment_data)
+
         # use SpanCat scores to set sentence boundaries on the target doc
+        # init senter annotations
+        for i, t in enumerate(target_doc):
+            t.is_sent_start = i == 0
+
         char_offset = 0
-        f = io.StringIO(references)
-        token_scorer = create_bib_item_start_scorer_for_doc(doc)
-        threshold = 0.2
-        lines = [line for line in f]
-        lines_len_in_tokens = [
-            _len for _len in map(lambda line: len(nlp_blank.tokenizer(line)), lines)
-        ]
+        token_scorer = create_bib_item_start_scorer_for_doc(norm_doc)
+        threshold = 0.5
         for line_num, line in enumerate(lines):
-            fuzzy = (
-                0 if line_num == 0 else lines_len_in_tokens[line_num - 1] // 4,
-                lines_len_in_tokens[line_num] // 4,
-            )
-            span, score = token_scorer(char_offset, fuzzy_in_tokens=fuzzy)
-            print(span, score)
-            if score > threshold:
-                target_doc[target_tokens_idx[char_offset]].is_sent_start = True
+            if not line.strip():
+                # ignore empty line
+                char_offset += len(line)
+                continue
+
+            token_index_in_target_doc = target_tokens_idx[char_offset]
+            # scroll to the first non-space (if the line starts from space):
+            while (
+                token_index_in_target_doc < len(target_doc)
+                and target_doc[token_index_in_target_doc].is_space
+            ):
+                token_index_in_target_doc += 1
+
+            index_in_norm_doc = np.where(alignment_data == token_index_in_target_doc)
+            if type(index_in_norm_doc) == tuple:
+                index_in_norm_doc = index_in_norm_doc[0]  # depends on numpy version...
+
+            if index_in_norm_doc.size > 0:
+                index_in_norm_doc = index_in_norm_doc[0].item()
+                span, score = token_scorer(index_in_norm_doc)
+                print(span, score, index_in_norm_doc)
+                if score > threshold:
+                    target_doc[target_tokens_idx[char_offset]].is_sent_start = True
             char_offset += len(line)
     else:
         # copy SentenceRecognizer annotations from doc without '\n' to the target doc
-        for t in doc:
-            if t.is_sent_start:
-                target_doc[target_tokens_idx[t.idx]].is_sent_start = True
+        sent_start = example.get_aligned("SENT_START")
+        for i, t in enumerate(target_doc):
+            target_doc[i].is_sent_start = sent_start[i] == 1
 
     # copy ner annotations:
-    target_doc.ents = [
-        target_doc.char_span(ent.start_char, ent.end_char, ent.label_)
-        for ent in doc.ents
-        # remove entities crossing sentence boundaries
-        if not any([t.is_sent_start for t in ent if t.i != ent.start])
-    ]
+    for label in tags_ent:
+        target_doc.vocab[label]
+    target_doc.ents = example.get_aligned_spans_y2x(norm_doc.ents)
 
     return target_doc
 
 
 def text_analysis(text, is_eol_mode):
 
-    html = ""
+    if not text:
+        return "<div style='max-width:100%; overflow:auto; color:grey'><p>Unparsed Bibliography Section is empty</p></div>"
 
     doc_with_linebreaks = split_up_references(
         text, is_eol_mode=is_eol_mode, nlp=nlp, nlp_blank=nlp_blank
     )
 
+    html = ""
+    options = {
+        "ents": tags_ent,
+        "colors": {
+            "citation-number": "yellow",
+            "citation-label": "yellow",
+            "family": "DeepSkyBlue",
+            "given": "LightSkyBlue",
+            "title": "PeachPuff",
+            "container-title": "Moccasin",
+            "publisher": "PaleTurquoise",
+            "issued": "Gold",
+        },
+    }
     for i, sent in enumerate(doc_with_linebreaks.sents):
         bib_item_doc = sent.as_doc()
-        bib_item_doc.user_data = {"title": f"***** Bib Item {i+1}: *****"}
-        html += displacy.render(bib_item_doc, style="ent")
+        ref = displacy.render(bib_item_doc, style="ent", options=options)
+        html += f"<tr><td>{i}</td><td>{ref}</td></tr>"
 
     html = (
-        "<div style='max-width:100%; max-height:360px; overflow:auto'>"
+        """<div style='max-width:100%; max-height:720px; overflow:auto'>
+        <style>table {
+              font-family: arial, sans-serif;
+              border-collapse: collapse;
+              width: 100%;
+            }
+
+            td, th {
+              border: 1px solid #b0b0b0;
+              text-align: left;
+              padding: 8px;
+            }
+
+            tr:nth-child(even) {
+              background-color: #f2f2f2;
+            }</style>"""
+        + "<table><tr><th>Index</th><th>Parsed Reference</th></tr>"
         + html
+        + "</table>"
         + "</div>"
     )
 
     return html
 
 
+gr.close_all()
 demo = gr.Blocks()
 with demo:
 
@@ -187,7 +227,7 @@ CFR
 [Knu] Donald Knuth. Knuth: Computers and typesetting."""
             ],
             [
-                """References
+                """References.
 Bartkiewicz, A., Szymczak, M., Cohen, R. J., & Richards, A. M. S. 2005, MN- RAS, 361, 623
 Bartkiewicz, A., Szymczak, M., & van Langevelde, H. J. 2016, A&A, 587, A104
 Benjamin, R. A., Churchwell, E., Babler, B. L., et al. 2003, PASP, 115, 953 
@@ -220,4 +260,5 @@ Galván-Madrid, R., Keto, E., Zhang, Q., et al. 2009, ApJ, 706, 1036"""
         ],
         inputs=textbox,
     )
+gr.close_all()
 demo.launch(share=False, server_name="0.0.0.0", server_port=7080)
