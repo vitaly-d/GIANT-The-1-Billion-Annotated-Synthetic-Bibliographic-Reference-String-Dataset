@@ -54,7 +54,7 @@ nlp_blank.tokenizer = create_references_tokenizer()(nlp_blank)
 
 
 def split_up_references(
-    references: str, is_eol_mode=False, nlp=nlp, nlp_blank=nlp_blank
+    references: str, is_eol_mode=False, ner=True, nlp=nlp, nlp_blank=nlp_blank
 ):
     """
     Args:
@@ -70,14 +70,23 @@ def split_up_references(
     f = io.StringIO(references)
     lines = [line for line in f]
 
-    # strip lines and remove any extra space between lines
-    norm_doc = nlp(" ".join([line.strip() for line in lines if line.strip()]))
+    # disable unused components to speedup inference && parse normalized referenences
+    disable = []
+    if is_eol_mode:
+        disable.append("senter")
+    else:
+        disable.append("spancat")
+    if not ner:
+        disable.append("ner")
+    with nlp.select_pipes(disable=disable):
+        # normalization applied: strip lines and remove any extra space between lines
+        norm_doc = nlp(" ".join([line.strip() for line in lines if line.strip()]))
 
+    # extremely useful spacy API for alignment normalized and target(created from non-modified input) docs
     example = Example(target_doc, norm_doc)
 
     if is_eol_mode:
         alignment_data = example.alignment.y2x.data
-        print(alignment_data)
 
         # use SpanCat scores to set sentence boundaries on the target doc
         # init senter annotations
@@ -111,6 +120,7 @@ def split_up_references(
                 print(span, score, index_in_norm_doc)
                 if score > threshold:
                     target_doc[target_tokens_idx[char_offset]].is_sent_start = True
+
             char_offset += len(line)
     else:
         # copy SentenceRecognizer annotations from doc without '\n' to the target doc
