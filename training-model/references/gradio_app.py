@@ -138,7 +138,7 @@ def split_up_references(
 
 def text_analysis(text, is_eol_mode):
 
-    if not text:
+    if not text or not text.strip():
         return "<div style='max-width:100%; overflow:auto; color:grey'><p>Unparsed Bibliography Section is empty</p></div>"
 
     doc_with_linebreaks = split_up_references(
