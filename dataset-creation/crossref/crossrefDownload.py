@@ -9,12 +9,12 @@ from tqdm import tqdm
 start = time.time()
 
 cr = Crossref()
-cr.mailto = os.environ["crossref_user_email"]
+cr.mailto = os.environ.get("crossref_user_email", None)
 assert (
     cr.mailto
 ), "Please set the 'crossref_user_email' env var, e.g., `export crossref_user_email=your@email`"
 
-for i in tqdm(range(6000)):
+for i in tqdm(range(20000)):
     # get random dois (Max: 100)
     try:
         randomDois = cr.random_dois(100)
