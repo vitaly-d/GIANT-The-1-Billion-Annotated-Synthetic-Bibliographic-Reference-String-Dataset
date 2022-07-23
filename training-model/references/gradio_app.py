@@ -1,4 +1,5 @@
 import io
+from typing import Optional
 
 import gradio as gr
 import numpy as np
@@ -43,7 +44,7 @@ def create_bib_item_start_scorer_for_doc(doc):
         return span, max(
             span_group.attrs["scores"][i]
             for i in range(i - fuzzy_in_tokens[0], i + fuzzy_in_tokens[1] + 1)
-            if i >= 0 and i < len(doc.text)
+            if i >= 0 and i < len(doc)
         )
 
     return scorer
@@ -65,6 +66,18 @@ Comito"""
 assert len(_tokenize_test(nlp)) == len(
     _tokenize_test(nlp_blank)
 ), "Check that the same tokenizer is used for both: trained model (in its config) and nlp_blank"
+
+
+def _token_index_in_norm_doc(
+    token_index_in_target_doc: int, alignment_data: np.ndarray
+) -> Optional[int]:
+
+    index_in_norm_doc = np.where(alignment_data == token_index_in_target_doc)
+    if type(index_in_norm_doc) == tuple:
+        index_in_norm_doc = index_in_norm_doc[0]  # depends on numpy version...
+
+        if index_in_norm_doc.size > 0:
+            return index_in_norm_doc[0].item()
 
 
 def split_up_references(
@@ -107,9 +120,21 @@ def split_up_references(
         for i, t in enumerate(target_doc):
             t.is_sent_start = i == 0
 
-        char_offset = 0
         token_scorer = create_bib_item_start_scorer_for_doc(norm_doc)
+
+        def target_doc_token_scorer(token_index_in_target_doc):
+            index_in_norm_doc = _token_index_in_norm_doc(
+                token_index_in_target_doc, alignment_data
+            )
+            if index_in_norm_doc is not None:
+                span, score = token_scorer(index_in_norm_doc)
+                # print(span, score, index_in_norm_doc)
+                return score
+            return 0.0
+
         threshold = 0.5
+
+        char_offset = 0
         for line_num, line in enumerate(lines):
             if not line.strip():
                 # ignore empty line
@@ -124,18 +149,13 @@ def split_up_references(
             ):
                 token_index_in_target_doc += 1
 
-            index_in_norm_doc = np.where(alignment_data == token_index_in_target_doc)
-            if type(index_in_norm_doc) == tuple:
-                index_in_norm_doc = index_in_norm_doc[0]  # depends on numpy version...
-
-            if index_in_norm_doc.size > 0:
-                index_in_norm_doc = index_in_norm_doc[0].item()
-                span, score = token_scorer(index_in_norm_doc)
-                print(span, score, index_in_norm_doc)
-                if score > threshold:
-                    target_doc[target_tokens_idx[char_offset]].is_sent_start = True
+            score = target_doc_token_scorer(token_index_in_target_doc)
+            if score > threshold:
+                target_doc[target_tokens_idx[char_offset]].is_sent_start = True
 
             char_offset += len(line)
+
+        _level_off_references(target_doc, target_doc_token_scorer)
     else:
         # copy SentenceRecognizer annotations from doc without '\n' to the target doc
         sent_start = example.get_aligned("SENT_START")
@@ -148,6 +168,53 @@ def split_up_references(
     target_doc.ents = example.get_aligned_spans_y2x(norm_doc.ents)
 
     return target_doc
+
+
+def _level_off_references(doc, token_scorer):
+
+    lengths = np.array([len(ref.text.strip().split("\n")) for ref in doc.sents])
+    median = np.median(lengths)
+    # mean = np.mean(lengths)
+    sigma = np.std(
+        lengths
+    )  # read this: https://stackoverflow.com/questions/27600207/why-does-numpy-std-give-a-different-result-to-matlab-std
+
+    print("median:", median, "sigma:", sigma)
+    if sigma == 0.0:
+        return
+
+    sent_starts = []
+    for n, ref in enumerate(doc.sents):
+        surprising = (lengths[n] - median) / sigma
+        print(surprising, ref.text[:20])
+        if surprising > 2:
+            line = []
+
+            def analyze_line(line):
+                if len(line) > 10:
+                    line_scores = [token_scorer(t.i) for t in line]
+                    start_score = line_scores[0]
+                    median_line_score = np.median(line_scores)
+                    split = start_score > 10 * median_line_score
+                    print(line[0], start_score, median_line_score, split)
+                    if split:
+                        sent_starts.append(line[0])
+                else:
+                    print("too short line:", line)
+
+                line.clear()
+
+            for t in ref:
+                if "\n" in t.text:
+                    analyze_line(line)
+                if t.is_space:
+                    continue
+                else:
+                    line.append(t)
+            analyze_line(line)
+
+    for t in sent_starts:
+        t.is_sent_start = True
 
 
 def text_analysis(text, is_eol_mode):
