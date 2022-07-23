@@ -9,6 +9,9 @@ tags_ent = [
     "issued",
     "URL",
     "DOI",
+    # add in lowercase as well: html parser changes the tags case
+    "url",
+    "doi",
     "publisher",
     "page",
     "publisher-place",
@@ -33,8 +36,6 @@ tags_span = [
     "day",
     "issued",
     "bib",
-    "URL",
-    "DOI",
 ] + tags_ent
 
 # span tag used for adding sentence boundaries annotations: an annotated CSL style encloses each bib item with <bib>..</bib>

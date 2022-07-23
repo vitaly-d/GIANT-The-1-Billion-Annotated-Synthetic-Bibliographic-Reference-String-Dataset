@@ -56,6 +56,7 @@ def annotations(element, tags_to_be_included: Optional[Sequence[str]] = None):
         elif "end" == event:
             _start = stack.pop()
             tag, start, end = _start[0], _start[1], len("".join(text))
+            # print(tag)
             assert tag == t.tag
             if tags_to_be_included and tag not in tags_to_be_included:
                 continue
