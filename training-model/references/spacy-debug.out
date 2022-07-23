@@ -1,0 +1,50 @@
+============================ Data file validation ============================
+✔ Pipeline can be initialized with data
+✔ Corpus is loadable
+
+=============================== Training stats ===============================
+Language: en
+Training pipeline: tok2vec, senter, ner, spancat
+91178 training docs
+1908 evaluation docs
+✔ No overlap between training and evaluation data
+
+============================== Vocab & Vectors ==============================
+ℹ 22259451 total word(s) in the data (1550048 unique)
+ℹ No word vectors present in the package
+
+============================ Span Categorization ============================
+
+Spans Key   Labels
+---------   -------
+sc          {'bib'}
+
+⚠ No examples for texts WITHOUT new label 'bib'
+ℹ Span characteristics for spans_key 'sc'
+ℹ SD = Span Distinctiveness, BD = Boundary Distinctiveness
+
+Span Type      Length   SD     BD
+------------   ------   ----   ----
+bib            1.0      2.26   1.16
+------------   ------   ----   ----
+Wgt. Average   1.0      2.26   1.16
+
+ℹ Over 90% of spans have lengths of 1 -- 1 (min=1, max=1). The most
+common span lengths are: 1 (100.0%). If you are using the n-gram suggester, note
+that omitting infrequent n-gram lengths can greatly improve speed and memory
+usage.
+✔ Spans are distinct from the rest of the corpus
+✔ Boundary tokens are distinct from the rest of the corpus
+✔ Good amount of examples for all labels
+
+========================== Named Entity Recognition ==========================
+ℹ 12 label(s)
+0 missing value(s) (tokens with '-' label)
+✔ Good amount of examples for all labels
+✔ Examples without occurrences available for all labels
+✔ No entities consisting of or starting/ending with whitespace
+✔ No entities crossing sentence boundaries
+
+================================== Summary ==================================
+✔ 10 checks passed
+⚠ 1 warning
