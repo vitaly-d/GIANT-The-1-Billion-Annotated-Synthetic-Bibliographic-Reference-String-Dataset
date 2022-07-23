@@ -21,11 +21,13 @@ from lxml_iter_tree import annotations
 from schema import spankey_sentence_start, tag_sentence_start, tags_ent, tags_span
 from sklearn.model_selection import train_test_split
 
+# less is better :) Consider download mo files from CrossRef
 NUM_STYLES_FOR_DOC = 1
+# usually >1 if NUM_STYLES_FOR_DOC>1
 DOWNSAMPE_RATIO = 1
 
-# it is relatively small because it is limited by GPU RAM..
-DEV_SIZE = 0.05
+# it is relatively small because it is limited by GPU RAM: Spacy seems to load all dev examples at once.
+DEV_SIZE = 0.02
 
 log = logging.getLogger(__name__)
 blank_nlp = spacy.blank("en")
@@ -177,9 +179,8 @@ def convert(
         len_styles = len(styles)
         print(f"CSL processor supports {len_styles} styles")
 
-        db_train = DocBin(store_user_data=True)
-        db_dev = DocBin(store_user_data=True)
         digests = set()
+        all_docs = []  # created by applying CSL to crossref_files
         for f in tqdm(crossref_files, desc=docbin_train_path.name):
             try:
                 bibliographies = make_bibliography(
@@ -217,22 +218,23 @@ def convert(
                             replace=False,
                         )
 
-                    def add_docs(docs, db):
-                        for doc in docs:
-                            if doc:
-                                db.add(doc)
-                            else:
-                                log.warning("Can't parse a part of %s", f)
-
-                    docs_train, docs_dev = train_test_split(docs, test_size=DEV_SIZE)
-                    add_docs(docs_train, db_train)
-                    add_docs(docs_dev, db_dev)
+                    all_docs.extend(docs)
 
             except:
                 log.exception("An exception while processing %s", f)
 
-        db_train.to_disk(docbin_train_path)
-        db_dev.to_disk(docbin_dev_path)
+        def write_docs(docs, path):
+            db = DocBin(store_user_data=True)
+            for doc in docs:
+                if doc:
+                    db.add(doc)
+                else:
+                    log.warning("Can't parse a part of %s", f)
+            db.to_disk(path)
+
+        docs_train, docs_dev = train_test_split(all_docs, test_size=DEV_SIZE)
+        write_docs(docs_train, docbin_train_path)
+        write_docs(docs_dev, docbin_dev_path)
 
         p.terminate()
 

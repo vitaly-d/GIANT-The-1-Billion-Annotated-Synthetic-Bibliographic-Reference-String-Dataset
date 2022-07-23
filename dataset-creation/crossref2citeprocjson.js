@@ -10,6 +10,28 @@ var skiptypes = ["component","book-issue","undefined"];
 var citations = [];
 var citationcounter = 0;
 
+// Counter({'journal-article': 418948, 'book-chapter': 80434, 'proceedings-article': 32358, 'component': 24468, 'dataset': 9850, 'reference-entry': 4852, 'book': 4187, 'journal-issue': 4091, 'posted-content': 3819, 'report': 2982, 'other': 2608, 'monograph': 2557, 'dissertation': 2166, 'standard': 1561, 'peer-review': 1093, 'reference-book': 966, 'proceedings': 243, None: 223, 'journal': 211, 'grant': 120, 'report-series': 78, 'book-part': 77, 'book-section': 66, 'journal-volume': 29, 'book-series': 13, 'proceedings-series': 1}) 
+// csl-json: https://docs.citationstyles.org/en/stable/specification.html#appendix-iii-types  
+types_dict = {
+  "journal-article": 'article-journal',
+  "book-chapter": 'chapter',
+  "proceedings-article": 'paper-conference',
+  "component": 'chapter', //TBD
+  "reference-entry": 'entry',
+  "journal-issue": 'periodical', //TBD
+  "posted-content": 'webpage', //TBD post?
+  "other": 'document',
+  "monograph": 'article-journal', //TBD
+  "peer-review": 'review',
+  "reference-book": 'book',
+  "proceedings": 'paper-conference',
+  "journal": 'periodical',
+  "grant": 'document',
+  "report-series": 'report',
+  "book-part": "chapter",
+  "book-section": 'chapter'
+}
+
 for (var i = 0; i < lines.length; i++) {
   if (lines[i] === '') continue;
   var line
@@ -22,9 +44,15 @@ for (var i = 0; i < lines.length; i++) {
   }
 
   if(line.type){
-    line.type = line.type.replace("journal-article", 'article-journal').replace("book-chapter", 'chapter');
+    csl_type = types_dict[line.type]
+    if (csl_type){
+        // console.log("type:", line.type, "->", csl_type);
+	line.type = csl_type
+    }
+      
   }else{
-    line.type = "undefined";
+    // None: 223
+    line.type = "document";
   }
   if(skiptypes.indexOf(line.type) !== -1){
     continue;
@@ -89,8 +117,8 @@ for (var i = 0; i < lines.length; i++) {
 }
 
 //console.log(unknowns);
-var newFile = "./cslCiteprocOutput/cslciteproc.json";
-fs.writeFileSync(newFile, JSON.stringify(citations));
-// console.log('Saved JSON to ' + newFile);
+//var newFile = "./cslCiteprocOutput/cslciteproc.json";
+//fs.writeFileSync(newFile, JSON.stringify(citations));
+//console.log('Saved JSON to ' + newFile);
 return citations;
 }}

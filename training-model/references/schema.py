@@ -7,18 +7,16 @@ tags_ent = [
     "title",
     "container-title",
     "issued",
-    "url",
+    "URL",
+    "DOI",
     "publisher",
     "page",
-    "doi",
     "publisher-place",
     "number-of-pages",
     "collection-title",
     "collection-number",
     "genre",
     "authority",
-    "URL",
-    "DOI",
     "volume",
     # "title-short", it is a valid tag, but we ended up with the only one in the dataset...
     "number",
@@ -34,8 +32,9 @@ tags_span = [
     "month",
     "day",
     "issued",
-    "url",
     "bib",
+    "URL",
+    "DOI",
 ] + tags_ent
 
 # span tag used for adding sentence boundaries annotations: an annotated CSL style encloses each bib item with <bib>..</bib>

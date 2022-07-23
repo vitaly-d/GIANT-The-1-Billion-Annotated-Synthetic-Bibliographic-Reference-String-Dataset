@@ -52,9 +52,9 @@ var serializer = new XMLSerializer();
 
 
 //This folder should have all the CSL files
-const cslFolder = './csl/';
+const cslFolder = './cslSmall/';
 
-const cslFolderAnnotated = './cslWithTags/';
+const cslFolderAnnotated = './cslSmallWithTags/';
 
 var files = fs.readdirSync(cslFolder);
 var csls = [];
@@ -73,7 +73,7 @@ for (var i = 0, len = csls.length; i < len; i++) {
   // styleString = styleString.replace(/<([^>]*)(\sdefault-locale=\".+?\"(\s|))(.*?)>/, '<$1$3>'); //prevent error caused by default locale https://github.com/Juris-M/citeproc-js/issues/81
   styleString = styleString.replace(/<sort>([\s\S]*?)<\/sort>/g, ''); //remove sorting
   // styleString = styleString.replace(/<text variable=\"citation-number\"(.*?)\/>/g, ''); //remove citation number at the beginning of the string
-  styleString = styleString.replace(/disambiguate-add-year-suffix=\"true\"/g, ''); //remove year suffix such as 2006b
+  // styleString = styleString.replace(/disambiguate-add-year-suffix=\"true\"/g, ''); //remove year suffix such as 2006b
 
   // bib = makebib(styleString);
 
@@ -132,7 +132,13 @@ for (var i = 0, len = csls.length; i < len; i++) {
       }
 
       try {
-        text[id].setAttribute("prefix", escapeXml2(text[id].getAttribute("prefix")) + newprefix);
+	if (variable=="DOI"){
+	    // try to avoid a labelled span within URL: https://doi.org/<DOI>10.1021/es991246a</DOI> 
+	    text[id].setAttribute("prefix", newprefix + escapeXml2(text[id].getAttribute("prefix")));
+	}
+        else{
+	    text[id].setAttribute("prefix", escapeXml2(text[id].getAttribute("prefix")) + newprefix);
+	}
         text[id].setAttribute("suffix", newsuffix + escapeXml2(text[id].getAttribute("suffix")));
         if (text[id].getAttribute("value")) {
           text[id].setAttribute("value", escapeXml2(text[id].getAttribute("value")));
