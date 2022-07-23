@@ -19,9 +19,13 @@ from bib_tokenizers import create_references_tokenizer
 from csl_client import base_url, make_bibliography, styles_list
 from lxml_iter_tree import annotations
 from schema import spankey_sentence_start, tag_sentence_start, tags_ent, tags_span
+from sklearn.model_selection import train_test_split
 
-NUM_STYLES_FOR_DOC = 10
-DOWNSAMPE_RATIO = 5
+NUM_STYLES_FOR_DOC = 1
+DOWNSAMPE_RATIO = 1
+
+# it is relatively small because it is limited by GPU RAM..
+DEV_SIZE = 0.05
 
 log = logging.getLogger(__name__)
 blank_nlp = spacy.blank("en")
@@ -152,7 +156,8 @@ def references_to_spacy_doc(
 
 def convert(
     crossref_files: List[Path],
-    docbin_path: Path,
+    docbin_train_path: Path,
+    docbin_dev_path: Path,
     csl_http_port=3000,
     csl_processor_path=f"{Path(__file__).parent}/../../dataset-creation/processManuscript.js",
 ):
@@ -172,9 +177,10 @@ def convert(
         len_styles = len(styles)
         print(f"CSL processor supports {len_styles} styles")
 
-        db = DocBin(store_user_data=True)
+        db_train = DocBin(store_user_data=True)
+        db_dev = DocBin(store_user_data=True)
         digests = set()
-        for f in tqdm(crossref_files, desc=docbin_path.name):
+        for f in tqdm(crossref_files, desc=docbin_train_path.name):
             try:
                 bibliographies = make_bibliography(
                     f,
@@ -204,29 +210,39 @@ def convert(
                     docs = references_to_spacy(references, style, fname=f.name)
 
                     # downsample
-                    if len(docs) // DOWNSAMPE_RATIO > 0:
+                    if DOWNSAMPE_RATIO > 1 and len(docs) // DOWNSAMPE_RATIO > 0:
                         docs = numpy.random.choice(
                             numpy.array(docs, dtype=numpy.dtype("object")),
                             len(docs) // DOWNSAMPE_RATIO,
                             replace=False,
                         )
 
-                    for doc in docs:
-                        if doc:
-                            db.add(doc)
-                        else:
-                            log.warning("Can't parse a part of %s", f)
+                    def add_docs(docs, db):
+                        for doc in docs:
+                            if doc:
+                                db.add(doc)
+                            else:
+                                log.warning("Can't parse a part of %s", f)
+
+                    docs_train, docs_dev = train_test_split(docs, test_size=DEV_SIZE)
+                    add_docs(docs_train, db_train)
+                    add_docs(docs_dev, db_dev)
+
             except:
                 log.exception("An exception while processing %s", f)
 
+        db_train.to_disk(docbin_train_path)
+        db_dev.to_disk(docbin_dev_path)
+
         p.terminate()
-        db.to_disk(docbin_path)
-    return docbin_path
+
+    return docbin_train_path, docbin_dev_path
 
 
 def main(
     crossref_dir: Path,
-    output_dir: Path = Path("train.ref"),
+    train_dir: Path = Path("train.ref"),
+    dev_dir: Path = Path("dev.ref"),
     parts: int = 100,
     parallel: int = 2,
     csl_processor_path=f"{Path(__file__).parent}/../../dataset-creation/processManuscript.js",
@@ -244,7 +260,8 @@ def main(
                   than one dataset-creation/processManuscript.js node process, i.e. in k8s cluster,
                   if you need high parallelism
     """
-    Path(output_dir).mkdir(parents=True, exist_ok=True)
+    for dir in [train_dir, dev_dir]:
+        Path(dir).mkdir(parents=True, exist_ok=True)
 
     input_files = [path for path in crossref_dir.glob("**/*.json")]
     input_files_parts = [
@@ -258,7 +275,8 @@ def main(
                     e.submit(
                         convert,
                         input_files_part,
-                        output_dir / f"references.{i}.spacy",
+                        train_dir / f"references.{i}.spacy",
+                        dev_dir / f"references.{i}.spacy",
                         3000 + i,
                         csl_processor_path,
                     )
@@ -270,7 +288,8 @@ def main(
         for i, input_files_part in enumerate(input_files_parts):
             result = convert(
                 input_files_part,
-                output_dir / f"references.{i}.spacy",
+                train_dir / f"references.{i}.spacy",
+                dev_dir / f"references.{i}.spacy",
                 3000 + i,
                 csl_processor_path,
             )

@@ -4,6 +4,7 @@ typer
 rich
 numpy
 lxml
+scikit-learn
 
 
 jupyter
