@@ -213,7 +213,7 @@ def _level_off_references(doc, token_scorer):
     for n, ref in enumerate(doc.sents):
         # print([f"'{t}'" for t in ref])
         surprising = (lengths[n] - mean) / sigma
-        if surprising > 2:
+        if surprising > 1.6:
             log.info("surprising: %s: %s", surprising, ref.text[:_LOG_STR_LEN])
             scores = [token_scorer(t.i) for t in ref]
             median_score = np.median(scores)
@@ -343,6 +343,13 @@ with demo:
     gr.Examples(
         examples=[
             [
+                """[Ein05] Albert Einstein. Zur Elektrodynamik bewegter K ̈orper. (German)
+[On the electrodynamics of moving bodies]. Annalen der Physik,
+322(10):891–921, 1905. 
+[GMS93] Michel Goossens, Frank Mittelbach, and Alexander Samarin. The LATEX Companion. Addison-Wesley, Reading, Massachusetts, 1993. 
+[Knu] Donald Knuth. Knuth: Computers and typesetting."""
+            ],
+            [
                 """[1] B. Foxman, R. Barlow, H. D'Arcy, B. Gillespie, and J. D. Sobel, "Urinary tract infection: self-reported incidence and associated costs," Ann Epidemiol, vol. 10, pp. 509-515, 2000. [2] B. Foxman, "Epidemiology of urinary tract infections: incidence, morbidity, and economic costs," Am J Med, vol. 113, pp. 5-13, 2002. [3] L. Nicolle, "Urinary tract infections in the elderly," Clin Geriatr Med, vol. 25, pp. 423-436, 2009."""
             ],
             [
@@ -363,43 +370,82 @@ CFR
 (4) Holzinger, E.R. et al. Genome-wide association study of plasma efavirenz pharmacokinetics in AIDS Clinical Trials Group protocols implicates several CYP2B6 variants. Pharmacogenet Genomics  22, 858-67 (2012).
 """
             ],
-            [
-                """[Ein05] Albert Einstein. Zur Elektrodynamik bewegter K ̈orper. (German)
-[On the electrodynamics of moving bodies]. Annalen der Physik,
-322(10):891–921, 1905. 
-[GMS93] Michel Goossens, Frank Mittelbach, and Alexander Samarin. The LATEX Companion. Addison-Wesley, Reading, Massachusetts, 1993. 
-[Knu] Donald Knuth. Knuth: Computers and typesetting."""
+            [  # https://arxiv.org/pdf/1910.01108v4.pdf
+                """Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. Bert: Pre-training of deep bidirectional transformers for language understanding. In NAACL-HLT, 2018.
+Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, and Ilya Sutskever. Language models are unsupervised multitask learners. 2019.
+Yinhan Liu, Myle Ott, Naman Goyal, Jingfei Du, Mandar S. Joshi, Danqi Chen, Omer Levy, Mike Lewis, Luke S. Zettlemoyer, and Veselin Stoyanov. Roberta: A robustly optimized bert pretraining approach. ArXiv, abs/1907.11692, 2019.
+Roy Schwartz, Jesse Dodge, Noah A. Smith, and Oren Etzioni. Green ai. ArXiv, abs/1907.10597, 2019. Emma Strubell, Ananya Ganesh, and Andrew McCallum. Energy and policy considerations for deep learning in
+nlp. In ACL, 2019.
+Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser,
+and Illia Polosukhin. Attention is all you need. In NIPS, 2017.
+Thomas Wolf, Lysandre Debut, Victor Sanh, Julien Chaumond, Clement Delangue, Anthony Moi, Pierric Cistac, Tim Rault, Rémi Louf, Morgan Funtowicz, and Jamie Brew. Transformers: State-of-the-art natural language processing, 2019.
+Cristian Bucila, Rich Caruana, and Alexandru Niculescu-Mizil. Model compression. In KDD, 2006.
+Geoffrey E. Hinton, Oriol Vinyals, and Jeffrey Dean. Distilling the knowledge in a neural network. ArXiv,
+abs/1503.02531, 2015.
+Yukun Zhu, Ryan Kiros, Richard S. Zemel, Ruslan Salakhutdinov, Raquel Urtasun, Antonio Torralba, and Sanja Fidler. Aligning books and movies: Towards story-like visual explanations by watching movies and reading books. 2015 IEEE International Conference on Computer Vision (ICCV), pages 19–27, 2015.
+Alex Wang, Amanpreet Singh, Julian Michael, Felix Hill, Omer Levy, and Samuel R. Bowman. Glue: A multi-task benchmark and analysis platform for natural language understanding. In ICLR, 2018.
+Matthew E. Peters, Mark Neumann, Mohit Iyyer, Matt Gardner, Christopher Clark, Kenton Lee, and Luke Zettlemoyer. Deep contextualized word representations. In NAACL, 2018.
+Alex Wang, Ian F. Tenney, Yada Pruksachatkun, Katherin Yu, Jan Hula, Patrick Xia, Raghu Pappagari, Shuning Jin, R. Thomas McCoy, Roma Patel, Yinghui Huang, Jason Phang, Edouard Grave, Najoung Kim, Phu Mon Htut, Thibault F’evry, Berlin Chen, Nikita Nangia, Haokun Liu, Anhad Mohananey, Shikha Bordia, Nicolas Patry, Ellie Pavlick, and Samuel R. Bowman. jiant 1.1: A software toolkit for research on general-purpose text understanding models. http://jiant.info/, 2019.
+Andrew L. Maas, Raymond E. Daly, Peter T. Pham, Dan Huang, Andrew Y. Ng, and Christopher Potts. Learning word vectors for sentiment analysis. In ACL, 2011.
+Pranav Rajpurkar, Jian Zhang, Konstantin Lopyrev, and Percy Liang. Squad: 100, 000+ questions for machine comprehension of text. In EMNLP, 2016."""
             ],
-            [
-                """References.
-Bartkiewicz, A., Szymczak, M., Cohen, R. J., & Richards, A. M. S. 2005, MN- RAS, 361, 623
-Bartkiewicz, A., Szymczak, M., & van Langevelde, H. J. 2016, A&A, 587, A104
-Benjamin, R. A., Churchwell, E., Babler, B. L., et al. 2003, PASP, 115, 953 
-Beuther, H., Mottram, J. C., Ahmadi, A., et al. 2018, A&A, 617, A100
-Beuther, H., Walsh, A. J., Thorwirth, S., et al. 2007, A&A, 466, 989
-Brogan, C. L., Hunter, T. R., Cyganowski, C. J., et al. 2011, ApJ, 739, L16
-Brown, A. T., Little, L. T., MacDonald, G. H., Riley, P. W., & Matheson, D. N.
-1981, MNRAS, 195, 607
-Brown, R. D. & Cragg, D. M. 1991, ApJ, 378, 445
-Carrasco-González, C., Sanna, A., Rodríguez-Kamenetzky, A., et al. 2021, ApJ,
-914, L1
-Cesaroni, R., Walmsley, C. M., & Churchwell, E. 1992, A&A, 256, 618
-Cheung, A. C., Rank, D. M., Townes, C. H., Thornton, D. D., & Welch, W. J.
-1968, Phys. Rev. Lett., 21, 1701
-Churchwell, E., Babler, B. L., Meade, M. R., et al. 2009, PASP, 121, 213
-Cohen, R. J. & Brebner, G. C. 1985, MNRAS, 216, 51P
-Comito, C., Schilke, P., Endesfelder, U., Jiménez-Serra, I., & Martín-Pintado, J.
-2007, A&A, 469, 207
-Curiel, S., Ho, P. T. P., Patel, N. A., et al. 2006, ApJ, 638, 878
-Danby, G., Flower, D. R., Valiron, P., Schilke, P., & Walmsley, C. M. 1988,
-MNRAS, 235, 229
-De Buizer, J. M., Liu, M., Tan, J. C., et al. 2017, ApJ, 843, 33
-De Buizer, J. M., Radomski, J. T., Telesco, C. M., & Piña, R. K. 2003, ApJ, 598,
-1127
-Dzib, S., Loinard, L., Rodríguez, L. F., Mioduszewski, A. J., & Torres, R. M.
-2011, ApJ, 733, 71
-Flower, D. R., Offer, A., & Schilke, P. 1990, MNRAS, 244, 4P
-Galván-Madrid, R., Keto, E., Zhang, Q., et al. 2009, ApJ, 706, 1036"""
+            [  # https://isg.beel.org/blog/2019/12/10/giant-the-1-billion-annotated-synthetic-bibliographic-reference-string-dataset-for-deep-citation-parsing-pre-print/
+                """Crossref, https://www.crossref.org
+A JavaScript implementation of the Citation Style Language (CSL),
+https://github.com/Juris-M/citeproc-js
+Oﬃcial repository for Citation Style Language (CSL),
+https://github.com/citation-style-language/styles
+Anzaroot, S., McCallum, A.: A New Dataset for fine-Grained Citation field Extraction (2013)
+Councill, I.G., Giles, C.L., Kan, M.Y.: Parscit: an open-source crf reference string parsing package. In: LREC. vol. 8, pp. 661–667 (2008)
+Fedoryszak, M., Tkaczyk, D., Bolikowski, L.: Large scale citation matching using apache hadoop. In: International Conference on Theory and Practice of Digital Libraries. pp. 362–365. Springer (2013)
+Hetzner, E.: A simple method for citation metadata extraction using hidden markov models. In: Proceedings of the 8th ACM/IEEE-CS joint conference on Digital libraries. pp. 280–284. ACM (2008)
+Lample, G., Ballesteros, M., Subramanian, S., Kawakami, K., Dyer, C.: Neural architectures for named entity recognition. arXiv preprint arXiv:1603.01360 (2016)
+Lopez, P.: Grobid: Combining automatic bibliographic data recognition and term extraction for scholarship publications. In: International conference on theory and practice of digital libraries. pp. 473–474. Springer (2009)
+Ma, X., Hovy, E.: End-to-end sequence labeling via bi-directional lstm-cnns-crf. arXiv preprint arXiv:1603.01354 (2016)
+Mikolov, T., Sutskever, I., Chen, K., Corrado, G.S., Dean, J.: Distributed representations of words and phrases and their compositionality. In: Advances in neural information processing systems. pp. 3111–3119 (2013)
+Ojokoh, B., Zhang, M., Tang, J.: A trigram hidden markov model for metadata extraction from heterogeneous references. Information Sciences 181(9), 1538–1551
+(2011)
+Okada, T., Takasu, A., Adachi, J.: Bibliographic component extraction using support vector machines and hidden markov models. In: International Conference on
+Theory and Practice of Digital Libraries. pp. 501–512. Springer (2004)
+Prasad, A., Kaur, M., Kan, M.Y.: Neural parscit: a deep learning-based reference string parser. International Journal on Digital Libraries 19(4), 323–337 (2018)
+Rodrigues Alves, D., Colavizza, G., Kaplan, F.: Deep reference mining from scholarly literature in the arts and humanities. Frontiers in Research Metrics and Analytics 3, 21 (2018)
+Tkaczyk, D., Collins, A., Sheridan, P., Beel, J.: Machine learning vs. rules and out-of-the-box vs. retrained: An evaluation of open-source bibliographic reference and citation parsers. In: Proceedings of the 18th ACM/IEEE on joint conference on digital libraries. pp. 99–108. ACM (2018)
+Tkaczyk, D., Szostek, P., Dendek, P.J., Fedoryszak, M., Bolikowski, L.: Cermine– automatic extraction of metadata and references from scientific literature. In: 2014 11th IAPR International Workshop on Document Analysis Systems. pp. 217–221. IEEE (2014)
+Yin, P., Zhang, M., Deng, Z., Yang, D.: Metadata extraction from bibliographies using bigram hmm. In: International Conference on Asian Digital Libraries. pp.
+310–319. Springer (2004)
+Zhang, X., Zou, J., Le, D.X., Thoma, G.R.: A structural svm approach for reference parsing. BMC bioinformatics 12(3), S7 (2011)"""
+            ],
+            [  # https://arxiv.org/pdf/1706.03762.pdf
+                """[28] Romain Paulus, Caiming Xiong, and Richard Socher. A deep reinforced model for abstractive
+summarization. arXiv preprint arXiv:1705.04304, 2017.
+[29] Slav Petrov, Leon Barrett, Romain Thibaux, and Dan Klein. Learning accurate, compact,
+and interpretable tree annotation. In Proceedings of the 21st International Conference on
+Computational Linguistics and 44th Annual Meeting of the ACL, pages 433–440. ACL, July
+2006.
+[30] Ofir Press and Lior Wolf. Using the output embedding to improve language models. arXiv preprint
+arXiv:1608.05859, 2016.
+[31] Rico Sennrich, Barry Haddow, and Alexandra Birch. Neural machine translation of rare words
+with subword units. arXiv preprint arXiv:1508.07909, 2015.
+[32] Noam Shazeer, Azalia Mirhoseini, Krzysztof Maziarz, Andy Davis, Quoc Le, Geoffrey Hinton,
+and Jeff Dean. Outrageously large neural networks: The sparsely-gated mixture-of-experts
+layer. arXiv preprint arXiv:1701.06538, 2017.
+[33] Nitish Srivastava, Geoffrey E Hinton, Alex Krizhevsky, Ilya Sutskever, and Ruslan Salakhutdi-
+nov. Dropout: a simple way to prevent neural networks from overfitting. Journal of Machine
+Learning Research, 15(1):1929–1958, 2014.
+[34] Sainbayar Sukhbaatar, Arthur Szlam, Jason Weston, and Rob Fergus. End-to-end memory
+networks. In C. Cortes, N. D. Lawrence, D. D. Lee, M. Sugiyama, and R. Garnett, editors,
+Advances in Neural Information Processing Systems 28, pages 2440–2448. Curran Associates,
+Inc., 2015.
+[35] Ilya Sutskever, Oriol Vinyals, and Quoc VV Le. Sequence to sequence learning with neural
+networks. In Advances in Neural Information Processing Systems, pages 3104–3112, 2014.
+[36] Christian Szegedy, Vincent Vanhoucke, Sergey Ioffe, Jonathon Shlens, and Zbigniew Wojna.
+Rethinking the inception architecture for computer vision. CoRR, abs/1512.00567, 2015.
+[37] Vinyals & Kaiser, Koo, Petrov, Sutskever, and Hinton. Grammar as a foreign language. In
+Advances in Neural Information Processing Systems, 2015.
+[38] Yonghui Wu, Mike Schuster, Zhifeng Chen, Quoc V Le, Mohammad Norouzi, Wolfgang
+Macherey, Maxim Krikun, Yuan Cao, Qin Gao, Klaus Macherey, et al. Google’s neural machine
+translation system: Bridging the gap between human and machine translation. arXiv preprint
+arXiv:1609.08144, 2016."""
             ],
         ],
         inputs=textbox,
