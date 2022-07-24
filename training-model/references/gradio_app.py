@@ -189,6 +189,15 @@ def split_up_references(
 
 
 def _level_off_references(doc, token_scorer):
+    """
+    Problem:
+    if a model that predicts the reference boundaries was .99 accurate,
+    the success rate for real papers would be still relative low
+    given that a typical bibliography consists of dozens of references.
+
+    This function attemps to detect references that contain more lines than
+    others and split them somehow... The result will not neccessary be better.
+    """
 
     lengths = np.array([len(ref.text.strip().split("\n")) for ref in doc.sents])
     median = np.median(lengths)
@@ -242,20 +251,20 @@ def _level_off_references(doc, token_scorer):
                 before_eol_ents = [
                     ent.label_ for ent in ref[0 if start is None else start : eol].ents
                 ]
-                after_eol_ents = [ent.label_ for ent in ref[eol:].ents]
-                after_eol_ent = None if not after_eol_ents else after_eol_ents[0]
+                # 2 entities after eol, if any
+                after_eol_ents = [ent.label_ for ent in ref[eol:].ents][:2]
                 if (
-                    after_eol_ent is not None
-                    and set(before_eol_ents)
-                    & set(["issued", "title", "container-title"])
+                    set(before_eol_ents) & set(["issued", "title", "container-title"])
                     and set(before_eol_ents) & set(["family", "given"])
-                    and after_eol_ent
-                    in [
-                        "family",
-                        "given",
-                        "citation-number",
-                        "citation-label",
-                    ]
+                    and set(after_eol_ents)
+                    & set(
+                        [
+                            "family",
+                            "given",
+                            "citation-number",
+                            "citation-label",
+                        ]
+                    )
                 ):
                     log.info("splitting up using NER predictions: %s", ref[i])
                     sent_starts.append(ref[i])
