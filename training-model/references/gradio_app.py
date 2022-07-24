@@ -5,6 +5,7 @@ import gradio as gr
 import numpy as np
 import spacy
 from spacy import displacy
+from spacy.matcher import Matcher
 from spacy.training import Example, alignment
 
 from bib_tokenizers import create_references_tokenizer
@@ -112,6 +113,12 @@ def split_up_references(
     # extremely useful spacy API for alignment normalized and target(created from non-modified input) docs
     example = Example(target_doc, norm_doc)
 
+    # copy ner annotations:
+    for label in tags_ent:
+        target_doc.vocab[label]
+    target_doc.ents = example.get_aligned_spans_y2x(norm_doc.ents)
+
+    # set senter annotations
     if is_eol_mode:
         alignment_data = example.alignment.y2x.data
 
@@ -162,11 +169,6 @@ def split_up_references(
         for i, t in enumerate(target_doc):
             target_doc[i].is_sent_start = sent_start[i] == 1
 
-    # copy ner annotations:
-    for label in tags_ent:
-        target_doc.vocab[label]
-    target_doc.ents = example.get_aligned_spans_y2x(norm_doc.ents)
-
     return target_doc
 
 
@@ -174,44 +176,74 @@ def _level_off_references(doc, token_scorer):
 
     lengths = np.array([len(ref.text.strip().split("\n")) for ref in doc.sents])
     median = np.median(lengths)
-    # mean = np.mean(lengths)
+    mean = np.mean(lengths)
     sigma = np.std(
         lengths
     )  # read this: https://stackoverflow.com/questions/27600207/why-does-numpy-std-give-a-different-result-to-matlab-std
 
-    print("median:", median, "sigma:", sigma)
+    print("median:", median, "mean", mean, "sigma:", sigma)
     if sigma == 0.0:
         return
 
     sent_starts = []
+    matcher = Matcher(nlp.vocab)
+    pattern = [
+        # {"TEXT": {"REGEX": "^(.*)(\\n)+(.*)$"}, "IS_SPACE": True},
+        {"TEXT": {"REGEX": "^(.*\\n.*)+$"}, "IS_SPACE": True},
+        {"IS_SPACE": True, "OP": "*"},
+        {"IS_SPACE": False},
+    ]
+    matcher.add("line_start", [pattern])
     for n, ref in enumerate(doc.sents):
-        surprising = (lengths[n] - median) / sigma
-        print(surprising, ref.text[:20])
+        # print([f"'{t}'" for t in ref])
+        surprising = (lengths[n] - mean) / sigma
         if surprising > 2:
-            line = []
-
-            def analyze_line(line):
-                if len(line) > 10:
-                    line_scores = [token_scorer(t.i) for t in line]
-                    start_score = line_scores[0]
-                    median_line_score = np.median(line_scores)
-                    split = start_score > 10 * median_line_score
-                    print(line[0], start_score, median_line_score, split)
-                    if split:
-                        sent_starts.append(line[0])
-                else:
-                    print("too short line:", line)
-
-                line.clear()
-
-            for t in ref:
-                if "\n" in t.text:
-                    analyze_line(line)
-                if t.is_space:
+            print("surprising:", surprising, ref.text[:20])
+            scores = [token_scorer(t.i) for t in ref]
+            median_score = np.median(scores)
+            # check each first non-space token on each line
+            start = None  # next reference start is we decided to splip up the ref span
+            for _, eol, token_i_after_eol in matcher(ref):
+                i = token_i_after_eol - 1
+                # using the predicted spancat score
+                print(
+                    "line start:",
+                    ref[i],
+                    scores[i],
+                    median_score,
+                    len(ref[token_i_after_eol:]),
+                )
+                # TODO: play with softmax temperature: find a way to get activations:
+                # here we have an activated neuron in the softmax input, but corresponding sofmax output is still too low
+                if scores[i] > 10 * median_score and len(ref[token_i_after_eol:]) > 10:
+                    sent_starts.append(ref[i])
+                    start = i
                     continue
-                else:
-                    line.append(t)
-            analyze_line(line)
+
+                # using ner output:
+                # an edge case if newx line starts with citation number of namnes and
+                # pref libes already contain names and title
+                before_eol_ents = [
+                    ent.label_ for ent in ref[0 if start is None else start : eol].ents
+                ]
+                after_eol_ents = [ent.label_ for ent in ref[eol:].ents]
+                after_eol_ent = None if not after_eol_ents else after_eol_ents[0]
+                if (
+                    after_eol_ent is not None
+                    and set(before_eol_ents)
+                    & set(["issued", "title", "container-title"])
+                    and set(before_eol_ents) & set(["family", "given"])
+                    and after_eol_ent
+                    in [
+                        "family",
+                        "given",
+                        "citation-number",
+                        "citation-label",
+                    ]
+                ):
+                    print("splitting up using NER predictions:", ref[i])
+                    sent_starts.append(ref[i])
+                    start = i
 
     for t in sent_starts:
         t.is_sent_start = True
