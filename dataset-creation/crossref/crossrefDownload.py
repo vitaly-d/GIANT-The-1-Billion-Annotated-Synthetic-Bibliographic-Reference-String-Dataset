@@ -22,6 +22,7 @@ for i in tqdm(range(20000)):
     except:
         print("Exception occured with random_dois on loop:", i)
         pass
+    import IPython; IPython.embed(); exit(1)
 
     try:
         resultsCrossRefAPI = cn.content_negotiation(
