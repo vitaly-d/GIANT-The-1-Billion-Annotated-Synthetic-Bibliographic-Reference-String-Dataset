@@ -8,10 +8,10 @@ import numpy as np
 import spacy
 from spacy import displacy
 from spacy.matcher import Matcher
-from spacy.training import Example, alignment
+from spacy.training import Example
 
 from bib_tokenizers import create_references_tokenizer
-from schema import spankey_sentence_start, tag_sentence_start, tags_ent
+from schema import spankey_sentence_start, tags_ent
 
 
 logging.basicConfig(level=logging.INFO)
