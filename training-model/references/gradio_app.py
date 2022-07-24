@@ -1,4 +1,6 @@
 import io
+import logging
+import timeit
 from typing import Optional
 
 import gradio as gr
@@ -12,6 +14,10 @@ from bib_tokenizers import create_references_tokenizer
 from schema import spankey_sentence_start, tag_sentence_start, tags_ent
 
 
+logging.basicConfig(level=logging.INFO)
+log = logging.getLogger(__name__)
+_LOG_STR_LEN = 16
+
 nlp = None
 nlp = spacy.load("output/model-best")
 # return score for each token:
@@ -21,7 +27,7 @@ nlp = spacy.load("output/model-best")
 #     @misc = "spacy.ngram_suggester.v1"
 #     sizes = [1]
 nlp.get_pipe("spancat").cfg["threshold"] = 0.0  #  see )
-print(nlp.get_pipe("spancat").cfg)
+log.info("spancat config: %s", nlp.get_pipe("spancat").cfg)
 
 
 def create_bib_item_start_scorer_for_doc(doc):
@@ -60,7 +66,7 @@ def _tokenize_test(nlp):
     _text = """MNRAS, 216, 51P
 Comito"""
     tokens = [f"'{t}'" for t in nlp(_text)]
-    print(tokens)
+    log.info("tokens: %s", tokens)
     return tokens
 
 
@@ -82,7 +88,7 @@ def _token_index_in_norm_doc(
 
 
 def split_up_references(
-    references: str, is_eol_mode=False, ner=True, nlp=nlp, nlp_blank=nlp_blank
+    references: str, is_eol_mode=True, ner=True, nlp=nlp, nlp_blank=nlp_blank
 ):
     """
     Args:
@@ -90,6 +96,12 @@ def split_up_references(
         nlp - a model that splits up references into separate sentences
         nlp_blank - a blank nlp with the same tokenizer/language
     """
+
+    _timeit_start = timeit.default_timer()
+    log.info(
+        "start processing: '%s...'",
+        references[: _LOG_STR_LEN if len(references) > _LOG_STR_LEN else references],
+    )
 
     target_doc = nlp_blank(references)
     target_tokens_idx = {
@@ -169,6 +181,11 @@ def split_up_references(
         for i, t in enumerate(target_doc):
             target_doc[i].is_sent_start = sent_start[i] == 1
 
+    log.info(
+        "done: '%s...', elapsed: %s",
+        references[: _LOG_STR_LEN if len(references) > _LOG_STR_LEN else references],
+        timeit.default_timer() - _timeit_start,
+    )
     return target_doc
 
 
@@ -181,7 +198,7 @@ def _level_off_references(doc, token_scorer):
         lengths
     )  # read this: https://stackoverflow.com/questions/27600207/why-does-numpy-std-give-a-different-result-to-matlab-std
 
-    print("median:", median, "mean", mean, "sigma:", sigma)
+    log.info("median: %s, mean: %s, sigma: %s", median, mean, sigma)
     if sigma == 0.0:
         return
 
@@ -198,7 +215,7 @@ def _level_off_references(doc, token_scorer):
         # print([f"'{t}'" for t in ref])
         surprising = (lengths[n] - mean) / sigma
         if surprising > 2:
-            print("surprising:", surprising, ref.text[:20])
+            log.info("surprising: %s: %s", surprising, ref.text[:_LOG_STR_LEN])
             scores = [token_scorer(t.i) for t in ref]
             median_score = np.median(scores)
             # check each first non-space token on each line
@@ -206,8 +223,8 @@ def _level_off_references(doc, token_scorer):
             for _, eol, token_i_after_eol in matcher(ref):
                 i = token_i_after_eol - 1
                 # using the predicted spancat score
-                print(
-                    "line start:",
+                log.info(
+                    "line start: token=%s, score=%s, median_score=%s, ahead=%s",
                     ref[i],
                     scores[i],
                     median_score,
@@ -241,7 +258,7 @@ def _level_off_references(doc, token_scorer):
                         "citation-label",
                     ]
                 ):
-                    print("splitting up using NER predictions:", ref[i])
+                    log.info("splitting up using NER predictions: %s", ref[i])
                     sent_starts.append(ref[i])
                     start = i
 
@@ -249,13 +266,13 @@ def _level_off_references(doc, token_scorer):
         t.is_sent_start = True
 
 
-def text_analysis(text, is_eol_mode):
+def text_analysis(text: str, more_than_one_ref_per_line: bool):
 
     if not text or not text.strip():
         return "<div style='max-width:100%; overflow:auto; color:grey'><p>Unparsed Bibliography Section is empty</p></div>"
 
     doc_with_linebreaks = split_up_references(
-        text, is_eol_mode=is_eol_mode, nlp=nlp, nlp_blank=nlp_blank
+        text, is_eol_mode=not more_than_one_ref_per_line, nlp=nlp, nlp_blank=nlp_blank
     )
 
     html = ""
@@ -312,12 +329,17 @@ with demo:
         placeholder="Enter bibliography here...",
         lines=20,
     )
-    is_eol_mode = gr.components.Checkbox(
-        label="a line does not contain more than one bibitem (Multiline bibitems are supported regardless of this choice)"
+    more_than_one_ref_per_line = gr.components.Checkbox(
+        value=False,
+        label="My bibliography may contain more than one reference per line - the model will make a prediction for each token: more predictions, more chances to make a mistake",
     )
     html = gr.components.HTML(label="Parsed Bib Items")
-    textbox.change(fn=text_analysis, inputs=[textbox, is_eol_mode], outputs=[html])
-    is_eol_mode.change(fn=text_analysis, inputs=[textbox, is_eol_mode], outputs=[html])
+    textbox.change(
+        fn=text_analysis, inputs=[textbox, more_than_one_ref_per_line], outputs=[html]
+    )
+    more_than_one_ref_per_line.change(
+        fn=text_analysis, inputs=[textbox, more_than_one_ref_per_line], outputs=[html]
+    )
 
     gr.Examples(
         examples=[
