@@ -18,7 +18,6 @@ logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 _LOG_STR_LEN = 16
 
-nlp = None
 nlp = spacy.load("output/model-best")
 # return score for each token:
 # with threshold set to zero each suggested span is returned, and span == token,
