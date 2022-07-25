@@ -177,7 +177,22 @@ def split_up_references(
 
             char_offset += len(line)
 
-        _level_off_references(target_doc, target_doc_token_scorer)
+        # try to miminize the variance of references lengths (in lines)
+        step = 0
+        sigma_prev = len(lines)
+        while (
+            step < 10
+            and sigma_prev > 0.0
+            and sigma_prev
+            > (
+                sigma := _level_off_references(
+                    target_doc, target_doc_token_scorer, step=step
+                )
+            )
+        ):
+            step += 1
+            sigma_prev = sigma
+
     else:
         # copy SentenceRecognizer annotations from doc without '\n' to the target doc
         sent_start = example.get_aligned("SENT_START")
@@ -192,7 +207,7 @@ def split_up_references(
     return target_doc
 
 
-def _level_off_references(doc, token_scorer):
+def _level_off_references(doc, token_scorer, step=1):
     """
     Problem:
     if a model that predicts the reference boundaries was .99 accurate,
@@ -204,15 +219,15 @@ def _level_off_references(doc, token_scorer):
     """
 
     lengths = np.array([len(ref.text.strip().split("\n")) for ref in doc.sents])
-    median = np.median(lengths)
-    mean = np.mean(lengths)
+    median = np.median(lengths).item()
+    mean = np.mean(lengths).item()
     sigma = np.std(
         lengths
-    )  # read this: https://stackoverflow.com/questions/27600207/why-does-numpy-std-give-a-different-result-to-matlab-std
+    ).item()  # read this: https://stackoverflow.com/questions/27600207/why-does-numpy-std-give-a-different-result-to-matlab-std
 
-    log.info("median: %s, mean: %s, sigma: %s", median, mean, sigma)
+    log.info("step: %s, median: %s, mean: %s, sigma: %s", step, median, mean, sigma)
     if sigma == 0.0:
-        return
+        return sigma
 
     sent_starts = []
     matcher = Matcher(nlp.vocab)
@@ -226,15 +241,17 @@ def _level_off_references(doc, token_scorer):
     for n, ref in enumerate(doc.sents):
         # print([f"'{t}'" for t in ref])
         surprising = (lengths[n] - mean) / sigma
-        if surprising > 1.6:
+        if surprising >= 1.0:
             log.info("surprising: %s: %s", surprising, ref.text[:_LOG_STR_LEN])
             scores = [token_scorer(t.i) for t in ref]
             median_score = np.median(scores)
-            # check each first non-space token on each line
+
+            # for each first non-space token on each line
             start = None  # next reference start is we decided to splip up the ref span
             for _, eol, token_i_after_eol in matcher(ref):
                 i = token_i_after_eol - 1
-                # using the predicted spancat score
+
+                # minimize variance using the predicted spancat score
                 log.info(
                     "line start: token=%s, score=%s, median_score=%s, ahead=%s",
                     ref[i],
@@ -246,12 +263,12 @@ def _level_off_references(doc, token_scorer):
                 # here we have an activated neuron in the softmax input, but corresponding sofmax output is still too low
                 if scores[i] > 10 * median_score and len(ref[token_i_after_eol:]) > 10:
                     sent_starts.append(ref[i])
-                    start = i
+                    start = i  # needed only for reviewing ner entities, see below
                     continue
 
-                # using ner output:
-                # an edge case if newx line starts with citation number of namnes and
-                # pref libes already contain names and title
+                # minimize variance using ner output:
+                # an edge case if a new line starts with citation number of namnes and
+                # pref lines already contain names and title
                 before_eol_ents = [
                     ent.label_ for ent in ref[0 if start is None else start : eol].ents
                 ]
@@ -276,6 +293,8 @@ def _level_off_references(doc, token_scorer):
 
     for t in sent_starts:
         t.is_sent_start = True
+
+    return sigma
 
 
 def text_analysis(text: str, more_than_one_ref_per_line: bool):
