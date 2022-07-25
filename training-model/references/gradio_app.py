@@ -13,12 +13,16 @@ from spacy.training import Example
 from bib_tokenizers import create_references_tokenizer
 from schema import spankey_sentence_start, tags_ent
 
+# 1.0.1
+# pip install https://huggingface.co/vitaly/en_bib_references_trf/resolve/main/en_bib_references_trf-any-py3-none-any.whl
+# MODEL = "en_bib_references_trf"
+MODEL = "output/model-best"
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 _LOG_STR_LEN = 16
 
-nlp = spacy.load("output/model-best")
+nlp = spacy.load(MODEL)
 # return score for each token:
 # with threshold set to zero each suggested span is returned, and span == token,
 # because suggester is configured to suggest spans with len(span) == 1:
@@ -351,34 +355,6 @@ with demo:
 
     gr.Examples(
         examples=[
-            [
-                """[Ein05] Albert Einstein. Zur Elektrodynamik bewegter K ̈orper. (German)
-[On the electrodynamics of moving bodies]. Annalen der Physik,
-322(10):891–921, 1905. 
-[GMS93] Michel Goossens, Frank Mittelbach, and Alexander Samarin. The LATEX Companion. Addison-Wesley, Reading, Massachusetts, 1993. 
-[Knu] Donald Knuth. Knuth: Computers and typesetting."""
-            ],
-            [
-                """[1] B. Foxman, R. Barlow, H. D'Arcy, B. Gillespie, and J. D. Sobel, "Urinary tract infection: self-reported incidence and associated costs," Ann Epidemiol, vol. 10, pp. 509-515, 2000. [2] B. Foxman, "Epidemiology of urinary tract infections: incidence, morbidity, and economic costs," Am J Med, vol. 113, pp. 5-13, 2002. [3] L. Nicolle, "Urinary tract infections in the elderly," Clin Geriatr Med, vol. 25, pp. 423-436, 2009."""
-            ],
-            [
-                """Barth, Fredrik, ed.
-	1969	Ethnic groups and boundaries: The social organization of culture difference. Oslo: Scandinavian University Press.
-Bondokji, Neven
-	2016	The Expectation Gap in Humanitarian Operations: Field Perspectives from Jordan. Asian Journal of Peace Building 4(1):1-28.
-Bourdieu, Pierre
-		The forms of capital In Handbook of Theory and Research for the Sociology of Education. J. Richardson, ed. Pp. 241-258. New York: Greenwood Publishesrs.
-Carrion, Doris
-	2015	Are Syrian Refguees a Security Threat to the MIddle East Vol. 2016. London Reuters.
-CFR
-	2016	The Global Humanitarian Regime: Priorities and Prospects for Reform. Council on Foerign Relations, International Institutues and Global Governance Program"""
-            ],
-            [
-                """(2)	Hofmann, M.H. et al. Aberrant splicing caused by single nucleotide polymorphism c.516G>T [Q172H], a marker of CYP2B6*6, is responsible for decreased expression and activity of CYP2B6 in liver. J Pharmacol Exp Ther  325, 284-92 (2008).
-(3) Zanger, U.M. & Klein, K. Pharmacogenetics of cytochrome P450 2B6 (CYP2B6): advances on polymorphisms, mechanisms, and clinical relevance. Front Genet  4, 24 (2013).
-(4) Holzinger, E.R. et al. Genome-wide association study of plasma efavirenz pharmacokinetics in AIDS Clinical Trials Group protocols implicates several CYP2B6 variants. Pharmacogenet Genomics  22, 858-67 (2012).
-"""
-            ],
             [  # https://arxiv.org/pdf/1910.01108v4.pdf
                 """Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. Bert: Pre-training of deep bidirectional transformers for language understanding. In NAACL-HLT, 2018.
 Alec Radford, Jeffrey Wu, Rewon Child, David Luan, Dario Amodei, and Ilya Sutskever. Language models are unsupervised multitask learners. 2019.
@@ -455,6 +431,34 @@ Advances in Neural Information Processing Systems, 2015.
 Macherey, Maxim Krikun, Yuan Cao, Qin Gao, Klaus Macherey, et al. Google’s neural machine
 translation system: Bridging the gap between human and machine translation. arXiv preprint
 arXiv:1609.08144, 2016."""
+            ],
+            [
+                """[Ein05] Albert Einstein. Zur Elektrodynamik bewegter K ̈orper. (German)
+[On the electrodynamics of moving bodies]. Annalen der Physik,
+322(10):891–921, 1905. 
+[GMS93] Michel Goossens, Frank Mittelbach, and Alexander Samarin. The LATEX Companion. Addison-Wesley, Reading, Massachusetts, 1993. 
+[Knu] Donald Knuth. Knuth: Computers and typesetting."""
+            ],
+            [
+                """[1] B. Foxman, R. Barlow, H. D'Arcy, B. Gillespie, and J. D. Sobel, "Urinary tract infection: self-reported incidence and associated costs," Ann Epidemiol, vol. 10, pp. 509-515, 2000. [2] B. Foxman, "Epidemiology of urinary tract infections: incidence, morbidity, and economic costs," Am J Med, vol. 113, pp. 5-13, 2002. [3] L. Nicolle, "Urinary tract infections in the elderly," Clin Geriatr Med, vol. 25, pp. 423-436, 2009."""
+            ],
+            [
+                """Barth, Fredrik, ed.
+	1969	Ethnic groups and boundaries: The social organization of culture difference. Oslo: Scandinavian University Press.
+Bondokji, Neven
+	2016	The Expectation Gap in Humanitarian Operations: Field Perspectives from Jordan. Asian Journal of Peace Building 4(1):1-28.
+Bourdieu, Pierre
+		The forms of capital In Handbook of Theory and Research for the Sociology of Education. J. Richardson, ed. Pp. 241-258. New York: Greenwood Publishesrs.
+Carrion, Doris
+	2015	Are Syrian Refguees a Security Threat to the MIddle East Vol. 2016. London Reuters.
+CFR
+	2016	The Global Humanitarian Regime: Priorities and Prospects for Reform. Council on Foerign Relations, International Institutues and Global Governance Program"""
+            ],
+            [
+                """(2)	Hofmann, M.H. et al. Aberrant splicing caused by single nucleotide polymorphism c.516G>T [Q172H], a marker of CYP2B6*6, is responsible for decreased expression and activity of CYP2B6 in liver. J Pharmacol Exp Ther  325, 284-92 (2008).
+(3) Zanger, U.M. & Klein, K. Pharmacogenetics of cytochrome P450 2B6 (CYP2B6): advances on polymorphisms, mechanisms, and clinical relevance. Front Genet  4, 24 (2013).
+(4) Holzinger, E.R. et al. Genome-wide association study of plasma efavirenz pharmacokinetics in AIDS Clinical Trials Group protocols implicates several CYP2B6 variants. Pharmacogenet Genomics  22, 858-67 (2012).
+"""
             ],
         ],
         inputs=textbox,
