@@ -3,13 +3,16 @@ import hashlib
 import io
 import logging
 from pathlib import Path
+from random import choices, random, seed
 import subprocess
 import time
-from typing import List, Optional
+from typing import List, Optional, Tuple
 
 from lxml import etree
 import numpy
 from numpy.random import randint
+from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split
 import spacy
 from spacy.tokens import Doc, DocBin, Span
 from tqdm import tqdm
@@ -19,7 +22,6 @@ from bib_tokenizers import create_references_tokenizer
 from csl_client import base_url, make_bibliography, styles_list
 from lxml_iter_tree import annotations
 from schema import spankey_sentence_start, tag_sentence_start, tags_ent, tags_span
-from sklearn.model_selection import train_test_split
 
 # less is better :) Consider download mo files from CrossRef
 NUM_STYLES_FOR_DOC = 1
@@ -28,6 +30,17 @@ DOWNSAMPE_RATIO = 1
 
 # it is relatively small because it is limited by GPU RAM: Spacy seems to load all dev examples at once.
 DEV_SIZE = 0.02
+
+SEED = 42
+
+# sample styles:
+# 1. choice a dir with CSLs given weights
+# 2. choice a number of styles from the dir at random
+# cslSmallWithTags contains popular styles selected by hand
+# cslWithTags contains all styles from the CSL repo
+styles_dirs = ["cslSmallWithTags", "cslWithTags"]
+styles_dir_weights = [0.8, 0.2]
+assert len(styles_dirs), len(styles_dir_weights)
 
 log = logging.getLogger(__name__)
 blank_nlp = spacy.blank("en")
@@ -169,24 +182,29 @@ def convert(
         print(f"{csl_processor_path} does not exist")
         exit(1)
     csl_processor_cwd = csl_processor_path.parent
+
     with subprocess.Popen(
         ["node", csl_processor_path, str(csl_http_port)],
         cwd=csl_processor_cwd,
     ) as p:
         print(f"CSL processor: {csl_processor_path}, pid: {p.pid}")
         time.sleep(1)
-        styles: List[str] = styles_list(url=base_url(csl_http_port))
-        len_styles = len(styles)
-        print(f"CSL processor supports {len_styles} styles")
+        styles: List[Tuple[str, int]] = [
+            (dir, len(styles_list(url=base_url(csl_http_port), styles_dir=dir)))
+            for dir in styles_dirs
+        ]
+        print(f"Sampling styles from:", styles, "with dir weights:", styles_dir_weights)
 
         digests = set()
         all_docs = []  # created by applying CSL to crossref_files
         for f in tqdm(crossref_files, desc=docbin_train_path.name):
+            styles_dir, num_styles = choices(styles, weights=styles_dir_weights)[0]
             try:
                 bibliographies = make_bibliography(
                     f,
-                    randint(0, len_styles, NUM_STYLES_FOR_DOC).tolist(),
+                    randint(0, num_styles, NUM_STYLES_FOR_DOC).tolist(),
                     url=base_url(csl_http_port),
+                    styles_dir=styles_dir,
                 )
                 for bibliography in bibliographies:
                     if "references" not in bibliography:
@@ -299,4 +317,6 @@ def main(
 
 
 if __name__ == "__main__":
+    seed(SEED)
+    numpy.random.seed(SEED)
     typer.run(main)
