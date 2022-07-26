@@ -103,7 +103,7 @@ def split_up_references(
     _timeit_start = timeit.default_timer()
     log.info(
         "start processing: '%s...'",
-        references[: _LOG_STR_LEN if len(references) > _LOG_STR_LEN else references],
+        references[: _LOG_STR_LEN if len(references) > _LOG_STR_LEN else -1],
     )
 
     target_doc = nlp_blank(references)
@@ -201,7 +201,7 @@ def split_up_references(
 
     log.info(
         "done: '%s...', elapsed: %s",
-        references[: _LOG_STR_LEN if len(references) > _LOG_STR_LEN else references],
+        references[: _LOG_STR_LEN if len(references) > _LOG_STR_LEN else -1],
         timeit.default_timer() - _timeit_start,
     )
     return target_doc
@@ -241,17 +241,16 @@ def _level_off_references(doc, token_scorer, step=1):
     for n, ref in enumerate(doc.sents):
         # print([f"'{t}'" for t in ref])
         surprising = (lengths[n] - mean) / sigma
-        if surprising >= 1.0:
+        if surprising > 1:
             log.info("surprising: %s: %s", surprising, ref.text[:_LOG_STR_LEN])
             scores = [token_scorer(t.i) for t in ref]
             median_score = np.median(scores)
 
             # for each first non-space token on each line
-            start = None  # next reference start is we decided to splip up the ref span
+            start = None  # next reference start is we decided to split up the ref span
             for _, eol, token_i_after_eol in matcher(ref):
                 i = token_i_after_eol - 1
 
-                # minimize variance using the predicted spancat score
                 log.info(
                     "line start: token=%s, score=%s, median_score=%s, ahead=%s",
                     ref[i],
@@ -259,20 +258,24 @@ def _level_off_references(doc, token_scorer, step=1):
                     median_score,
                     len(ref[token_i_after_eol:]),
                 )
-                # TODO: play with softmax temperature: find a way to get activations:
-                # here we have an activated neuron in the softmax input, but corresponding sofmax output is still too low
-                if scores[i] > 10 * median_score and len(ref[token_i_after_eol:]) > 10:
-                    sent_starts.append(ref[i])
-                    start = i  # needed only for reviewing ner entities, see below
-                    continue
 
-                # minimize variance using ner output:
-                # an edge case if a new line starts with citation number of namnes and
-                # pref lines already contain names and title
+                if surprising > 2:
+                    # risky.. minimize variance using the predicted spancat score
+                    if (
+                        scores[i] > 10 * median_score
+                        and len(ref[token_i_after_eol:]) > 10
+                    ):
+                        sent_starts.append(ref[i])
+                        start = i  # needed only for reviewing ner entities, see below
+                        continue
+
+                # minimize variance using ner output, a bit less risky - to support
+                # an edge case if a new line starts with citation number of names and
+                # prev lines already contain names and title
                 before_eol_ents = [
                     ent.label_ for ent in ref[0 if start is None else start : eol].ents
                 ]
-                # 2 entities after eol, if any
+                # entities after eol, if any
                 after_eol_ents = [ent.label_ for ent in ref[eol:].ents][:2]
                 if (
                     set(before_eol_ents) & set(["issued", "title", "container-title"])
