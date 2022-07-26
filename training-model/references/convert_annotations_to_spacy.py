@@ -24,7 +24,7 @@ from lxml_iter_tree import annotations
 from schema import spankey_sentence_start, tag_sentence_start, tags_ent, tags_span
 
 # less is better :) Consider download mo files from CrossRef
-NUM_STYLES_FOR_DOC = 1
+NUM_STYLES_FOR_DOC = 2
 # usually >1 if NUM_STYLES_FOR_DOC>1
 DOWNSAMPE_RATIO = 1
 
