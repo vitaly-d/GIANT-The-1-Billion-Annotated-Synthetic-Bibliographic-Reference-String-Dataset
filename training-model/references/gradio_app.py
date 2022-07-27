@@ -214,6 +214,18 @@ def split_up_references(
     return target_doc
 
 
+# a token can be considered as sent_start if its score is at least 10 times larger than median score for tokens in the reference span
+MIN_SCORE_PEAK_LOG10 = 1
+# how far the current reference length in lines(aka paragraphs) from the mean
+MIN_DISTANCE_IN_SIGMAS = 1
+# if a reference is too large, lower value of the token score is accepted to split up the reference
+ACCEPT_THRESHOLD = 3
+# a neuron is definitely activated
+ACCEPT_UNCONDITIONALLY_SCORE = 0.1
+# don't split up if a new reference is too short
+MIN_TOKENS_IN_REF = 10
+
+
 def _level_off_references(doc, token_scorer, step=1):
     """
     Problem:
@@ -248,7 +260,7 @@ def _level_off_references(doc, token_scorer, step=1):
     for n, ref in enumerate(doc.sents):
         # print([f"'{t}'" for t in ref])
         surprising = (lengths[n] - mean) / sigma
-        if surprising > 1:
+        if surprising > MIN_DISTANCE_IN_SIGMAS:
             log.info("surprising: %s: %s", surprising, ref.text[:_LOG_STR_LEN])
             scores = [token_scorer(t.i) for t in ref]
             median_score = np.median(scores)
@@ -260,18 +272,24 @@ def _level_off_references(doc, token_scorer, step=1):
 
                 score_peak = math.log10(scores[i] / median_score)
                 log.info(
-                    "line start: token=%s, score=%s, median_score=%s, ahead=%s, score_peak=%s",
+                    "line start: token=%s, score=%s, median_score=%s, score_peak=%s, ahead=%s",
                     ref[i],
-                    scores[i],
-                    median_score,
+                    np.format_float_scientific(scores[i], precision=2),
+                    np.format_float_scientific(median_score, precision=2),
+                    np.format_float_scientific(score_peak, precision=2),
                     len(ref[token_i_after_eol:]),
-                    score_peak
                 )
 
-                # risky if score is too low.. minimize variance using the predicted spancat score
-                # sum oranges and apples..
-                score_is_enough_to_split = scores[i]>.1 or score_peak + surprising > 3
-                if score_is_enough_to_split and len(ref[token_i_after_eol:]) > 10:
+                # minimize variance using the predicted spancat score, risky if score is too low..
+                score_is_enough_to_split = scores[i] > ACCEPT_UNCONDITIONALLY_SCORE or (
+                    score_peak > MIN_SCORE_PEAK_LOG10
+                    # sum oranges and apples:
+                    and score_peak + surprising > ACCEPT_THRESHOLD
+                )
+                if (
+                    score_is_enough_to_split
+                    and len(ref[token_i_after_eol:]) > MIN_TOKENS_IN_REF
+                ):
                     sent_starts.append(ref[i])
                     start = i  # needed only for reviewing ner entities, see below
                     continue
