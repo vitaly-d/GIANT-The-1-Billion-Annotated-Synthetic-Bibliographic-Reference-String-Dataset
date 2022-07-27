@@ -34,6 +34,9 @@ log.info("spancat config: %s", nlp.get_pipe("spancat").cfg)
 
 
 def create_bib_item_start_scorer_for_doc(doc):
+    """
+    the spancat pipe based scorer
+    """
 
     span_group = doc.spans[spankey_sentence_start]
     assert not span_group.has_overlap
@@ -115,12 +118,8 @@ def split_up_references(
 
     # disable unused components to speedup inference && parse normalized referenences
     disable = []
-    if is_eol_mode:
-        disable.append("senter")
-    else:
+    if not is_eol_mode:
         disable.append("spancat")
-    if not ner:
-        disable.append("ner")
     with nlp.select_pipes(disable=disable):
         # normalization applied: strip lines and remove any extra space between lines
         norm_doc = nlp(" ".join([line.strip() for line in lines if line.strip()]))
@@ -142,16 +141,22 @@ def split_up_references(
         for i, t in enumerate(target_doc):
             t.is_sent_start = i == 0
 
-        token_scorer = create_bib_item_start_scorer_for_doc(norm_doc)
+        spancat_token_scorer = create_bib_item_start_scorer_for_doc(norm_doc)
 
         def target_doc_token_scorer(token_index_in_target_doc):
+            """
+            returns max score if senter predicted sent start, orherwise spancat score
+            """
             index_in_norm_doc = _token_index_in_norm_doc(
                 token_index_in_target_doc, alignment_data
             )
             if index_in_norm_doc is not None:
-                span, score = token_scorer(index_in_norm_doc)
-                # print(span, score, index_in_norm_doc)
-                return score
+                if target_doc[token_index_in_target_doc].is_sent_start:
+                    return 1.0
+                else:
+                    span, score = spancat_token_scorer(index_in_norm_doc)
+                    # print(span, score, index_in_norm_doc, is_sent_start)
+                    return score
             return 0.0
 
         threshold = 0.5
