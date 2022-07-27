@@ -123,7 +123,7 @@
       <else>
         <choose>
           <if variable="DOI">
-            <text variable="DOI" prefix="DOI:&lt;DOI>" suffix="&lt;/DOI>."/>
+            <text variable="DOI" prefix="&lt;DOI>DOI:" suffix="&lt;/DOI>."/>
           </if>
           <else>
             <choose>
@@ -425,7 +425,7 @@
       </else>
     </choose>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" collapse="year">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" collapse="year">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">

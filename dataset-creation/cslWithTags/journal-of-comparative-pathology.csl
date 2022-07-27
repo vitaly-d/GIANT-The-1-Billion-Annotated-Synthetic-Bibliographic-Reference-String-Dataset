@@ -109,7 +109,7 @@
       <label text-case="capitalize-first" variable="edition" form="short"/>
     </group>
   </macro>
-  <citation collapse="year">
+  <citation disambiguate-add-year-suffix="true" collapse="year">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">

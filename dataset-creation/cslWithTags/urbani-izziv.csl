@@ -119,7 +119,7 @@
   <macro name="access">
     <choose>
       <if variable="DOI">
-        <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
       </if>
       <else-if type="webpage post-weblog" match="any">
         <group delimiter=" ">
@@ -246,7 +246,7 @@
       </else-if>
     </choose>
   </macro>
-  <citation delimiter-precedes-et-al="never" delimiter-precedes-last="never" et-al-min="3" et-al-use-first="1" disambiguate-add-givenname="true" collapse="year">
+  <citation delimiter-precedes-et-al="never" delimiter-precedes-last="never" et-al-min="3" et-al-use-first="1" disambiguate-add-givenname="true" disambiguate-add-year-suffix="true" collapse="year">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">

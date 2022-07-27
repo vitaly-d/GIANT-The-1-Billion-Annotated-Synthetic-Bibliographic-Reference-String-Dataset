@@ -333,7 +333,7 @@
       <text variable="archive" prefix=" &lt;archive>" suffix="&lt;/archive>"/>
     </group>
   </macro>
-  <citation et-al-min="4" et-al-use-first="1" collapse="year">
+  <citation et-al-min="4" et-al-use-first="1" collapse="year" disambiguate-add-year-suffix="true">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group>

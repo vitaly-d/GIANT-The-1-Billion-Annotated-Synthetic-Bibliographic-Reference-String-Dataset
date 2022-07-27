@@ -81,7 +81,7 @@
       </else>
     </choose>
   </macro>
-  <citation and="text" et-al-min="3" et-al-use-first="1" disambiguate-add-names="true" collapse="year-suffix" year-suffix-delimiter=", ">
+  <citation and="text" et-al-min="3" et-al-use-first="1" disambiguate-add-names="true" disambiguate-add-year-suffix="true" collapse="year-suffix" year-suffix-delimiter=", ">
     
     <layout delimiter="; " prefix="(" suffix=")">
       <group delimiter=" ">

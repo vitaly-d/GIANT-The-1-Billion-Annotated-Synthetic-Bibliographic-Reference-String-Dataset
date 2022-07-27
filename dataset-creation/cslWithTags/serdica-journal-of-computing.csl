@@ -105,7 +105,7 @@
       <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
     </group>
   </macro>
-  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true" givenname-disambiguation-rule="primary-name">
+  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="true" givenname-disambiguation-rule="primary-name">
     
     <layout delimiter=", " prefix="[" suffix="]">
       <text variable="citation-number" prefix="&lt;citation-number>" suffix="&lt;/citation-number>"/>
@@ -163,7 +163,7 @@
       </choose>
       <choose>
         <if match="any" variable="DOI">
-          <text variable="DOI" prefix=". doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+          <text variable="DOI" prefix=". &lt;DOI>doi:" suffix="&lt;/DOI>"/>
         </if>
       </choose>
     </layout>

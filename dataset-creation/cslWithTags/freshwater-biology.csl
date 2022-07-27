@@ -90,11 +90,11 @@
   <macro name="access">
     <choose>
       <if type="article-journal" match="any">
-        <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
       </if>
     </choose>
   </macro>
-  <citation et-al-min="4" et-al-subsequent-min="3" et-al-use-first="1" et-al-subsequent-use-first="1" disambiguate-add-names="false" disambiguate-add-givenname="false" collapse="year-suffix" year-suffix-delimiter=" ">
+  <citation et-al-min="4" et-al-subsequent-min="3" et-al-use-first="1" et-al-subsequent-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="false" disambiguate-add-givenname="false" collapse="year-suffix" year-suffix-delimiter=" ">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">

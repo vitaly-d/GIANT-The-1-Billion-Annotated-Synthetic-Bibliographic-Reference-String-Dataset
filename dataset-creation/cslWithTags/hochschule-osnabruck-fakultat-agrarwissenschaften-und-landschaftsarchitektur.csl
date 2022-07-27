@@ -159,7 +159,7 @@
       <name form="count"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
     </names>
   </macro>
-  <citation and="symbol" et-al-min="3" et-al-use-first="1">
+  <citation and="symbol" et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=" ">

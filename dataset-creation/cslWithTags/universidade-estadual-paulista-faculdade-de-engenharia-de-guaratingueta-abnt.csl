@@ -560,7 +560,7 @@ Dentro da tag bibliography são organizadas todas referências pelo seu tipo cor
   <macro name="title-short">
     <text variable="title-short" suffix="&lt;/title-short>." prefix="&lt;title-short>"/>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-givenname="true" givenname-disambiguation-rule="by-cite" collapse="year" delimiter-precedes-et-al="never">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-givenname="true" givenname-disambiguation-rule="by-cite" collapse="year" delimiter-precedes-et-al="never">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <choose>

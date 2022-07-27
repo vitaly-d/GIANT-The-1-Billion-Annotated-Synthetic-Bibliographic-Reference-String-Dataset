@@ -406,7 +406,7 @@
     <choose>
       <if type="bill legal_case" match="any"/>
       <else-if variable="DOI" match="any">
-        <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
       </else-if>
       <else-if variable="URL">
         <group delimiter=" ">
@@ -1434,7 +1434,7 @@
       </else-if>
     </choose>
   </macro>
-  <citation et-al-min="6" et-al-use-first="1" et-al-subsequent-min="3" et-al-subsequent-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true" collapse="year" givenname-disambiguation-rule="primary-name">
+  <citation et-al-min="6" et-al-use-first="1" et-al-subsequent-min="3" et-al-subsequent-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="true" collapse="year" givenname-disambiguation-rule="primary-name">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">

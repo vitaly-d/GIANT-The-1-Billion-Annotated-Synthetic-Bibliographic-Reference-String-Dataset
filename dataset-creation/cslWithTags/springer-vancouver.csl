@@ -128,7 +128,7 @@
 	       J Mol Med. doi:10.1007/s001090000086     -->
           <group delimiter=". ">
             <text variable="container-title" form="short" strip-periods="true" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
-            <text prefix="https://doi.org/&lt;DOI>" variable="DOI" suffix="&lt;/DOI>"/>
+            <text prefix="&lt;DOI>https://doi.org/" variable="DOI" suffix="&lt;/DOI>"/>
           </group>
         </else-if>
         <else-if type="bill book graphic legal_case legislation motion_picture report song" match="any">

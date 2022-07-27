@@ -447,7 +447,7 @@
     </group>
     <choose>
       <if variable="DOI">
-        <text variable="DOI" prefix=" &amp;amp;lt;https://doi.org/&lt;DOI>" suffix="&lt;/DOI>&amp;amp;gt;"/>
+        <text variable="DOI" prefix=" &lt;DOI>&amp;amp;lt;https://doi.org/" suffix="&lt;/DOI>&amp;amp;gt;"/>
         <group prefix=" [" suffix="]">
           <text term="accessed" prefix="" suffix=""/>
           <date form="text" variable="accessed" prefix="&lt;accessed>" suffix="&lt;/accessed>">

@@ -90,7 +90,7 @@
       </else>
     </choose>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" collapse="year-suffix">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" collapse="year-suffix">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">
@@ -207,7 +207,7 @@
                     <if variable="DOI">
                       <group>
                         <text variable="volume" font-style="italic" prefix="&lt;volume>" suffix="&lt;/volume>"/>
-                        <text variable="DOI" prefix=", doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+                        <text variable="DOI" prefix=", &lt;DOI>doi:" suffix="&lt;/DOI>"/>
                       </group>
                     </if>
                     <else>

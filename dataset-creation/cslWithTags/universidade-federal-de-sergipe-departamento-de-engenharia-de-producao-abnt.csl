@@ -147,7 +147,7 @@
     </choose>
     <choose>
       <if variable="DOI" match="any">
-        <text variable="DOI" prefix=" Disponível em: https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix=" Disponível em: &lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
         <group prefix=". Acesso em: " suffix=".">
           <date variable="accessed" prefix="&lt;accessed>" suffix="&lt;/accessed>">
             <date-part name="day" suffix="&lt;/day> " prefix="&lt;day>"/>
@@ -415,7 +415,7 @@
       </else>
     </choose>
   </macro>
-  <citation et-al-min="4" et-al-use-first="1" collapse="year" delimiter-precedes-et-al="never">
+  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-year-suffix="true" collapse="year" delimiter-precedes-et-al="never">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <choose>

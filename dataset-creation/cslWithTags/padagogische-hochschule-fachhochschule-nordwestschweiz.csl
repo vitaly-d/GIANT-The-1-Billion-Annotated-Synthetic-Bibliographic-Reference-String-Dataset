@@ -159,7 +159,7 @@
           <text macro="archive" prefix="" suffix=""/>
         </if>
       </choose>
-      <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+      <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
       <choose>
         <if type="legal_case" match="none">
           <group prefix="[" suffix="]" delimiter="">
@@ -373,7 +373,7 @@
       </else>
     </choose>
   </macro>
-  <citation et-al-min="4" et-al-use-first="1" et-al-subsequent-min="4" et-al-subsequent-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true">
+  <citation et-al-min="4" et-al-use-first="1" et-al-subsequent-min="4" et-al-subsequent-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="true">
     <layout prefix="(" suffix=")" delimiter=", ">
       <group delimiter=": ">
         <group delimiter=" ">

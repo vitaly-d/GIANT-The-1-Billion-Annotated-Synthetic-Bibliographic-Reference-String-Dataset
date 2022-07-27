@@ -122,7 +122,7 @@
         </if>
         <else-if type="article-journal" match="any">
           <group delimiter=", ">
-            <text variable="DOI" prefix=" DOI:&lt;DOI>" suffix="&lt;/DOI>"/>
+            <text variable="DOI" prefix=" &lt;DOI>DOI:" suffix="&lt;/DOI>"/>
             <group delimiter=" ">
               <text term="accessed" prefix="" suffix=""/>
               <date form="text" variable="accessed" prefix="el &lt;accessed>" suffix="&lt;/accessed>"/>
@@ -331,7 +331,7 @@
   <macro name="original-date">
     <date date-parts="year" form="text" variable="original-date" prefix="&lt;original-date>" suffix="&lt;/original-date>"/>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="false" collapse="year">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="false" collapse="year">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=":">

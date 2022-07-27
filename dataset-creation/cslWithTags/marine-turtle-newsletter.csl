@@ -137,7 +137,7 @@
       <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
     </group>
   </macro>
-  <citation and="text" et-al-min="3" et-al-use-first="1" givenname-disambiguation-rule="primary-name" collapse="year" cite-group-delimiter=",">
+  <citation and="text" et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" givenname-disambiguation-rule="primary-name" collapse="year" cite-group-delimiter=",">
     
     <layout delimiter="; " prefix="(" suffix=")">
       <group delimiter=" ">

@@ -237,7 +237,7 @@
       </choose>
       <text prefix=" " macro="collection" suffix=""/>
       <text prefix=" " macro="access" suffix=""/>
-      <text variable="DOI" prefix=". doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+      <text variable="DOI" prefix=". &lt;DOI>doi:" suffix="&lt;/DOI>"/>
     </layout>
   </bibliography>
 </style>

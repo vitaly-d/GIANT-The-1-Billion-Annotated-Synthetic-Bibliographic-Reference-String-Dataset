@@ -90,7 +90,7 @@
   <macro name="access">
     <choose>
       <if type="article-journal" match="any">
-        <text variable="DOI" display="block" prefix="    http://doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+        <text variable="DOI" display="block" prefix="    &lt;DOI>http://doi:" suffix="&lt;/DOI>"/>
       </if>
       <else-if type="book chapter" match="any">
         <text variable="ISBN" prefix=" ISBN &lt;ISBN>" suffix="&lt;/ISBN>"/>

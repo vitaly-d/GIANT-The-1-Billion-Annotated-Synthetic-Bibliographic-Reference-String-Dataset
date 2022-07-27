@@ -81,7 +81,7 @@
   <macro name="access">
     <choose>
       <if type="article-journal" match="any">
-        <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
       </if>
       <else-if type="report" match="any">
         <group delimiter=": ">
@@ -107,7 +107,7 @@
       <label variable="number-of-pages" form="short"/>
     </group>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=" ">

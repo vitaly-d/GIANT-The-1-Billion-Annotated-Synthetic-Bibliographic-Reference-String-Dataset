@@ -137,7 +137,7 @@
       <if type="thesis report webpage dataset post-weblog post" match="any">
         <choose>
           <if variable="DOI" match="any">
-            <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+            <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
           </if>
           <else-if variable="URL" match="any">
             <group>
@@ -621,7 +621,7 @@
       </if>
     </choose>
   </macro>
-  <citation and="text" et-al-min="6" et-al-use-first="1" et-al-subsequent-min="3" et-al-subsequent-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true" givenname-disambiguation-rule="primary-name" collapse="year">
+  <citation and="text" et-al-min="6" et-al-use-first="1" et-al-subsequent-min="3" et-al-subsequent-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true" disambiguate-add-year-suffix="true" givenname-disambiguation-rule="primary-name" collapse="year">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">

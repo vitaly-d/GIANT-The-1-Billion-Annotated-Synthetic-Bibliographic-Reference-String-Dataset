@@ -602,7 +602,7 @@
       </date>
     </group>
   </macro>
-  <citation et-al-min="15" et-al-use-first="14" initialize-with=".">
+  <citation et-al-min="15" et-al-use-first="14" initialize-with="." disambiguate-add-year-suffix="true">
     <layout suffix="." delimiter=" ; ">
       <choose>
         <if position="ibid-with-locator">

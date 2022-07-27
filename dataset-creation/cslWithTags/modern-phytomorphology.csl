@@ -62,7 +62,7 @@
       <if variable="page" match="none">
         <choose>
           <if variable="DOI">
-            <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+            <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
           </if>
           <else-if variable="URL">
             <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
@@ -83,7 +83,7 @@
       </if>
     </choose>
   </macro>
-  <citation collapse="year-suffix" et-al-min="3" et-al-use-first="1" year-suffix-delimiter=",">
+  <citation collapse="year-suffix" et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" year-suffix-delimiter=",">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group font-variant="small-caps" delimiter=" ">

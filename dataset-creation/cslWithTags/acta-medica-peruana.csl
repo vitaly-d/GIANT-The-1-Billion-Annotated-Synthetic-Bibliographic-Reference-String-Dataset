@@ -94,7 +94,7 @@
     <choose>
       <if match="any" variable="DOI">
         <group>
-          <text variable="DOI" font-variant="normal" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+          <text variable="DOI" font-variant="normal" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
         </group>
       </if>
       <else-if match="any" variable="URL">

@@ -298,7 +298,7 @@
   <macro name="note">
     <text variable="note" prefix="&lt;note>" suffix="&lt;/note>"/>
   </macro>
-  <citation name-delimiter=", " disambiguate-add-givenname="true" givenname-disambiguation-rule="all-names">
+  <citation name-delimiter=", " disambiguate-add-givenname="true" disambiguate-add-year-suffix="true" givenname-disambiguation-rule="all-names">
     
     <layout delimiter=" ; " suffix=".">
       <text macro="citation" prefix="" suffix=""/>

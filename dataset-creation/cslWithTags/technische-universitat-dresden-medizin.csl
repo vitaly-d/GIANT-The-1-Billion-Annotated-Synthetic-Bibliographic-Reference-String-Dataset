@@ -152,7 +152,7 @@
       <date-part name="day" suffix="&lt;/day>." prefix="&lt;day>"/>
     </date>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">

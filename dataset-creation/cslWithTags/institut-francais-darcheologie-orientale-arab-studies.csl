@@ -374,7 +374,7 @@
       <text term="volume" form="short" prefix="" suffix=""/>
     </group>
   </macro>
-  <citation name-delimiter=", " initialize="false" near-note-distance="1" disambiguate-add-givenname="true" givenname-disambiguation-rule="all-names" collapse="citation-number">
+  <citation name-delimiter=", " initialize="false" near-note-distance="1" disambiguate-add-givenname="true" disambiguate-add-year-suffix="true" givenname-disambiguation-rule="all-names" collapse="citation-number">
     
     <layout delimiter=" ; " suffix=".">
       <text macro="citation" prefix="" suffix=""/>

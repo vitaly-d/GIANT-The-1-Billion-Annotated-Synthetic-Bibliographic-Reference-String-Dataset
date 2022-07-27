@@ -277,7 +277,7 @@
             <text variable="page" prefix=" &lt;page>" suffix="&lt;/page>"/>
           </group>
           <group>
-            <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+            <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
           </group>
         </group>
       </if>
@@ -322,7 +322,7 @@
       </else-if>
     </choose>
   </macro>
-  <citation and="symbol" et-al-min="6" et-al-use-first="1" et-al-subsequent-min="4" et-al-subsequent-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true" givenname-disambiguation-rule="primary-name" collapse="year">
+  <citation and="symbol" et-al-min="6" et-al-use-first="1" et-al-subsequent-min="4" et-al-subsequent-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true" disambiguate-add-year-suffix="true" givenname-disambiguation-rule="primary-name" collapse="year">
     
     <layout delimiter="; " prefix="(" suffix=")">
       <group delimiter=", ">

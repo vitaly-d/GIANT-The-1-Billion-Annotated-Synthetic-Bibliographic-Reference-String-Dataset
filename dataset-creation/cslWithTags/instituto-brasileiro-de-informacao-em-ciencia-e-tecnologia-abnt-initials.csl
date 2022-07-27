@@ -165,7 +165,7 @@
         <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
       </else-if>
       <else>
-        <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
       </else>
     </choose>
     <choose>
@@ -375,7 +375,7 @@
       <text variable="number" prefix=", n. &lt;number>" suffix="&lt;/number>"/>
     </group>
   </macro>
-  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true" collapse="year-suffix" givenname-disambiguation-rule="primary-name" year-suffix-delimiter=", ">
+  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="true" collapse="year-suffix" givenname-disambiguation-rule="primary-name" year-suffix-delimiter=", ">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group>

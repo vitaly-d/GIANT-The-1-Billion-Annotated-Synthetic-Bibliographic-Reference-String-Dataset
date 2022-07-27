@@ -87,13 +87,13 @@
       <if type="article-journal" match="any">
         <choose>
           <if variable="page" match="none">
-            <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+            <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
           </if>
         </choose>
       </if>
     </choose>
   </macro>
-  <citation collapse="year-suffix" et-al-min="3" et-al-use-first="1" year-suffix-delimiter=", ">
+  <citation collapse="year-suffix" et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" year-suffix-delimiter=", ">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=" ">

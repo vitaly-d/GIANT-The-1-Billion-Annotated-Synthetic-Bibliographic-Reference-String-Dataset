@@ -131,7 +131,7 @@
       <text variable="publisher-place" prefix="&lt;publisher-place>" suffix="&lt;/publisher-place>"/>
     </group>
   </macro>
-  <citation collapse="year">
+  <citation disambiguate-add-year-suffix="true" collapse="year">
     
     <layout delimiter=", " prefix="[" suffix="]">
       <group delimiter=", ">

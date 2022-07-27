@@ -298,7 +298,7 @@
       </else-if>
     </choose>
   </macro>
-  <citation et-al-min="3" et-al-use-first="2" collapse="year">
+  <citation et-al-min="3" et-al-use-first="2" disambiguate-add-year-suffix="true" collapse="year">
     
     <layout prefix="(" suffix=")" delimiter=", ">
       <group delimiter=", ">

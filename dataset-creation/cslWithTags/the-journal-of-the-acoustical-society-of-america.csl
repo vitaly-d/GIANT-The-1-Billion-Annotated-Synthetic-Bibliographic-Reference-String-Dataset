@@ -108,7 +108,7 @@
       <else>
         <choose>
           <if variable="DOI">
-            <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+            <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
           </if>
           <else>
             <choose>
@@ -271,7 +271,7 @@
               <text variable="number-of-pages" suffix="&lt;/number-of-pages> pages" prefix="&lt;number-of-pages>"/>
             </else-if>
             <else-if variable="DOI">
-              <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+              <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
             </else-if>
             <else-if variable="URL">
               <text variable="URL" prefix=" Available: &lt;URL>" suffix="&lt;/URL>"/>
@@ -348,7 +348,7 @@
       <text variable="locator" prefix=" &lt;locator>" suffix="&lt;/locator>"/>
     </group>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-names="false" disambiguate-add-givenname="false" collapse="year" givenname-disambiguation-rule="primary-name">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="false" disambiguate-add-givenname="false" collapse="year" givenname-disambiguation-rule="primary-name">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">

@@ -110,7 +110,7 @@
   <macro name="location">
     <choose>
       <if variable="DOI">
-        <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
       </if>
       <else-if variable="URL">
         <text variable="URL" prefix="Available at: &lt;URL>" suffix="&lt;/URL>"/>
@@ -160,7 +160,7 @@
       <text variable="collection-number" prefix="&lt;collection-number>" suffix="&lt;/collection-number>"/>
     </group>
   </macro>
-  <citation collapse="year" et-al-min="3" et-al-use-first="1">
+  <citation disambiguate-add-year-suffix="true" collapse="year" et-al-min="3" et-al-use-first="1">
     <!--  sort as cited  -->
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">

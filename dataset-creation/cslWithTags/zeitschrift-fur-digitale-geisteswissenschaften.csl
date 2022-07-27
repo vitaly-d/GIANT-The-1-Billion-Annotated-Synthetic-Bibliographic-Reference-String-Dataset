@@ -282,7 +282,7 @@
   <macro name="citation-locator">
     <text variable="locator" prefix="&lt;locator>" suffix="&lt;/locator>"/>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true" collapse="year" givenname-disambiguation-rule="primary-name">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="true" collapse="year" givenname-disambiguation-rule="primary-name">
     
     <layout suffix=".">
       <text macro="contributors-short" prefix="" suffix=""/>

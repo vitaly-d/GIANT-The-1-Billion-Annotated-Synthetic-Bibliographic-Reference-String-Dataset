@@ -342,8 +342,8 @@
       </choose>
       <choose>
         <if variable="DOI">
-          <text variable="DOI" prefix="&amp;amp;lt;a href=&amp;amp;quot;https://doi.org/&lt;DOI>" suffix="&lt;/DOI>&amp;amp;quot; target=&amp;amp;quot;_blank&amp;amp;quot;&amp;amp;gt;"/>
-          <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>&amp;amp;lt;/a&amp;amp;gt;"/>
+          <text variable="DOI" prefix="&amp;amp;lt;a &lt;DOI>href=&amp;amp;quot;https://doi.org/" suffix="&lt;/DOI>&amp;amp;quot; target=&amp;amp;quot;_blank&amp;amp;quot;&amp;amp;gt;"/>
+          <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>&amp;amp;lt;/a&amp;amp;gt;"/>
         </if>
         <else>
           <text variable="URL" prefix="&amp;amp;lt;a href=&amp;amp;quot;&lt;URL>" suffix="&lt;/URL>&amp;amp;quot; target=&amp;amp;quot;_blank&amp;amp;quot;&amp;amp;gt;[Link]&amp;amp;lt;/a&amp;amp;gt;"/>

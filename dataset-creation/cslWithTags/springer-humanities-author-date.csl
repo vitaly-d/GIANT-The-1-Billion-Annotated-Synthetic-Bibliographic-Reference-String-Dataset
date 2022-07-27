@@ -145,7 +145,7 @@
           <text macro="archive" prefix="" suffix=""/>
         </else-if>
       </choose>
-      <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+      <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
       <choose>
         <if variable="DOI issued" match="none">
           <choose>
@@ -431,7 +431,7 @@
       </else>
     </choose>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true" givenname-disambiguation-rule="primary-name">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="true" givenname-disambiguation-rule="primary-name">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">

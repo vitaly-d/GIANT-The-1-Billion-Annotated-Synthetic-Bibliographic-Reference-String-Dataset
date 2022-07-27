@@ -74,7 +74,7 @@
     <choose>
       <if variable="volume"/>
       <else-if variable="DOI">
-        <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
       </else-if>
       <else-if variable="URL">
         <text value="Available from: " prefix="" suffix=""/>
@@ -115,7 +115,7 @@
       </else>
     </choose>
   </macro>
-  <citation collapse="year" et-al-min="3" et-al-use-first="1">
+  <citation collapse="year" et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">

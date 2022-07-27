@@ -49,7 +49,7 @@
           <text value="Available from: " prefix="" suffix=""/>
           <choose>
             <if variable="DOI">
-              <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+              <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
             </if>
             <else>
               <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
@@ -261,7 +261,7 @@
       </else>
     </choose>
   </macro>
-  <citation et-al-min="4" et-al-use-first="1" sort-separator="," collapse="year">
+  <citation et-al-min="4" et-al-use-first="1" sort-separator="," disambiguate-add-year-suffix="true" collapse="year">
     
     <layout suffix=")" delimiter="; " prefix="(">
       <group delimiter=" ">

@@ -202,7 +202,7 @@
         </group>
         <choose>
           <if variable="DOI">
-            <text variable="DOI" prefix="&amp;amp;lt;doi:&lt;DOI>" suffix="&lt;/DOI>&amp;amp;gt;"/>
+            <text variable="DOI" prefix="&lt;DOI>&amp;amp;lt;doi:" suffix="&lt;/DOI>&amp;amp;gt;"/>
           </if>
           <else-if variable="URL">
             <text variable="URL" prefix="&amp;amp;lt;&lt;URL>" suffix="&lt;/URL>&amp;amp;gt;"/>
@@ -212,7 +212,7 @@
     </choose>
   </macro>
   <!-- CITATION SECTION -->
-  <citation et-al-min="3" et-al-use-first="1" collapse="year">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" collapse="year">
     
     <layout prefix="(" suffix=")" delimiter=", ">
       <group delimiter=", ">

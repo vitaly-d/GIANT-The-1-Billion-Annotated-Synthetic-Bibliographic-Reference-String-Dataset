@@ -244,7 +244,7 @@
       <if variable="DOI">
         <!-- Quando houver DOI, utilizá-lo no lugar do link -->
         <text term="available at" text-case="capitalize-first" prefix=" " suffix=": "/>
-        <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
         <group>
           <text term="accessed" text-case="capitalize-first" prefix=". " suffix=" "/>
           <text term="at" text-case="lowercase" suffix=": " prefix=""/>
@@ -604,7 +604,7 @@
       </else>
     </choose>
   </macro>
-  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-givenname="true" givenname-disambiguation-rule="primary-name" collapse="year" delimiter-precedes-et-al="never">
+  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-givenname="true" givenname-disambiguation-rule="primary-name" collapse="year" delimiter-precedes-et-al="never">
     <!-- CITAÇÃO: uso de sufixo para desambiguação de anos e de prenome ativos -->
     
     <layout delimiter="; ">

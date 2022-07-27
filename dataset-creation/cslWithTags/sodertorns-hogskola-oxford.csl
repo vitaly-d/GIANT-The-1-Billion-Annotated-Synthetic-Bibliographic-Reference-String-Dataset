@@ -503,7 +503,7 @@
               <text prefix="&amp;amp;quot;" macro="title-long" suffix="&amp;amp;quot;, "/>
               <text macro="container" prefix="" suffix=""/>
               <text prefix=" " macro="issued" suffix=""/>
-              <text prefix=", doi:&lt;DOI>" variable="DOI" suffix="&lt;/DOI>"/>
+              <text prefix=", &lt;DOI>doi:" variable="DOI" suffix="&lt;/DOI>"/>
               <text macro="locator-or-period" prefix="" suffix=""/>
             </else-if>
             <else-if type="paper-conference speech" match="any">
@@ -515,7 +515,7 @@
               <text prefix=" " macro="publisher" suffix=""/>
               <choose>
                 <if variable="DOI" match="any">
-                  <text prefix=", doi:&lt;DOI>" variable="DOI" suffix="&lt;/DOI>"/>
+                  <text prefix=", &lt;DOI>doi:" variable="DOI" suffix="&lt;/DOI>"/>
                 </if>
               </choose>
               <text macro="locator-or-period" prefix="" suffix=""/>
@@ -689,7 +689,7 @@
           <text macro="container-full" prefix="" suffix=""/>
           <text prefix=" " macro="issued" suffix=""/>
           <text prefix=", " macro="page-range" suffix=""/>
-          <text prefix=", doi:&lt;DOI>" variable="DOI" suffix="&lt;/DOI>"/>
+          <text prefix=", &lt;DOI>doi:" variable="DOI" suffix="&lt;/DOI>"/>
           <text value="." prefix="" suffix=""/>
         </else-if>
         <else-if type="paper-conference speech" match="any">
@@ -702,7 +702,7 @@
           <choose>
             <if variable="DOI" match="any">
               <text prefix=", " macro="page-range" suffix=""/>
-              <text prefix=", doi:&lt;DOI>" variable="DOI" suffix="&lt;/DOI>."/>
+              <text prefix=", &lt;DOI>doi:" variable="DOI" suffix="&lt;/DOI>."/>
             </if>
             <else>
               <text prefix=", " macro="page-range" suffix=""/>

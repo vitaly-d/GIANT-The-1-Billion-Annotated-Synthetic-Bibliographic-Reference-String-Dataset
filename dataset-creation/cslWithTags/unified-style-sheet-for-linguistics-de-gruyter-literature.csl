@@ -157,7 +157,7 @@
           <date form="numeric" variable="accessed" prefix="(letzter Zugriff &lt;accessed>" suffix="&lt;/accessed>)"/>
         </if>
       </choose>
-      <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+      <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
     </group>
   </macro>
   <macro name="title">
@@ -361,7 +361,7 @@
   <macro name="publisher-thesis">
     <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
   </macro>
-  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true">
+  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="true">
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=": ">
         <group delimiter=" ">

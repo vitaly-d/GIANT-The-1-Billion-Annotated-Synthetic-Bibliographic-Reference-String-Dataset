@@ -46,7 +46,7 @@
   <macro name="access-value">
     <choose>
       <if variable="DOI">
-        <text variable="DOI" prefix=", doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix=", &lt;DOI>doi:" suffix="&lt;/DOI>"/>
       </if>
       <else>
         <group prefix=" (" suffix=")">

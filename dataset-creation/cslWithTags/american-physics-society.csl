@@ -174,7 +174,7 @@
             <text variable="title" text-case="title" font-style="italic" prefix="&lt;title>" suffix="&lt;/title>"/>
             <choose>
               <if variable="DOI">
-                <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+                <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
               </if>
               <else-if variable="URL">
                 <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>

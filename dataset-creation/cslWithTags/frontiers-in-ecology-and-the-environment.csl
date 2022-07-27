@@ -67,7 +67,7 @@
       <text variable="publisher" prefix="&lt;publisher>" suffix="&lt;/publisher>"/>
     </group>
   </macro>
-  <citation collapse="year-suffix" et-al-min="3" et-al-use-first="1" year-suffix-delimiter=", ">
+  <citation collapse="year-suffix" et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" year-suffix-delimiter=", ">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=" ">

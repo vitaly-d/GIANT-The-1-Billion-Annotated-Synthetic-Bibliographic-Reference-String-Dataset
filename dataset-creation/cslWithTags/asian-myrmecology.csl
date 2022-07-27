@@ -114,7 +114,7 @@
       <date form="text" variable="accessed" prefix="&lt;accessed>" suffix="&lt;/accessed>"/>
     </group>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true" collapse="year-suffix-ranged">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true" disambiguate-add-year-suffix="true" collapse="year-suffix-ranged">
     <layout delimiter="; " prefix="(" suffix=")">
       <group delimiter=", ">
         <group delimiter=" ">

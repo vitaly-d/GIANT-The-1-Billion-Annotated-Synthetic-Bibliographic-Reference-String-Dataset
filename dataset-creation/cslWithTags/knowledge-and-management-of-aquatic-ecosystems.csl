@@ -108,7 +108,7 @@
       </if>
     </choose>
   </macro>
-  <citation collapse="year">
+  <citation disambiguate-add-year-suffix="true" collapse="year">
     
     <layout delimiter="; " prefix="(" suffix=")">
       <group delimiter=", ">

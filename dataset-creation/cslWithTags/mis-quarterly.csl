@@ -251,7 +251,7 @@
   <macro name="access">
     <choose>
       <if variable="DOI">
-        <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
       </if>
       <else>
         <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
@@ -276,7 +276,7 @@
       <text variable="locator" prefix=" &lt;locator>" suffix="&lt;/locator>"/>
     </group>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true" givenname-disambiguation-rule="by-cite" collapse="year">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="true" givenname-disambiguation-rule="by-cite" collapse="year">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">

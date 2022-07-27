@@ -161,7 +161,7 @@
     <number variable="edition" form="ordinal" prefix=" | edition="/>
   </macro>
   <macro name="doi">
-    <text variable="DOI" prefix=" | doi=&lt;DOI>" suffix="&lt;/DOI>"/>
+    <text variable="DOI" prefix=" | &lt;DOI>doi=" suffix="&lt;/DOI>"/>
   </macro>
   <macro name="isbn">
     <text variable="ISBN" prefix=" | isbn=&lt;ISBN>" suffix="&lt;/ISBN>"/>

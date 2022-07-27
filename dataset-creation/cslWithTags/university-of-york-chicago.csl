@@ -1169,7 +1169,7 @@
             <if variable="DOI">
               <text term="accessed" prefix="" suffix=""/>
               <date form="text" variable="accessed" prefix="&lt;accessed>" suffix="&lt;/accessed>"/>
-              <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+              <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
             </if>
             <else>
               <text term="accessed" strip-periods="true" prefix="" suffix=""/>
@@ -1197,7 +1197,7 @@
             <if variable="DOI">
               <text term="accessed" text-case="capitalize-first" strip-periods="true" prefix="" suffix=""/>
               <date form="text" variable="accessed" prefix="&lt;accessed>" suffix="&lt;/accessed>"/>
-              <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+              <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
             </if>
             <else>
               <text term="accessed" text-case="capitalize-first" strip-periods="true" prefix="" suffix=""/>

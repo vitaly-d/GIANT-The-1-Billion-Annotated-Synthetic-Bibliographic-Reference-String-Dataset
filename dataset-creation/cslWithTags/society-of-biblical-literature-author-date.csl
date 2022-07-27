@@ -485,7 +485,7 @@
       <text macro="point-locators" prefix="" suffix=""/>
     </group>
   </macro>
-  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true" givenname-disambiguation-rule="primary-name" collapse="year" after-collapse-delimiter="; ">
+  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-names="true" disambiguate-add-year-suffix="true" disambiguate-add-givenname="true" givenname-disambiguation-rule="primary-name" collapse="year" after-collapse-delimiter="; ">
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">
         <group delimiter=" ">

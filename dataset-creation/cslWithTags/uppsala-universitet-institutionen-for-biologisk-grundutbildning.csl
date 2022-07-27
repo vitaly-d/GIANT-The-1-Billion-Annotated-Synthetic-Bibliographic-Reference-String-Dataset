@@ -118,7 +118,7 @@
       <text variable="locator" prefix="&lt;locator>" suffix="&lt;/locator>"/>
     </group>
   </macro>
-  <citation and="symbol" et-al-min="3" et-al-use-first="1" name-as-sort-order="first" sort-separator=" " disambiguate-add-givenname="true" givenname-disambiguation-rule="primary-name-with-initials">
+  <citation and="symbol" et-al-min="3" et-al-use-first="1" name-as-sort-order="first" sort-separator=" " disambiguate-add-givenname="true" disambiguate-add-year-suffix="true" givenname-disambiguation-rule="primary-name-with-initials">
     
     <layout delimiter=", " prefix="(" suffix=")">
       <group font-style="normal" delimiter=" ">

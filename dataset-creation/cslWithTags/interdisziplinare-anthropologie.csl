@@ -95,7 +95,7 @@
       <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
     </group>
   </macro>
-  <citation et-al-min="4" et-al-use-first="1">
+  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-year-suffix="true">
     
     <layout delimiter=" ; ">
       <text macro="author-short" suffix=" " prefix=""/>

@@ -184,7 +184,7 @@
       </else>
     </choose>
   </macro>
-  <citation disambiguate-add-givenname="true" givenname-disambiguation-rule="primary-name" et-al-min="2" et-al-use-first="1">
+  <citation disambiguate-add-givenname="true" givenname-disambiguation-rule="primary-name" disambiguate-add-year-suffix="true" et-al-min="2" et-al-use-first="1">
     
     <layout delimiter=", ">
       <group delimiter=" ">

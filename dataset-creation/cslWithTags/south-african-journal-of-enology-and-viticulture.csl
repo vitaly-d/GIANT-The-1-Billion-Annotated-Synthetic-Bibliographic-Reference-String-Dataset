@@ -170,7 +170,7 @@
       <text variable="publisher-place" prefix="&lt;publisher-place>" suffix="&lt;/publisher-place>"/>
     </group>
   </macro>
-  <citation year-suffix-delimiter="," disambiguate-add-names="true" disambiguate-add-givenname="false" collapse="year-suffix">
+  <citation disambiguate-add-year-suffix="true" year-suffix-delimiter="," disambiguate-add-names="true" disambiguate-add-givenname="false" collapse="year-suffix">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">

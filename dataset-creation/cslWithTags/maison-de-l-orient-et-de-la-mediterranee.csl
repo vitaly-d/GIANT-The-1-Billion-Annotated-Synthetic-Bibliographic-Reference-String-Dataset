@@ -152,7 +152,7 @@
       <text variable="locator" prefix="&lt;locator>" suffix="&lt;/locator>"/>
     </group>
   </macro>
-  <citation delimiter-precedes-last="never">
+  <citation disambiguate-add-year-suffix="true" delimiter-precedes-last="never">
     
     <layout delimiter=" ; ">
       <group>

@@ -69,7 +69,7 @@
     <group>
       <choose>
         <if variable="DOI" match="any">
-          <text variable="DOI" strip-periods="false" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+          <text variable="DOI" strip-periods="false" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
         </if>
         <else>
           <choose>
@@ -117,7 +117,7 @@
       </choose>
     </group>
   </macro>
-  <citation collapse="year-suffix" et-al-min="3" et-al-use-first="1" disambiguate-add-names="true">
+  <citation collapse="year-suffix" et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="true">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=" ">

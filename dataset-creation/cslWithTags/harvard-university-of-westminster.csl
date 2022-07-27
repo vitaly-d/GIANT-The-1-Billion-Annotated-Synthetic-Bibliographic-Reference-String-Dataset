@@ -67,7 +67,7 @@
           <text term="available at" text-case="capitalize-first" prefix="" suffix=""/>
           <choose>
             <if match="any" variable="DOI">
-              <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+              <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
             </if>
             <else>
               <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
@@ -158,7 +158,7 @@
       <names variable="director" prefix="&lt;director>" suffix="&lt;/director>"/>
     </group>
   </macro>
-  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true" collapse="year">
+  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="true" collapse="year">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">

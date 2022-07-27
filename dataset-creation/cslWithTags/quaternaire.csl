@@ -215,7 +215,7 @@
     <text variable="page" prefix=" p. &lt;page>" suffix="&lt;/page>."/>
   </macro>
   <!--  ***************** Citation ********************* -->
-  <citation>
+  <citation disambiguate-add-year-suffix="true">
     
     <layout prefix="(" suffix=")" delimiter=" ; ">
       <group delimiter=" : ">

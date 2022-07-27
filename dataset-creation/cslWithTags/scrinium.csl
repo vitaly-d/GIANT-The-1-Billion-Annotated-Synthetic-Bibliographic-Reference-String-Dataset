@@ -670,7 +670,7 @@
     </choose>
   </macro>
   <macro name="doi-note">
-    <text variable="DOI" prefix=", doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+    <text variable="DOI" prefix=", &lt;DOI>doi:" suffix="&lt;/DOI>"/>
   </macro>
   <macro name="access-note">
     <group delimiter=", ">

@@ -109,7 +109,7 @@
     <label variable="locator" form="short" prefix=", " suffix=" "/>
     <text variable="locator" prefix="&lt;locator>" suffix="&lt;/locator>"/>
   </macro>
-  <citation et-al-min="4" et-al-use-first="1">
+  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-year-suffix="true">
     <layout delimiter="; " prefix="(" suffix=")">
       <text macro="author-short" strip-periods="false" prefix="" suffix=""/>
       <text macro="year-date" prefix=", " suffix=""/>

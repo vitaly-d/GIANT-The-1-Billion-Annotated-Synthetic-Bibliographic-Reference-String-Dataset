@@ -459,7 +459,7 @@
     <text variable="ISBN" prefix="ISBN &lt;ISBN>" suffix="&lt;/ISBN>"/>
   </macro>
   <macro name="doi">
-    <text prefix="DOI : &lt;DOI>" variable="DOI" suffix="&lt;/DOI>"/>
+    <text prefix="&lt;DOI>DOI : " variable="DOI" suffix="&lt;/DOI>"/>
   </macro>
   <macro name="url">
     <choose>

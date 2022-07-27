@@ -460,7 +460,7 @@
     </choose>
   </macro>
   <!--Para generar las citas-->
-  <citation et-al-min="2" et-al-use-first="1" after-collapse-delimiter=";">
+  <citation et-al-min="2" et-al-use-first="1" disambiguate-add-year-suffix="true" after-collapse-delimiter=";">
     <layout suffix="." delimiter="; ">
       <choose>
         <if position="ibid-with-locator">

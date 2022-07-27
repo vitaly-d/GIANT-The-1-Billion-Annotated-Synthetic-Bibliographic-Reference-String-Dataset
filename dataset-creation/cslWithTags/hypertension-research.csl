@@ -43,7 +43,7 @@
           <if variable="page" match="none">
             <choose>
               <if variable="DOI">
-                <text variable="DOI" prefix=" doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+                <text variable="DOI" prefix=" &lt;DOI>doi:" suffix="&lt;/DOI>"/>
               </if>
               <else-if variable="URL">
                 <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
@@ -59,7 +59,7 @@
       <else-if variable="page volume" match="any">
         <choose>
           <if variable="DOI">
-            <text variable="DOI" prefix=" doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+            <text variable="DOI" prefix=" &lt;DOI>doi:" suffix="&lt;/DOI>"/>
           </if>
           <else-if variable="URL">
             <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
@@ -91,7 +91,7 @@
               <if variable="DOI URL" match="any">
                 <group prefix="(e-pub ahead of print " suffix=")" delimiter="; ">
                   <date variable="issued" form="text" prefix="&lt;issued>" suffix="&lt;/issued>"/>
-                  <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+                  <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
                 </group>
               </if>
               <else>

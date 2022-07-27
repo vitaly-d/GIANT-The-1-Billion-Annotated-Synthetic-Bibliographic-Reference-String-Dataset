@@ -274,7 +274,7 @@
       <text variable="locator" prefix="&lt;locator>" suffix="&lt;/locator>"/>
     </group>
   </macro>
-  <citation et-al-min="99" et-al-use-first="98" et-al-subsequent-min="3" et-al-subsequent-use-first="1" collapse="year">
+  <citation et-al-min="99" et-al-use-first="98" et-al-subsequent-min="3" et-al-subsequent-use-first="1" disambiguate-add-year-suffix="true" collapse="year">
     
     <layout delimiter="; " suffix=".">
       <choose>

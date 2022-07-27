@@ -128,7 +128,7 @@
       <if type="thesis report" match="any">
         <choose>
           <if variable="DOI" match="any">
-            <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+            <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
           </if>
           <else-if variable="URL" match="any">
             <group>
@@ -150,7 +150,7 @@
       <else>
         <choose>
           <if variable="DOI">
-            <text variable="DOI" strip-periods="false" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+            <text variable="DOI" strip-periods="false" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
           </if>
           <else>
             <choose>
@@ -599,7 +599,7 @@
       </if>
     </choose>
   </macro>
-  <citation et-al-min="6" et-al-use-first="1" et-al-subsequent-min="3" et-al-subsequent-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true" collapse="year" givenname-disambiguation-rule="primary-name">
+  <citation et-al-min="6" et-al-use-first="1" et-al-subsequent-min="3" et-al-subsequent-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="true" collapse="year" givenname-disambiguation-rule="primary-name">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group>

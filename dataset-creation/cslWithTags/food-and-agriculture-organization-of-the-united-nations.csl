@@ -121,7 +121,7 @@
     <!-- If DOI exists, then DOI is shown as: https://doi.org/DOI. If DOI doesn't exist, then "also available at URL" is shown. -->
     <choose>
       <if variable="DOI">
-        <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
       </if>
       <else>
         <group delimiter=" " prefix="(" suffix=").">
@@ -139,7 +139,7 @@
     </group>
   </macro>
   <!-- in-line citation: (author, date) -->
-  <citation collapse="year" et-al-min="4" et-al-use-first="1">
+  <citation disambiguate-add-year-suffix="true" collapse="year" et-al-min="4" et-al-use-first="1">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <text macro="author-short" suffix=", " prefix=""/>

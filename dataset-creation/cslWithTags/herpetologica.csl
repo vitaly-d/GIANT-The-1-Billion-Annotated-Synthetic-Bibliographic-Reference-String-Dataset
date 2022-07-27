@@ -72,7 +72,7 @@
       </else>
     </choose>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" collapse="year-suffix" cite-group-delimiter=",">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" collapse="year-suffix" cite-group-delimiter=",">
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=" ">
         <text macro="author-short" prefix="" suffix=""/>
@@ -132,7 +132,7 @@
               <text variable="volume" prefix="&lt;volume>" suffix="&lt;/volume>"/>
               <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
             </group>
-            <text prefix="DOI: https://doi.org/&lt;DOI>" variable="DOI" suffix="&lt;/DOI>"/>
+            <text prefix="DOI: &lt;DOI>https://doi.org/" variable="DOI" suffix="&lt;/DOI>"/>
           </group>
         </else>
       </choose>

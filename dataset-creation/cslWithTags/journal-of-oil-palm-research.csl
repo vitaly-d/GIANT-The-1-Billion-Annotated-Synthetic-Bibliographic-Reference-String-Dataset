@@ -72,7 +72,7 @@
       <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
     </group>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" collapse="year">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" collapse="year">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">

@@ -145,7 +145,7 @@
         <if type="legal_case" match="none">
           <choose>
             <if variable="DOI">
-              <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+              <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
             </if>
             <else>
               <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
@@ -573,7 +573,7 @@
       </else>
     </choose>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true" givenname-disambiguation-rule="primary-name" collapse="year">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="true" givenname-disambiguation-rule="primary-name" collapse="year">
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">
         <choose>

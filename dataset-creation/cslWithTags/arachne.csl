@@ -146,7 +146,7 @@
       </else>
     </choose>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" collapse="year-suffix" givenname-disambiguation-rule="primary-name">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" collapse="year-suffix" givenname-disambiguation-rule="primary-name">
     
     <layout delimiter="; ">
       <group delimiter=", ">

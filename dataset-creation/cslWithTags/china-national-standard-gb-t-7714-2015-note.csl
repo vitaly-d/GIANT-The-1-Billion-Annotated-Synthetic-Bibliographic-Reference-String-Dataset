@@ -243,7 +243,7 @@
           <text macro="accessed-date" prefix="" suffix=""/>
           <group delimiter=". " prefix=". ">
             <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
-            <text variable="DOI" prefix="DOI:&lt;DOI>" suffix="&lt;/DOI>"/>
+            <text variable="DOI" prefix="&lt;DOI>DOI:" suffix="&lt;/DOI>"/>
           </group>
         </else>
       </choose>
@@ -295,7 +295,7 @@
       <text macro="accessed-date" prefix="" suffix=""/>
       <group delimiter=". " prefix=". ">
         <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
-        <text variable="DOI" prefix="DOI:&lt;DOI>" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix="&lt;DOI>DOI:" suffix="&lt;/DOI>"/>
       </group>
     </layout>
   </bibliography>

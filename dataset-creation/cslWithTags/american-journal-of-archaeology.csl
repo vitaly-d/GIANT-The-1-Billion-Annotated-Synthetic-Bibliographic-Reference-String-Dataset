@@ -156,7 +156,7 @@
           <text macro="archive" prefix="" suffix=""/>
         </else-if>
       </choose>
-      <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+      <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
       <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
     </group>
   </macro>
@@ -348,7 +348,7 @@
       </else>
     </choose>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" collapse="year">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" collapse="year">
     
     <layout delimiter="; ">
       <group delimiter=", ">

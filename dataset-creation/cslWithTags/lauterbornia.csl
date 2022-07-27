@@ -122,7 +122,7 @@
       </else>
     </choose>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" initialize="false" names-delimiter=", " disambiguate-add-names="true" disambiguate-add-givenname="true" givenname-disambiguation-rule="primary-name" collapse="year" year-suffix-delimiter=", ">
+  <citation et-al-min="3" et-al-use-first="1" initialize="false" names-delimiter=", " disambiguate-add-names="true" disambiguate-add-givenname="true" disambiguate-add-year-suffix="true" givenname-disambiguation-rule="primary-name" collapse="year" year-suffix-delimiter=", ">
     
     <layout delimiter="; " prefix="(" suffix=")">
       <group delimiter=" ">

@@ -276,7 +276,7 @@
             <group delimiter=" ">
               <text term="accessed" prefix="" suffix=""/>
               <text term="at" prefix="" suffix=""/>
-              <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+              <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
             </group>
           </if>
           <else-if variable="URL">
@@ -295,7 +295,7 @@
       </if>
     </choose>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-givenname="true" collapse="year">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-givenname="true" collapse="year">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=": ">

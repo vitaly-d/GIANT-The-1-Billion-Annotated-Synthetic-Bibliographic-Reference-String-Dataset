@@ -442,7 +442,7 @@
     </group>
     <choose>
       <if variable="DOI">
-        <text variable="DOI" prefix=" &amp;amp;lt;doi:&lt;DOI>" suffix="&lt;/DOI>&amp;amp;gt;"/>
+        <text variable="DOI" prefix=" &lt;DOI>&amp;amp;lt;doi:" suffix="&lt;/DOI>&amp;amp;gt;"/>
       </if>
       <else>
         <text variable="URL" prefix=" &amp;amp;lt;&lt;URL>" suffix="&lt;/URL>&amp;amp;gt;"/>

@@ -341,7 +341,7 @@
     <choose>
       <if variable="DOI" match="any">
         <group prefix=". " delimiter=", ">
-          <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+          <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
         </group>
       </if>
       <else-if variable="accessed" match="any">
@@ -532,7 +532,7 @@
     </group>
   </macro>
   <!--_-_-_-_-_-SECTION DEFINITION DES NDBP (citation)-_-_-_-_-_-_-->
-  <citation et-al-min="6" et-al-use-first="3" et-al-subsequent-min="2" et-al-subsequent-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true" givenname-disambiguation-rule="primary-name" collapse="year">
+  <citation et-al-min="6" et-al-use-first="3" et-al-subsequent-min="2" et-al-subsequent-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true" disambiguate-add-year-suffix="true" givenname-disambiguation-rule="primary-name" collapse="year">
     
     <layout delimiter="; " prefix=" (" suffix=")">
       <group delimiter=" ">

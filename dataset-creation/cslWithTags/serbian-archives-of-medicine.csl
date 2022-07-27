@@ -260,7 +260,7 @@ add event-name and event-place once they become available
   <macro name="DOI">
     <choose>
       <if variable="DOI">
-        <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
       </if>
       <else-if type="webpage post-weblog" match="any">
         <choose>

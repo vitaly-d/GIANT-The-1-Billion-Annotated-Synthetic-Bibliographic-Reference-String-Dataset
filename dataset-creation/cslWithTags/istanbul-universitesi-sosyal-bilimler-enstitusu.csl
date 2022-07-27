@@ -1293,7 +1293,7 @@
         <if type="article-journal legal_case book thesis" match="none">
           <choose>
             <if match="any" variable="DOI">
-              <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+              <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
             </if>
             <else>
               <group delimiter="">
@@ -1327,7 +1327,7 @@
         <if type="article-journal legal_case book thesis" match="none">
           <choose>
             <if match="any" variable="DOI">
-              <text variable="DOI" prefix=", doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+              <text variable="DOI" prefix=", &lt;DOI>doi:" suffix="&lt;/DOI>"/>
             </if>
             <else>
               <group delimiter="">

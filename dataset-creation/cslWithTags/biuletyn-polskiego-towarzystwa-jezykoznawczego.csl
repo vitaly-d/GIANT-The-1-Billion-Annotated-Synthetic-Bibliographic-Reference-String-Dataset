@@ -122,7 +122,7 @@
       </else>
     </choose>
   </macro>
-  <citation et-al-min="4" et-al-use-first="1" collapse="year-suffix">
+  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-year-suffix="true" collapse="year-suffix">
     <layout delimiter="; " prefix="(" suffix=")">
       <group delimiter=": ">
         <text macro="creator-year-short" prefix="" suffix=""/>

@@ -60,7 +60,7 @@
   <macro name="access">
     <choose>
       <if variable="DOI">
-        <text variable="DOI" prefix=" https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix=" &lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
         <group delimiter=" " prefix=" (" suffix=")">
           <text term="accessed" form="verb" prefix="" suffix=""/>
           <date form="text" variable="accessed" prefix="&lt;accessed>" suffix="&lt;/accessed>"/>
@@ -121,7 +121,7 @@
       <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
     </group>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true" collapse="year">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="true" collapse="year">
     
     <layout delimiter="; " prefix=" (" suffix=")">
       <choose>

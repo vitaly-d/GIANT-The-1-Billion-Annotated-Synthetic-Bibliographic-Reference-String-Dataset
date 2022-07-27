@@ -222,7 +222,7 @@
       </else-if>
     </choose>
   </macro>
-  <citation>
+  <citation disambiguate-add-year-suffix="true">
     
     <layout prefix="(" suffix=")" delimiter=" ; ">
       <text macro="author-short" suffix=" " prefix=""/>

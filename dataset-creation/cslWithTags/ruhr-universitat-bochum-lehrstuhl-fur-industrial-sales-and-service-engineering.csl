@@ -123,7 +123,7 @@
       <if type="article-journal">
         <choose>
           <if variable="volume issue" match="none">
-            <text variable="DOI" prefix=", URL: https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+            <text variable="DOI" prefix=", URL: &lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
           </if>
         </choose>
       </if>
@@ -280,7 +280,7 @@
       <text variable="container-title" font-style="italic" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
     </group>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" givenname-disambiguation-rule="primary-name" collapse="year">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" givenname-disambiguation-rule="primary-name" collapse="year">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">

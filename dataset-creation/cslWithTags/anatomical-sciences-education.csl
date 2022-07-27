@@ -64,7 +64,7 @@
       </if>
     </choose>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" collapse="year">
+  <citation disambiguate-add-year-suffix="true" et-al-min="3" et-al-use-first="1" collapse="year">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">

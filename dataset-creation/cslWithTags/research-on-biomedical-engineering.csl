@@ -88,7 +88,7 @@
     <text variable="PMID" prefix="PMid:&lt;PMID>" suffix="&lt;/PMID>. "/>
     <choose>
       <if variable="DOI">
-        <text variable="DOI" prefix="doi: https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix="doi: &lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
       </if>
       <else-if type="webpage post-weblog" match="any">
         <group delimiter=" " prefix=" [" suffix="]. ">
@@ -106,7 +106,7 @@
       </else-if>
     </choose>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" collapse="year" cite-group-delimiter="; ">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" collapse="year" cite-group-delimiter="; ">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">

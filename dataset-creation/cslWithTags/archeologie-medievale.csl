@@ -256,7 +256,7 @@
       </names>
     </group>
   </macro>
-  <citation et-al-min="4" et-al-use-first="3" delimiter-precedes-et-al="never">
+  <citation et-al-min="4" et-al-use-first="3" delimiter-precedes-et-al="never" disambiguate-add-year-suffix="true">
     
     <layout delimiter=" ; ">
       <choose>

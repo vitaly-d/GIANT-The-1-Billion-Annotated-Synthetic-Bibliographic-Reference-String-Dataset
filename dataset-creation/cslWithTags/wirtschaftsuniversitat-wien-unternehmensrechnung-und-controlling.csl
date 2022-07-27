@@ -70,7 +70,7 @@
           <text value="Online unter" prefix="" suffix=""/>
           <choose>
             <if variable="DOI">
-              <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+              <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
             </if>
             <else>
               <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
@@ -366,7 +366,7 @@
       <text macro="u__access" prefix=" " suffix=""/>
     </group>
   </macro>
-  <citation name-form="short" et-al-min="3" et-al-use-first="1" disambiguate-add-givenname="true" collapse="year">
+  <citation name-form="short" et-al-min="3" et-al-use-first="1" disambiguate-add-givenname="true" disambiguate-add-year-suffix="true" collapse="year">
     <layout delimiter="; ">
       <choose>
         <if type="webpage" match="any">

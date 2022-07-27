@@ -113,7 +113,7 @@
       </substitute>
     </names>
   </macro>
-  <citation et-al-min="4" et-al-use-first="1" collapse="year-suffix">
+  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-year-suffix="true" collapse="year-suffix">
     <layout delimiter="; " prefix="(" suffix=")">
       <group delimiter=", ">
         <text macro="creator-year-short" prefix="" suffix=""/>
@@ -147,7 +147,7 @@
                 <text macro="container-title-volume" prefix="" suffix=""/>
               </group>
               <text macro="page-range" prefix="" suffix=""/>
-              <text variable="DOI" strip-periods="false" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+              <text variable="DOI" strip-periods="false" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
             </group>
           </else-if>
           <else-if type="chapter" match="any">
@@ -157,7 +157,7 @@
               <text macro="edition" prefix="" suffix=""/>
               <text macro="publication-place-publisher" prefix="" suffix=""/>
               <text macro="page-range" prefix="" suffix=""/>
-              <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+              <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
             </group>
           </else-if>
           <else-if type="dataset" match="any"/>

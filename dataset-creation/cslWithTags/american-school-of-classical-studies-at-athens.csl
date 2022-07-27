@@ -218,7 +218,7 @@
       <label plural="always" variable="volume" form="short"/>
     </group>
   </macro>
-  <citation et-al-min="4" et-al-use-first="1" collapse="year">
+  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-year-suffix="true" collapse="year">
     
     <layout delimiter="; ">
       <group delimiter=", ">

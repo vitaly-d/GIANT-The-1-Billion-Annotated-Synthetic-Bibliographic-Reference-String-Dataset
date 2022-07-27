@@ -131,7 +131,7 @@
   <macro name="access">
     <choose>
       <if match="all" variable="DOI">
-        <text variable="DOI" prefix="DOI:&lt;DOI>" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix="&lt;DOI>DOI:" suffix="&lt;/DOI>"/>
       </if>
       <else-if match="all" variable="URL">
         <text value="Available at: " text-case="capitalize-first" prefix="" suffix=""/>
@@ -147,7 +147,7 @@
       </else-if>
     </choose>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="true">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <choose>

@@ -97,7 +97,7 @@
       <name form="count"><name-part name="family" prefix="&lt;family>" suffix="&lt;/family>"/><name-part name="given" prefix="&lt;given>" suffix="&lt;/given>"/></name>
     </names>
   </macro>
-  <citation>
+  <citation disambiguate-add-year-suffix="true">
     
     <layout delimiter="; ">
       <group delimiter=": ">

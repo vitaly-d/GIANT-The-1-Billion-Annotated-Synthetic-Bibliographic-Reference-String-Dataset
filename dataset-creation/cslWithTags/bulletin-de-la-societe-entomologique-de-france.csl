@@ -113,7 +113,7 @@
       </else>
     </choose>
   </macro>
-  <citation name-form="short" and="text" et-al-min="3" et-al-use-first="1" disambiguate-add-names="false" disambiguate-add-givenname="false">
+  <citation name-form="short" and="text" et-al-min="3" et-al-use-first="1" disambiguate-add-names="false" disambiguate-add-givenname="false" disambiguate-add-year-suffix="true">
     
     <layout delimiter=" ; " prefix="(" suffix=")">
       <group delimiter=":">

@@ -107,7 +107,7 @@
   <macro name="access">
     <choose>
       <if match="none" variable="page volume">
-        <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
       </if>
     </choose>
   </macro>
@@ -117,7 +117,7 @@
       <label text-case="capitalize-first" variable="volume" form="short"/>
     </group>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-names="true">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="true">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">

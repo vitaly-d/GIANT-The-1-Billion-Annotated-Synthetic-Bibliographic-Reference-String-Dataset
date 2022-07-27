@@ -194,7 +194,7 @@
       <date date-parts="year" form="text" variable="event-date" prefix="&lt;event-date>" suffix="&lt;/event-date>"/>
     </group>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" collapse="year">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" collapse="year">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <choose>

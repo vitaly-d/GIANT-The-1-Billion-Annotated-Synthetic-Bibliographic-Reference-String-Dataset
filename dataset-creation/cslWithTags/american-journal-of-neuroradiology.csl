@@ -187,7 +187,7 @@
               </if>
               <!--assume Ahead of print; either with or without DOI-->
               <else-if variable="DOI">
-                <text variable="DOI" prefix=" https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+                <text variable="DOI" prefix=" &lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
               </else-if>
               <else>
                 <group delimiter=". " prefix=" ">

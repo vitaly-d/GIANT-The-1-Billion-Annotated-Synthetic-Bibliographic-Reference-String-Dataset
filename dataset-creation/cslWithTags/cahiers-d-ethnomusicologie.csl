@@ -306,7 +306,7 @@
   <macro name="note">
     <text variable="note" prefix="&lt;note>" suffix="&lt;/note>"/>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true" collapse="year" year-suffix-delimiter=", " after-collapse-delimiter=" ; ">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="true" collapse="year" year-suffix-delimiter=", " after-collapse-delimiter=" ; ">
     <layout prefix="(" suffix=")" delimiter=" ; ">
       <group delimiter=" ">
         <text macro="author-citation" prefix="" suffix=""/>

@@ -95,7 +95,7 @@
         <choose>
           <if match="none" variable="page volume">
             <group delimiter=" ">
-              <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+              <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
               <group delimiter=" " prefix="[" suffix="]">
                 <text term="accessed" prefix="" suffix=""/>
                 <date variable="accessed" prefix="&lt;accessed>" suffix="&lt;/accessed>">
@@ -268,7 +268,7 @@
   <macro name="citation-locator">
     <text variable="locator" form="short" prefix="&lt;locator>" suffix="&lt;/locator>"/>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" initialize-with="." givenname-disambiguation-rule="primary-name" collapse="year" year-suffix-delimiter=", ">
+  <citation et-al-min="3" et-al-use-first="1" initialize-with="." disambiguate-add-year-suffix="true" givenname-disambiguation-rule="primary-name" collapse="year" year-suffix-delimiter=", ">
     
     <layout delimiter="; " prefix="(" suffix=")">
       <group delimiter=": ">

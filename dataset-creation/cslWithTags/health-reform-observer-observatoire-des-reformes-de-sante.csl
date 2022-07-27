@@ -115,7 +115,7 @@
       <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
     </group>
   </macro>
-  <citation et-al-use-first="1" et-al-min="4" disambiguate-add-names="true" disambiguate-add-givenname="true">
+  <citation et-al-use-first="1" et-al-min="4" disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="true">
     <layout prefix="(" delimiter="; " suffix=")">
       <group delimiter=", ">
         <group delimiter=" ">

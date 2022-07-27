@@ -81,7 +81,7 @@
       <else>
         <choose>
           <if variable="DOI">
-            <text prefix="LINK https://doi.org/&lt;DOI>" variable="DOI" suffix="&lt;/DOI>"/>
+            <text prefix="LINK &lt;DOI>https://doi.org/" variable="DOI" suffix="&lt;/DOI>"/>
           </if>
           <else>
             <choose>

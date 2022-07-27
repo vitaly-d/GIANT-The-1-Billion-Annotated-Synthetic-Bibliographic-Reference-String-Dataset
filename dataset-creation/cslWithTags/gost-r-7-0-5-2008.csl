@@ -76,7 +76,7 @@
   <macro name="citation-number">
     <text variable="citation-number" suffix="&lt;/citation-number>. " prefix="&lt;citation-number>"/>
   </macro>
-  <citation et-al-min="4" et-al-use-first="1">
+  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-year-suffix="true">
     
     <layout prefix="[" suffix="]" delimiter="; ">
       <text macro="author_short" suffix=", " prefix=""/>

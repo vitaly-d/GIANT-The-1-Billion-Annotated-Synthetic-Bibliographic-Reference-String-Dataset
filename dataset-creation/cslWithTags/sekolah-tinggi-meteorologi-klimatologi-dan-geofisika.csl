@@ -60,7 +60,7 @@
                 <text value="Advance Access published" prefix="" suffix=""/>
                 <date form="text" date-parts="year-month-day" variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>"/>
               </group>
-              <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+              <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
             </group>
           </if>
         </choose>
@@ -75,7 +75,7 @@
       <date form="text" variable="original-date" prefix="[&lt;original-date>" suffix="&lt;/original-date>]"/>
     </group>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" collapse="year">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" collapse="year">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">

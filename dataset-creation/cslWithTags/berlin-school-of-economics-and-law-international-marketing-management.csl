@@ -132,7 +132,7 @@
   <macro name="year">
     <date date-parts="year" form="text" variable="issued" prefix="&lt;issued>" suffix="&lt;/issued>"/>
   </macro>
-  <citation et-al-min="3" et-al-use-first="1" collapse="year-suffix">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" collapse="year-suffix">
     <layout delimiter="; " prefix="(" suffix=")">
       <group delimiter=", ">
         <text macro="creator-year-short" prefix="" suffix=""/>

@@ -77,7 +77,7 @@
       <text variable="locator" prefix="&lt;locator>" suffix="&lt;/locator>"/>
     </group>
   </macro>
-  <citation et-al-min="4" et-al-use-first="1">
+  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-year-suffix="true">
     
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=" ">

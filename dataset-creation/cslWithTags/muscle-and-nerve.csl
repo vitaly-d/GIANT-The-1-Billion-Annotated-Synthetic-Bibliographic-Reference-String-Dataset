@@ -48,7 +48,7 @@
         </group>
       </if>
       <else>
-        <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
       </else>
     </choose>
   </macro>

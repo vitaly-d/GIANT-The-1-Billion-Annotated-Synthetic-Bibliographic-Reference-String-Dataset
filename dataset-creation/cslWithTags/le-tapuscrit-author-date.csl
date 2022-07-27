@@ -287,7 +287,7 @@
   <macro name="collection">
     <text variable="collection-title" quotes="true" prefix=" (coll. &lt;collection-title>" suffix="&lt;/collection-title>)"/>
   </macro>
-  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true" givenname-disambiguation-rule="primary-name">
+  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="true" givenname-disambiguation-rule="primary-name">
     <layout prefix="(" suffix=")" delimiter="; ">
       <choose>
         <if position="ibid-with-locator">

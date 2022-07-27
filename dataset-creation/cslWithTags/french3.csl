@@ -188,7 +188,7 @@
     <text variable="issue" prefix=" n°&lt;issue>" suffix="&lt;/issue>,"/>
     <text variable="page" prefix=" p. &lt;page>" suffix="&lt;/page>."/>
   </macro>
-  <citation disambiguate-add-names="true" disambiguate-add-givenname="true">
+  <citation disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="true">
     
     <layout prefix=" (" suffix=")" delimiter=" ; ">
       <group delimiter=", ">

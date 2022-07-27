@@ -171,7 +171,7 @@
         </else-if>
       </choose>
     </group>
-    <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>, "/>
+    <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>, "/>
     <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
     <group prefix=" (" suffix=")">
       <text term="accessed" suffix=": " prefix=""/>
@@ -359,7 +359,7 @@
       </else>
     </choose>
   </macro>
-  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true" after-collapse-delimiter="; ">
+  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="true" after-collapse-delimiter="; ">
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">
         <group delimiter=" ">

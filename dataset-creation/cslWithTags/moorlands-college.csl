@@ -865,7 +865,7 @@
         <if type="legal_case" match="none">
           <choose>
             <if variable="DOI">
-              <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+              <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
             </if>
             <else-if type="webpage">
               <group prefix="&lt;" suffix=">">
@@ -906,7 +906,7 @@
         <if type="legal_case" match="none">
           <choose>
             <if variable="DOI">
-              <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
+              <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
             </if>
             <else-if type="webpage" match="any">
               <group prefix="&lt;" suffix=">">

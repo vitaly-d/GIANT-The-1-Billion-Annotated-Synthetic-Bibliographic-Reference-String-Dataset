@@ -138,7 +138,7 @@
   <macro name="net-link">
     <choose>
       <if variable="DOI">
-        <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
       </if>
       <else-if variable="URL">
         <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
@@ -147,7 +147,7 @@
     <text macro="accessed" prefix=" " suffix=""/>
   </macro>
   <!--CITATION-->
-  <citation collapse="year" year-suffix-delimiter=", " after-collapse-delimiter="; " et-al-min="4" et-al-use-first="1" delimiter-precedes-last="never">
+  <citation disambiguate-add-year-suffix="true" collapse="year" year-suffix-delimiter=", " after-collapse-delimiter="; " et-al-min="4" et-al-use-first="1" delimiter-precedes-last="never">
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=", ">
         <group delimiter=" ">
