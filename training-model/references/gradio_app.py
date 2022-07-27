@@ -249,7 +249,7 @@ def _level_off_references(doc, token_scorer, step=1):
         return sigma
 
     sent_starts = []
-    matcher = Matcher(nlp.vocab)
+    matcher = Matcher(doc.vocab)
     pattern = [
         # {"TEXT": {"REGEX": "^(.*)(\\n)+(.*)$"}, "IS_SPACE": True},
         {"TEXT": {"REGEX": "^(.*\\n.*)+$"}, "IS_SPACE": True},
