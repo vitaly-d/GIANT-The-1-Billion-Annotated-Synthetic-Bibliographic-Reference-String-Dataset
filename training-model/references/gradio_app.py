@@ -1,5 +1,6 @@
 import io
 import logging
+import math
 import timeit
 from typing import Optional
 
@@ -177,6 +178,7 @@ def split_up_references(
                 token_index_in_target_doc += 1
 
             score = target_doc_token_scorer(token_index_in_target_doc)
+            # print(target_doc[token_index_in_target_doc], score)
             if score > threshold:
                 target_doc[target_tokens_idx[char_offset]].is_sent_start = True
 
@@ -256,23 +258,23 @@ def _level_off_references(doc, token_scorer, step=1):
             for _, eol, token_i_after_eol in matcher(ref):
                 i = token_i_after_eol - 1
 
+                score_peak = math.log10(scores[i] / median_score)
                 log.info(
-                    "line start: token=%s, score=%s, median_score=%s, ahead=%s",
+                    "line start: token=%s, score=%s, median_score=%s, ahead=%s, score_peak=%s",
                     ref[i],
                     scores[i],
                     median_score,
                     len(ref[token_i_after_eol:]),
+                    score_peak
                 )
 
-                if surprising > 2:
-                    # risky.. minimize variance using the predicted spancat score
-                    if (
-                        scores[i] > 10 * median_score
-                        and len(ref[token_i_after_eol:]) > 10
-                    ):
-                        sent_starts.append(ref[i])
-                        start = i  # needed only for reviewing ner entities, see below
-                        continue
+                # risky if score is too low.. minimize variance using the predicted spancat score
+                # sum oranges and apples..
+                score_is_enough_to_split = scores[i]>.1 or score_peak + surprising > 3
+                if score_is_enough_to_split and len(ref[token_i_after_eol:]) > 10:
+                    sent_starts.append(ref[i])
+                    start = i  # needed only for reviewing ner entities, see below
+                    continue
 
                 # minimize variance using ner output, a bit less risky - to support
                 # an edge case if a new line starts with citation number of names and
