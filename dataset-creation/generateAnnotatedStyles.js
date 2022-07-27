@@ -44,6 +44,7 @@ var beforeTime = Date.now()
 // dependancies
 var fs = require('fs');
 var xmldom = require('xmldom').DOMParser;
+const path = require('path');
 
 //needed for tagged output
 var xml = new xmldom();
@@ -52,9 +53,15 @@ var serializer = new XMLSerializer();
 
 
 //This folder should have all the CSL files
-const cslFolder = './cslSmall/';
+//const cslFolder = './cslSmall/';
 
-const cslFolderAnnotated = './cslSmallWithTags/';
+var args = process.argv.slice(2);
+var cslFolder = "./cslSmall"
+if (args.length > 0){
+    cslFolder = args[0]
+}
+const cslFolderAnnotated = cslFolder + 'WithTags/';
+console.log("cslFolder:", cslFolder, "cslFolderAnnotated:", cslFolderAnnotated)
 
 var files = fs.readdirSync(cslFolder);
 var csls = [];
@@ -68,7 +75,7 @@ for (var i in files) {
 // for each citation style
 for (var i = 0, len = csls.length; i < len; i++) {
   console.log(i + ". " + csls[i]);
-  var styleString = fs.readFileSync(cslFolder + csls[i] + '.csl', 'utf8');
+  var styleString = fs.readFileSync(path.join(cslFolder, csls[i] + '.csl'), 'utf8');
 
   // styleString = styleString.replace(/<([^>]*)(\sdefault-locale=\".+?\"(\s|))(.*?)>/, '<$1$3>'); //prevent error caused by default locale https://github.com/Juris-M/citeproc-js/issues/81
   styleString = styleString.replace(/<sort>([\s\S]*?)<\/sort>/g, ''); //remove sorting
