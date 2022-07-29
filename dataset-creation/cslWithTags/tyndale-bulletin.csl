@@ -1053,7 +1053,7 @@
           <text macro="issue-note" prefix="" suffix=""/>
           <text macro="locators-newspaper" prefix=", " suffix=""/>
           <text macro="point-locators" prefix="" suffix=""/>
-          <text variable="DOI" prefix=", &lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
+          <text variable="DOI" prefix=", https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
           <text macro="access-note" prefix=", " suffix=""/>
         </else>
       </choose>
@@ -1100,7 +1100,7 @@
           <text macro="issue" prefix="" suffix=""/>
           <text macro="locators-newspaper" prefix=", " suffix=""/>
           <text macro="locators-journal" prefix="" suffix=""/>
-          <text variable="DOI" prefix=". &lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
+          <text variable="DOI" prefix=". https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
           <text macro="access" prefix=". " suffix=""/>
         </else>
       </choose>

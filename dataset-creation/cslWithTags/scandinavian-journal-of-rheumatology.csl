@@ -112,7 +112,7 @@
               <text variable="page" prefix=":&lt;page>" suffix="&lt;/page>"/>
             </if>
             <else>
-              <text variable="DOI" prefix=". &lt;DOI>doi:" suffix="&lt;/DOI>"/>
+              <text variable="DOI" prefix=". doi:&lt;DOI>" suffix="&lt;/DOI>"/>
             </else>
           </choose>
         </else>

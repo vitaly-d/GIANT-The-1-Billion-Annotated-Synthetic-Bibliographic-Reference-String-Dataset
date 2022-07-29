@@ -86,7 +86,7 @@
       <else-if type="article-journal">
         <choose>
           <if variable="page" match="none">
-            <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
+            <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
           </if>
         </choose>
       </else-if>

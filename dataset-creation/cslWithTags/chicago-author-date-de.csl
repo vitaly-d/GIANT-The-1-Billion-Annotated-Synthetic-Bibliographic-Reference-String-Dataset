@@ -171,7 +171,7 @@
         </else-if>
       </choose>
     </group>
-    <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>, "/>
+    <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>, "/>
     <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
     <group prefix=" (" suffix=")">
       <text term="accessed" suffix=": " prefix=""/>

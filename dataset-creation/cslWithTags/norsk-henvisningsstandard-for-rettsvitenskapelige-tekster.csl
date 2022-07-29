@@ -203,7 +203,7 @@
     </choose>
   </macro>
   <macro name="DOI">
-    <text prefix=". DOI: &lt;DOI>https://doi.org/" variable="DOI" suffix="&lt;/DOI>"/>
+    <text prefix=". DOI: https://doi.org/&lt;DOI>" variable="DOI" suffix="&lt;/DOI>"/>
   </macro>
   <macro name="nor-case">
     <choose>
@@ -326,7 +326,7 @@
             <text prefix=" " macro="issued-no-parenthesis" suffix=""/>
             <choose>
               <if variable="DOI" match="any">
-                <text prefix=". DOI: &lt;DOI>https://doi.org/" variable="DOI" suffix="&lt;/DOI>"/>
+                <text prefix=". DOI: https://doi.org/&lt;DOI>" variable="DOI" suffix="&lt;/DOI>"/>
               </if>
               <else-if variable="URL" match="any">
                 <text prefix=", &lt;URL>" variable="URL" suffix="&lt;/URL>"/>

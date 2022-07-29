@@ -131,7 +131,7 @@
   <macro name="access">
     <choose>
       <if match="all" variable="DOI">
-        <text variable="DOI" prefix="&lt;DOI>DOI:" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix="DOI:&lt;DOI>" suffix="&lt;/DOI>"/>
       </if>
       <else-if match="all" variable="URL">
         <text value="Available at: " text-case="capitalize-first" prefix="" suffix=""/>

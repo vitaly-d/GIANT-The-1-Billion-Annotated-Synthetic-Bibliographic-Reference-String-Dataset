@@ -207,7 +207,7 @@
                     <if variable="DOI">
                       <group>
                         <text variable="volume" font-style="italic" prefix="&lt;volume>" suffix="&lt;/volume>"/>
-                        <text variable="DOI" prefix=", &lt;DOI>doi:" suffix="&lt;/DOI>"/>
+                        <text variable="DOI" prefix=", doi:&lt;DOI>" suffix="&lt;/DOI>"/>
                       </group>
                     </if>
                     <else>

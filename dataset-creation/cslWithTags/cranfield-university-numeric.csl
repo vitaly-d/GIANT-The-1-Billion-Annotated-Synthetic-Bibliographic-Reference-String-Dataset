@@ -74,7 +74,7 @@
             <text term="available at" text-case="capitalize-first" prefix="" suffix=""/>
             <choose>
               <if variable="DOI">
-                <text variable="DOI" prefix="&lt;DOI>DOI:" suffix="&lt;/DOI>"/>
+                <text variable="DOI" prefix="DOI:&lt;DOI>" suffix="&lt;/DOI>"/>
               </if>
               <else>
                 <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>

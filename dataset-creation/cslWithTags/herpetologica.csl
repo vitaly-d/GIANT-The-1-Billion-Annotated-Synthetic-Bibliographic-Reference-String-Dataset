@@ -132,7 +132,7 @@
               <text variable="volume" prefix="&lt;volume>" suffix="&lt;/volume>"/>
               <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
             </group>
-            <text prefix="DOI: &lt;DOI>https://doi.org/" variable="DOI" suffix="&lt;/DOI>"/>
+            <text prefix="DOI: https://doi.org/&lt;DOI>" variable="DOI" suffix="&lt;/DOI>"/>
           </group>
         </else>
       </choose>

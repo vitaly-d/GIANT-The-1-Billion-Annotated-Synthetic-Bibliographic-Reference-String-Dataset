@@ -418,7 +418,7 @@
       </choose>
       <choose>
         <if type="article article-journal article-magazine article-newspaper bill" match="any">
-          <text variable="DOI" prefix=", &lt;DOI>&amp;amp;lt;" suffix="&lt;/DOI>&amp;amp;gt;"/>
+          <text variable="DOI" prefix=", &amp;amp;lt;&lt;DOI>" suffix="&lt;/DOI>&amp;amp;gt;"/>
           <text variable="URL" prefix=", &amp;amp;lt;&lt;URL>" suffix="&lt;/URL>&amp;amp;gt;"/>
         </if>
       </choose>

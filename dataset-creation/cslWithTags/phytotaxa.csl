@@ -70,7 +70,7 @@
         </choose>
       </if>
       <else-if type="article-journal" match="any">
-        <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
       </else-if>
     </choose>
   </macro>

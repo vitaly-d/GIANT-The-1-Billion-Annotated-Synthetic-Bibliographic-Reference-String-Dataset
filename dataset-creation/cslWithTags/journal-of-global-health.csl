@@ -82,7 +82,7 @@
       <if variable="DOI PMID" match="any">
         <group delimiter=" ">
           <text variable="PMID" prefix="Medline:&lt;PMID>" suffix="&lt;/PMID>"/>
-          <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
+          <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
         </group>
       </if>
       <else-if variable="URL">

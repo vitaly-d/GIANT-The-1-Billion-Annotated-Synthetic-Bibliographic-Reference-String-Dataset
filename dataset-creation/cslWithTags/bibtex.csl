@@ -152,7 +152,7 @@
         <!--Not in CSL <text variable="LCCN" prefix=" callNumber={" suffix="}"/>-->
         <text variable="archive_location" prefix=" archiveLocation={&lt;archive_location>" suffix="&lt;/archive_location>}"/>
         <text variable="URL" prefix=" url={&lt;URL>" suffix="&lt;/URL>}"/>
-        <text variable="DOI" prefix=" &lt;DOI>DOI={" suffix="&lt;/DOI>}"/>
+        <text variable="DOI" prefix=" DOI={&lt;DOI>" suffix="&lt;/DOI>}"/>
         <text variable="abstract" prefix=" abstractNote={&lt;abstract>" suffix="&lt;/abstract>}"/>
         <text variable="note" prefix=" note={&lt;note>" suffix="&lt;/note>}"/>
         <text macro="number" prefix=" number={" suffix="}"/>

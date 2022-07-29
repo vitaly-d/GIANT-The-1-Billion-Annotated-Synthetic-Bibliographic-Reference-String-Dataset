@@ -105,7 +105,7 @@
       <group display="block" font-style="italic">
         <choose>
           <if variable="DOI">
-            <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
+            <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
           </if>
           <else>
             <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>

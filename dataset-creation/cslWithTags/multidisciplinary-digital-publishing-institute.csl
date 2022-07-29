@@ -99,7 +99,7 @@
         <text variable="ISBN" prefix=" ISBN &lt;ISBN>" suffix="&lt;/ISBN>"/>
       </if>
       <else-if type="article-journal">
-        <text variable="DOI" prefix=", &lt;DOI>doi:" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix=", doi:&lt;DOI>" suffix="&lt;/DOI>"/>
       </else-if>
     </choose>
   </macro>

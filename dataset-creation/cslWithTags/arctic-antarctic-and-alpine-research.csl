@@ -548,7 +548,7 @@
       <if type="thesis report" match="any">
         <choose>
           <if variable="DOI" match="any">
-            <text variable="DOI" prefix="doi: &lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
+            <text variable="DOI" prefix="doi: https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
           </if>
           <else-if variable="archive" match="any">
             <group>
@@ -570,7 +570,7 @@
       <else>
         <choose>
           <if variable="DOI">
-            <text variable="DOI" prefix=", doi: &lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
+            <text variable="DOI" prefix=", doi: https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
           </if>
           <else>
             <choose>

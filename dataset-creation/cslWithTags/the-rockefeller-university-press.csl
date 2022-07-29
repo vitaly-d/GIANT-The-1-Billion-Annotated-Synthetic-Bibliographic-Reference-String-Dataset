@@ -118,7 +118,7 @@
               <text variable="volume" prefix="&lt;volume>" suffix="&lt;/volume>"/>
               <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
             </group>
-            <text prefix="&lt;DOI>doi:" variable="DOI" suffix="&lt;/DOI>"/>
+            <text prefix="doi:&lt;DOI>" variable="DOI" suffix="&lt;/DOI>"/>
           </group>
         </else>
       </choose>

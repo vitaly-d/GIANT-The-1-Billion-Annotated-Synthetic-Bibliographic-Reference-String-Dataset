@@ -335,7 +335,7 @@
                 <choose>
                   <if match="any" variable="DOI">
                     <text variable="title" text-case="title" font-style="normal" prefix="*[&lt;title>" suffix="&lt;/title>]"/>
-                    <text variable="DOI" prefix="&lt;DOI>(http://doi.org/" suffix="&lt;/DOI>)*,"/>
+                    <text variable="DOI" prefix="(http://doi.org/&lt;DOI>" suffix="&lt;/DOI>)*,"/>
                   </if>
                   <else-if match="any" variable="ISBN">
                     <text variable="title" text-case="title" font-style="normal" prefix="*[&lt;title>" suffix="&lt;/title>]"/>
@@ -354,7 +354,7 @@
                 <choose>
                   <if match="any" variable="DOI">
                     <text variable="title" prefix="[&lt;title>" suffix="&lt;/title>]"/>
-                    <text variable="DOI" prefix="&lt;DOI>(http://doi.org/" suffix="&lt;/DOI>),"/>
+                    <text variable="DOI" prefix="(http://doi.org/&lt;DOI>" suffix="&lt;/DOI>),"/>
                   </if>
                   <else-if match="any" variable="URL">
                     <text variable="title" prefix="[&lt;title>" suffix="&lt;/title>]"/>
@@ -375,7 +375,7 @@
             <choose>
               <if match="any" variable="DOI">
                 <text variable="title" prefix="[&lt;title>" suffix="&lt;/title>]"/>
-                <text variable="DOI" prefix="&lt;DOI>(http://doi.org/" suffix="&lt;/DOI>),"/>
+                <text variable="DOI" prefix="(http://doi.org/&lt;DOI>" suffix="&lt;/DOI>),"/>
               </if>
               <else-if match="any" variable="URL">
                 <text variable="title" prefix="[&lt;title>" suffix="&lt;/title>]"/>
@@ -394,7 +394,7 @@
             <choose>
               <if match="any" variable="DOI">
                 <text variable="title" text-case="title" font-style="normal" prefix="*[&lt;title>" suffix="&lt;/title>]"/>
-                <text variable="DOI" prefix="&lt;DOI>(http://doi.org/" suffix="&lt;/DOI>)*,"/>
+                <text variable="DOI" prefix="(http://doi.org/&lt;DOI>" suffix="&lt;/DOI>)*,"/>
               </if>
               <else-if match="any" variable="ISBN">
                 <text variable="title" text-case="title" font-style="normal" prefix="*[&lt;title>" suffix="&lt;/title>]"/>

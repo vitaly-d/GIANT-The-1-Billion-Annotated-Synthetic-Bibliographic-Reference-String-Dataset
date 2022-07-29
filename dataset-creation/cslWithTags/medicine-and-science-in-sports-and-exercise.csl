@@ -94,7 +94,7 @@
                 <text term="available at" text-case="capitalize-first" prefix="" suffix=""/>
                 <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>
               </group>
-              <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
+              <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
             </group>
           </if>
         </choose>

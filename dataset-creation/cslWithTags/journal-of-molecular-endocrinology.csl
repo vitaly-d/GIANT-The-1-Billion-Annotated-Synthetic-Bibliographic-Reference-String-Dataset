@@ -172,7 +172,7 @@
           </else>
         </choose>
       </group>
-      <text prefix=" &lt;DOI>(doi:" suffix="&lt;/DOI>)" variable="DOI"/>
+      <text prefix=" (doi:&lt;DOI>" suffix="&lt;/DOI>)" variable="DOI"/>
     </layout>
   </bibliography>
 </style>

@@ -157,7 +157,7 @@
           <else>
             <text term="online" text-case="capitalize-first" suffix=": " prefix=""/>
             <date form="text" variable="issued" suffix="&lt;/issued>." prefix="&lt;issued>"/>
-            <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
+            <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
           </else>
         </choose>
       </if>

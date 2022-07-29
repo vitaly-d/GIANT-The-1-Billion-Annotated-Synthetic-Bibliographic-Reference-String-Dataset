@@ -77,7 +77,7 @@
   <macro name="access">
     <choose>
       <if variable="DOI">
-        <text variable="DOI" prefix=" &lt;DOI>&amp;amp;lt;https://doi.org/" suffix="&lt;/DOI>&amp;amp;gt;"/>
+        <text variable="DOI" prefix=" &amp;amp;lt;https://doi.org/&lt;DOI>" suffix="&lt;/DOI>&amp;amp;gt;"/>
       </if>
       <else>
         <choose>

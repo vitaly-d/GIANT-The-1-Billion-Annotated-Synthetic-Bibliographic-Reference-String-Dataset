@@ -153,7 +153,7 @@
       <if type="thesis dataset" match="any">
         <choose>
           <if variable="DOI">
-            <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
+            <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
           </if>
           <else-if variable="archive" match="any">
             <group delimiter=". ">
@@ -181,7 +181,7 @@
       <else>
         <choose>
           <if variable="DOI">
-            <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
+            <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
           </if>
           <else>
             <choose>

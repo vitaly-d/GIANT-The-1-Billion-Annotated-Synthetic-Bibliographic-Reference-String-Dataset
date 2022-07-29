@@ -150,7 +150,7 @@
                 <text macro="pages" prefix="" suffix=""/>
               </if>
               <else>
-                <text variable="DOI" prefix="&lt;DOI>DOI:" suffix="&lt;/DOI>"/>
+                <text variable="DOI" prefix="DOI:&lt;DOI>" suffix="&lt;/DOI>"/>
               </else>
             </choose>
           </group>

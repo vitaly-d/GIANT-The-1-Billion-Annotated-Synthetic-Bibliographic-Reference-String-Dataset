@@ -143,13 +143,13 @@
                       <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
                     </group>
                   </group>
-                  <text prefix=". &lt;DOI>https://doi.org/" variable="DOI" suffix="&lt;/DOI>"/>
+                  <text prefix=". https://doi.org/&lt;DOI>" variable="DOI" suffix="&lt;/DOI>"/>
                 </group>
               </if>
               <else>
                 <group prefix=". " delimiter=". ">
                   <text variable="container-title" form="short" strip-periods="true" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
-                  <text prefix="&lt;DOI>https://doi.org/" variable="DOI" suffix="&lt;/DOI>"/>
+                  <text prefix="https://doi.org/&lt;DOI>" variable="DOI" suffix="&lt;/DOI>"/>
                 </group>
               </else>
             </choose>

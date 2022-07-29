@@ -163,7 +163,7 @@
       </choose>
       <choose>
         <if match="any" variable="DOI">
-          <text variable="DOI" prefix=". &lt;DOI>doi:" suffix="&lt;/DOI>"/>
+          <text variable="DOI" prefix=". doi:&lt;DOI>" suffix="&lt;/DOI>"/>
         </if>
       </choose>
     </layout>

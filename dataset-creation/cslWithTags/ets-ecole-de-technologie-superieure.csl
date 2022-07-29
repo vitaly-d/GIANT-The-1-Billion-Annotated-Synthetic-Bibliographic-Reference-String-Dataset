@@ -125,7 +125,7 @@
     <choose>
       <if variable="DOI" match="any">
         <group delimiter=". ">
-          <text variable="DOI" prefix="&lt;DOI>&amp;amp;lt;https://doi.org/" suffix="&lt;/DOI>&amp;amp;gt;"/>
+          <text variable="DOI" prefix="&amp;amp;lt;https://doi.org/&lt;DOI>" suffix="&lt;/DOI>&amp;amp;gt;"/>
           <date variable="accessed" delimiter=" " prefix="Consulté le &lt;accessed>" suffix="&lt;/accessed>">
             <date-part name="day" prefix="&lt;day>" suffix="&lt;/day>"/>
             <date-part name="month" prefix="&lt;month>" suffix="&lt;/month>"/>

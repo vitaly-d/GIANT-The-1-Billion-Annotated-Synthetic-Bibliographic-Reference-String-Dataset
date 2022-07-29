@@ -52,7 +52,7 @@
         <group delimiter=": " suffix=".">
           <text term="available at" prefix="" suffix=""/>
           <!-- Haaga-Helia referencing guidelines do not recognize DOI. However, due to its persistency, it makes sense to use it when given. -->
-          <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
+          <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
         </group>
       </if>
       <else-if variable="URL" match="all">

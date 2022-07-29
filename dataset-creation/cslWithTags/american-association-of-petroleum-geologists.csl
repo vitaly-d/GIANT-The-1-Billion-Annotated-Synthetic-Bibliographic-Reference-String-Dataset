@@ -172,7 +172,7 @@
         <text macro="publisher" prefix="" suffix=""/>
         <text macro="mapinfo" prefix="" suffix=""/>
         <text macro="page" prefix="" suffix=""/>
-        <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
       </group>
       <text macro="accessed" prefix=": " suffix=""/>
     </layout>

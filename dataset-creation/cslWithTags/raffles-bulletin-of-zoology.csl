@@ -136,7 +136,7 @@
       <if type="thesis report" match="any">
         <choose>
           <if match="any" variable="DOI">
-            <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
+            <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
           </if>
           <else-if match="any" variable="URL">
             <group>

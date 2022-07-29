@@ -392,7 +392,7 @@
   <macro name="internet-ndbp">
     <choose>
       <if variable="DOI">
-        <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
       </if>
       <else-if variable="URL">
         <choose>
@@ -412,7 +412,7 @@
   <macro name="internet-bib">
     <choose>
       <if variable="DOI">
-        <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
       </if>
       <else-if variable="URL">
         <choose>

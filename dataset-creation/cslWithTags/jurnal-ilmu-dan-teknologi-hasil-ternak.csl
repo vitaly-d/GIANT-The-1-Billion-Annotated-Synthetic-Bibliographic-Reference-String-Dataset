@@ -304,7 +304,7 @@
             <text variable="container-title" strip-periods="true" font-style="normal" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
             <text macro="locators" prefix="" suffix=""/>
             <text variable="volume" suffix="&lt;/volume>:" prefix="&lt;volume>"/>
-            <text variable="DOI" prefix="&lt;DOI>(doi:" suffix="&lt;/DOI>)"/>
+            <text variable="DOI" prefix="(doi:&lt;DOI>" suffix="&lt;/DOI>)"/>
           </group>
           <group delimiter=", ">
             <text macro="publisher" prefix="" suffix=""/>

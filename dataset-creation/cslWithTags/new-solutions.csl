@@ -148,7 +148,7 @@
           <text macro="locators" suffix=" " prefix=""/>
           <text macro="issued" prefix="(" suffix=")"/>
           <text macro="page" prefix=": " suffix=""/>
-          <text variable="DOI" prefix=", &lt;DOI>doi:" suffix="&lt;/DOI>"/>
+          <text variable="DOI" prefix=", doi:&lt;DOI>" suffix="&lt;/DOI>"/>
         </if>
         <else-if type="bill book graphic legal_case legislation motion_picture song" match="any">
           <group delimiter=", ">
@@ -172,7 +172,7 @@
             <text macro="issued" prefix="" suffix=""/>
           </group>
           <text macro="page" prefix=", " suffix=""/>
-          <text variable="DOI" prefix=", &lt;DOI>doi:" suffix="&lt;/DOI>"/>
+          <text variable="DOI" prefix=", doi:&lt;DOI>" suffix="&lt;/DOI>"/>
         </else-if>
         <else-if type="report">
           <group delimiter=", ">

@@ -174,7 +174,7 @@
             <group prefix=":">
               <text variable="page" prefix="&lt;page>" suffix="&lt;/page>"/>
             </group>
-            <text variable="DOI" prefix=". &lt;DOI>doi:" suffix="&lt;/DOI>"/>
+            <text variable="DOI" prefix=". doi:&lt;DOI>" suffix="&lt;/DOI>"/>
           </group>
         </else>
       </choose>

@@ -51,7 +51,7 @@
           <text value="Available at: " prefix="" suffix=""/>
           <choose>
             <if variable="DOI">
-              <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
+              <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
             </if>
             <else>
               <text variable="URL" prefix="&lt;URL>" suffix="&lt;/URL>"/>

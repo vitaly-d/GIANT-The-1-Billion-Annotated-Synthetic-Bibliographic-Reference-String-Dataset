@@ -80,7 +80,7 @@
                 <if type="article-journal" match="any">
                   <group delimiter=": ">
                     <text variable="container-title" prefix="&lt;container-title>" suffix="&lt;/container-title>"/>
-                    <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
+                    <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
                   </group>
                 </if>
               </choose>

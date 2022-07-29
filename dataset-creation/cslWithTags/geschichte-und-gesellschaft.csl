@@ -583,7 +583,7 @@
   <macro name="doi-url">
     <choose>
       <if variable="DOI">
-        <text prefix=", &lt;DOI>https://doi.org/" variable="DOI" suffix="&lt;/DOI>"/>
+        <text prefix=", https://doi.org/&lt;DOI>" variable="DOI" suffix="&lt;/DOI>"/>
       </if>
       <else-if variable="URL">
         <group prefix=", " delimiter=" ">

@@ -117,7 +117,7 @@
       <if type="thesis report" match="any">
         <choose>
           <if variable="DOI" match="any">
-            <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
+            <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
           </if>
           <else-if variable="archive" match="any">
             <group>
@@ -146,7 +146,7 @@
         </group>
       </else-if>
       <else-if type="article-journal" match="any">
-        <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
+        <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
       </else-if>
     </choose>
   </macro>

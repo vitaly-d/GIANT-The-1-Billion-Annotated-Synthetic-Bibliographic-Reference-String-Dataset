@@ -444,7 +444,7 @@
         <group delimiter=", ">
           <group delimiter="">
             <text value="&amp;amp;lt;" prefix="" suffix=""/>
-            <text variable="DOI" prefix="&lt;DOI>https://doi.org/" suffix="&lt;/DOI>"/>
+            <text variable="DOI" prefix="https://doi.org/&lt;DOI>" suffix="&lt;/DOI>"/>
             <text value="&amp;amp;gt;" prefix="" suffix=""/>
           </group>
           <text macro="accessed" prefix="" suffix=""/>

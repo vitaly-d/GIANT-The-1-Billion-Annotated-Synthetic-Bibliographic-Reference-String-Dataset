@@ -132,7 +132,7 @@
         </if>
         <else-if type="article-journal" match="any">
           <group delimiter=", ">
-            <text variable="DOI" prefix=" &lt;DOI>DOI:" suffix="&lt;/DOI>"/>
+            <text variable="DOI" prefix=" DOI:&lt;DOI>" suffix="&lt;/DOI>"/>
             <group delimiter=" ">
               <text term="accessed" prefix="" suffix=""/>
               <date form="text" variable="accessed" prefix="&lt;accessed>" suffix="&lt;/accessed>"/>

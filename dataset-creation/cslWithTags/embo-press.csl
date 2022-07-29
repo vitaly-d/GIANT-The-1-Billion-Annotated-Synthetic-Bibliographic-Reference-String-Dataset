@@ -57,7 +57,7 @@
         <if type="article dataset" match="any">
           <choose>
             <if variable="DOI">
-              <text variable="DOI" prefix="&lt;DOI>doi:" suffix="&lt;/DOI>"/>
+              <text variable="DOI" prefix="doi:&lt;DOI>" suffix="&lt;/DOI>"/>
             </if>
             <else-if variable="URL">
               <text variable="URL" prefix="(&lt;URL>" suffix="&lt;/URL>)"/>
