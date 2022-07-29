@@ -107,7 +107,7 @@ def references_to_spacy_doc(
         return
 
     # create doc from text
-    text = get_text(root.itertext())
+    text = get_text(root)
     doc = blank_nlp(text)
 
     # add annotations: they are overlapped spans
