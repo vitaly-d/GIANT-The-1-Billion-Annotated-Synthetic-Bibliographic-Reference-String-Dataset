@@ -111,8 +111,12 @@ def references_to_spacy_doc(
     doc = blank_nlp(text)
 
     # add annotations: they are overlapped spans
+    def alignment_mode(tag):
+        # include doi prefix such as https://doi.org/
+        return "expand" if tag == "doi" else "contract"
+
     spans = [
-        doc.char_span(start, end, label=tag, alignment_mode="contract")
+        doc.char_span(start, end, label=tag, alignment_mode=alignment_mode(tag))
         for tag, start, end in annotations(root, tags_to_be_included=tags_span)
     ]
     # doc.char_span can return None if character indices can't be snaped to token boundaries
