@@ -1,4 +1,10 @@
+import logging
 from typing import Optional, Sequence
+from xml.sax.saxutils import unescape
+
+from lxml import etree
+
+log = logging.getLogger(__name__)
 
 
 def iter_elements_with_text(node):
@@ -33,13 +39,30 @@ def iter_elements_with_text(node):
         yield "text", tail
 
 
+def parse(xml_string):
+    """
+    Args:
+     xml_string: XML-escaped text with annotations XML-tags used as text span annotations
+    returns:
+     lxml elements tree or None
+    raises:
+     etree.XMLSyntaxError
+    """
+    parser = etree.HTMLParser()
+    return etree.fromstring(xml_string, parser)
+
+
+def get_text(root):
+    return unescape("".join(root.itertext()))
+
+
 def annotations(element, tags_to_be_included: Optional[Sequence[str]] = None):
     """
     performs non-destructive parsing
     and converts xml tags into tuples
           `(tag, start, end)`
-    where `start` and `end` are character offsets
-           in the `"".join(element.itertext())` string
+    where `start` and `end` are character offsets in XML-unescaped text
+           that you can get by calling get_text(element)
 
     Args:
         element: etree element
@@ -50,7 +73,7 @@ def annotations(element, tags_to_be_included: Optional[Sequence[str]] = None):
     stack = []
     for event, t in iter_elements_with_text(element):
         if "text" == event:
-            text.append(t)
+            text.append(unescape(t))
         elif "start" == event:
             stack.append((t.tag, len("".join(text))))
         elif "end" == event:
@@ -62,4 +85,4 @@ def annotations(element, tags_to_be_included: Optional[Sequence[str]] = None):
                 continue
             yield (tag, start, end)
 
-    assert "".join(text) == "".join(element.itertext())
+    assert "".join(text) == get_text(element)

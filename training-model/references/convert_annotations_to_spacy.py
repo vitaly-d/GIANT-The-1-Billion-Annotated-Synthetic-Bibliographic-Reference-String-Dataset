@@ -7,6 +7,7 @@ from random import choices, random, seed
 import subprocess
 import time
 from typing import List, Optional, Tuple
+from xml.sax.saxutils import unescape
 
 from lxml import etree
 import numpy
@@ -20,11 +21,11 @@ import typer
 
 from bib_tokenizers import create_references_tokenizer
 from csl_client import base_url, make_bibliography, styles_list
-from lxml_iter_tree import annotations
+from lxml_iter_tree import annotations, get_text, parse
 from schema import spankey_sentence_start, tag_sentence_start, tags_ent, tags_span
 
 # less is better :) Consider download mo files from CrossRef
-NUM_STYLES_FOR_DOC = 2
+NUM_STYLES_FOR_DOC = 1
 # usually >1 if NUM_STYLES_FOR_DOC>1
 DOWNSAMPE_RATIO = 1
 
@@ -100,17 +101,16 @@ def references_to_spacy_doc(
     # don't miss the space between already normalized lines:
     xml = f"<references><bib>{' </bib><bib>'.join(norm_references)}</bib></references>"
     try:
-        parser = etree.HTMLParser()
-        root = etree.fromstring(xml, parser)
+        root = parse(xml)
     except etree.XMLSyntaxError as e:
-        log.exception("cannot parse %s", references)
+        log.exception("%s: cannot parse %s", e, references)
         return
+
     # create doc from text
-    text = "".join(root.itertext())
-
+    text = get_text(root.itertext())
     doc = blank_nlp(text)
-    # add annotations: they are overlapped spans
 
+    # add annotations: they are overlapped spans
     spans = [
         doc.char_span(start, end, label=tag, alignment_mode="contract")
         for tag, start, end in annotations(root, tags_to_be_included=tags_span)
