@@ -3,11 +3,10 @@ import hashlib
 import io
 import logging
 from pathlib import Path
-from random import choices, random, seed
+from random import choices, seed
 import subprocess
 import time
 from typing import List, Optional, Tuple
-from xml.sax.saxutils import unescape
 
 from lxml import etree
 import numpy
