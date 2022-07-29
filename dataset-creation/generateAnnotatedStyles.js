@@ -139,19 +139,7 @@ for (var i = 0, len = csls.length; i < len; i++) {
       }
 
       try {
-	if (variable=="DOI"){
-	    // try to avoid the DOI span within URL: https://doi.org/<DOI>10.1021/es991246a</DOI> 
-	    // a bit complicated because prefix could be any string. Let's assume that urls does not contain spaces 
-	    var doi_parts = escapeXml2(text[id].getAttribute("prefix")).split(" ")
-	    if (doi_parts.length > 1){
-		text[id].setAttribute("prefix", doi_parts.slice(0,-1).join(" ") + " " + newprefix + doi_parts[doi_parts.length-1]);
-	    }else{
-		text[id].setAttribute("prefix", newprefix + escapeXml2(text[id].getAttribute("prefix")));
-	    }
-	}
-        else{
-	    text[id].setAttribute("prefix", escapeXml2(text[id].getAttribute("prefix")) + newprefix);
-	}
+	text[id].setAttribute("prefix", escapeXml2(text[id].getAttribute("prefix")) + newprefix);
         text[id].setAttribute("suffix", newsuffix + escapeXml2(text[id].getAttribute("suffix")));
         if (text[id].getAttribute("value")) {
           text[id].setAttribute("value", escapeXml2(text[id].getAttribute("value")));
