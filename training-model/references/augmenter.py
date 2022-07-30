@@ -49,16 +49,19 @@ def create_augmenter(p=0.2, count=2, eol="\n", hanging_indent_geom_p=0.8):
             return
 
         # ajust _supported_ annotations after changing the tokenization
-        example = Example(aug_doc, _doc)
+        _aug_doc_to_doc = Example(aug_doc, _doc)
 
-        # copy ner annotations:
+        # align and copy annotation
         try:
-            aug_doc.ents = get_aligned_spans_y2x(example, _doc.ents)
+            # copy ner annotations:
+            aug_doc.ents = get_aligned_spans_y2x(_aug_doc_to_doc, _doc.ents)
             # copy span categoriser annotation
             for key in aug_doc.spans:
-                aug_doc.spans[key] = get_aligned_spans_y2x(example, _doc.spans[key])
+                aug_doc.spans[key] = get_aligned_spans_y2x(
+                    _aug_doc_to_doc, _doc.spans[key]
+                )
             # copy sentencerecognizer annotations
-            sent_start = example.get_aligned("SENT_START")
+            sent_start = _aug_doc_to_doc.get_aligned("SENT_START")
             for i in range(len(aug_doc)):
                 aug_doc[i].is_sent_start = sent_start[i] == 1
 
