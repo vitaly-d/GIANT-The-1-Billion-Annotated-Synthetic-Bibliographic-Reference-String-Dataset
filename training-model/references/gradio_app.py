@@ -180,7 +180,7 @@ def split_up_references(
 
             score = target_doc_token_scorer(token_index_in_target_doc)
             # print(target_doc[token_index_in_target_doc], score)
-            if score > threshold and target_doc[target_tokens_idx[char_offset]].ent_iob_=="O":
+            if score > threshold:
                 target_doc[target_tokens_idx[char_offset]].is_sent_start = True
 
             char_offset += len(line)
@@ -321,8 +321,7 @@ def _level_off_references(doc, token_scorer, step=1):
                     start = i
 
     for t in sent_starts:
-        if t.ent_iob_=="O":
-            t.is_sent_start = True
+        t.is_sent_start = True
 
     return sigma
 
