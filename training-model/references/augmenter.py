@@ -3,7 +3,6 @@
 # Replaces ' ' with '\n[hanging_indent]' after author or title
 #
 from random import random
-
 import numpy as np
 import spacy
 from spacy.training import Example, augment
@@ -12,7 +11,7 @@ from spacy_aligned_spans import get_aligned_spans_y2x
 
 
 @spacy.registry.augmenters("space_augmenter.v1")
-def create_augmenter(p=0.1, count=2, orth="\n", hanging_indent_geom_p=0.8):
+def create_augmenter(p=0.2, count=2, orth="\n", hanging_indent_geom_p=0.8):
     print("create spaces augmenter", locals())
 
     def augment(nlp, example):
@@ -36,7 +35,8 @@ def create_augmenter(p=0.1, count=2, orth="\n", hanging_indent_geom_p=0.8):
         aug_text = [ch for ch in _text]
         for i in to_be_replaced:
             aug_text[i] = orth + (
-                " " * (np.random.geometric(p=hanging_indent_geom_p, size=1)[0] - 1)
+                np.random.choice([" ", "\t"], size=1, p=[0.8, 0.2])[0].item()
+                * (np.random.geometric(p=hanging_indent_geom_p, size=1)[0] - 1)
             )
 
         aug_text = "".join(aug_text)
