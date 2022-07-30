@@ -19,8 +19,10 @@ def create_augmenter(p=0.2, count=2, eol="\n", hanging_indent_geom_p=0.8):
 
     def augment(nlp, example):
 
+        # Original example followed by augmented example
+        yield example
+
         if random() > p:
-            yield example
             return
 
         # Create augmented aug_doc
@@ -29,12 +31,11 @@ def create_augmenter(p=0.2, count=2, eol="\n", hanging_indent_geom_p=0.8):
         _text = _doc.text
         spaces = [i for i, ch in enumerate(_text) if ch.isspace()]
         if not spaces:
-            yield example
             return
 
+        # augment text by replacing spaces at randomly selected positions
         size = min(len(spaces), count)
         to_be_replaced = np.random.choice(spaces, size=size, replace=False)
-
         aug_text = [ch for ch in _text]
         for i in to_be_replaced:
             aug_text[i] = eol + (
@@ -42,15 +43,12 @@ def create_augmenter(p=0.2, count=2, eol="\n", hanging_indent_geom_p=0.8):
                 * (np.random.geometric(p=hanging_indent_geom_p, size=1)[0] - 1)
             )
         aug_text = "".join(aug_text)
-
-        aug_doc = nlp.make_doc(aug_text)
         if aug_text == _text:
-            yield example
             return
 
         # ajust _supported_ annotations after changing the tokenization
+        aug_doc = nlp.make_doc(aug_text)
         _aug_doc_to_doc = Example(aug_doc, _doc)
-
         # align and copy annotation
         try:
             # copy ner annotations:
@@ -65,13 +63,10 @@ def create_augmenter(p=0.2, count=2, eol="\n", hanging_indent_geom_p=0.8):
             for i in range(len(aug_doc)):
                 aug_doc[i].is_sent_start = sent_start[i] == 1
 
-            # Original example followed by augmented example
             yield Example(nlp.make_doc(aug_text), aug_doc)
         except:
             # print("Cannot aligh entities: ", _text, aug_text)
             pass
-
-        yield example
 
     return augment
 
