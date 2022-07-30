@@ -13,6 +13,7 @@ from spacy.training import Example
 
 from bib_tokenizers import create_references_tokenizer
 from schema import spankey_sentence_start, tags_ent
+from spacy_aligned_spans import get_aligned_spans_y2x
 
 # 1.0.1
 # pip install https://huggingface.co/vitaly/en_bib_references_trf/resolve/main/en_bib_references_trf-any-py3-none-any.whl
@@ -131,7 +132,7 @@ def split_up_references(
     # copy ner annotations:
     for label in tags_ent:
         target_doc.vocab[label]
-    target_doc.ents = example.get_aligned_spans_y2x(norm_doc.ents)
+    target_doc.ents = get_aligned_spans_y2x(example, norm_doc.ents)
 
     # set senter annotations
     if is_eol_mode:
@@ -179,7 +180,7 @@ def split_up_references(
 
             score = target_doc_token_scorer(token_index_in_target_doc)
             # print(target_doc[token_index_in_target_doc], score)
-            if score > threshold:
+            if score > threshold and target_doc[target_tokens_idx[char_offset]].ent_iob_=="O":
                 target_doc[target_tokens_idx[char_offset]].is_sent_start = True
 
             char_offset += len(line)
@@ -320,7 +321,8 @@ def _level_off_references(doc, token_scorer, step=1):
                     start = i
 
     for t in sent_starts:
-        t.is_sent_start = True
+        if t.ent_iob_=="O":
+            t.is_sent_start = True
 
     return sigma
 
