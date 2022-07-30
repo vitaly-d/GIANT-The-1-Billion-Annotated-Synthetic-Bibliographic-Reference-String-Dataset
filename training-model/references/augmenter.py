@@ -13,6 +13,8 @@ from spacy_aligned_spans import get_aligned_spans_y2x
 
 @spacy.registry.augmenters("space_augmenter.v1")
 def create_augmenter(p=0.1, count=2, orth="\n", hanging_indent_geom_p=0.8):
+    print("create spaces augmenter", locals())
+
     def augment(nlp, example):
 
         if random() > p:
@@ -48,17 +50,21 @@ def create_augmenter(p=0.1, count=2, orth="\n", hanging_indent_geom_p=0.8):
         example = Example(aug_doc, _doc)
 
         # copy ner annotations:
-        aug_doc.ents = get_aligned_spans_y2x(example, _doc.ents)
-        # copy span categoriser annotation
-        for key in aug_doc.spans:
-            aug_doc.spans[key] = get_aligned_spans_y2x(example, _doc.spans[key])
-        # copy sentencerecognizer annotations
-        sent_start = example.get_aligned("SENT_START")
-        for i in range(len(aug_doc)):
-            aug_doc[i].is_sent_start = sent_start[i] == 1
+        try:
+            aug_doc.ents = get_aligned_spans_y2x(example, _doc.ents)
+            # copy span categoriser annotation
+            for key in aug_doc.spans:
+                aug_doc.spans[key] = get_aligned_spans_y2x(example, _doc.spans[key])
+            # copy sentencerecognizer annotations
+            sent_start = example.get_aligned("SENT_START")
+            for i in range(len(aug_doc)):
+                aug_doc[i].is_sent_start = sent_start[i] == 1
 
-        # Original example followed by augmented example
-        yield Example(nlp.make_doc(aug_text), aug_doc)
+            # Original example followed by augmented example
+            yield Example(nlp.make_doc(aug_text), aug_doc)
+        except:
+            # print("Cannot aligh entities: ", _text, aug_text)
+            pass
 
         yield example
 
