@@ -11,8 +11,11 @@ from spacy_aligned_spans import get_aligned_spans_y2x
 
 
 @spacy.registry.augmenters("space_augmenter.v1")
-def create_augmenter(p=0.2, count=2, orth="\n", hanging_indent_geom_p=0.8):
-    print("create spaces augmenter", locals())
+def create_augmenter(p=0.2, count=2, eol="\n", hanging_indent_geom_p=0.8):
+    print(
+        f"create spaces augmenter: it replaces spaces to '{eol}  ' and '{eol}\t\t",
+        locals(),
+    )
 
     def augment(nlp, example):
 
@@ -34,11 +37,10 @@ def create_augmenter(p=0.2, count=2, orth="\n", hanging_indent_geom_p=0.8):
 
         aug_text = [ch for ch in _text]
         for i in to_be_replaced:
-            aug_text[i] = orth + (
+            aug_text[i] = eol + (
                 np.random.choice([" ", "\t"], size=1, p=[0.8, 0.2])[0].item()
                 * (np.random.geometric(p=hanging_indent_geom_p, size=1)[0] - 1)
             )
-
         aug_text = "".join(aug_text)
 
         aug_doc = nlp.make_doc(aug_text)
@@ -72,7 +74,7 @@ def create_augmenter(p=0.2, count=2, orth="\n", hanging_indent_geom_p=0.8):
 
 
 if __name__ == "__main__":
-    augment = create_augmenter(p=1, count=1000, orth="\n", hanging_indent_geom_p=0.5)
+    augment = create_augmenter(p=1, count=1000, eol="\n", hanging_indent_geom_p=0.5)
     nlp = spacy.load("en_core_web_sm")
     doc = nlp("Apple Computers is looking at buying U.K. startup for $1 billion")
     example = Example(doc, doc)
