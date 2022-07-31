@@ -103,16 +103,21 @@ def references_to_spacy_doc(
         fname - croccref citeproc jsonl file bibliography has been generated from
         part - an index of a process for mutliprocessing
         normalize - remove '\n' from references.
-            normalize==True Pros:
+
+        normalize==True:
+            Pros:
                 - a model will be able to split up a string into separate bibitem even if the string is a single line.
-            normalize==True Cons:
+            Cons:
                 - text preprocessing & aligning predictions are required in the inference pipeline
                 - model predictions can be less accurate because removing information about line breaks makes the task harder
-            normalize=False Pros:
+
+        normalize=False:
+            Pros:
                 - model predictions tend to be more accurate
                 - simpler solution: no pre/post processing are required for trainig & inference
-            normalize==False Cons:
-                - model biased towards making 'split' decisions only for new lines. It does not support a case when a line consists of more than one reference item
+            Cons:
+                - model biased towards making 'split' decisions only for new lines.
+                  It does not support a case when a line consists of more than one reference item
                 - good result can be archived only with an augment function that randonly replaces spaces to '\n'.
                   Otherwise the model 'collapses': it starts to make useless predictions "each new line is a new reference item"
     """
