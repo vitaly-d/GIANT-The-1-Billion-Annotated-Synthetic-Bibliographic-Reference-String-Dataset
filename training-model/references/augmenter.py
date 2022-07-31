@@ -13,7 +13,7 @@ from spacy_aligned_spans import get_aligned_spans_y2x
 @spacy.registry.augmenters("space_augmenter.v1")
 def create_augmenter(p=0.2, count=2, eol="\n", hanging_indent_geom_p=0.8):
     print(
-        f"create spaces augmenter: it replaces the a space char to 'EOL SPACE*' or 'EOL TAB*\nEOL is set to '{eol}'",
+        "create spaces augmenter: it replaces a space char to 'EOL SPACE*' or 'EOL TAB*",
         locals(),
     )
 
