@@ -153,7 +153,8 @@ def split_up_references(
                 token_index_in_target_doc, alignment_data
             )
             if index_in_norm_doc is not None:
-                if target_doc[token_index_in_target_doc].is_sent_start:
+                if norm_doc[index_in_norm_doc].is_sent_start:
+                    # print(norm_doc[index_in_norm_doc], 1.0, index_in_norm_doc)
                     return 1.0
                 else:
                     span, score = spancat_token_scorer(index_in_norm_doc)
