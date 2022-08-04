@@ -1,5 +1,8 @@
 # spacy
-spacy[apple]
+
+# lookups-data and thinc-apple-ops for tok2vec encoder 
+# mamba install spacy spacy-lookups-data && pip install spacy-transformers, thinc-apple-ops   
+spacy[apple,lookups,transformers]
 typer
 rich
 numpy

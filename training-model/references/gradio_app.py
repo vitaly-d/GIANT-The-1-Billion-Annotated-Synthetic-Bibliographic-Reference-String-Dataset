@@ -14,6 +14,7 @@ from spacy.training import Example
 from bib_tokenizers import create_references_tokenizer
 from schema import spankey_sentence_start, tags_ent
 from spacy_aligned_spans import get_aligned_spans_y2x
+from lines import preprocess_merge_lines_list
 
 # 1.0.1
 # pip install https://huggingface.co/vitaly/en_bib_references_trf/resolve/main/en_bib_references_trf-any-py3-none-any.whl
@@ -124,7 +125,11 @@ def split_up_references(
         disable.append("spancat")
     with nlp.select_pipes(disable=disable):
         # normalization applied: strip lines and remove any extra space between lines
-        norm_doc = nlp(" ".join([line.strip() for line in lines if line.strip()]))
+        # if the model is trained on data prepared with MERGE_LINES=True
+        # norm_doc = nlp(preprocess_merge_lines_list(lines))
+
+        # if the model is trained on data prepared with MERGE_LINES=False
+        norm_doc = nlp(references)
 
     # extremely useful spacy API for alignment normalized and target(created from non-modified input) docs
     example = Example(target_doc, norm_doc)
@@ -216,10 +221,11 @@ def split_up_references(
     return target_doc
 
 
-# a token can be considered as sent_start if its score is at least 10 times larger than median score for tokens in the reference span
-MIN_SCORE_PEAK_LOG10 = 1
-# how far the current reference length in lines(aka paragraphs) from the mean
-MIN_DISTANCE_IN_SIGMAS = 1
+# a token can be considered as sent_start if its score is at least 10^MIN_SCORE_PEAK_LOG10 times larger 
+# than median score for tokens in the reference span
+MIN_SCORE_PEAK_LOG10 = 2
+# try to split out if the current reference length in lines(aka paragraphs) is at least in MIN_DISTANCE_IN_SIGMAS from the mean
+MIN_DISTANCE_IN_SIGMAS = 2
 # if a reference is too large, lower value of the token score is accepted to split up the reference
 ACCEPT_THRESHOLD = 3
 # a neuron is definitely activated
@@ -327,13 +333,13 @@ def _level_off_references(doc, token_scorer, step=1):
     return sigma
 
 
-def text_analysis(text: str, more_than_one_ref_per_line: bool):
+def text_analysis(text: str, enable_postprocessing: bool):
 
     if not text or not text.strip():
         return "<div style='max-width:100%; overflow:auto; color:grey'><p>Unparsed Bibliography Section is empty</p></div>"
 
     doc_with_linebreaks = split_up_references(
-        text, is_eol_mode=not more_than_one_ref_per_line, nlp=nlp, nlp_blank=nlp_blank
+        text, is_eol_mode=enable_postprocessing, nlp=nlp, nlp_blank=nlp_blank
     )
 
     html = ""
@@ -390,16 +396,16 @@ with demo:
         placeholder="Enter bibliography here...",
         lines=20,
     )
-    more_than_one_ref_per_line = gr.components.Checkbox(
-        value=False,
-        label="My bibliography may contain more than one reference per line - the model will make a prediction for each token: more predictions, more chances to make a mistake",
+    enable_postprocessing = gr.components.Checkbox(
+        value=True,
+        label="I assume that in my bibliography most of the references have the same line length. Try to use this assunption to improve the result",
     )
     html = gr.components.HTML(label="Parsed Bib Items")
     textbox.change(
-        fn=text_analysis, inputs=[textbox, more_than_one_ref_per_line], outputs=[html]
+        fn=text_analysis, inputs=[textbox, enable_postprocessing], outputs=[html]
     )
-    more_than_one_ref_per_line.change(
-        fn=text_analysis, inputs=[textbox, more_than_one_ref_per_line], outputs=[html]
+    enable_postprocessing.change(
+        fn=text_analysis, inputs=[textbox, enable_postprocessing], outputs=[html]
     )
 
     gr.Examples(
