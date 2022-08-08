@@ -14,5 +14,5 @@ def preprocess_merge_lines(text) -> str:
     return preprocess_merge_lines_list(lines)
 
 
-def preprocess_merge_lines_list(lines: Iterable[str]) -> str:
-    return " ".join((line.strip() for line in lines if line.strip()))
+def preprocess_merge_lines_list(lines: Iterable[str], sep=" ") -> str:
+    return sep.join((line.strip() for line in lines if line.strip()))
