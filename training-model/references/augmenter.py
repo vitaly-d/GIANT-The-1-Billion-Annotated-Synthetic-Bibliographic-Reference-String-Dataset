@@ -13,7 +13,7 @@ from spacy_aligned_spans import get_aligned_spans_y2x
 @spacy.registry.augmenters("spaces_augmenter.v1")
 def create_augmenter(p=0.2, count=2, eol="\n", hanging_indent_geom_p=0.8):
     print(
-        "create spaces augmenter: it replaces a space char to 'eol space*' or 'eol tab*",
+        "create spaces augmenter: it replaces a space char to 'space* eol space*' or 'space* eol tab*",
         locals(),
     )
 
@@ -38,9 +38,13 @@ def create_augmenter(p=0.2, count=2, eol="\n", hanging_indent_geom_p=0.8):
         to_be_replaced = np.random.choice(spaces, size=size, replace=False)
         aug_text = [ch for ch in _text]
         for i in to_be_replaced:
-            aug_text[i] = eol + (
-                np.random.choice([" ", "\t"], size=1, p=[0.8, 0.2])[0].item()
-                * (np.random.geometric(p=hanging_indent_geom_p, size=1)[0] - 1)
+            aug_text[i] = (
+                (" " * (np.random.geometric(p=hanging_indent_geom_p, size=1)[0] - 1))
+                + eol
+                + (
+                    np.random.choice([" ", "\t"], size=1, p=[0.8, 0.2])[0].item()
+                    * (np.random.geometric(p=hanging_indent_geom_p, size=1)[0] - 1)
+                )
             )
         aug_text = "".join(aug_text)
         if aug_text == _text:
@@ -72,7 +76,7 @@ def create_augmenter(p=0.2, count=2, eol="\n", hanging_indent_geom_p=0.8):
 
 
 if __name__ == "__main__":
-    augment = create_augmenter(p=1, count=1000, eol="\n", hanging_indent_geom_p=0.5)
+    augment = create_augmenter(p=1, count=1000, eol="\n", hanging_indent_geom_p=0.7)
     nlp = spacy.load("en_core_web_sm")
     doc = nlp("Apple Computers is looking at buying U.K. startup for $1 billion")
     example = Example(doc, doc)
