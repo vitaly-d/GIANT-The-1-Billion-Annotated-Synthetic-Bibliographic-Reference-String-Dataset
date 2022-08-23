@@ -29,11 +29,14 @@ dependencies:\n\
   - pytorch=${torch_version}\n\
   - python=${python_version}\n\
   - spacy=${spacy_version}\n\
+  - spacy-lookups-data\n\
   - spacy-transformers\n\
   - sentencepiece\n\
   - cupy\n\
   - ipython\n\
   - jupyter\n\
+  - scikit-learn\n\
+  - nodejs==16.14.2\n\
 " > /tmp/env.yaml
 RUN cat /tmp/env.yaml
 # install
@@ -41,3 +44,4 @@ RUN cat /tmp/env.yaml
 RUN micromamba install -y -n base -f /tmp/env.yaml && \
     micromamba clean --all --yes
 
+RUN spacy download en_core_web_lg
