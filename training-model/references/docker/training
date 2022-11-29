@@ -6,12 +6,12 @@
 # docker run --runtime=nvidia --shm-size 2G --network host --rm -it --mount type=bind,source=$(pwd),target=/opt/ml/code training_bib_ref:latest
 #
 #FROM mambaorg/micromamba:0.24.0
-FROM mambaorg/micromamba:git-fe2ca1a-bionic-cuda-11.3.1
+FROM mambaorg/micromamba:focal-cuda-11.7.1
 
-arg cuda_version=11.3
-arg python_version=3.9.7
-arg spacy_version=3.4.1
-arg torch_version=1.12.1
+arg cuda_version=11.7
+arg python_version=3.10.8
+arg spacy_version=3.4.3
+arg torch_version=1.13.0
 
 ARG model_dir=/opt/ml/model
 ARG app_dir=/opt/ml/code
@@ -43,5 +43,7 @@ RUN cat /tmp/env.yaml
 #
 RUN micromamba install -y -n base -f /tmp/env.yaml && \
     micromamba clean --all --yes
+
+ARG MAMBA_DOCKERFILE_ACTIVATE=1
 
 RUN spacy download en_core_web_lg
